@@ -1,0 +1,437 @@
+body {
+  background-color: #fff;
+  color: #333;
+}
+a {
+  color: #AB04AB;
+}
+a:hover {
+  color: #AB04AB;
+}
+.pre-header a:hover {
+  color: #AB04AB;
+}
+.shop-currencies a.current {
+  color: #AB04AB;
+}
+.header-navigation ul > li.active > a,
+.header-navigation ul > li > a:hover,
+.header-navigation ul > li > a:focus,
+.header-navigation ul > li.open > a,
+.header-navigation ul > li.open > a:hover,
+.header-navigation ul > li.open > a:focus {
+  color: #AB04AB;
+}
+.header-navigation li.menu-search i:hover {
+  color: #AB04AB;
+}
+.sidebar a:hover {
+  color: #AB04AB;
+}
+.sidebar .dropdown.open .dropdown-toggle:hover {
+  color: #AB04AB;
+}
+.sidebar-menu .dropdown-menu li > a:hover, .sidebar-menu .dropdown-menu li > a:focus, .sidebar-menu li.active > a, .sidebar-menu li.active > a:hover {
+  color: #AB04AB;
+}
+.content-page a:hover,
+.sidebar2 a:hover {
+  color: #AB04AB;
+}
+.content-page .link, .content-page .link:hover, .content-page .link:active {
+  color: #AB04AB;
+}
+.page-404 .number,
+.page-500 .number {
+  color: #AB04AB;
+}
+.content-form-page a:hover {
+  color: #AB04AB;
+}
+/* Blockquote Box */
+.quote-v1 a.btn-transparent:hover {
+  background: #AB04AB;
+}
+.quote-v1 {
+  background: #690169;
+}
+.quote-v1 > .qheader {
+  color: #fff;
+  text-shadow: 2px 2px #934593;
+}
+.quote-v1 a {
+
+}
+.quote-v1 span {
+  color: #fff;
+}
+.quote-v1 a.btn-transparent {
+  color: #fff;
+  border: solid 1px #fff;
+  background: none;
+}
+.quote-v1 a.btn-transparent:hover {
+  background: #690169;
+  color: #fff;
+  transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -webkit-transition: all 0.5s ease;
+}
+.quote-v1 a.btn-transparent i {
+  margin-right: 10px;
+}
+
+.recent-work h2 a:hover {
+  color: #AB04AB;
+}
+.recent-work .recent-work-item .fa:hover {
+  color: #AB04AB;
+}
+.our-clients h2 a:hover {
+  color: #AB04AB;
+}
+.front-team h3 strong {
+  color: #AB04AB;
+}
+.ecommerce .header-navigation ul > li.active > a,
+.ecommerce .header-navigation ul > li > a:hover,
+.ecommerce .header-navigation ul > li > a:focus,
+.ecommerce .header-navigation ul > li.open > a,
+.ecommerce .header-navigation ul > li.open > a:hover,
+.ecommerce .header-navigation ul > li.open > a:focus {
+  color: #AB04AB;
+}
+.product-item h3 a:hover {
+  color: #AB04AB;
+}
+.checkout-page a:hover {
+  color: #AB04AB;
+}
+
+
+.langs-block-others:after {
+  border-bottom: 8px solid #AB04AB;
+}
+.header-navigation > ul > li.dropdown:hover > a:after {
+  border-bottom: 8px solid #AB04AB;
+}
+.header-navigation .dropdown-menu > li > a:hover,
+.header-navigation .dropdown-menu > li.active > a,
+.header-navigation .header-navigation-content .header-navigation-col li > a:hover,
+.header-navigation .header-navigation-content .header-navigation-col li.active > a {
+  background: #AB04AB;
+  color: #fff;
+}
+.header-navigation .dropdown-menu .header-navigation-content-ext li > a:hover,
+.header-navigation .dropdown-menu .header-navigation-content-ext li.active > a {
+  background: #fff;
+  color: #AB04AB;
+}
+.header-navigation .search-box:after {
+  border-bottom: 8px solid #AB04AB;
+}
+.header-navigation .search-box {
+  border-top: solid 2px #AB04AB;
+}
+.title-wrapper h1 span {
+  color: #AB04AB;
+}
+.breadcrumb > .active {
+  color: #AB04AB;
+}
+.form-info h2 em {
+  color: #AB04AB;
+}
+.nav-tabs {
+  border-color: #AB04AB;
+}
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+  background: #AB04AB;
+}
+.content-search h1 em {
+  color: #AB04AB;
+}
+.recent-work .recent-work-item:hover a.recent-work-description {
+  background: #AB04AB;
+}
+.testimonials-v1 blockquote:after {
+  background-color: #AB04AB;
+}
+.testimonials-v1 span.testimonials-name {
+  color: #AB04AB;
+}
+.search-result-item h4 a {
+  color: #AB04AB;
+}
+.top-cart-content:after {
+  border-bottom: 8px solid #AB04AB;
+}
+.goods-data a,
+.checkout-page .checkout-description a {
+  color: #AB04AB;
+}
+.product-page .review a {
+  color: #AB04AB;
+}
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+  background: #AB04AB;
+  color: #fff;
+}
+.list-view-sorting a {
+  background: #fff;
+  color: #AB04AB;
+}
+
+
+
+::-moz-selection {
+  color: #fff;
+  background: #AB04AB;
+}
+::selection {
+  color: #fff;
+  background: #AB04AB;
+}
+.steps-block ::-moz-selection {
+  color: #AB04AB;
+  background: #fff;
+}
+.steps-block ::selection {
+  color: #AB04AB;
+  background: #fff;
+}
+
+
+
+.owl-buttons .owl-prev:hover {
+  background-color: #AB04AB;
+}
+.owl-buttons .owl-next:hover {
+  background-color: #AB04AB;
+}
+.steps-block-red {
+  background: #AB04AB;
+}
+.pre-footer {
+  background: #270027;
+  color: #b0b0b0;
+}
+.pre-footer h2,
+.ecommerce .pre-footer h2 {
+  color: #AB04AB;
+}
+.pre-footer .photo-stream img:hover {
+  border-color: #AB04AB;
+}
+.pre-footer-light dl.f-twitter dd a {
+  color: #AB04AB;
+}
+.pre-footer-light address a {
+  color: #AB04AB;
+}
+.footer .powered > a {
+  color: #AB04AB;
+}
+.footer .powered > a:hover {
+  color: #AB04AB;
+}
+
+.testimonials-v1 .left-btn:hover {
+  background-color: #AB04AB;
+}
+.testimonials-v1 .right-btn:hover {
+  background-color: #AB04AB;
+}
+.blog-tags li i,
+.blog-info li i {
+  color: #AB04AB;
+}
+.blog-posts .more,
+.blog-sidebar .more {
+  color: #AB04AB;
+}
+.recent-news h3 a {
+  color: #AB04AB;
+}
+.blog-photo-stream li img:hover {
+  border-color: #AB04AB;
+}
+.blog-tags li a:hover {
+  color: #fff;
+  background: #AB04AB;
+}
+.blog-tags li a:hover:after {
+  border-left-color: #AB04AB;
+}
+.sidebar-categories li > a:hover,
+.sidebar-categories li.active > a,
+.sidebar-categories li.active:hover > a {
+  color: #AB04AB;
+}
+.blog-item blockquote {
+  border-color: #AB04AB;
+}
+.blog-item h4.media-heading span a {
+  color: #AB04AB;
+}
+.front-steps-wrapper .front-step1 {
+  background: #AB04AB;
+}
+.pricing-active {
+  border: 3px solid #AB04AB;
+  box-shadow: 7px 7px rgba(68, 177, 193, 0.2);
+}
+.pricing:hover {
+  border: 3px solid #AB04AB;
+}
+.pricing:hover h4 {
+  color: #AB04AB;
+}
+.pricing-head h3 {
+  background: #AB04AB;
+}
+.pricing-head-active h4 {
+  color: #AB04AB;
+}
+.pricing-content li i {
+  color: #AB04AB;
+}
+.top-cart-block .fa-shopping-cart {
+  background: #AB04AB;
+}
+.product-item .btn:hover {
+  background: #AB04AB;
+}
+.pi-price {
+  color: #AB04AB;
+}
+.product-item .add2cart:hover {
+  color: #fff !important;
+  background: #AB04AB !important;
+  border-color: #AB04AB;
+}
+.goods-page-price strong,
+.goods-page-total strong,
+.checkout-price strong,
+.checkout-total strong {
+  color: #AB04AB;
+}
+.shopping-total strong,
+.checkout-total-block strong {
+  color: #AB04AB;
+}
+.compare-item strong {
+  color: #AB04AB;
+}
+.sidebar-products .price {
+  color: #AB04AB;
+}
+.price-availability-block .price strong {
+  color: #AB04AB;
+}
+
+.require {
+  color: #AB04AB;
+}
+.content-form-page .form-control:focus {
+  border: solid 1px #AB04AB;
+}
+.content-search input:focus {
+  border: solid 1px #AB04AB;
+}
+
+.btn-primary {
+  background: #AB04AB;
+}
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
+  background: #AB04AB;
+}
+
+.header-navigation .dropdown-menu > li:first-child {
+  border-top: 2px solid #AB04AB;
+}
+.front-steps-wrapper .front-step1:after {
+  border-left: 15px solid #AB04AB;
+}
+
+.del-goods:hover,
+.add-goods:hover {
+  background-color: #AB04AB;
+}
+
+.sidebar a:hover > .fa-angle-down {
+  background-position: -55px 0;
+}
+.sidebar .collapsed:hover > .fa-angle-down {
+  background-position: -55px -37px;
+}
+
+.top-cart-content {
+  border-top: solid 2px #AB04AB;
+}
+
+.front-skills .progress-bar {
+  background: #AB04AB;
+}
+
+.service-box-v1:hover {
+  background: #AB04AB;
+}
+
+.header .mobi-toggler:hover {
+  background-color: #AB04AB;
+  border-color: #AB04AB;
+}
+
+@media (max-width: 1024px) {
+  .header .header-navigation li > a:hover,
+  .header .header-navigation li.active > a,
+  .header .header-navigation li.open > a:hover {
+    color: #AB04AB !important;
+  }
+}
+
+
+.faq-tabbable {
+  border-left: solid 2px #AB04AB;
+}
+.faq-tabbable li:hover a,
+.faq-tabbable li.active a{
+  background: #AB04AB;
+}
+.faq-tabbable li.active:after {
+  border-left: 6px solid #AB04AB;
+}
+
+.mix-filter li:hover, .mix-filter li.active {
+  background: #AB04AB;
+  color: #fff;
+}
+.mix-grid .mix .mix-details {
+  background: #AB04AB;
+}
+.mix-grid .mix a.mix-link,
+.mix-grid .mix a.mix-preview {
+  background: #1adbd2;
+}
+.langs-block-others {
+  border-top: solid 2px #AB04AB;
+}
+
+.brands .owl-buttons .owl-prev:hover {
+  background-position: 18px -646px;
+}
+.brands .owl-buttons .owl-next:hover {
+  background-position: -249px -646px;
+}
+.header-navigation ul > li.active > a/*,
+.ecommerce .header-navigation ul > li.active > a*/ {
+  border-bottom: 2px solid #AB04AB;
+}
+
+.block-header {
+  color: #AB04AB;
+}
