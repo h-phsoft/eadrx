@@ -41,7 +41,7 @@ if (!function_exists('cp_getRandomTip')) {
 if (!function_exists('cp_AddLog')) {
 
   function cp_AddLog($vText) {
-    $sReturn = -999;
+    $nInsertedId = -999;
     $nUserId = ph_session("UID");
 
     if ($vText != '') {
@@ -50,9 +50,9 @@ if (!function_exists('cp_AddLog')) {
               . " VALUES ("
               . "'" . $nUserId . "', NOW(), '" . $vText . "')";
       ph_Execute($sSQL);
-      $sReturn = ph_InsertedId();
+      $nInsertedId = ph_InsertedId();
     }
-    return $sReturn;
+    return $nInsertedId;
   }
 
 }
