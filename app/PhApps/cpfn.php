@@ -76,12 +76,7 @@ if (!function_exists('cp_RegisterUser')) {
                 . " VALUES ( '" . $sPhName . "', '" . ph_EncodePassword($sPhUPass) . "' )";
         ph_Execute($sSQL);
         $sReturn = ph_InsertedId();
-        $vMsg = 'Y';
-        if ($sReturn == 0) {
-          $sReturn = -999;
-          $vMsg = 'N';
-        }
-        ph_AddLog('Add User >> Name=[' . $sPhName . '] ' . $vMsg);
+        ph_AddLog('Add User >> Name=[' . $sPhName . '] Inseted Id=[' . $sReturn . ']');
       }
     }
     return $sReturn;
@@ -103,8 +98,7 @@ if (!function_exists('cp_Login')) {
   function cp_Login($sPhUName, $sPhUPass) {
     $vWhere = "(`status_id`=1"
             . " AND lower(`user_name`)=lower('" . $sPhUName . "')"
-            . " AND `user_password`='" . $sPhUPass . "')";
-//            . " AND `user_password`='" . ph_EncodePassword($sPhUPass) . "')";
+            . " AND `user_password`='" . ph_EncodePassword($sPhUPass) . "')";
     $nRet = ph_GetDBValue('user_name', 'cpy_user', $vWhere);
     return $nRet;
   }
