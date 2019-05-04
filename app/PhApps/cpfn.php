@@ -69,17 +69,17 @@ if (!function_exists('cp_isUserExist')) {
 if (!function_exists('cp_RegisterUser')) {
 
   function cp_RegisterUser($sPhName, $sPhUPass) {
-    $sReturn = -999;
+    $nRegId = -999;
     if ($sPhUPass != '' && $sPhName != '') {
       if (!cp_isUserExist($sPhName)) {
         $sSQL = "INSERT INTO `cpy_user` ( `user_name`, `user_password` )"
                 . " VALUES ( '" . $sPhName . "', '" . ph_EncodePassword($sPhUPass) . "' )";
         ph_Execute($sSQL);
-        $sReturn = ph_InsertedId();
-        ph_AddLog('Add User >> Name=[' . $sPhName . '] Inseted Id=[' . $sReturn . ']');
+        $nRegId = ph_InsertedId();
+        ph_AddLog('Add User >> Name=[' . $sPhName . '] Inseted Id=[' . $nRegId . ']');
       }
     }
-    return $sReturn;
+    return $nRegId;
   }
 
 }
