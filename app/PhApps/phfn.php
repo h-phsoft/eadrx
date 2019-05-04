@@ -149,7 +149,7 @@ function ph_GetDBValue($sField, $sTable, $sWhere = '') {
       $res->Close();
     }
   } catch (Exception $ex) {
-    $sRetVal = "";
+    $sRetVal = $ex->getMessage();
   }
   return $sRetVal;
 }
