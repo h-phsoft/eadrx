@@ -9,7 +9,7 @@
               <label for="inputName"><?php echo ph_DBKey('Nick Name', $curLang->Lang_Id); ?></label>
             </div>
             <div class="form-label-group">
-              <input type="password" id="inputPassword" name="inputPassword" class="form-control" placeholder="<?php echo ph_DBKey('Password', $curLang->Lang_Id); ?>" required value="<?php echo $inputPassword; ?>">
+              <input type="password" id="inputPassword" name="inputPassword" class="form-control" placeholder="<?php echo ph_DBKey('Password', $curLang->Lang_Id); ?>" required>
               <label for="inputPassword"><?php echo ph_DBKey('Password', $curLang->Lang_Id); ?></label>
             </div>
             <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit"><?php echo ph_DBKey('Sign in', $curLang->Lang_Id); ?></button>

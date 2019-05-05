@@ -68,12 +68,12 @@ if (!function_exists('cp_isUserExist')) {
 
 if (!function_exists('cp_RegisterUser')) {
 
-  function cp_RegisterUser($sPhName, $sPhUPass) {
+  function cp_RegisterUser($sPhName, $sPhUPass, $nGender) {
     $nRegId = -999;
     if ($sPhUPass != '' && $sPhName != '') {
       if (!cp_isUserExist($sPhName)) {
-        $sSQL = "INSERT INTO `cpy_user` ( `user_name`, `user_password` )"
-                . " VALUES ( '" . $sPhName . "', '" . ph_EncodePassword($sPhUPass) . "' )";
+        $sSQL = "INSERT INTO `cpy_user` ( `user_name`, `user_password`, `gend_id` )"
+                . " VALUES ( '" . $sPhName . "', '" . ph_EncodePassword($sPhUPass) . "', '" . $nGender . "' )";
         ph_Execute($sSQL);
         $nRegId = ph_InsertedId();
         ph_AddLog('Add User >> Name=[' . $sPhName . '] Inseted Id=[' . $nRegId . ']');
@@ -99,7 +99,7 @@ if (!function_exists('cp_Login')) {
     $vWhere = "(`status_id`=1"
             . " AND lower(`user_name`)=lower('" . $sPhUName . "')"
             . " AND `user_password`='" . ph_EncodePassword($sPhUPass) . "')";
-    $nRet = ph_GetDBValue('user_name', 'cpy_user', $vWhere);
+    $nRet = ph_GetDBValue('user_id', 'cpy_user', $vWhere);
     return $nRet;
   }
 

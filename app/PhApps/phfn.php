@@ -121,6 +121,16 @@ if (!function_exists('ph_AddLog')) {
 
 }
 
+if (!function_exists('ph_EncodePassword')) {
+
+  function ph_EncodePassword($sPass) {
+    $vRet = md5(md5(md5(md5(md5(md5(md5(ph_Clean_Password($sPass))))))));
+    $vRet = md5(ph_Clean_Password($sPass));
+    return $vRet;
+  }
+
+}
+
 // Get DB Setting Varchar Value from Database
 function ph_Setting($vKey) {
   $vRet = ph_SettingValue($vKey, 'set_val');
