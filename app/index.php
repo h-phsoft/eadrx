@@ -52,14 +52,28 @@ $dbKeys = ph_LoadDBKeys($nLang);
 if ($nMode == ph_Setting('App-Menu-Home')) {
   $nMode = 0;
 }
+echo '<br><br><br><br><br><br><br><br><br>';
 $nUserId = ph_session("UID");
-if ($nUserId == '' || $nMode == ph_Setting('App-Mode-Logout')) {
-  if ($nMode == ph_Setting('App-Mode-Register')) {
+if ($nUserId == null || $nUserId == '' || $nMode == ph_Setting('App-Mode-Logout')) {
+  if ($nMode != ph_Setting('App-Mode-Register')) {
     $nMode = ph_Setting('App-Mode-Login');
+    echo '0<br>';
   }
   ph_SetSession('UID', '');
+  echo '1<br>';
 }
 if ($nMode == ph_Setting('App-Mode-Login') && $nId != 0) {
+  $inputName = ph_Post('inputName');
+  $inputPassword = ph_Post('inputPassword');
+  $nUserId = cp_Login($inputName, $inputPassword);
+  if ($nUserId > 0) {
+    ph_SetSession('UID', $nUserId);
+    $nMode = 0;
+    $nId = 0;
+  }
+  echo '2<br>';
+}
+if ($nMode == ph_Setting('App-Mode-Register') && $nId != 0) {
   $inputName = ph_Post('inputName');
   $inputPassword = ph_Post('inputPassword');
   $inputGender = ph_Post('inputGender');
@@ -69,16 +83,7 @@ if ($nMode == ph_Setting('App-Mode-Login') && $nId != 0) {
     $nMode = 0;
     $nId = 0;
   }
-}
-if ($nMode == ph_Setting('App-Mode-Register') && $nId != 0) {
-  $inputName = ph_Post('inputName');
-  $inputPassword = ph_Post('inputPassword');
-  $nUserId = cp_Login($inputName, $inputPassword);
-  if ($nUserId > 0) {
-    ph_SetSession('UID', $nUserId);
-    $nMode = 0;
-    $nId = 0;
-  }
+  echo '3<br>';
 }
 
 ph_SetSession('CurrLang', $nLang);

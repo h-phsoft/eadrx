@@ -52,14 +52,20 @@
     }
     ?>
   </ul>
-  <!--
-  <ul class="list-unstyled CTAs">
+  <hr>
+  <ul class="list-unstyled components">
     <li>
-      <a href="#" class="download">Download source</a>
-    </li>
-    <li>
-      <a href="#" class="article">Back to article</a>
+      <?php
+      $nUserId = ph_session("UID");
+      if ($nUserId > 0) {
+        ?>
+        <a href="<?php echo $PH_BASE_PATH . '?' . $nLang . '/' . ph_Setting('App-Mode-Logout'); ?>" class="">
+          <i class="fas fa-sign-out-alt"></i>
+          <?php echo ph_DBKey('Logout', $curLang->Lang_Id); ?>
+        </a>
+        <?php
+      }
+      ?>
     </li>
   </ul>
-  -->
 </nav>
