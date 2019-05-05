@@ -60,17 +60,29 @@ if ($nMode == 0) {
         $nMode = 0;
       }
       ph_SetSession('UID', '');
-      ph_SetSession('CurrLang', $nLang);
     }
   } else if ($nId == -1) {
     $inputName = ph_Post('inputName');
     $inputPassword = ph_Post('inputPassword');
     $inputGender = ph_Post('inputGender');
+    $nUserId = cp_RegisterUser($inputName, $inputPassword, $inputGender);
+    if ($nUserId > 0) {
+      ph_SetSession('UID', $nUserId);
+      $nMode = 10;
+      $nId = 0;
+    }
   } else if ($nId == -2) {
     $inputName = ph_Post('inputName');
     $inputPassword = ph_Post('inputPassword');
+    $nUserId = cp_Login($inputName, $inputPassword);
+    if ($nUserId > 0) {
+      ph_SetSession('UID', $nUserId);
+      $nMode = 10;
+      $nId = 0;
+    }
   }
 }
+ph_SetSession('CurrLang', $nLang);
 
 // PhSoft Setting
 $ph_Setting_SiteName = ph_Setting('Site-Name');
