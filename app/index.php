@@ -48,20 +48,12 @@ if ($nLang === '') {
   $nLang = 2;
 }
 $dbKeys = ph_LoadDBKeys($nLang);
+ph_SetSession('CurrLang', $nLang);
 
 if ($nMode == ph_Setting('App-Menu-Home')) {
   $nMode = 0;
 }
 echo '<br><br><br><br><br><br><br><br><br>';
-$nUserId = ph_session("UID");
-if ($nUserId == null || $nUserId == '' || $nMode == ph_Setting('App-Mode-Logout')) {
-  if ($nMode != ph_Setting('App-Mode-Register')) {
-    $nMode = ph_Setting('App-Mode-Login');
-    echo '0<br>';
-  }
-  ph_SetSession('UID', '');
-  echo '1<br>';
-}
 if ($nMode == ph_Setting('App-Mode-Login') && $nId != 0) {
   $inputName = ph_Post('inputName');
   $inputPassword = ph_Post('inputPassword');
@@ -85,8 +77,18 @@ if ($nMode == ph_Setting('App-Mode-Register') && $nId != 0) {
   }
   echo '3<br>';
 }
-
-ph_SetSession('CurrLang', $nLang);
+$nUserId = ph_session("UID");
+if ($nUserId == null || $nUserId == '' || $nMode == ph_Setting('App-Mode-Logout')) {
+  if ($nMode != ph_Setting('App-Mode-Register')) {
+    $nMode = ph_Setting('App-Mode-Login');
+    echo '0<br>';
+  }
+  ph_SetSession('UID', '');
+  echo '1<br>';
+}
+if ($nUserId > 0) {
+  $vUserName = cp_UserName($nUserId);
+}
 
 // PhSoft Setting
 $ph_Setting_SiteName = ph_Setting('Site-Name');
@@ -131,7 +133,7 @@ if ($pageName == '') {
     }
     $pageName = ph_Setting('App-Page-Book-Subscribe');
   } else {
-    $vHeader = $ph_Setting_SiteName;
+    $vHeader = ph_Setting('App-Application-Name');
     $pageName = 'app-main.php';
   }
 }

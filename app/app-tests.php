@@ -7,13 +7,13 @@
       <div class="block col-12 col-sm-12 my-3">
         <div class="block-body">
           <div class="row">
-            <div class="col-12 col-sm-2 px-3">
+            <div class="col-8 col-sm-2 px-3 mx-auto">
               <img src="<?php echo $PH_BASE_IMAGES_PATH . ph_Setting('Path-Test-Images') . $test->Test_Image; ?>" style="width: 100%;">
             </div>
             <div class="col-12 col-sm-10 px-5">
               <div class="row">
                 <div class="col-12">
-                  <h3><?php echo ph_DBKey("Test Name", $curLang->Lang_Id) . ': ' . ph_DBKey($test->Test_Name, $curLang->Lang_Id); ?></h3>
+                  <h4><?php echo ph_DBKey("Test Name", $curLang->Lang_Id) . ': ' . ph_DBKey($test->Test_Name, $curLang->Lang_Id); ?></h4>
                 </div>
               </div>
               <div class="row">

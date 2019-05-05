@@ -5,7 +5,7 @@
         <div class="card-body">
           <form class="form-signin" method="post" action="index.php">
             <div class="form-label-group">
-              <input type="text" id="inputSubject" name="inputSubject" class="form-control" placeholder="Email address" required autofocus value="<?php echo $inputEmail; ?>">
+              <input type="text" id="inputSubject" name="inputSubject" class="form-control" placeholder="Email address" required autofocus>
               <label for="inputSubject">Subject</label>
             </div>
             <div class="form-label-group">

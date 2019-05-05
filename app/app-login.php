@@ -3,7 +3,7 @@
     <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
       <div class="card card-signin my-5">
         <div class="card-body">
-          <form class="form-signin" method="post" action="<?php echo $PH_BASE_PATH . '?' . $nLang . '/0/-2'; ?>">
+          <form class="form-signin" method="post" action="<?php echo $PH_BASE_PATH . '?' . $nLang . '/' . ph_Setting('App-Mode-Login') . '/-2'; ?>">
             <div class="form-label-group">
               <input type="text" id="inputName" name="inputName" class="form-control" placeholder="<?php echo ph_DBKey('Nick Name', $curLang->Lang_Id); ?>" required autofocus>
               <label for="inputName"><?php echo ph_DBKey('Nick Name', $curLang->Lang_Id); ?></label>
