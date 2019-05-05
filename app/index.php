@@ -52,36 +52,35 @@ if ($nLang === '') {
 }
 $dbKeys = ph_LoadDBKeys($nLang);
 
-if ($nMode == 0) {
-  if ($nId == 0) {
-    $nUId = ph_session("UID");
-    if ($nUId == '') {
-      if ($nMode != -1) {
-        $nMode = 0;
-      }
-      ph_SetSession('UID', '');
-    }
-  } else if ($nId == -1) {
-    $inputName = ph_Post('inputName');
-    $inputPassword = ph_Post('inputPassword');
-    $inputGender = ph_Post('inputGender');
-    $nUserId = cp_RegisterUser($inputName, $inputPassword, $inputGender);
-    if ($nUserId > 0) {
-      ph_SetSession('UID', $nUserId);
-      $nMode = 10;
-      $nId = 0;
-    }
-  } else if ($nId == -2) {
-    $inputName = ph_Post('inputName');
-    $inputPassword = ph_Post('inputPassword');
-    $nUserId = cp_Login($inputName, $inputPassword);
-    if ($nUserId > 0) {
-      ph_SetSession('UID', $nUserId);
-      $nMode = 10;
-      $nId = 0;
-    }
+$nUserId = ph_session("UID");
+if ($nUserId == '' || $nMode == ph_Setting('App-Mode-Logout')) {
+  if ($nMode == ph_Setting('App-Mode-Register')) {
+    $nMode = ph_Setting('App-Mode-Login');
+  }
+  ph_SetSession('UID', '');
+}
+if ($nMode == ph_Setting('App-Mode-Login') && $nId == -1) {
+  $inputName = ph_Post('inputName');
+  $inputPassword = ph_Post('inputPassword');
+  $inputGender = ph_Post('inputGender');
+  $nUserId = cp_RegisterUser($inputName, $inputPassword, $inputGender);
+  if ($nUserId > 0) {
+    ph_SetSession('UID', $nUserId);
+    $nMode = 0;
+    $nId = 0;
   }
 }
+if ($nMode == ph_Setting('App-Mode-Register') && $nId == -1) {
+  $inputName = ph_Post('inputName');
+  $inputPassword = ph_Post('inputPassword');
+  $nUserId = cp_Login($inputName, $inputPassword);
+  if ($nUserId > 0) {
+    ph_SetSession('UID', $nUserId);
+    $nMode = 0;
+    $nId = 0;
+  }
+}
+
 ph_SetSession('CurrLang', $nLang);
 
 // PhSoft Setting
