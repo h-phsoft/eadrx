@@ -51,6 +51,14 @@ if (!function_exists('cp_getDailyTip')) {
 
 }
 
+if (!function_exists('cp_doLoginActions')) {
+
+  function cp_doLoginActions($userId, $nLang = 2) {
+    $sSQL = 'UPDATE app_notification_for SET `nstatus_id`=3 WHERE `user_id`=' . $userId . ' AND `nstatus_id`<3';
+  }
+
+}
+
 if (!function_exists('cp_AddLog')) {
 
   function cp_AddLog($vText) {
@@ -89,7 +97,7 @@ if (!function_exists('cp_RegisterUser')) {
                 . " VALUES ( '" . $sPhName . "', '" . ph_EncodePassword($sPhUPass) . "', '" . $nGender . "' )";
         ph_Execute($sSQL);
         $nRegId = ph_InsertedId();
-        ph_AddLog('Add User >> Name=[' . $sPhName . '] Inseted Id=[' . $nRegId . ']');
+        ph_AddLog('Name=[' . $sPhName . '] Id=[' . $nRegId . ']', 'Add User');
       }
     }
     return $nRegId;
@@ -112,8 +120,12 @@ if (!function_exists('cp_Login')) {
     $vWhere = "(`status_id`=1"
             . " AND lower(`user_name`)=lower('" . $sPhUName . "')"
             . " AND `user_password`='" . ph_EncodePassword($sPhUPass) . "')";
-    $nRet = ph_GetDBValue('user_id', 'cpy_user', $vWhere);
-    return $nRet;
+    $nUserId = ph_GetDBValue('user_id', 'cpy_user', $vWhere);
+    if ($nUserId != '') {
+      cp_doLoginActions($nUserId);
+    }
+    ph_AddLog('Name=[' . $sPhUName . '] Id=[' . $nUserId . ']', 'Login User');
+    return $nUserId;
   }
 
 }
