@@ -45,7 +45,7 @@ class cNotification {
             . 'FROM '
             . '(SELECT `notif_id`, `lang_id`, `for_id`, `nstatus_id`, `notif_title`, `notif_text`, `ins_datetime`'
             . '   FROM `app_notification`'
-            . '  WHERE (`for_id`=1 '
+            . '  WHERE (`for_id`=0 '
             . '    AND `notif_id` NOT IN (SELECT `notif_id` FROM app_notification_for WHERE `user_id`=' . $nUserId . ')'
             . '        )'
             . ' UNION ALL '
