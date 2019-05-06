@@ -5,8 +5,8 @@
         <div class="card-body">
           <form class="form-signin" method="post" action="<?php echo $PH_BASE_PATH . '?' . $nLang . '/' . ph_Setting('App-Mode-Login') . '/-2'; ?>">
             <div class="form-label-group">
-              <input type="text" id="inputName" name="inputName" class="form-control" placeholder="<?php echo ph_DBKey('Nick Name', $curLang->Lang_Id); ?>" required autofocus>
-              <label for="inputName"><?php echo ph_DBKey('Nick Name', $curLang->Lang_Id); ?></label>
+              <input type="text" id="inputName" name="inputName" class="form-control" placeholder="<?php echo ph_DBKey('Name', $curLang->Lang_Id); ?>" required autofocus>
+              <label for="inputName"><?php echo ph_DBKey('Name', $curLang->Lang_Id); ?></label>
             </div>
             <div class="form-label-group">
               <input type="password" id="inputPassword" name="inputPassword" class="form-control" placeholder="<?php echo ph_DBKey('Password', $curLang->Lang_Id); ?>" required>
