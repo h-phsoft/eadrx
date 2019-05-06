@@ -54,6 +54,16 @@ body {
   background: var(--main-background) !important;
 }
 
+.align-items-stretch {
+  -webkit-box-align: stretch !important;
+  -ms-flex-align: stretch !important;
+  align-items: stretch !important;
+}
+.text-justify-last-center {
+  text-align: justify;
+  -moz-text-align-last: center;
+  text-align-last: center;
+}
 p {
   font-family: 'Droid Arabic Kufi', sans-serif;
   font-size: 1.1em;

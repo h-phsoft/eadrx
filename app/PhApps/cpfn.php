@@ -38,6 +38,19 @@ if (!function_exists('cp_getRandomTip')) {
   }
 
 }
+
+if (!function_exists('cp_getDailyTip')) {
+
+  function cp_getDailyTip($nLang = 2) {
+    $nMin = ph_GetDBValue('Min(`tips_id`)', '`app_tips`', '`lang_id`=' . $nLang);
+    $nMax = ph_GetDBValue('Max(`tips_id`)', '`app_tips`', '`lang_id`=' . $nLang);
+    $nId = rand($nMin, $nMax);
+    $vTip = ph_GetDBValue('`tips_text`', '`app_tips`', '`tips_id`=' . $nId);
+    return $vTip;
+  }
+
+}
+
 if (!function_exists('cp_AddLog')) {
 
   function cp_AddLog($vText) {
