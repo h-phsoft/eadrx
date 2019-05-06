@@ -28,6 +28,8 @@
   --title-background: whitesmoke;
   --block-background: #fff;
   --block-color: #555;
+  --block-title-color: #b90303;
+  --block-footer-color: #7386D5;
   --block-body-background: whitesmoke;
   --block-body-color: #b90303;
   --dismiss-background: #fff;
@@ -382,6 +384,7 @@ a.article:hover {
 }
 
 .block-title {
+  color: var(--block-title-color);
   font-weight: 300;
   font-size: 1.5rem;
 }
@@ -399,6 +402,7 @@ a.article:hover {
 }
 
 .block-footer {
+  color: var(--block-footer-color);
   font-weight: 100;
   font-size: 0.8rem;
 }

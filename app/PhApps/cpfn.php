@@ -26,6 +26,7 @@ include_once $PH_CLASS_PATH . "cBook.php";
 include_once $PH_CLASS_PATH . "cTestQuestion.php";
 include_once $PH_CLASS_PATH . "cTestEvaluate.php";
 include_once $PH_CLASS_PATH . "cTest.php";
+include_once $PH_CLASS_PATH . "cNotification.php";
 
 if (!function_exists('cp_getRandomTip')) {
 
@@ -53,8 +54,16 @@ if (!function_exists('cp_getDailyTip')) {
 
 if (!function_exists('cp_doLoginActions')) {
 
-  function cp_doLoginActions($userId, $nLang = 2) {
-    $sSQL = 'UPDATE app_notification_for SET `nstatus_id`=3 WHERE `user_id`=' . $userId . ' AND `nstatus_id`<3';
+  function cp_doLoginActions($nUserId) {
+    $vSQL = 'INSERT INTO app_notification_for '
+            . '(`notif_id`, `user_id`, `nstatus_id`)'
+            . 'SELECT `notif_id`, ' . $nUserId . ', 3'
+            . ' FROM app_notification'
+            . ' WHERE `for_id`=0'
+            . ' AND `notif_id` NOT IN (SELECT `notif_id` FROM app_notification_for WHERE `user_id`=' . $nUserId . ')';
+    ph_Execute($vSQL);
+    $vSQL = 'UPDATE app_notification_for SET `nstatus_id`=3 WHERE `user_id`=' . $nUserId . ' AND `nstatus_id`<3';
+    ph_Execute($vSQL);
   }
 
 }
