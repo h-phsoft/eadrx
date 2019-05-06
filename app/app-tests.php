@@ -28,8 +28,8 @@
               </div>
               <div class="row my-3">
                 <div class="col-12 text-right">
-                  <a class="btn btn-success" href="?<?php echo $PH_BASE_PATH . '?' . $nLang . '/' . ph_Setting('App-Menu-Test') . '/' . $test->Test_Id; ?>"><?php echo ph_DBKey('Results', $curLang->Lang_Id); ?></a>
-                  <a class="btn btn-info" href="?<?php echo $PH_BASE_PATH . '?' . $nLang . '/' . ph_Setting('App-Menu-Take-Test') . '/' . $test->Test_Id; ?>"><?php echo ph_DBKey('Take it', $curLang->Lang_Id) . ' ' . $test->Test_Price . ph_Setting('Currency-Sign'); ?></a>
+                  <a class="btn btn-success" href="?<?php echo $nLang . '/' . ph_Setting('App-Menu-Test') . '/' . $test->Test_Id; ?>"><?php echo ph_DBKey('Results', $curLang->Lang_Id); ?></a>
+                  <a class="btn btn-info" href="?<?php echo $nLang . '/' . ph_Setting('App-Menu-Take-Test') . '/' . $test->Test_Id; ?>"><?php echo ph_DBKey('Take it', $curLang->Lang_Id) . ' ' . $test->Test_Price . ph_Setting('Currency-Sign'); ?></a>
                 </div>
               </div>
             </div>
