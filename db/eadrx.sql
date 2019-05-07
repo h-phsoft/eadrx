@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: May 05, 2019 at 02:24 PM
+-- Generation Time: May 06, 2019 at 01:17 PM
 -- Server version: 5.7.24
 -- PHP Version: 7.2.14
 
@@ -425,14 +425,14 @@ CREATE TABLE IF NOT EXISTS `app_notification_for` (
   KEY `notif_id` (`notif_id`),
   KEY `user_id` (`user_id`),
   KEY `nstatus_id` (`nstatus_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `app_notification_for`
 --
 
 INSERT INTO `app_notification_for` (`nfor_id`, `notif_id`, `user_id`, `nstatus_id`) VALUES
-(1, 1, 2, 1);
+(3, 1, 4, 3);
 
 -- --------------------------------------------------------
 
@@ -1806,6 +1806,24 @@ CREATE TABLE IF NOT EXISTS `app_vtest_question` (
 -- --------------------------------------------------------
 
 --
+-- Stand-in structure for view `app_vtips`
+-- (See below for the actual view)
+--
+DROP VIEW IF EXISTS `app_vtips`;
+CREATE TABLE IF NOT EXISTS `app_vtips` (
+`tcat_id` int(11)
+,`cstatus_id` tinyint(4)
+,`tcat_name` varchar(100)
+,`tips_id` int(11)
+,`lang_id` int(11)
+,`status_id` tinyint(4)
+,`tips_text` mediumtext
+,`ins_datetime` timestamp
+);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `cpy_ads`
 --
 
@@ -2083,9 +2101,9 @@ INSERT INTO `cpy_page_row_block` (`blk_id`, `row_id`, `type_id`, `slid_id`, `vid
 (22, 7, 1, 0, 0, 1, 4, 3, 'Get Application 03', 'Android App', NULL, 'You can find your application <a href=\"https://play.google.com/store/apps/details?id=com.application.doctorx\" target=\"_blank\">here</a>', NULL),
 (23, 7, 1, 0, 0, 1, 4, 4, 'Get Application 04', 'Apple App', NULL, '<p>Mobile Application for Apple devices is under construction, you can use our web application <a href=\"app\">here</a></p>', NULL),
 (24, 8, 1, 0, 0, 1, 12, 1, 'Get Application 01', 'الحصول على التطبيق', NULL, '<br/><br/><br/><br/><br/>', NULL),
-(25, 8, 1, 0, 0, 1, 4, 2, 'Get Application 02', 'تطبيق الانترنت', NULL, '<p>يمكنك استخدام التطبيق على الانترنت من خلال <a href=\"app\">الرابط التالي</a></p>', NULL),
+(25, 8, 1, 0, 0, 1, 4, 2, 'Get Application 02', 'تطبيق الانترنت', NULL, '<p>يمكنك استخدام التطبيق على الانترنت من خلال <a href=\"app?1\">الرابط التالي</a></p>', NULL),
 (26, 8, 1, 0, 0, 1, 4, 3, 'Get Application 03', 'تطبيق أجهزة Android', NULL, '<p dir=\"rtl\">يمكنك الحصول على التطبيق من متجر Google play من <a href=\"https://play.google.com/store/apps/details?id=com.application.doctorx\" target=\"_blank\">الرابط التالي</a></p>', NULL),
-(27, 8, 1, 0, 0, 1, 4, 4, 'Get Application 04', 'تطبيق أجهزة Apple', NULL, '<p dir=\"rtl\">تطبيق أجهزة Apple قيد التطوير حاليا لذا يمكنك استخدام التطبيق على الانترنت من خلال <a href=\"app\">الرابط التالي</a></p>', NULL),
+(27, 8, 1, 0, 0, 1, 4, 4, 'Get Application 04', 'تطبيق أجهزة Apple', NULL, '<p dir=\"rtl\">تطبيق أجهزة Apple قيد التطوير حاليا لذا يمكنك استخدام التطبيق على الانترنت من خلال <a href=\"app?1\">الرابط التالي</a></p>', NULL),
 (28, 2, 1, 0, 0, 1, 6, 1, 'Emotional Intelligence (EQ)', 'Emotional Intelligence<br>(EQ)', 't1.jpg', '<p style=\"text-align:justify\">EQ is a test that measures the aptitude to deal with others positively and respond to the difficult emerging conditions. It reveals the ability to monitor one\\\'s emotions and use emotional information to adapt to the social environment People with high scores of EQ are said to enjoy greater mental health, have distinguished job performance and more potent leadership skills. <a href=\"app\" target=\"_blank\">Take The Test</a></p>', NULL),
 (29, 2, 1, 0, 0, 1, 6, 2, 'Femininity & Masculinity (FM)', 'Femininity & Masculinity<br>(FM)', 't2.jpg', '<p style=\"text-align:justify\">This is a test that measures to what extent a person uses their right or left cerebral hemispheres taking into consideration that the right cerebrum (anima) is responsible for love, intuition, feelings, beauty and creativity whereas the left cerebrum (animus) is responsible for logic and the senses. Hence, taking the FM test will reveal the masculinity of femininity of one\'s brain. <a href=\"app\" target=\"_blank\">Take The Test</a></p>\r\n\r\n<p style=\"text-align:justify\">&nbsp;</p>\r\n\r\n<p style=\"text-align:justify\">&nbsp;</p>', NULL),
 (30, 2, 1, 0, 0, 1, 6, 3, 'Emotional Imprint (EI)', 'Emotional Imprint<br>(EI)', 't3.jpg', '<p>This is an innovative test that uncovers the emotional imprint of a person as regards feelings, love and emotions. <a href=\"app\" target=\"_blank\">Take The Test</a></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>', NULL),
@@ -3133,7 +3151,7 @@ INSERT INTO `phs_menu` (`menu_id`, `menu_pid`, `page_id`, `test_id`, `type_id`, 
 (3400, 3, 0, 0, 0, 1, 4, 'Books', 'fas fa-book', NULL, NULL, 'app-books.php'),
 (3401, -1, 0, 0, 0, 1, 4, 'Book', 'fas fa-book', NULL, NULL, NULL),
 (3500, 3, 0, 0, 0, 1, 5, 'Tips', 'far fa-comment', NULL, NULL, 'app-tips.php'),
-(3800, 3, 0, 0, 0, 1, 8, 'Notifications', 'far fa-bell', NULL, NULL, NULL),
+(3800, 3, 0, 0, 0, 1, 8, 'Notifications', 'far fa-bell', NULL, NULL, 'app-notifications.php'),
 (3900, 3, 0, 0, 0, 1, 9, 'Contact', 'far fa-envelope', NULL, NULL, 'app-contact.php'),
 (3901, 3, 0, 0, 0, 1, 9, 'About', 'far fa-question-circle', NULL, NULL, 'app-about.php'),
 (4101, 4, 0, 0, 0, 2, 1, 'Call US', 'fas fa-phone', NULL, '_BLANK', NULL),
@@ -3555,7 +3573,7 @@ CREATE TABLE IF NOT EXISTS `phs_vkeys` (
 --
 DROP TABLE IF EXISTS `app_vbook`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `app_vbook`  AS  select `b`.`book_id` AS `book_id`,`b`.`lang_id` AS `lang_id`,`b`.`status_id` AS `status_id`,`b`.`book_title` AS `book_title`,`b`.`book_desc` AS `book_desc`,`b`.`book_image` AS `book_image`,`b`.`book_price` AS `book_price`,`b`.`ins_datetime` AS `ins_datetime`,`p`.`bpage_id` AS `bpage_id`,`p`.`page_num` AS `page_num`,`p`.`page_image` AS `page_image`,`p`.`page_text` AS `page_text` from (`app_book` `b` join `app_book_page` `p`) where (`p`.`book_id` = `b`.`book_id`) ;
+CREATE VIEW `app_vbook`  AS  select `b`.`book_id` AS `book_id`,`b`.`lang_id` AS `lang_id`,`b`.`status_id` AS `status_id`,`b`.`book_title` AS `book_title`,`b`.`book_desc` AS `book_desc`,`b`.`book_image` AS `book_image`,`b`.`book_price` AS `book_price`,`b`.`ins_datetime` AS `ins_datetime`,`p`.`bpage_id` AS `bpage_id`,`p`.`page_num` AS `page_num`,`p`.`page_image` AS `page_image`,`p`.`page_text` AS `page_text` from (`app_book` `b` join `app_book_page` `p`) where (`p`.`book_id` = `b`.`book_id`) ;
 
 -- --------------------------------------------------------
 
@@ -3564,7 +3582,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `app_vcons_cat`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `app_vcons_cat`  AS  select `t`.`cat_id` AS `cat_id`,`t`.`cat_order` AS `cat_order`,`t`.`cat_name` AS `cat_iname`,`t`.`status_id` AS `status_id`,`t`.`cat_Price` AS `cat_price`,`n`.`ncat_id` AS `ncat_id`,`n`.`lang_id` AS `lang_id`,`n`.`cat_name` AS `cat_name`,`n`.`cat_desc` AS `cat_desc` from (`app_consultation_category` `t` join `app_consultation_category_name` `n`) where (`n`.`cat_id` = `t`.`cat_id`) ;
+CREATE VIEW `app_vcons_cat`  AS  select `t`.`cat_id` AS `cat_id`,`t`.`cat_order` AS `cat_order`,`t`.`cat_name` AS `cat_iname`,`t`.`status_id` AS `status_id`,`t`.`cat_Price` AS `cat_price`,`n`.`ncat_id` AS `ncat_id`,`n`.`lang_id` AS `lang_id`,`n`.`cat_name` AS `cat_name`,`n`.`cat_desc` AS `cat_desc` from (`app_consultation_category` `t` join `app_consultation_category_name` `n`) where (`n`.`cat_id` = `t`.`cat_id`) ;
 
 -- --------------------------------------------------------
 
@@ -3573,7 +3591,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `app_vtest`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `app_vtest`  AS  select `t`.`test_id` AS `test_id`,`t`.`test_num` AS `test_num`,`t`.`test_iname` AS `test_iname`,`t`.`status_id` AS `status_id`,`t`.`test_price` AS `test_price`,`t`.`test_image` AS `test_image`,`n`.`ntest_id` AS `ntest_id`,`n`.`lang_id` AS `lang_id`,`n`.`test_name` AS `test_name`,`n`.`test_desc` AS `test_desc` from (`app_test` `t` join `app_test_name` `n`) where (`n`.`test_id` = `t`.`test_id`) ;
+CREATE VIEW `app_vtest`  AS  select `t`.`test_id` AS `test_id`,`t`.`test_num` AS `test_num`,`t`.`test_iname` AS `test_iname`,`t`.`status_id` AS `status_id`,`t`.`test_price` AS `test_price`,`t`.`test_image` AS `test_image`,`n`.`ntest_id` AS `ntest_id`,`n`.`lang_id` AS `lang_id`,`n`.`test_name` AS `test_name`,`n`.`test_desc` AS `test_desc` from (`app_test` `t` join `app_test_name` `n`) where (`n`.`test_id` = `t`.`test_id`) ;
 
 -- --------------------------------------------------------
 
@@ -3582,7 +3600,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `app_vtest_evaluate`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `app_vtest_evaluate`  AS  select `v`.`test_id` AS `test_id`,`v`.`test_num` AS `test_num`,`v`.`test_iname` AS `test_iname`,`v`.`status_id` AS `status_id`,`v`.`test_price` AS `test_price`,`v`.`test_image` AS `test_image`,`v`.`ntest_id` AS `ntest_id`,`v`.`lang_id` AS `lang_id`,`v`.`test_name` AS `test_name`,`v`.`test_desc` AS `test_desc`,`e`.`eval_id` AS `eval_id`,`e`.`gend_id` AS `gend_id`,`e`.`eval_from` AS `eval_from`,`e`.`eval_to` AS `eval_to`,`e`.`eval_text` AS `eval_text` from (`app_vtest` `v` join `app_test_evaluate` `e`) where ((`e`.`test_id` = `v`.`test_id`) and (`e`.`lang_id` = `v`.`lang_id`)) ;
+CREATE VIEW `app_vtest_evaluate`  AS  select `v`.`test_id` AS `test_id`,`v`.`test_num` AS `test_num`,`v`.`test_iname` AS `test_iname`,`v`.`status_id` AS `status_id`,`v`.`test_price` AS `test_price`,`v`.`test_image` AS `test_image`,`v`.`ntest_id` AS `ntest_id`,`v`.`lang_id` AS `lang_id`,`v`.`test_name` AS `test_name`,`v`.`test_desc` AS `test_desc`,`e`.`eval_id` AS `eval_id`,`e`.`gend_id` AS `gend_id`,`e`.`eval_from` AS `eval_from`,`e`.`eval_to` AS `eval_to`,`e`.`eval_text` AS `eval_text` from (`app_vtest` `v` join `app_test_evaluate` `e`) where ((`e`.`test_id` = `v`.`test_id`) and (`e`.`lang_id` = `v`.`lang_id`)) ;
 
 -- --------------------------------------------------------
 
@@ -3591,7 +3609,16 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `app_vtest_question`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `app_vtest_question`  AS  select `v`.`test_id` AS `test_id`,`v`.`test_num` AS `test_num`,`v`.`test_iname` AS `test_iname`,`v`.`status_id` AS `status_id`,`v`.`test_price` AS `test_price`,`v`.`test_image` AS `test_image`,`v`.`ntest_id` AS `ntest_id`,`v`.`lang_id` AS `lang_id`,`v`.`test_name` AS `test_name`,`v`.`test_desc` AS `test_desc`,`q`.`qstn_id` AS `qstn_id`,`q`.`gend_id` AS `gend_id`,`q`.`qstn_num` AS `qstn_num`,`q`.`qstn_text` AS `qstn_text`,`q`.`qstn_ansr1` AS `qstn_ansr1`,`q`.`qstn_ansr2` AS `qstn_ansr2`,`q`.`qstn_ansr3` AS `qstn_ansr3`,`q`.`qstn_ansr4` AS `qstn_ansr4`,`q`.`qstn_rep1` AS `qstn_rep1`,`q`.`qstn_rep2` AS `qstn_rep2`,`q`.`qstn_rep3` AS `qstn_rep3`,`q`.`qstn_rep4` AS `qstn_rep4`,`q`.`qstn_val1` AS `qstn_val1`,`q`.`qstn_val2` AS `qstn_val2`,`q`.`qstn_val3` AS `qstn_val3`,`q`.`qstn_val4` AS `qstn_val4` from (`app_vtest` `v` join `app_test_question` `q`) where ((`q`.`test_id` = `v`.`test_id`) and (`q`.`lang_id` = `v`.`lang_id`)) ;
+CREATE VIEW `app_vtest_question`  AS  select `v`.`test_id` AS `test_id`,`v`.`test_num` AS `test_num`,`v`.`test_iname` AS `test_iname`,`v`.`status_id` AS `status_id`,`v`.`test_price` AS `test_price`,`v`.`test_image` AS `test_image`,`v`.`ntest_id` AS `ntest_id`,`v`.`lang_id` AS `lang_id`,`v`.`test_name` AS `test_name`,`v`.`test_desc` AS `test_desc`,`q`.`qstn_id` AS `qstn_id`,`q`.`gend_id` AS `gend_id`,`q`.`qstn_num` AS `qstn_num`,`q`.`qstn_text` AS `qstn_text`,`q`.`qstn_ansr1` AS `qstn_ansr1`,`q`.`qstn_ansr2` AS `qstn_ansr2`,`q`.`qstn_ansr3` AS `qstn_ansr3`,`q`.`qstn_ansr4` AS `qstn_ansr4`,`q`.`qstn_rep1` AS `qstn_rep1`,`q`.`qstn_rep2` AS `qstn_rep2`,`q`.`qstn_rep3` AS `qstn_rep3`,`q`.`qstn_rep4` AS `qstn_rep4`,`q`.`qstn_val1` AS `qstn_val1`,`q`.`qstn_val2` AS `qstn_val2`,`q`.`qstn_val3` AS `qstn_val3`,`q`.`qstn_val4` AS `qstn_val4` from (`app_vtest` `v` join `app_test_question` `q`) where ((`q`.`test_id` = `v`.`test_id`) and (`q`.`lang_id` = `v`.`lang_id`)) ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `app_vtips`
+--
+DROP TABLE IF EXISTS `app_vtips`;
+
+CREATE VIEW `app_vtips`  AS  select `c`.`tcat_id` AS `tcat_id`,`c`.`status_id` AS `cstatus_id`,`c`.`tcat_name` AS `tcat_name`,`t`.`tips_id` AS `tips_id`,`t`.`lang_id` AS `lang_id`,`t`.`status_id` AS `status_id`,`t`.`tips_text` AS `tips_text`,`t`.`ins_datetime` AS `ins_datetime` from (`app_tips` `t` join `app_tips_category` `c`) where (`t`.`tcat_id` = `c`.`tcat_id`) ;
 
 -- --------------------------------------------------------
 
@@ -3600,7 +3627,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `cpy_vteam`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `cpy_vteam`  AS  select `m`.`team_id` AS `team_id`,`m`.`team_iname` AS `team_iname`,`m`.`team_order` AS `team_order`,`m`.`team_photo` AS `team_photo`,`t`.`teamn_id` AS `teamn_id`,`t`.`lang_id` AS `lang_id`,`t`.`team_name` AS `team_name`,`t`.`team_title` AS `team_title`,`t`.`team_position` AS `team_position`,`t`.`team_text` AS `team_text` from (`cpy_team` `m` join `cpy_team_names` `t`) where (`t`.`team_id` = `m`.`team_id`) ;
+CREATE VIEW `cpy_vteam`  AS  select `m`.`team_id` AS `team_id`,`m`.`team_iname` AS `team_iname`,`m`.`team_order` AS `team_order`,`m`.`team_photo` AS `team_photo`,`t`.`teamn_id` AS `teamn_id`,`t`.`lang_id` AS `lang_id`,`t`.`team_name` AS `team_name`,`t`.`team_title` AS `team_title`,`t`.`team_position` AS `team_position`,`t`.`team_text` AS `team_text` from (`cpy_team` `m` join `cpy_team_names` `t`) where (`t`.`team_id` = `m`.`team_id`) ;
 
 -- --------------------------------------------------------
 
@@ -3609,7 +3636,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `phs_vkeys`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `phs_vkeys`  AS  select `k`.`key_id` AS `key_id`,`k`.`key_name` AS `key_name`,`k`.`key_defvalue` AS `key_defvalue`,`l`.`lang_id` AS `lang_id`,`l`.`lang_name` AS `lang_name`,`l`.`lang_dir` AS `lang_dir`,`l`.`status_id` AS `status_id`,`l`.`lang_code` AS `lang_code`,`v`.`kval_id` AS `kval_id`,`v`.`key_value` AS `key_value`,`v`.`key_rvalue` AS `key_rvalue`,`v`.`key_text` AS `key_text` from ((`phs_keys` `k` join `phs_language` `l`) join `phs_keyvalues` `v`) where ((`v`.`key_id` = `k`.`key_id`) and (`v`.`lang_id` = `l`.`lang_id`)) ;
+CREATE VIEW `phs_vkeys`  AS  select `k`.`key_id` AS `key_id`,`k`.`key_name` AS `key_name`,`k`.`key_defvalue` AS `key_defvalue`,`l`.`lang_id` AS `lang_id`,`l`.`lang_name` AS `lang_name`,`l`.`lang_dir` AS `lang_dir`,`l`.`status_id` AS `status_id`,`l`.`lang_code` AS `lang_code`,`v`.`kval_id` AS `kval_id`,`v`.`key_value` AS `key_value`,`v`.`key_rvalue` AS `key_rvalue`,`v`.`key_text` AS `key_text` from ((`phs_keys` `k` join `phs_language` `l`) join `phs_keyvalues` `v`) where ((`v`.`key_id` = `k`.`key_id`) and (`v`.`lang_id` = `l`.`lang_id`)) ;
 
 --
 -- Constraints for dumped tables
