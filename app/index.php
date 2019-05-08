@@ -158,19 +158,34 @@ if ($pageName == '') {
   </head>
   <body dir="<?php echo $curLang->Lang_Dir; ?>">
     <div class="wrapper">
-      <?php include 'app-sidebar-left.php'; ?>
 
-      <?php include 'app-sidebar-right.php'; ?>
+      <?php
+      if ($nUserId > 0) {
+        include 'app-sidebar-left.php';
+      }
+      ?>
+
+      <?php
+      if ($nUserId > 0) {
+        include 'app-sidebar-right.php';
+      }
+      ?>
 
       <!-- Page Content  -->
       <div id="content">
         <div class="container-fluid text-center shadow bg-white rounded" style="padding: 5px !important;">
-          <button type="button" class="btn btn-outline-primary sidebarCollapse float-left" data-side="left">
-            <i class="fas fa-align-left"></i>
-          </button>
-          <button type="button" class="btn btn-outline-primary sidebarCollapse float-right" data-side="right">
-            <i class="fas fa-align-right"></i>
-          </button>
+          <?php
+          if ($nUserId > 0) {
+            ?>
+            <button type="button" class="btn btn-outline-primary sidebarCollapse float-left" data-side="left">
+              <i class="fas fa-align-left"></i>
+            </button>
+            <button type="button" class="btn btn-outline-primary sidebarCollapse float-right" data-side="right">
+              <i class="fas fa-align-right"></i>
+            </button>
+            <?php
+          }
+          ?>
           <div>
             <h3><?php echo $vHeader; ?></h3>
           </div>
