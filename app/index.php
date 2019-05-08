@@ -53,7 +53,7 @@ ph_SetSession('CurrLang', $nLang);
 if ($nMode == ph_Setting('App-Menu-Home')) {
   $nMode = 0;
 }
-echo '<br><br><br><br><br><br><br><br><br>';
+//echo '<br><br><br><br><br><br><br><br><br>';
 if ($nMode == ph_Setting('App-Mode-Login') && $nId != 0) {
   $inputName = ph_Post('inputName');
   $inputPassword = ph_Post('inputPassword');
