@@ -162,11 +162,7 @@ if ($pageName == '') {
       <?php
       if ($nUserId > 0) {
         include 'app-sidebar-left.php';
-      }
-      ?>
 
-      <?php
-      if ($nUserId > 0) {
         include 'app-sidebar-right.php';
       }
       ?>
