@@ -79,10 +79,8 @@ $nUserId = ph_session("UID");
 if ($nUserId == null || $nUserId == '' || $nMode == ph_Setting('App-Mode-Logout')) {
   if ($nMode != ph_Setting('App-Mode-Register')) {
     $nMode = ph_Setting('App-Mode-Login');
-    echo '0<br>';
   }
   ph_SetSession('UID', '');
-  echo '1<br>';
 }
 if ($nUserId > 0) {
   $vUserName = cp_UserName($nUserId);
