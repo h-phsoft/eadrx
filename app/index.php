@@ -63,7 +63,6 @@ if ($nMode == ph_Setting('App-Mode-Login') && $nId != 0) {
     $nMode = 0;
     $nId = 0;
   }
-  echo '2<br>';
 }
 if ($nMode == ph_Setting('App-Mode-Register') && $nId != 0) {
   $inputName = ph_Post('inputName');
@@ -75,7 +74,6 @@ if ($nMode == ph_Setting('App-Mode-Register') && $nId != 0) {
     $nMode = 0;
     $nId = 0;
   }
-  echo '3<br>';
 }
 $nUserId = ph_session("UID");
 if ($nUserId == null || $nUserId == '' || $nMode == ph_Setting('App-Mode-Logout')) {
