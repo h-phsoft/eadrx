@@ -179,11 +179,11 @@ a:focus {
 }
 
 .sidebar-left .sidebar-header {
-  padding: 10px 10px 10px 50px;
+  padding: 15px 10px 10px 50px;
 }
 
 .sidebar-right .sidebar-header {
-  padding: 10px;
+  padding: 15px;
 }
 
 .sidebar ul.components {

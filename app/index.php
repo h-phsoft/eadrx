@@ -20,7 +20,7 @@ ph_PrepareGets();
 ph_PreparePosts();
 
 $nLang = '2';
-$nMode = '0';
+$nMode = ph_Setting('App-Mode-Login');
 $nId = 0;
 $vURL = '';
 foreach ($_GET as $key => $value) {
@@ -162,7 +162,11 @@ if ($pageName == '') {
       <?php
       if ($nUserId > 0) {
         include 'app-sidebar-left.php';
+      }
+      ?>
 
+      <?php
+      if ($nUserId > 0) {
         include 'app-sidebar-right.php';
       }
       ?>

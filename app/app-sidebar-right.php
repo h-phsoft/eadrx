@@ -3,7 +3,7 @@
     <i class="fas fa-arrow-right"></i>
   </div>
   <div class="sidebar-header">
-    <h4><?php echo $ph_Setting_SiteName; ?></h4>
+    <h4>&nbsp;</h4>
   </div>
   <ul class="list-unstyled components">
     <?php

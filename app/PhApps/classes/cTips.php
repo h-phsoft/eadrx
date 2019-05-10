@@ -23,7 +23,7 @@ class cTips {
     $nIdx = 0;
     $sSQL = 'SELECT `tcat_id`, `cstatus_id`, `tcat_name`, `tips_id`, `status_id`, `lang_id`, `tips_text`, `ins_datetime`,'
             . ' FROM `app_vtips`'
-            . ' WHERE (`cstatus_id`=1 AND `status_id`=1)';
+            . ' WHERE (`cstatus_id`=1 AND `status_id`=1 AND `tcat_id`!=0)';
     if ($vCond != "") {
       $sSQL .= ' AND (' . $vCond . ')';
     }

@@ -3,7 +3,7 @@
     <i class="fas fa-arrow-left"></i>
   </div>
   <div class="sidebar-header">
-    <h4><?php echo $ph_Setting_SiteName; ?></h4>
+    <?php echo $vUserName; ?>
   </div>
   <ul class="list-unstyled components">
     <?php
@@ -60,7 +60,7 @@
         ?>
         <a href="<?php echo $PH_BASE_PATH . '?' . $nLang . '/' . ph_Setting('App-Mode-Logout'); ?>" class="">
           <i class="fas fa-sign-out-alt"></i>
-          <?php echo $vUserName . ', ' . ph_DBKey('Logout', $curLang->Lang_Id); ?>
+          <?php echo ph_DBKey('Logout', $curLang->Lang_Id); ?>
         </a>
         <?php
       }

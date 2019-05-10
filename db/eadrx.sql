@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: May 06, 2019 at 01:17 PM
+-- Generation Time: May 09, 2019 at 04:08 PM
 -- Server version: 5.7.24
 -- PHP Version: 7.2.14
 
@@ -41,13 +41,14 @@ CREATE TABLE IF NOT EXISTS `app_book` (
   PRIMARY KEY (`book_id`),
   KEY `lang_id` (`lang_id`),
   KEY `book_status` (`status_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `app_book`
 --
 
 INSERT INTO `app_book` (`book_id`, `lang_id`, `status_id`, `book_title`, `book_desc`, `book_image`, `book_price`, `ins_datetime`) VALUES
+(0, 2, 2, 'None', 'None', 'None.jpg', '0.00', '2019-03-29 09:35:35'),
 (1, 2, 1, 'Sexual Imprint', '<p>Every person in this world in a distinctive imprint; i.e., they have their unique unmatched personality. This definitely means that there are serious disparities between the types of thinking of males and females in addition to qualitative biological differences between the two sexes. Males and females are different type each; they may be visual, auditory, kinesthetic or olfactory. However, it happens that some people might have more than one distinctive characteristic. Those are the people who are the most difficult to deal with. Everyone of them is a situated knower and has their innate distinctive characteristics that make them a unique entity.</p>', 'Sexual Imprint.jpg', '9.99', '2019-03-29 09:35:35');
 
 -- --------------------------------------------------------
@@ -268,13 +269,14 @@ CREATE TABLE IF NOT EXISTS `app_consultation_category` (
   PRIMARY KEY (`cat_id`),
   UNIQUE KEY `cat_name` (`cat_name`),
   KEY `status_id` (`status_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `app_consultation_category`
 --
 
 INSERT INTO `app_consultation_category` (`cat_id`, `status_id`, `cat_order`, `cat_name`, `cat_Price`) VALUES
+(0, 2, 0, 'None', '0.00'),
 (1, 1, 0, 'Free', '0.00');
 
 -- --------------------------------------------------------
@@ -400,14 +402,15 @@ CREATE TABLE IF NOT EXISTS `app_notification` (
   KEY `for_id` (`for_id`),
   KEY `lang_id` (`lang_id`),
   KEY `nstatus_id` (`nstatus_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `app_notification`
 --
 
 INSERT INTO `app_notification` (`notif_id`, `for_id`, `lang_id`, `nstatus_id`, `notif_title`, `notif_text`, `ins_datetime`, `upd_datetime`) VALUES
-(1, 0, 2, 1, 'Test', 'Test Test Test Test Test Test Test Test Test Test Test', '2019-04-10 23:08:16', '2019-04-10 23:08:16');
+(1, 0, 2, 1, 'Test', 'Test Test Test Test Test Test Test Test Test Test Test', '2019-04-10 23:08:16', '2019-04-10 23:08:16'),
+(2, 0, 2, 1, 'new bla bla bla bla', 'You can find a new figure in bla bla bla bla', '2019-05-06 17:45:13', '2019-05-06 17:45:13');
 
 -- --------------------------------------------------------
 
@@ -425,14 +428,15 @@ CREATE TABLE IF NOT EXISTS `app_notification_for` (
   KEY `notif_id` (`notif_id`),
   KEY `user_id` (`user_id`),
   KEY `nstatus_id` (`nstatus_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `app_notification_for`
 --
 
 INSERT INTO `app_notification_for` (`nfor_id`, `notif_id`, `user_id`, `nstatus_id`) VALUES
-(3, 1, 4, 3);
+(3, 1, 4, 3),
+(4, 2, 4, 3);
 
 -- --------------------------------------------------------
 
@@ -508,6 +512,63 @@ INSERT INTO `app_notif_status` (`nstatus_id`, `nstatus_name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `app_service`
+--
+
+DROP TABLE IF EXISTS `app_service`;
+CREATE TABLE IF NOT EXISTS `app_service` (
+  `serv_id` smallint(6) NOT NULL AUTO_INCREMENT COMMENT 'Auto PK',
+  `serv_name` varchar(200) NOT NULL COMMENT 'Name',
+  PRIMARY KEY (`serv_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `app_service`
+--
+
+INSERT INTO `app_service` (`serv_id`, `serv_name`) VALUES
+(1, 'Book'),
+(2, 'Tips'),
+(3, 'Consultation'),
+(4, 'Test');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `app_subscribe`
+--
+
+DROP TABLE IF EXISTS `app_subscribe`;
+CREATE TABLE IF NOT EXISTS `app_subscribe` (
+  `subs_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Auto PK',
+  `serv_id` smallint(6) NOT NULL COMMENT 'Service',
+  `user_id` int(11) NOT NULL COMMENT 'User',
+  `cycle_id` smallint(6) NOT NULL COMMENT 'Cycle',
+  `book_id` int(11) NOT NULL DEFAULT '0' COMMENT 'Book',
+  `tcat_id` int(11) NOT NULL DEFAULT '0' COMMENT 'Tips Category',
+  `test_id` int(11) NOT NULL DEFAULT '0' COMMENT 'Test',
+  `cat_id` int(11) NOT NULL DEFAULT '0' COMMENT 'Consultation Category',
+  `cons_id` int(11) NOT NULL DEFAULT '0' COMMENT 'Consultation',
+  `subs_start` date NOT NULL COMMENT 'Start',
+  `subs_end` date NOT NULL COMMENT 'End',
+  `subs_qnt` decimal(10,0) NOT NULL DEFAULT '1' COMMENT 'QTY',
+  `subs_price` decimal(10,0) NOT NULL DEFAULT '0' COMMENT 'Price',
+  `subs_amt` decimal(10,0) NOT NULL DEFAULT '0',
+  `ins_datetime` datetime NOT NULL COMMENT 'Inserted Datetime',
+  PRIMARY KEY (`subs_id`),
+  KEY `serv_id` (`serv_id`),
+  KEY `user_id` (`user_id`),
+  KEY `cycle_id` (`cycle_id`),
+  KEY `book_id` (`book_id`),
+  KEY `tcat_id` (`tcat_id`),
+  KEY `test_id` (`test_id`),
+  KEY `cons_id` (`cons_id`),
+  KEY `cat_id` (`cat_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `app_test`
 --
 
@@ -530,7 +591,7 @@ CREATE TABLE IF NOT EXISTS `app_test` (
 --
 
 INSERT INTO `app_test` (`test_id`, `test_num`, `test_iname`, `status_id`, `test_price`, `test_image`) VALUES
-(0, 0, 'No Test', 2, '0.00', 't.jpg'),
+(0, 0, 'None', 2, '0.00', 't.jpg'),
 (1, 1, 'Emotional Intelligence (EQ)', 1, '0.00', 't1.jpg'),
 (2, 2, 'Femininity And Masculinity Of The Brain (FM)', 1, '0.00', 't2.jpg'),
 (3, 3, 'Situated Emotion (SE)', 1, '20.00', 't3.jpg'),
@@ -1668,18 +1729,50 @@ CREATE TABLE IF NOT EXISTS `app_tips_category` (
   `tcat_name` varchar(100) NOT NULL DEFAULT '' COMMENT 'Name',
   PRIMARY KEY (`tcat_id`),
   KEY `status_id` (`status_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `app_tips_category`
 --
 
 INSERT INTO `app_tips_category` (`tcat_id`, `status_id`, `tcat_name`) VALUES
+(0, 2, 'None'),
 (1, 1, 'Free'),
 (2, 1, 'Sexual'),
 (3, 1, 'Body Language'),
 (4, 1, 'Relationships'),
 (5, 1, 'Eve & Adam');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `app_tips_package`
+--
+
+DROP TABLE IF EXISTS `app_tips_package`;
+CREATE TABLE IF NOT EXISTS `app_tips_package` (
+  `pkg_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Auto PK',
+  `cycle_id` smallint(6) NOT NULL COMMENT 'Cycle',
+  `pkg_price` decimal(10,0) NOT NULL DEFAULT '0' COMMENT 'Price',
+  PRIMARY KEY (`pkg_id`),
+  KEY `cycle_id` (`cycle_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `app_tips_pkg_cat`
+--
+
+DROP TABLE IF EXISTS `app_tips_pkg_cat`;
+CREATE TABLE IF NOT EXISTS `app_tips_pkg_cat` (
+  `tpkg_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Auto PK',
+  `pkg_id` int(11) NOT NULL COMMENT 'Package',
+  `tcat_id` int(11) NOT NULL COMMENT 'Tips Category',
+  PRIMARY KEY (`tpkg_id`),
+  UNIQUE KEY `pkg_id` (`pkg_id`,`tcat_id`),
+  KEY `tcat_id` (`tcat_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -2364,6 +2457,36 @@ CREATE TABLE IF NOT EXISTS `cpy_vteam` (
 ,`team_position` varchar(50)
 ,`team_text` text
 );
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `phs_bill_cycle`
+--
+
+DROP TABLE IF EXISTS `phs_bill_cycle`;
+CREATE TABLE IF NOT EXISTS `phs_bill_cycle` (
+  `cycle_id` smallint(6) NOT NULL AUTO_INCREMENT COMMENT 'Auto PK',
+  `cycle_name` varchar(200) NOT NULL COMMENT 'Name',
+  `cycle_Desc` varchar(200) NOT NULL COMMENT 'Description',
+  PRIMARY KEY (`cycle_id`),
+  UNIQUE KEY `cycle_name` (`cycle_name`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `phs_bill_cycle`
+--
+
+INSERT INTO `phs_bill_cycle` (`cycle_id`, `cycle_name`, `cycle_Desc`) VALUES
+(1, 'One Time', 'Pay One\'s Use all time'),
+(2, 'One Time Use', 'Pay One for One'),
+(3, 'Daily', ''),
+(4, 'Weekly', ''),
+(5, 'Monthly', ''),
+(6, 'Quarterly', ''),
+(7, '4 Months', ''),
+(8, '6 Months', ''),
+(9, 'Yearly', '');
 
 -- --------------------------------------------------------
 
@@ -3395,7 +3518,7 @@ CREATE TABLE IF NOT EXISTS `phs_setting` (
   `set_val` varchar(255) NOT NULL DEFAULT 'none' COMMENT 'Value',
   PRIMARY KEY (`set_id`),
   UNIQUE KEY `set_name` (`set_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=76 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=75 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `phs_setting`
@@ -3573,7 +3696,7 @@ CREATE TABLE IF NOT EXISTS `phs_vkeys` (
 --
 DROP TABLE IF EXISTS `app_vbook`;
 
-CREATE VIEW `app_vbook`  AS  select `b`.`book_id` AS `book_id`,`b`.`lang_id` AS `lang_id`,`b`.`status_id` AS `status_id`,`b`.`book_title` AS `book_title`,`b`.`book_desc` AS `book_desc`,`b`.`book_image` AS `book_image`,`b`.`book_price` AS `book_price`,`b`.`ins_datetime` AS `ins_datetime`,`p`.`bpage_id` AS `bpage_id`,`p`.`page_num` AS `page_num`,`p`.`page_image` AS `page_image`,`p`.`page_text` AS `page_text` from (`app_book` `b` join `app_book_page` `p`) where (`p`.`book_id` = `b`.`book_id`) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `app_vbook`  AS  select `b`.`book_id` AS `book_id`,`b`.`lang_id` AS `lang_id`,`b`.`status_id` AS `status_id`,`b`.`book_title` AS `book_title`,`b`.`book_desc` AS `book_desc`,`b`.`book_image` AS `book_image`,`b`.`book_price` AS `book_price`,`b`.`ins_datetime` AS `ins_datetime`,`p`.`bpage_id` AS `bpage_id`,`p`.`page_num` AS `page_num`,`p`.`page_image` AS `page_image`,`p`.`page_text` AS `page_text` from (`app_book` `b` join `app_book_page` `p`) where (`p`.`book_id` = `b`.`book_id`) ;
 
 -- --------------------------------------------------------
 
@@ -3582,7 +3705,7 @@ CREATE VIEW `app_vbook`  AS  select `b`.`book_id` AS `book_id`,`b`.`lang_id` AS 
 --
 DROP TABLE IF EXISTS `app_vcons_cat`;
 
-CREATE VIEW `app_vcons_cat`  AS  select `t`.`cat_id` AS `cat_id`,`t`.`cat_order` AS `cat_order`,`t`.`cat_name` AS `cat_iname`,`t`.`status_id` AS `status_id`,`t`.`cat_Price` AS `cat_price`,`n`.`ncat_id` AS `ncat_id`,`n`.`lang_id` AS `lang_id`,`n`.`cat_name` AS `cat_name`,`n`.`cat_desc` AS `cat_desc` from (`app_consultation_category` `t` join `app_consultation_category_name` `n`) where (`n`.`cat_id` = `t`.`cat_id`) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `app_vcons_cat`  AS  select `t`.`cat_id` AS `cat_id`,`t`.`cat_order` AS `cat_order`,`t`.`cat_name` AS `cat_iname`,`t`.`status_id` AS `status_id`,`t`.`cat_Price` AS `cat_price`,`n`.`ncat_id` AS `ncat_id`,`n`.`lang_id` AS `lang_id`,`n`.`cat_name` AS `cat_name`,`n`.`cat_desc` AS `cat_desc` from (`app_consultation_category` `t` join `app_consultation_category_name` `n`) where (`n`.`cat_id` = `t`.`cat_id`) ;
 
 -- --------------------------------------------------------
 
@@ -3591,7 +3714,7 @@ CREATE VIEW `app_vcons_cat`  AS  select `t`.`cat_id` AS `cat_id`,`t`.`cat_order`
 --
 DROP TABLE IF EXISTS `app_vtest`;
 
-CREATE VIEW `app_vtest`  AS  select `t`.`test_id` AS `test_id`,`t`.`test_num` AS `test_num`,`t`.`test_iname` AS `test_iname`,`t`.`status_id` AS `status_id`,`t`.`test_price` AS `test_price`,`t`.`test_image` AS `test_image`,`n`.`ntest_id` AS `ntest_id`,`n`.`lang_id` AS `lang_id`,`n`.`test_name` AS `test_name`,`n`.`test_desc` AS `test_desc` from (`app_test` `t` join `app_test_name` `n`) where (`n`.`test_id` = `t`.`test_id`) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `app_vtest`  AS  select `t`.`test_id` AS `test_id`,`t`.`test_num` AS `test_num`,`t`.`test_iname` AS `test_iname`,`t`.`status_id` AS `status_id`,`t`.`test_price` AS `test_price`,`t`.`test_image` AS `test_image`,`n`.`ntest_id` AS `ntest_id`,`n`.`lang_id` AS `lang_id`,`n`.`test_name` AS `test_name`,`n`.`test_desc` AS `test_desc` from (`app_test` `t` join `app_test_name` `n`) where (`n`.`test_id` = `t`.`test_id`) ;
 
 -- --------------------------------------------------------
 
@@ -3600,7 +3723,7 @@ CREATE VIEW `app_vtest`  AS  select `t`.`test_id` AS `test_id`,`t`.`test_num` AS
 --
 DROP TABLE IF EXISTS `app_vtest_evaluate`;
 
-CREATE VIEW `app_vtest_evaluate`  AS  select `v`.`test_id` AS `test_id`,`v`.`test_num` AS `test_num`,`v`.`test_iname` AS `test_iname`,`v`.`status_id` AS `status_id`,`v`.`test_price` AS `test_price`,`v`.`test_image` AS `test_image`,`v`.`ntest_id` AS `ntest_id`,`v`.`lang_id` AS `lang_id`,`v`.`test_name` AS `test_name`,`v`.`test_desc` AS `test_desc`,`e`.`eval_id` AS `eval_id`,`e`.`gend_id` AS `gend_id`,`e`.`eval_from` AS `eval_from`,`e`.`eval_to` AS `eval_to`,`e`.`eval_text` AS `eval_text` from (`app_vtest` `v` join `app_test_evaluate` `e`) where ((`e`.`test_id` = `v`.`test_id`) and (`e`.`lang_id` = `v`.`lang_id`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `app_vtest_evaluate`  AS  select `v`.`test_id` AS `test_id`,`v`.`test_num` AS `test_num`,`v`.`test_iname` AS `test_iname`,`v`.`status_id` AS `status_id`,`v`.`test_price` AS `test_price`,`v`.`test_image` AS `test_image`,`v`.`ntest_id` AS `ntest_id`,`v`.`lang_id` AS `lang_id`,`v`.`test_name` AS `test_name`,`v`.`test_desc` AS `test_desc`,`e`.`eval_id` AS `eval_id`,`e`.`gend_id` AS `gend_id`,`e`.`eval_from` AS `eval_from`,`e`.`eval_to` AS `eval_to`,`e`.`eval_text` AS `eval_text` from (`app_vtest` `v` join `app_test_evaluate` `e`) where ((`e`.`test_id` = `v`.`test_id`) and (`e`.`lang_id` = `v`.`lang_id`)) ;
 
 -- --------------------------------------------------------
 
@@ -3609,7 +3732,7 @@ CREATE VIEW `app_vtest_evaluate`  AS  select `v`.`test_id` AS `test_id`,`v`.`tes
 --
 DROP TABLE IF EXISTS `app_vtest_question`;
 
-CREATE VIEW `app_vtest_question`  AS  select `v`.`test_id` AS `test_id`,`v`.`test_num` AS `test_num`,`v`.`test_iname` AS `test_iname`,`v`.`status_id` AS `status_id`,`v`.`test_price` AS `test_price`,`v`.`test_image` AS `test_image`,`v`.`ntest_id` AS `ntest_id`,`v`.`lang_id` AS `lang_id`,`v`.`test_name` AS `test_name`,`v`.`test_desc` AS `test_desc`,`q`.`qstn_id` AS `qstn_id`,`q`.`gend_id` AS `gend_id`,`q`.`qstn_num` AS `qstn_num`,`q`.`qstn_text` AS `qstn_text`,`q`.`qstn_ansr1` AS `qstn_ansr1`,`q`.`qstn_ansr2` AS `qstn_ansr2`,`q`.`qstn_ansr3` AS `qstn_ansr3`,`q`.`qstn_ansr4` AS `qstn_ansr4`,`q`.`qstn_rep1` AS `qstn_rep1`,`q`.`qstn_rep2` AS `qstn_rep2`,`q`.`qstn_rep3` AS `qstn_rep3`,`q`.`qstn_rep4` AS `qstn_rep4`,`q`.`qstn_val1` AS `qstn_val1`,`q`.`qstn_val2` AS `qstn_val2`,`q`.`qstn_val3` AS `qstn_val3`,`q`.`qstn_val4` AS `qstn_val4` from (`app_vtest` `v` join `app_test_question` `q`) where ((`q`.`test_id` = `v`.`test_id`) and (`q`.`lang_id` = `v`.`lang_id`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `app_vtest_question`  AS  select `v`.`test_id` AS `test_id`,`v`.`test_num` AS `test_num`,`v`.`test_iname` AS `test_iname`,`v`.`status_id` AS `status_id`,`v`.`test_price` AS `test_price`,`v`.`test_image` AS `test_image`,`v`.`ntest_id` AS `ntest_id`,`v`.`lang_id` AS `lang_id`,`v`.`test_name` AS `test_name`,`v`.`test_desc` AS `test_desc`,`q`.`qstn_id` AS `qstn_id`,`q`.`gend_id` AS `gend_id`,`q`.`qstn_num` AS `qstn_num`,`q`.`qstn_text` AS `qstn_text`,`q`.`qstn_ansr1` AS `qstn_ansr1`,`q`.`qstn_ansr2` AS `qstn_ansr2`,`q`.`qstn_ansr3` AS `qstn_ansr3`,`q`.`qstn_ansr4` AS `qstn_ansr4`,`q`.`qstn_rep1` AS `qstn_rep1`,`q`.`qstn_rep2` AS `qstn_rep2`,`q`.`qstn_rep3` AS `qstn_rep3`,`q`.`qstn_rep4` AS `qstn_rep4`,`q`.`qstn_val1` AS `qstn_val1`,`q`.`qstn_val2` AS `qstn_val2`,`q`.`qstn_val3` AS `qstn_val3`,`q`.`qstn_val4` AS `qstn_val4` from (`app_vtest` `v` join `app_test_question` `q`) where ((`q`.`test_id` = `v`.`test_id`) and (`q`.`lang_id` = `v`.`lang_id`)) ;
 
 -- --------------------------------------------------------
 
@@ -3618,7 +3741,7 @@ CREATE VIEW `app_vtest_question`  AS  select `v`.`test_id` AS `test_id`,`v`.`tes
 --
 DROP TABLE IF EXISTS `app_vtips`;
 
-CREATE VIEW `app_vtips`  AS  select `c`.`tcat_id` AS `tcat_id`,`c`.`status_id` AS `cstatus_id`,`c`.`tcat_name` AS `tcat_name`,`t`.`tips_id` AS `tips_id`,`t`.`lang_id` AS `lang_id`,`t`.`status_id` AS `status_id`,`t`.`tips_text` AS `tips_text`,`t`.`ins_datetime` AS `ins_datetime` from (`app_tips` `t` join `app_tips_category` `c`) where (`t`.`tcat_id` = `c`.`tcat_id`) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `app_vtips`  AS  select `c`.`tcat_id` AS `tcat_id`,`c`.`status_id` AS `cstatus_id`,`c`.`tcat_name` AS `tcat_name`,`t`.`tips_id` AS `tips_id`,`t`.`lang_id` AS `lang_id`,`t`.`status_id` AS `status_id`,`t`.`tips_text` AS `tips_text`,`t`.`ins_datetime` AS `ins_datetime` from (`app_tips` `t` join `app_tips_category` `c`) where (`t`.`tcat_id` = `c`.`tcat_id`) ;
 
 -- --------------------------------------------------------
 
@@ -3627,7 +3750,7 @@ CREATE VIEW `app_vtips`  AS  select `c`.`tcat_id` AS `tcat_id`,`c`.`status_id` A
 --
 DROP TABLE IF EXISTS `cpy_vteam`;
 
-CREATE VIEW `cpy_vteam`  AS  select `m`.`team_id` AS `team_id`,`m`.`team_iname` AS `team_iname`,`m`.`team_order` AS `team_order`,`m`.`team_photo` AS `team_photo`,`t`.`teamn_id` AS `teamn_id`,`t`.`lang_id` AS `lang_id`,`t`.`team_name` AS `team_name`,`t`.`team_title` AS `team_title`,`t`.`team_position` AS `team_position`,`t`.`team_text` AS `team_text` from (`cpy_team` `m` join `cpy_team_names` `t`) where (`t`.`team_id` = `m`.`team_id`) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `cpy_vteam`  AS  select `m`.`team_id` AS `team_id`,`m`.`team_iname` AS `team_iname`,`m`.`team_order` AS `team_order`,`m`.`team_photo` AS `team_photo`,`t`.`teamn_id` AS `teamn_id`,`t`.`lang_id` AS `lang_id`,`t`.`team_name` AS `team_name`,`t`.`team_title` AS `team_title`,`t`.`team_position` AS `team_position`,`t`.`team_text` AS `team_text` from (`cpy_team` `m` join `cpy_team_names` `t`) where (`t`.`team_id` = `m`.`team_id`) ;
 
 -- --------------------------------------------------------
 
@@ -3636,7 +3759,7 @@ CREATE VIEW `cpy_vteam`  AS  select `m`.`team_id` AS `team_id`,`m`.`team_iname` 
 --
 DROP TABLE IF EXISTS `phs_vkeys`;
 
-CREATE VIEW `phs_vkeys`  AS  select `k`.`key_id` AS `key_id`,`k`.`key_name` AS `key_name`,`k`.`key_defvalue` AS `key_defvalue`,`l`.`lang_id` AS `lang_id`,`l`.`lang_name` AS `lang_name`,`l`.`lang_dir` AS `lang_dir`,`l`.`status_id` AS `status_id`,`l`.`lang_code` AS `lang_code`,`v`.`kval_id` AS `kval_id`,`v`.`key_value` AS `key_value`,`v`.`key_rvalue` AS `key_rvalue`,`v`.`key_text` AS `key_text` from ((`phs_keys` `k` join `phs_language` `l`) join `phs_keyvalues` `v`) where ((`v`.`key_id` = `k`.`key_id`) and (`v`.`lang_id` = `l`.`lang_id`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `phs_vkeys`  AS  select `k`.`key_id` AS `key_id`,`k`.`key_name` AS `key_name`,`k`.`key_defvalue` AS `key_defvalue`,`l`.`lang_id` AS `lang_id`,`l`.`lang_name` AS `lang_name`,`l`.`lang_dir` AS `lang_dir`,`l`.`status_id` AS `status_id`,`l`.`lang_code` AS `lang_code`,`v`.`kval_id` AS `kval_id`,`v`.`key_value` AS `key_value`,`v`.`key_rvalue` AS `key_rvalue`,`v`.`key_text` AS `key_text` from ((`phs_keys` `k` join `phs_language` `l`) join `phs_keyvalues` `v`) where ((`v`.`key_id` = `k`.`key_id`) and (`v`.`lang_id` = `l`.`lang_id`)) ;
 
 --
 -- Constraints for dumped tables
@@ -3715,6 +3838,18 @@ ALTER TABLE `app_notification_status`
   ADD CONSTRAINT `app_notification_status_ibfk_3` FOREIGN KEY (`user_id`) REFERENCES `cpy_user` (`user_id`);
 
 --
+-- Constraints for table `app_subscribe`
+--
+ALTER TABLE `app_subscribe`
+  ADD CONSTRAINT `app_subscribe_ibfk_1` FOREIGN KEY (`cat_id`) REFERENCES `app_consultation_category` (`cat_id`),
+  ADD CONSTRAINT `app_subscribe_ibfk_2` FOREIGN KEY (`cons_id`) REFERENCES `app_consultation` (`cons_id`),
+  ADD CONSTRAINT `app_subscribe_ibfk_3` FOREIGN KEY (`cycle_id`) REFERENCES `phs_bill_cycle` (`cycle_id`),
+  ADD CONSTRAINT `app_subscribe_ibfk_4` FOREIGN KEY (`tcat_id`) REFERENCES `app_tips_category` (`tcat_id`),
+  ADD CONSTRAINT `app_subscribe_ibfk_5` FOREIGN KEY (`test_id`) REFERENCES `app_test` (`test_id`),
+  ADD CONSTRAINT `app_subscribe_ibfk_6` FOREIGN KEY (`user_id`) REFERENCES `cpy_user` (`user_id`),
+  ADD CONSTRAINT `app_subscribe_ibfk_7` FOREIGN KEY (`serv_id`) REFERENCES `app_service` (`serv_id`);
+
+--
 -- Constraints for table `app_test`
 --
 ALTER TABLE `app_test`
@@ -3761,6 +3896,19 @@ ALTER TABLE `app_tips`
 --
 ALTER TABLE `app_tips_category`
   ADD CONSTRAINT `app_tips_category_ibfk_1` FOREIGN KEY (`status_id`) REFERENCES `phs_status` (`status_id`);
+
+--
+-- Constraints for table `app_tips_package`
+--
+ALTER TABLE `app_tips_package`
+  ADD CONSTRAINT `app_tips_package_ibfk_1` FOREIGN KEY (`cycle_id`) REFERENCES `phs_bill_cycle` (`cycle_id`);
+
+--
+-- Constraints for table `app_tips_pkg_cat`
+--
+ALTER TABLE `app_tips_pkg_cat`
+  ADD CONSTRAINT `app_tips_pkg_cat_ibfk_1` FOREIGN KEY (`pkg_id`) REFERENCES `app_tips_package` (`pkg_id`),
+  ADD CONSTRAINT `app_tips_pkg_cat_ibfk_2` FOREIGN KEY (`tcat_id`) REFERENCES `app_tips_category` (`tcat_id`);
 
 --
 -- Constraints for table `cpy_ads`
