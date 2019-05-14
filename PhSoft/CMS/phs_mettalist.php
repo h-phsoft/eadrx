@@ -1593,6 +1593,8 @@ class cphs_metta_list extends cphs_metta {
 			if ($this->getSqlOrderBy() <> "") {
 				$sOrderBy = $this->getSqlOrderBy();
 				$this->setSessionOrderBy($sOrderBy);
+				$this->metta_type->setSort("ASC");
+				$this->metta_name->setSort("ASC");
 			}
 		}
 	}

@@ -21,7 +21,7 @@ class cTips {
   public static function getArray($vCond = "") {
     $aArray = array();
     $nIdx = 0;
-    $sSQL = 'SELECT `tcat_id`, `cstatus_id`, `tcat_name`, `tips_id`, `status_id`, `lang_id`, `tips_text`, `ins_datetime`,'
+    $sSQL = 'SELECT `tcat_id`, `cstatus_id`, `tcat_name`, `tips_id`, `status_id`, `lang_id`, `tips_text`, `ins_datetime`'
             . ' FROM `app_vtips`'
             . ' WHERE (`cstatus_id`=1 AND `status_id`=1 AND `tcat_id`!=0)';
     if ($vCond != "") {
@@ -42,11 +42,10 @@ class cTips {
 
   public static function getInstance($nId) {
     $cClass = new cTips();
-    $sSQL = 'SELECT `tcat_id`, `cstatus_id`, `tcat_name`, `tips_id`, `status_id`, `lang_id`, `tips_text`, `ins_datetime`,'
-            . ' FROM `app_vtips`'
-            . ' WHERE (`cstatus_id`=1 AND `status_id`=1)';
+    $sSQL = 'SELECT `tcat_id`, `cstatus_id`, `tcat_name`, `tips_id`, `status_id`, `lang_id`, `tips_text`, `ins_datetime`'
+            . ' FROM `app_vtips`';
     if ($nId != "") {
-      $sSQL .= ' AND (`tips_id`=' . $nId . ')';
+      $sSQL .= ' WHERE (`tips_id`=' . $nId . ')';
     }
     $res = ph_Execute($sSQL);
     if ($res != '') {

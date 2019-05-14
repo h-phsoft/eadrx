@@ -84,7 +84,7 @@ class ccpy_user extends cTable {
 		$this->fields['pgrp_id'] = &$this->pgrp_id;
 
 		// status_id
-		$this->status_id = new cField('cpy_user', 'cpy_user', 'x_status_id', 'status_id', '`status_id`', '`status_id`', 3, -1, FALSE, '`status_id`', FALSE, FALSE, FALSE, 'FORMATTED TEXT', 'SELECT');
+		$this->status_id = new cField('cpy_user', 'cpy_user', 'x_status_id', 'status_id', '`status_id`', '`status_id`', 16, -1, FALSE, '`status_id`', FALSE, FALSE, FALSE, 'FORMATTED TEXT', 'SELECT');
 		$this->status_id->Sortable = TRUE; // Allow sort
 		$this->status_id->UsePleaseSelect = TRUE; // Use PleaseSelect by default
 		$this->status_id->PleaseSelectText = $Language->Phrase("PleaseSelect"); // PleaseSelect text
@@ -246,7 +246,7 @@ class ccpy_user extends cTable {
 	var $_SqlOrderBy = "";
 
 	function getSqlOrderBy() { // Order By
-		return ($this->_SqlOrderBy <> "") ? $this->_SqlOrderBy : "";
+		return ($this->_SqlOrderBy <> "") ? $this->_SqlOrderBy : "`pgrp_id` ASC,`cntry_id` ASC,`gend_id` ASC,`lang_id` ASC,`status_id` ASC,`user_name` ASC";
 	}
 
 	function SqlOrderBy() { // For backward compatibility

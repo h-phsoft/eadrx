@@ -449,24 +449,25 @@ class capp_vtest_question_list extends capp_vtest_question {
 
 		// Setup export options
 		$this->SetupExportOptions();
-		$this->test_id->SetVisibility();
-		if ($this->IsAdd() || $this->IsCopy() || $this->IsGridAdd())
-			$this->test_id->Visible = FALSE;
 		$this->test_num->SetVisibility();
+		$this->lang_id->SetVisibility();
 		$this->test_iname->SetVisibility();
 		$this->status_id->SetVisibility();
 		$this->test_price->SetVisibility();
 		$this->test_image->SetVisibility();
-		$this->ntest_id->SetVisibility();
-		if ($this->IsAdd() || $this->IsCopy() || $this->IsGridAdd())
-			$this->ntest_id->Visible = FALSE;
-		$this->lang_id->SetVisibility();
 		$this->test_name->SetVisibility();
-		$this->qstn_id->SetVisibility();
-		if ($this->IsAdd() || $this->IsCopy() || $this->IsGridAdd())
-			$this->qstn_id->Visible = FALSE;
+		$this->test_desc->SetVisibility();
 		$this->gend_id->SetVisibility();
 		$this->qstn_num->SetVisibility();
+		$this->qstn_text->SetVisibility();
+		$this->qstn_ansr1->SetVisibility();
+		$this->qstn_ansr2->SetVisibility();
+		$this->qstn_ansr3->SetVisibility();
+		$this->qstn_ansr4->SetVisibility();
+		$this->qstn_rep1->SetVisibility();
+		$this->qstn_rep2->SetVisibility();
+		$this->qstn_rep3->SetVisibility();
+		$this->qstn_rep4->SetVisibility();
 		$this->qstn_val1->SetVisibility();
 		$this->qstn_val2->SetVisibility();
 		$this->qstn_val3->SetVisibility();
@@ -805,17 +806,14 @@ class capp_vtest_question_list extends capp_vtest_question {
 		// Initialize
 		$sFilterList = "";
 		$sSavedFilterList = "";
-		$sFilterList = ew_Concat($sFilterList, $this->test_id->AdvancedSearch->ToJson(), ","); // Field test_id
 		$sFilterList = ew_Concat($sFilterList, $this->test_num->AdvancedSearch->ToJson(), ","); // Field test_num
+		$sFilterList = ew_Concat($sFilterList, $this->lang_id->AdvancedSearch->ToJson(), ","); // Field lang_id
 		$sFilterList = ew_Concat($sFilterList, $this->test_iname->AdvancedSearch->ToJson(), ","); // Field test_iname
 		$sFilterList = ew_Concat($sFilterList, $this->status_id->AdvancedSearch->ToJson(), ","); // Field status_id
 		$sFilterList = ew_Concat($sFilterList, $this->test_price->AdvancedSearch->ToJson(), ","); // Field test_price
 		$sFilterList = ew_Concat($sFilterList, $this->test_image->AdvancedSearch->ToJson(), ","); // Field test_image
-		$sFilterList = ew_Concat($sFilterList, $this->ntest_id->AdvancedSearch->ToJson(), ","); // Field ntest_id
-		$sFilterList = ew_Concat($sFilterList, $this->lang_id->AdvancedSearch->ToJson(), ","); // Field lang_id
 		$sFilterList = ew_Concat($sFilterList, $this->test_name->AdvancedSearch->ToJson(), ","); // Field test_name
 		$sFilterList = ew_Concat($sFilterList, $this->test_desc->AdvancedSearch->ToJson(), ","); // Field test_desc
-		$sFilterList = ew_Concat($sFilterList, $this->qstn_id->AdvancedSearch->ToJson(), ","); // Field qstn_id
 		$sFilterList = ew_Concat($sFilterList, $this->gend_id->AdvancedSearch->ToJson(), ","); // Field gend_id
 		$sFilterList = ew_Concat($sFilterList, $this->qstn_num->AdvancedSearch->ToJson(), ","); // Field qstn_num
 		$sFilterList = ew_Concat($sFilterList, $this->qstn_text->AdvancedSearch->ToJson(), ","); // Field qstn_text
@@ -875,14 +873,6 @@ class capp_vtest_question_list extends capp_vtest_question {
 		$filter = json_decode(@$_POST["filter"], TRUE);
 		$this->Command = "search";
 
-		// Field test_id
-		$this->test_id->AdvancedSearch->SearchValue = @$filter["x_test_id"];
-		$this->test_id->AdvancedSearch->SearchOperator = @$filter["z_test_id"];
-		$this->test_id->AdvancedSearch->SearchCondition = @$filter["v_test_id"];
-		$this->test_id->AdvancedSearch->SearchValue2 = @$filter["y_test_id"];
-		$this->test_id->AdvancedSearch->SearchOperator2 = @$filter["w_test_id"];
-		$this->test_id->AdvancedSearch->Save();
-
 		// Field test_num
 		$this->test_num->AdvancedSearch->SearchValue = @$filter["x_test_num"];
 		$this->test_num->AdvancedSearch->SearchOperator = @$filter["z_test_num"];
@@ -890,6 +880,14 @@ class capp_vtest_question_list extends capp_vtest_question {
 		$this->test_num->AdvancedSearch->SearchValue2 = @$filter["y_test_num"];
 		$this->test_num->AdvancedSearch->SearchOperator2 = @$filter["w_test_num"];
 		$this->test_num->AdvancedSearch->Save();
+
+		// Field lang_id
+		$this->lang_id->AdvancedSearch->SearchValue = @$filter["x_lang_id"];
+		$this->lang_id->AdvancedSearch->SearchOperator = @$filter["z_lang_id"];
+		$this->lang_id->AdvancedSearch->SearchCondition = @$filter["v_lang_id"];
+		$this->lang_id->AdvancedSearch->SearchValue2 = @$filter["y_lang_id"];
+		$this->lang_id->AdvancedSearch->SearchOperator2 = @$filter["w_lang_id"];
+		$this->lang_id->AdvancedSearch->Save();
 
 		// Field test_iname
 		$this->test_iname->AdvancedSearch->SearchValue = @$filter["x_test_iname"];
@@ -923,22 +921,6 @@ class capp_vtest_question_list extends capp_vtest_question {
 		$this->test_image->AdvancedSearch->SearchOperator2 = @$filter["w_test_image"];
 		$this->test_image->AdvancedSearch->Save();
 
-		// Field ntest_id
-		$this->ntest_id->AdvancedSearch->SearchValue = @$filter["x_ntest_id"];
-		$this->ntest_id->AdvancedSearch->SearchOperator = @$filter["z_ntest_id"];
-		$this->ntest_id->AdvancedSearch->SearchCondition = @$filter["v_ntest_id"];
-		$this->ntest_id->AdvancedSearch->SearchValue2 = @$filter["y_ntest_id"];
-		$this->ntest_id->AdvancedSearch->SearchOperator2 = @$filter["w_ntest_id"];
-		$this->ntest_id->AdvancedSearch->Save();
-
-		// Field lang_id
-		$this->lang_id->AdvancedSearch->SearchValue = @$filter["x_lang_id"];
-		$this->lang_id->AdvancedSearch->SearchOperator = @$filter["z_lang_id"];
-		$this->lang_id->AdvancedSearch->SearchCondition = @$filter["v_lang_id"];
-		$this->lang_id->AdvancedSearch->SearchValue2 = @$filter["y_lang_id"];
-		$this->lang_id->AdvancedSearch->SearchOperator2 = @$filter["w_lang_id"];
-		$this->lang_id->AdvancedSearch->Save();
-
 		// Field test_name
 		$this->test_name->AdvancedSearch->SearchValue = @$filter["x_test_name"];
 		$this->test_name->AdvancedSearch->SearchOperator = @$filter["z_test_name"];
@@ -954,14 +936,6 @@ class capp_vtest_question_list extends capp_vtest_question {
 		$this->test_desc->AdvancedSearch->SearchValue2 = @$filter["y_test_desc"];
 		$this->test_desc->AdvancedSearch->SearchOperator2 = @$filter["w_test_desc"];
 		$this->test_desc->AdvancedSearch->Save();
-
-		// Field qstn_id
-		$this->qstn_id->AdvancedSearch->SearchValue = @$filter["x_qstn_id"];
-		$this->qstn_id->AdvancedSearch->SearchOperator = @$filter["z_qstn_id"];
-		$this->qstn_id->AdvancedSearch->SearchCondition = @$filter["v_qstn_id"];
-		$this->qstn_id->AdvancedSearch->SearchValue2 = @$filter["y_qstn_id"];
-		$this->qstn_id->AdvancedSearch->SearchOperator2 = @$filter["w_qstn_id"];
-		$this->qstn_id->AdvancedSearch->Save();
 
 		// Field gend_id
 		$this->gend_id->AdvancedSearch->SearchValue = @$filter["x_gend_id"];
@@ -1248,18 +1222,25 @@ class capp_vtest_question_list extends capp_vtest_question {
 		if (@$_GET["order"] <> "") {
 			$this->CurrentOrder = @$_GET["order"];
 			$this->CurrentOrderType = @$_GET["ordertype"];
-			$this->UpdateSort($this->test_id); // test_id
 			$this->UpdateSort($this->test_num); // test_num
+			$this->UpdateSort($this->lang_id); // lang_id
 			$this->UpdateSort($this->test_iname); // test_iname
 			$this->UpdateSort($this->status_id); // status_id
 			$this->UpdateSort($this->test_price); // test_price
 			$this->UpdateSort($this->test_image); // test_image
-			$this->UpdateSort($this->ntest_id); // ntest_id
-			$this->UpdateSort($this->lang_id); // lang_id
 			$this->UpdateSort($this->test_name); // test_name
-			$this->UpdateSort($this->qstn_id); // qstn_id
+			$this->UpdateSort($this->test_desc); // test_desc
 			$this->UpdateSort($this->gend_id); // gend_id
 			$this->UpdateSort($this->qstn_num); // qstn_num
+			$this->UpdateSort($this->qstn_text); // qstn_text
+			$this->UpdateSort($this->qstn_ansr1); // qstn_ansr1
+			$this->UpdateSort($this->qstn_ansr2); // qstn_ansr2
+			$this->UpdateSort($this->qstn_ansr3); // qstn_ansr3
+			$this->UpdateSort($this->qstn_ansr4); // qstn_ansr4
+			$this->UpdateSort($this->qstn_rep1); // qstn_rep1
+			$this->UpdateSort($this->qstn_rep2); // qstn_rep2
+			$this->UpdateSort($this->qstn_rep3); // qstn_rep3
+			$this->UpdateSort($this->qstn_rep4); // qstn_rep4
 			$this->UpdateSort($this->qstn_val1); // qstn_val1
 			$this->UpdateSort($this->qstn_val2); // qstn_val2
 			$this->UpdateSort($this->qstn_val3); // qstn_val3
@@ -1275,6 +1256,9 @@ class capp_vtest_question_list extends capp_vtest_question {
 			if ($this->getSqlOrderBy() <> "") {
 				$sOrderBy = $this->getSqlOrderBy();
 				$this->setSessionOrderBy($sOrderBy);
+				$this->lang_id->setSort("ASC");
+				$this->test_num->setSort("ASC");
+				$this->qstn_num->setSort("ASC");
 			}
 		}
 	}
@@ -1296,18 +1280,25 @@ class capp_vtest_question_list extends capp_vtest_question {
 			if ($this->Command == "resetsort") {
 				$sOrderBy = "";
 				$this->setSessionOrderBy($sOrderBy);
-				$this->test_id->setSort("");
 				$this->test_num->setSort("");
+				$this->lang_id->setSort("");
 				$this->test_iname->setSort("");
 				$this->status_id->setSort("");
 				$this->test_price->setSort("");
 				$this->test_image->setSort("");
-				$this->ntest_id->setSort("");
-				$this->lang_id->setSort("");
 				$this->test_name->setSort("");
-				$this->qstn_id->setSort("");
+				$this->test_desc->setSort("");
 				$this->gend_id->setSort("");
 				$this->qstn_num->setSort("");
+				$this->qstn_text->setSort("");
+				$this->qstn_ansr1->setSort("");
+				$this->qstn_ansr2->setSort("");
+				$this->qstn_ansr3->setSort("");
+				$this->qstn_ansr4->setSort("");
+				$this->qstn_rep1->setSort("");
+				$this->qstn_rep2->setSort("");
+				$this->qstn_rep3->setSort("");
+				$this->qstn_rep4->setSort("");
 				$this->qstn_val1->setSort("");
 				$this->qstn_val2->setSort("");
 				$this->qstn_val3->setSort("");
@@ -1702,16 +1693,17 @@ class capp_vtest_question_list extends capp_vtest_question {
 		if (!$rs || $rs->EOF)
 			return;
 		$this->test_id->setDbValue($row['test_id']);
+		$this->ntest_id->setDbValue($row['ntest_id']);
+		$this->qstn_id->setDbValue($row['qstn_id']);
 		$this->test_num->setDbValue($row['test_num']);
+		$this->lang_id->setDbValue($row['lang_id']);
 		$this->test_iname->setDbValue($row['test_iname']);
 		$this->status_id->setDbValue($row['status_id']);
 		$this->test_price->setDbValue($row['test_price']);
-		$this->test_image->setDbValue($row['test_image']);
-		$this->ntest_id->setDbValue($row['ntest_id']);
-		$this->lang_id->setDbValue($row['lang_id']);
+		$this->test_image->Upload->DbValue = $row['test_image'];
+		$this->test_image->setDbValue($this->test_image->Upload->DbValue);
 		$this->test_name->setDbValue($row['test_name']);
 		$this->test_desc->setDbValue($row['test_desc']);
-		$this->qstn_id->setDbValue($row['qstn_id']);
 		$this->gend_id->setDbValue($row['gend_id']);
 		$this->qstn_num->setDbValue($row['qstn_num']);
 		$this->qstn_text->setDbValue($row['qstn_text']);
@@ -1733,16 +1725,16 @@ class capp_vtest_question_list extends capp_vtest_question {
 	function NewRow() {
 		$row = array();
 		$row['test_id'] = NULL;
+		$row['ntest_id'] = NULL;
+		$row['qstn_id'] = NULL;
 		$row['test_num'] = NULL;
+		$row['lang_id'] = NULL;
 		$row['test_iname'] = NULL;
 		$row['status_id'] = NULL;
 		$row['test_price'] = NULL;
 		$row['test_image'] = NULL;
-		$row['ntest_id'] = NULL;
-		$row['lang_id'] = NULL;
 		$row['test_name'] = NULL;
 		$row['test_desc'] = NULL;
-		$row['qstn_id'] = NULL;
 		$row['gend_id'] = NULL;
 		$row['qstn_num'] = NULL;
 		$row['qstn_text'] = NULL;
@@ -1767,16 +1759,16 @@ class capp_vtest_question_list extends capp_vtest_question {
 			return;
 		$row = is_array($rs) ? $rs : $rs->fields;
 		$this->test_id->DbValue = $row['test_id'];
+		$this->ntest_id->DbValue = $row['ntest_id'];
+		$this->qstn_id->DbValue = $row['qstn_id'];
 		$this->test_num->DbValue = $row['test_num'];
+		$this->lang_id->DbValue = $row['lang_id'];
 		$this->test_iname->DbValue = $row['test_iname'];
 		$this->status_id->DbValue = $row['status_id'];
 		$this->test_price->DbValue = $row['test_price'];
-		$this->test_image->DbValue = $row['test_image'];
-		$this->ntest_id->DbValue = $row['ntest_id'];
-		$this->lang_id->DbValue = $row['lang_id'];
+		$this->test_image->Upload->DbValue = $row['test_image'];
 		$this->test_name->DbValue = $row['test_name'];
 		$this->test_desc->DbValue = $row['test_desc'];
-		$this->qstn_id->DbValue = $row['qstn_id'];
 		$this->gend_id->DbValue = $row['gend_id'];
 		$this->qstn_num->DbValue = $row['qstn_num'];
 		$this->qstn_text->DbValue = $row['qstn_text'];
@@ -1861,16 +1853,23 @@ class capp_vtest_question_list extends capp_vtest_question {
 
 		// Common render codes for all row types
 		// test_id
+
+		$this->test_id->CellCssStyle = "white-space: nowrap;";
+
+		// ntest_id
+		$this->ntest_id->CellCssStyle = "white-space: nowrap;";
+
+		// qstn_id
+		$this->qstn_id->CellCssStyle = "white-space: nowrap;";
+
 		// test_num
+		// lang_id
 		// test_iname
 		// status_id
 		// test_price
 		// test_image
-		// ntest_id
-		// lang_id
 		// test_name
 		// test_desc
-		// qstn_id
 		// gend_id
 		// qstn_num
 		// qstn_text
@@ -1889,20 +1888,58 @@ class capp_vtest_question_list extends capp_vtest_question {
 
 		if ($this->RowType == EW_ROWTYPE_VIEW) { // View row
 
-		// test_id
-		$this->test_id->ViewValue = $this->test_id->CurrentValue;
-		$this->test_id->ViewCustomAttributes = "";
-
 		// test_num
 		$this->test_num->ViewValue = $this->test_num->CurrentValue;
 		$this->test_num->ViewCustomAttributes = "";
+
+		// lang_id
+		if (strval($this->lang_id->CurrentValue) <> "") {
+			$sFilterWrk = "`lang_id`" . ew_SearchString("=", $this->lang_id->CurrentValue, EW_DATATYPE_NUMBER, "");
+		$sSqlWrk = "SELECT `lang_id`, `lang_name` AS `DispFld`, '' AS `Disp2Fld`, '' AS `Disp3Fld`, '' AS `Disp4Fld` FROM `phs_language`";
+		$sWhereWrk = "";
+		$this->lang_id->LookupFilters = array();
+		ew_AddFilter($sWhereWrk, $sFilterWrk);
+		$this->Lookup_Selecting($this->lang_id, $sWhereWrk); // Call Lookup Selecting
+		if ($sWhereWrk <> "") $sSqlWrk .= " WHERE " . $sWhereWrk;
+			$rswrk = Conn()->Execute($sSqlWrk);
+			if ($rswrk && !$rswrk->EOF) { // Lookup values found
+				$arwrk = array();
+				$arwrk[1] = $rswrk->fields('DispFld');
+				$this->lang_id->ViewValue = $this->lang_id->DisplayValue($arwrk);
+				$rswrk->Close();
+			} else {
+				$this->lang_id->ViewValue = $this->lang_id->CurrentValue;
+			}
+		} else {
+			$this->lang_id->ViewValue = NULL;
+		}
+		$this->lang_id->ViewCustomAttributes = "";
 
 		// test_iname
 		$this->test_iname->ViewValue = $this->test_iname->CurrentValue;
 		$this->test_iname->ViewCustomAttributes = "";
 
 		// status_id
-		$this->status_id->ViewValue = $this->status_id->CurrentValue;
+		if (strval($this->status_id->CurrentValue) <> "") {
+			$sFilterWrk = "`status_id`" . ew_SearchString("=", $this->status_id->CurrentValue, EW_DATATYPE_NUMBER, "");
+		$sSqlWrk = "SELECT `status_id`, `status_name` AS `DispFld`, '' AS `Disp2Fld`, '' AS `Disp3Fld`, '' AS `Disp4Fld` FROM `phs_status`";
+		$sWhereWrk = "";
+		$this->status_id->LookupFilters = array();
+		ew_AddFilter($sWhereWrk, $sFilterWrk);
+		$this->Lookup_Selecting($this->status_id, $sWhereWrk); // Call Lookup Selecting
+		if ($sWhereWrk <> "") $sSqlWrk .= " WHERE " . $sWhereWrk;
+			$rswrk = Conn()->Execute($sSqlWrk);
+			if ($rswrk && !$rswrk->EOF) { // Lookup values found
+				$arwrk = array();
+				$arwrk[1] = $rswrk->fields('DispFld');
+				$this->status_id->ViewValue = $this->status_id->DisplayValue($arwrk);
+				$rswrk->Close();
+			} else {
+				$this->status_id->ViewValue = $this->status_id->CurrentValue;
+			}
+		} else {
+			$this->status_id->ViewValue = NULL;
+		}
 		$this->status_id->ViewCustomAttributes = "";
 
 		// test_price
@@ -1910,32 +1947,87 @@ class capp_vtest_question_list extends capp_vtest_question {
 		$this->test_price->ViewCustomAttributes = "";
 
 		// test_image
-		$this->test_image->ViewValue = $this->test_image->CurrentValue;
+		$this->test_image->UploadPath = '../../assets/img/testImages';
+		if (!ew_Empty($this->test_image->Upload->DbValue)) {
+			$this->test_image->ImageWidth = 200;
+			$this->test_image->ImageHeight = 0;
+			$this->test_image->ImageAlt = $this->test_image->FldAlt();
+			$this->test_image->ViewValue = $this->test_image->Upload->DbValue;
+		} else {
+			$this->test_image->ViewValue = "";
+		}
 		$this->test_image->ViewCustomAttributes = "";
-
-		// ntest_id
-		$this->ntest_id->ViewValue = $this->ntest_id->CurrentValue;
-		$this->ntest_id->ViewCustomAttributes = "";
-
-		// lang_id
-		$this->lang_id->ViewValue = $this->lang_id->CurrentValue;
-		$this->lang_id->ViewCustomAttributes = "";
 
 		// test_name
 		$this->test_name->ViewValue = $this->test_name->CurrentValue;
 		$this->test_name->ViewCustomAttributes = "";
 
-		// qstn_id
-		$this->qstn_id->ViewValue = $this->qstn_id->CurrentValue;
-		$this->qstn_id->ViewCustomAttributes = "";
+		// test_desc
+		$this->test_desc->ViewValue = $this->test_desc->CurrentValue;
+		$this->test_desc->ViewCustomAttributes = "";
 
 		// gend_id
-		$this->gend_id->ViewValue = $this->gend_id->CurrentValue;
+		if (strval($this->gend_id->CurrentValue) <> "") {
+			$sFilterWrk = "`gend_id`" . ew_SearchString("=", $this->gend_id->CurrentValue, EW_DATATYPE_NUMBER, "");
+		$sSqlWrk = "SELECT `gend_id`, `gend_name` AS `DispFld`, '' AS `Disp2Fld`, '' AS `Disp3Fld`, '' AS `Disp4Fld` FROM `phs_gender`";
+		$sWhereWrk = "";
+		$this->gend_id->LookupFilters = array();
+		ew_AddFilter($sWhereWrk, $sFilterWrk);
+		$this->Lookup_Selecting($this->gend_id, $sWhereWrk); // Call Lookup Selecting
+		if ($sWhereWrk <> "") $sSqlWrk .= " WHERE " . $sWhereWrk;
+			$rswrk = Conn()->Execute($sSqlWrk);
+			if ($rswrk && !$rswrk->EOF) { // Lookup values found
+				$arwrk = array();
+				$arwrk[1] = $rswrk->fields('DispFld');
+				$this->gend_id->ViewValue = $this->gend_id->DisplayValue($arwrk);
+				$rswrk->Close();
+			} else {
+				$this->gend_id->ViewValue = $this->gend_id->CurrentValue;
+			}
+		} else {
+			$this->gend_id->ViewValue = NULL;
+		}
 		$this->gend_id->ViewCustomAttributes = "";
 
 		// qstn_num
 		$this->qstn_num->ViewValue = $this->qstn_num->CurrentValue;
 		$this->qstn_num->ViewCustomAttributes = "";
+
+		// qstn_text
+		$this->qstn_text->ViewValue = $this->qstn_text->CurrentValue;
+		$this->qstn_text->ViewCustomAttributes = "";
+
+		// qstn_ansr1
+		$this->qstn_ansr1->ViewValue = $this->qstn_ansr1->CurrentValue;
+		$this->qstn_ansr1->ViewCustomAttributes = "";
+
+		// qstn_ansr2
+		$this->qstn_ansr2->ViewValue = $this->qstn_ansr2->CurrentValue;
+		$this->qstn_ansr2->ViewCustomAttributes = "";
+
+		// qstn_ansr3
+		$this->qstn_ansr3->ViewValue = $this->qstn_ansr3->CurrentValue;
+		$this->qstn_ansr3->ViewCustomAttributes = "";
+
+		// qstn_ansr4
+		$this->qstn_ansr4->ViewValue = $this->qstn_ansr4->CurrentValue;
+		$this->qstn_ansr4->ViewCustomAttributes = "";
+
+		// qstn_rep1
+		$this->qstn_rep1->ViewValue = $this->qstn_rep1->CurrentValue;
+		$this->qstn_rep1->ViewCustomAttributes = "";
+
+		// qstn_rep2
+		$this->qstn_rep2->ViewValue = $this->qstn_rep2->CurrentValue;
+		$this->qstn_rep2->ViewCustomAttributes = "";
+
+		// qstn_rep3
+		$this->qstn_rep3->ViewValue = $this->qstn_rep3->CurrentValue;
+		$this->qstn_rep3->ViewCustomAttributes = "";
+
+		// qstn_rep4
+		$this->qstn_rep4->ViewValue = $this->qstn_rep4->CurrentValue;
+		$this->qstn_rep4->ViewCustomAttributes = "";
 
 		// qstn_val1
 		$this->qstn_val1->ViewValue = $this->qstn_val1->CurrentValue;
@@ -1953,15 +2045,15 @@ class capp_vtest_question_list extends capp_vtest_question {
 		$this->qstn_val4->ViewValue = $this->qstn_val4->CurrentValue;
 		$this->qstn_val4->ViewCustomAttributes = "";
 
-			// test_id
-			$this->test_id->LinkCustomAttributes = "";
-			$this->test_id->HrefValue = "";
-			$this->test_id->TooltipValue = "";
-
 			// test_num
 			$this->test_num->LinkCustomAttributes = "";
 			$this->test_num->HrefValue = "";
 			$this->test_num->TooltipValue = "";
+
+			// lang_id
+			$this->lang_id->LinkCustomAttributes = "";
+			$this->lang_id->HrefValue = "";
+			$this->lang_id->TooltipValue = "";
 
 			// test_iname
 			$this->test_iname->LinkCustomAttributes = "";
@@ -1980,28 +2072,32 @@ class capp_vtest_question_list extends capp_vtest_question {
 
 			// test_image
 			$this->test_image->LinkCustomAttributes = "";
-			$this->test_image->HrefValue = "";
+			$this->test_image->UploadPath = '../../assets/img/testImages';
+			if (!ew_Empty($this->test_image->Upload->DbValue)) {
+				$this->test_image->HrefValue = ew_GetFileUploadUrl($this->test_image, $this->test_image->Upload->DbValue); // Add prefix/suffix
+				$this->test_image->LinkAttrs["target"] = ""; // Add target
+				if ($this->Export <> "") $this->test_image->HrefValue = ew_FullUrl($this->test_image->HrefValue, "href");
+			} else {
+				$this->test_image->HrefValue = "";
+			}
+			$this->test_image->HrefValue2 = $this->test_image->UploadPath . $this->test_image->Upload->DbValue;
 			$this->test_image->TooltipValue = "";
-
-			// ntest_id
-			$this->ntest_id->LinkCustomAttributes = "";
-			$this->ntest_id->HrefValue = "";
-			$this->ntest_id->TooltipValue = "";
-
-			// lang_id
-			$this->lang_id->LinkCustomAttributes = "";
-			$this->lang_id->HrefValue = "";
-			$this->lang_id->TooltipValue = "";
+			if ($this->test_image->UseColorbox) {
+				if (ew_Empty($this->test_image->TooltipValue))
+					$this->test_image->LinkAttrs["title"] = $Language->Phrase("ViewImageGallery");
+				$this->test_image->LinkAttrs["data-rel"] = "app_vtest_question_x" . $this->RowCnt . "_test_image";
+				ew_AppendClass($this->test_image->LinkAttrs["class"], "ewLightbox");
+			}
 
 			// test_name
 			$this->test_name->LinkCustomAttributes = "";
 			$this->test_name->HrefValue = "";
 			$this->test_name->TooltipValue = "";
 
-			// qstn_id
-			$this->qstn_id->LinkCustomAttributes = "";
-			$this->qstn_id->HrefValue = "";
-			$this->qstn_id->TooltipValue = "";
+			// test_desc
+			$this->test_desc->LinkCustomAttributes = "";
+			$this->test_desc->HrefValue = "";
+			$this->test_desc->TooltipValue = "";
 
 			// gend_id
 			$this->gend_id->LinkCustomAttributes = "";
@@ -2012,6 +2108,51 @@ class capp_vtest_question_list extends capp_vtest_question {
 			$this->qstn_num->LinkCustomAttributes = "";
 			$this->qstn_num->HrefValue = "";
 			$this->qstn_num->TooltipValue = "";
+
+			// qstn_text
+			$this->qstn_text->LinkCustomAttributes = "";
+			$this->qstn_text->HrefValue = "";
+			$this->qstn_text->TooltipValue = "";
+
+			// qstn_ansr1
+			$this->qstn_ansr1->LinkCustomAttributes = "";
+			$this->qstn_ansr1->HrefValue = "";
+			$this->qstn_ansr1->TooltipValue = "";
+
+			// qstn_ansr2
+			$this->qstn_ansr2->LinkCustomAttributes = "";
+			$this->qstn_ansr2->HrefValue = "";
+			$this->qstn_ansr2->TooltipValue = "";
+
+			// qstn_ansr3
+			$this->qstn_ansr3->LinkCustomAttributes = "";
+			$this->qstn_ansr3->HrefValue = "";
+			$this->qstn_ansr3->TooltipValue = "";
+
+			// qstn_ansr4
+			$this->qstn_ansr4->LinkCustomAttributes = "";
+			$this->qstn_ansr4->HrefValue = "";
+			$this->qstn_ansr4->TooltipValue = "";
+
+			// qstn_rep1
+			$this->qstn_rep1->LinkCustomAttributes = "";
+			$this->qstn_rep1->HrefValue = "";
+			$this->qstn_rep1->TooltipValue = "";
+
+			// qstn_rep2
+			$this->qstn_rep2->LinkCustomAttributes = "";
+			$this->qstn_rep2->HrefValue = "";
+			$this->qstn_rep2->TooltipValue = "";
+
+			// qstn_rep3
+			$this->qstn_rep3->LinkCustomAttributes = "";
+			$this->qstn_rep3->HrefValue = "";
+			$this->qstn_rep3->TooltipValue = "";
+
+			// qstn_rep4
+			$this->qstn_rep4->LinkCustomAttributes = "";
+			$this->qstn_rep4->HrefValue = "";
+			$this->qstn_rep4->TooltipValue = "";
 
 			// qstn_val1
 			$this->qstn_val1->LinkCustomAttributes = "";
@@ -2375,8 +2516,14 @@ fapp_vtest_questionlist.Form_CustomValidate =
 fapp_vtest_questionlist.ValidateRequired = <?php echo json_encode(EW_CLIENT_VALIDATE) ?>;
 
 // Dynamic selection lists
-// Form object for search
+fapp_vtest_questionlist.Lists["x_lang_id"] = {"LinkField":"x_lang_id","Ajax":true,"AutoFill":false,"DisplayFields":["x_lang_name","","",""],"ParentFields":[],"ChildFields":[],"FilterFields":[],"Options":[],"Template":"","LinkTable":"phs_language"};
+fapp_vtest_questionlist.Lists["x_lang_id"].Data = "<?php echo $app_vtest_question_list->lang_id->LookupFilterQuery(FALSE, "list") ?>";
+fapp_vtest_questionlist.Lists["x_status_id"] = {"LinkField":"x_status_id","Ajax":true,"AutoFill":false,"DisplayFields":["x_status_name","","",""],"ParentFields":[],"ChildFields":[],"FilterFields":[],"Options":[],"Template":"","LinkTable":"phs_status"};
+fapp_vtest_questionlist.Lists["x_status_id"].Data = "<?php echo $app_vtest_question_list->status_id->LookupFilterQuery(FALSE, "list") ?>";
+fapp_vtest_questionlist.Lists["x_gend_id"] = {"LinkField":"x_gend_id","Ajax":true,"AutoFill":false,"DisplayFields":["x_gend_name","","",""],"ParentFields":[],"ChildFields":[],"FilterFields":[],"Options":[],"Template":"","LinkTable":"phs_gender"};
+fapp_vtest_questionlist.Lists["x_gend_id"].Data = "<?php echo $app_vtest_question_list->gend_id->LookupFilterQuery(FALSE, "list") ?>";
 
+// Form object for search
 var CurrentSearchForm = fapp_vtest_questionlistsrch = new ew_Form("fapp_vtest_questionlistsrch");
 </script>
 <script type="text/javascript">
@@ -2542,21 +2689,21 @@ $app_vtest_question_list->RenderListOptions();
 // Render list options (header, left)
 $app_vtest_question_list->ListOptions->Render("header", "left");
 ?>
-<?php if ($app_vtest_question->test_id->Visible) { // test_id ?>
-	<?php if ($app_vtest_question->SortUrl($app_vtest_question->test_id) == "") { ?>
-		<th data-name="test_id" class="<?php echo $app_vtest_question->test_id->HeaderCellClass() ?>"><div id="elh_app_vtest_question_test_id" class="app_vtest_question_test_id"><div class="ewTableHeaderCaption"><?php echo $app_vtest_question->test_id->FldCaption() ?></div></div></th>
-	<?php } else { ?>
-		<th data-name="test_id" class="<?php echo $app_vtest_question->test_id->HeaderCellClass() ?>"><div class="ewPointer" onclick="ew_Sort(event,'<?php echo $app_vtest_question->SortUrl($app_vtest_question->test_id) ?>',1);"><div id="elh_app_vtest_question_test_id" class="app_vtest_question_test_id">
-			<div class="ewTableHeaderBtn"><span class="ewTableHeaderCaption"><?php echo $app_vtest_question->test_id->FldCaption() ?></span><span class="ewTableHeaderSort"><?php if ($app_vtest_question->test_id->getSort() == "ASC") { ?><span class="caret ewSortUp"></span><?php } elseif ($app_vtest_question->test_id->getSort() == "DESC") { ?><span class="caret"></span><?php } ?></span></div>
-		</div></div></th>
-	<?php } ?>
-<?php } ?>
 <?php if ($app_vtest_question->test_num->Visible) { // test_num ?>
 	<?php if ($app_vtest_question->SortUrl($app_vtest_question->test_num) == "") { ?>
 		<th data-name="test_num" class="<?php echo $app_vtest_question->test_num->HeaderCellClass() ?>"><div id="elh_app_vtest_question_test_num" class="app_vtest_question_test_num"><div class="ewTableHeaderCaption"><?php echo $app_vtest_question->test_num->FldCaption() ?></div></div></th>
 	<?php } else { ?>
 		<th data-name="test_num" class="<?php echo $app_vtest_question->test_num->HeaderCellClass() ?>"><div class="ewPointer" onclick="ew_Sort(event,'<?php echo $app_vtest_question->SortUrl($app_vtest_question->test_num) ?>',1);"><div id="elh_app_vtest_question_test_num" class="app_vtest_question_test_num">
 			<div class="ewTableHeaderBtn"><span class="ewTableHeaderCaption"><?php echo $app_vtest_question->test_num->FldCaption() ?></span><span class="ewTableHeaderSort"><?php if ($app_vtest_question->test_num->getSort() == "ASC") { ?><span class="caret ewSortUp"></span><?php } elseif ($app_vtest_question->test_num->getSort() == "DESC") { ?><span class="caret"></span><?php } ?></span></div>
+		</div></div></th>
+	<?php } ?>
+<?php } ?>
+<?php if ($app_vtest_question->lang_id->Visible) { // lang_id ?>
+	<?php if ($app_vtest_question->SortUrl($app_vtest_question->lang_id) == "") { ?>
+		<th data-name="lang_id" class="<?php echo $app_vtest_question->lang_id->HeaderCellClass() ?>"><div id="elh_app_vtest_question_lang_id" class="app_vtest_question_lang_id"><div class="ewTableHeaderCaption"><?php echo $app_vtest_question->lang_id->FldCaption() ?></div></div></th>
+	<?php } else { ?>
+		<th data-name="lang_id" class="<?php echo $app_vtest_question->lang_id->HeaderCellClass() ?>"><div class="ewPointer" onclick="ew_Sort(event,'<?php echo $app_vtest_question->SortUrl($app_vtest_question->lang_id) ?>',1);"><div id="elh_app_vtest_question_lang_id" class="app_vtest_question_lang_id">
+			<div class="ewTableHeaderBtn"><span class="ewTableHeaderCaption"><?php echo $app_vtest_question->lang_id->FldCaption() ?></span><span class="ewTableHeaderSort"><?php if ($app_vtest_question->lang_id->getSort() == "ASC") { ?><span class="caret ewSortUp"></span><?php } elseif ($app_vtest_question->lang_id->getSort() == "DESC") { ?><span class="caret"></span><?php } ?></span></div>
 		</div></div></th>
 	<?php } ?>
 <?php } ?>
@@ -2596,24 +2743,6 @@ $app_vtest_question_list->ListOptions->Render("header", "left");
 		</div></div></th>
 	<?php } ?>
 <?php } ?>
-<?php if ($app_vtest_question->ntest_id->Visible) { // ntest_id ?>
-	<?php if ($app_vtest_question->SortUrl($app_vtest_question->ntest_id) == "") { ?>
-		<th data-name="ntest_id" class="<?php echo $app_vtest_question->ntest_id->HeaderCellClass() ?>"><div id="elh_app_vtest_question_ntest_id" class="app_vtest_question_ntest_id"><div class="ewTableHeaderCaption"><?php echo $app_vtest_question->ntest_id->FldCaption() ?></div></div></th>
-	<?php } else { ?>
-		<th data-name="ntest_id" class="<?php echo $app_vtest_question->ntest_id->HeaderCellClass() ?>"><div class="ewPointer" onclick="ew_Sort(event,'<?php echo $app_vtest_question->SortUrl($app_vtest_question->ntest_id) ?>',1);"><div id="elh_app_vtest_question_ntest_id" class="app_vtest_question_ntest_id">
-			<div class="ewTableHeaderBtn"><span class="ewTableHeaderCaption"><?php echo $app_vtest_question->ntest_id->FldCaption() ?></span><span class="ewTableHeaderSort"><?php if ($app_vtest_question->ntest_id->getSort() == "ASC") { ?><span class="caret ewSortUp"></span><?php } elseif ($app_vtest_question->ntest_id->getSort() == "DESC") { ?><span class="caret"></span><?php } ?></span></div>
-		</div></div></th>
-	<?php } ?>
-<?php } ?>
-<?php if ($app_vtest_question->lang_id->Visible) { // lang_id ?>
-	<?php if ($app_vtest_question->SortUrl($app_vtest_question->lang_id) == "") { ?>
-		<th data-name="lang_id" class="<?php echo $app_vtest_question->lang_id->HeaderCellClass() ?>"><div id="elh_app_vtest_question_lang_id" class="app_vtest_question_lang_id"><div class="ewTableHeaderCaption"><?php echo $app_vtest_question->lang_id->FldCaption() ?></div></div></th>
-	<?php } else { ?>
-		<th data-name="lang_id" class="<?php echo $app_vtest_question->lang_id->HeaderCellClass() ?>"><div class="ewPointer" onclick="ew_Sort(event,'<?php echo $app_vtest_question->SortUrl($app_vtest_question->lang_id) ?>',1);"><div id="elh_app_vtest_question_lang_id" class="app_vtest_question_lang_id">
-			<div class="ewTableHeaderBtn"><span class="ewTableHeaderCaption"><?php echo $app_vtest_question->lang_id->FldCaption() ?></span><span class="ewTableHeaderSort"><?php if ($app_vtest_question->lang_id->getSort() == "ASC") { ?><span class="caret ewSortUp"></span><?php } elseif ($app_vtest_question->lang_id->getSort() == "DESC") { ?><span class="caret"></span><?php } ?></span></div>
-		</div></div></th>
-	<?php } ?>
-<?php } ?>
 <?php if ($app_vtest_question->test_name->Visible) { // test_name ?>
 	<?php if ($app_vtest_question->SortUrl($app_vtest_question->test_name) == "") { ?>
 		<th data-name="test_name" class="<?php echo $app_vtest_question->test_name->HeaderCellClass() ?>"><div id="elh_app_vtest_question_test_name" class="app_vtest_question_test_name"><div class="ewTableHeaderCaption"><?php echo $app_vtest_question->test_name->FldCaption() ?></div></div></th>
@@ -2623,12 +2752,12 @@ $app_vtest_question_list->ListOptions->Render("header", "left");
 		</div></div></th>
 	<?php } ?>
 <?php } ?>
-<?php if ($app_vtest_question->qstn_id->Visible) { // qstn_id ?>
-	<?php if ($app_vtest_question->SortUrl($app_vtest_question->qstn_id) == "") { ?>
-		<th data-name="qstn_id" class="<?php echo $app_vtest_question->qstn_id->HeaderCellClass() ?>"><div id="elh_app_vtest_question_qstn_id" class="app_vtest_question_qstn_id"><div class="ewTableHeaderCaption"><?php echo $app_vtest_question->qstn_id->FldCaption() ?></div></div></th>
+<?php if ($app_vtest_question->test_desc->Visible) { // test_desc ?>
+	<?php if ($app_vtest_question->SortUrl($app_vtest_question->test_desc) == "") { ?>
+		<th data-name="test_desc" class="<?php echo $app_vtest_question->test_desc->HeaderCellClass() ?>"><div id="elh_app_vtest_question_test_desc" class="app_vtest_question_test_desc"><div class="ewTableHeaderCaption"><?php echo $app_vtest_question->test_desc->FldCaption() ?></div></div></th>
 	<?php } else { ?>
-		<th data-name="qstn_id" class="<?php echo $app_vtest_question->qstn_id->HeaderCellClass() ?>"><div class="ewPointer" onclick="ew_Sort(event,'<?php echo $app_vtest_question->SortUrl($app_vtest_question->qstn_id) ?>',1);"><div id="elh_app_vtest_question_qstn_id" class="app_vtest_question_qstn_id">
-			<div class="ewTableHeaderBtn"><span class="ewTableHeaderCaption"><?php echo $app_vtest_question->qstn_id->FldCaption() ?></span><span class="ewTableHeaderSort"><?php if ($app_vtest_question->qstn_id->getSort() == "ASC") { ?><span class="caret ewSortUp"></span><?php } elseif ($app_vtest_question->qstn_id->getSort() == "DESC") { ?><span class="caret"></span><?php } ?></span></div>
+		<th data-name="test_desc" class="<?php echo $app_vtest_question->test_desc->HeaderCellClass() ?>"><div class="ewPointer" onclick="ew_Sort(event,'<?php echo $app_vtest_question->SortUrl($app_vtest_question->test_desc) ?>',1);"><div id="elh_app_vtest_question_test_desc" class="app_vtest_question_test_desc">
+			<div class="ewTableHeaderBtn"><span class="ewTableHeaderCaption"><?php echo $app_vtest_question->test_desc->FldCaption() ?><?php echo $Language->Phrase("SrchLegend") ?></span><span class="ewTableHeaderSort"><?php if ($app_vtest_question->test_desc->getSort() == "ASC") { ?><span class="caret ewSortUp"></span><?php } elseif ($app_vtest_question->test_desc->getSort() == "DESC") { ?><span class="caret"></span><?php } ?></span></div>
 		</div></div></th>
 	<?php } ?>
 <?php } ?>
@@ -2647,6 +2776,87 @@ $app_vtest_question_list->ListOptions->Render("header", "left");
 	<?php } else { ?>
 		<th data-name="qstn_num" class="<?php echo $app_vtest_question->qstn_num->HeaderCellClass() ?>"><div class="ewPointer" onclick="ew_Sort(event,'<?php echo $app_vtest_question->SortUrl($app_vtest_question->qstn_num) ?>',1);"><div id="elh_app_vtest_question_qstn_num" class="app_vtest_question_qstn_num">
 			<div class="ewTableHeaderBtn"><span class="ewTableHeaderCaption"><?php echo $app_vtest_question->qstn_num->FldCaption() ?></span><span class="ewTableHeaderSort"><?php if ($app_vtest_question->qstn_num->getSort() == "ASC") { ?><span class="caret ewSortUp"></span><?php } elseif ($app_vtest_question->qstn_num->getSort() == "DESC") { ?><span class="caret"></span><?php } ?></span></div>
+		</div></div></th>
+	<?php } ?>
+<?php } ?>
+<?php if ($app_vtest_question->qstn_text->Visible) { // qstn_text ?>
+	<?php if ($app_vtest_question->SortUrl($app_vtest_question->qstn_text) == "") { ?>
+		<th data-name="qstn_text" class="<?php echo $app_vtest_question->qstn_text->HeaderCellClass() ?>"><div id="elh_app_vtest_question_qstn_text" class="app_vtest_question_qstn_text"><div class="ewTableHeaderCaption"><?php echo $app_vtest_question->qstn_text->FldCaption() ?></div></div></th>
+	<?php } else { ?>
+		<th data-name="qstn_text" class="<?php echo $app_vtest_question->qstn_text->HeaderCellClass() ?>"><div class="ewPointer" onclick="ew_Sort(event,'<?php echo $app_vtest_question->SortUrl($app_vtest_question->qstn_text) ?>',1);"><div id="elh_app_vtest_question_qstn_text" class="app_vtest_question_qstn_text">
+			<div class="ewTableHeaderBtn"><span class="ewTableHeaderCaption"><?php echo $app_vtest_question->qstn_text->FldCaption() ?><?php echo $Language->Phrase("SrchLegend") ?></span><span class="ewTableHeaderSort"><?php if ($app_vtest_question->qstn_text->getSort() == "ASC") { ?><span class="caret ewSortUp"></span><?php } elseif ($app_vtest_question->qstn_text->getSort() == "DESC") { ?><span class="caret"></span><?php } ?></span></div>
+		</div></div></th>
+	<?php } ?>
+<?php } ?>
+<?php if ($app_vtest_question->qstn_ansr1->Visible) { // qstn_ansr1 ?>
+	<?php if ($app_vtest_question->SortUrl($app_vtest_question->qstn_ansr1) == "") { ?>
+		<th data-name="qstn_ansr1" class="<?php echo $app_vtest_question->qstn_ansr1->HeaderCellClass() ?>"><div id="elh_app_vtest_question_qstn_ansr1" class="app_vtest_question_qstn_ansr1"><div class="ewTableHeaderCaption"><?php echo $app_vtest_question->qstn_ansr1->FldCaption() ?></div></div></th>
+	<?php } else { ?>
+		<th data-name="qstn_ansr1" class="<?php echo $app_vtest_question->qstn_ansr1->HeaderCellClass() ?>"><div class="ewPointer" onclick="ew_Sort(event,'<?php echo $app_vtest_question->SortUrl($app_vtest_question->qstn_ansr1) ?>',1);"><div id="elh_app_vtest_question_qstn_ansr1" class="app_vtest_question_qstn_ansr1">
+			<div class="ewTableHeaderBtn"><span class="ewTableHeaderCaption"><?php echo $app_vtest_question->qstn_ansr1->FldCaption() ?><?php echo $Language->Phrase("SrchLegend") ?></span><span class="ewTableHeaderSort"><?php if ($app_vtest_question->qstn_ansr1->getSort() == "ASC") { ?><span class="caret ewSortUp"></span><?php } elseif ($app_vtest_question->qstn_ansr1->getSort() == "DESC") { ?><span class="caret"></span><?php } ?></span></div>
+		</div></div></th>
+	<?php } ?>
+<?php } ?>
+<?php if ($app_vtest_question->qstn_ansr2->Visible) { // qstn_ansr2 ?>
+	<?php if ($app_vtest_question->SortUrl($app_vtest_question->qstn_ansr2) == "") { ?>
+		<th data-name="qstn_ansr2" class="<?php echo $app_vtest_question->qstn_ansr2->HeaderCellClass() ?>"><div id="elh_app_vtest_question_qstn_ansr2" class="app_vtest_question_qstn_ansr2"><div class="ewTableHeaderCaption"><?php echo $app_vtest_question->qstn_ansr2->FldCaption() ?></div></div></th>
+	<?php } else { ?>
+		<th data-name="qstn_ansr2" class="<?php echo $app_vtest_question->qstn_ansr2->HeaderCellClass() ?>"><div class="ewPointer" onclick="ew_Sort(event,'<?php echo $app_vtest_question->SortUrl($app_vtest_question->qstn_ansr2) ?>',1);"><div id="elh_app_vtest_question_qstn_ansr2" class="app_vtest_question_qstn_ansr2">
+			<div class="ewTableHeaderBtn"><span class="ewTableHeaderCaption"><?php echo $app_vtest_question->qstn_ansr2->FldCaption() ?><?php echo $Language->Phrase("SrchLegend") ?></span><span class="ewTableHeaderSort"><?php if ($app_vtest_question->qstn_ansr2->getSort() == "ASC") { ?><span class="caret ewSortUp"></span><?php } elseif ($app_vtest_question->qstn_ansr2->getSort() == "DESC") { ?><span class="caret"></span><?php } ?></span></div>
+		</div></div></th>
+	<?php } ?>
+<?php } ?>
+<?php if ($app_vtest_question->qstn_ansr3->Visible) { // qstn_ansr3 ?>
+	<?php if ($app_vtest_question->SortUrl($app_vtest_question->qstn_ansr3) == "") { ?>
+		<th data-name="qstn_ansr3" class="<?php echo $app_vtest_question->qstn_ansr3->HeaderCellClass() ?>"><div id="elh_app_vtest_question_qstn_ansr3" class="app_vtest_question_qstn_ansr3"><div class="ewTableHeaderCaption"><?php echo $app_vtest_question->qstn_ansr3->FldCaption() ?></div></div></th>
+	<?php } else { ?>
+		<th data-name="qstn_ansr3" class="<?php echo $app_vtest_question->qstn_ansr3->HeaderCellClass() ?>"><div class="ewPointer" onclick="ew_Sort(event,'<?php echo $app_vtest_question->SortUrl($app_vtest_question->qstn_ansr3) ?>',1);"><div id="elh_app_vtest_question_qstn_ansr3" class="app_vtest_question_qstn_ansr3">
+			<div class="ewTableHeaderBtn"><span class="ewTableHeaderCaption"><?php echo $app_vtest_question->qstn_ansr3->FldCaption() ?><?php echo $Language->Phrase("SrchLegend") ?></span><span class="ewTableHeaderSort"><?php if ($app_vtest_question->qstn_ansr3->getSort() == "ASC") { ?><span class="caret ewSortUp"></span><?php } elseif ($app_vtest_question->qstn_ansr3->getSort() == "DESC") { ?><span class="caret"></span><?php } ?></span></div>
+		</div></div></th>
+	<?php } ?>
+<?php } ?>
+<?php if ($app_vtest_question->qstn_ansr4->Visible) { // qstn_ansr4 ?>
+	<?php if ($app_vtest_question->SortUrl($app_vtest_question->qstn_ansr4) == "") { ?>
+		<th data-name="qstn_ansr4" class="<?php echo $app_vtest_question->qstn_ansr4->HeaderCellClass() ?>"><div id="elh_app_vtest_question_qstn_ansr4" class="app_vtest_question_qstn_ansr4"><div class="ewTableHeaderCaption"><?php echo $app_vtest_question->qstn_ansr4->FldCaption() ?></div></div></th>
+	<?php } else { ?>
+		<th data-name="qstn_ansr4" class="<?php echo $app_vtest_question->qstn_ansr4->HeaderCellClass() ?>"><div class="ewPointer" onclick="ew_Sort(event,'<?php echo $app_vtest_question->SortUrl($app_vtest_question->qstn_ansr4) ?>',1);"><div id="elh_app_vtest_question_qstn_ansr4" class="app_vtest_question_qstn_ansr4">
+			<div class="ewTableHeaderBtn"><span class="ewTableHeaderCaption"><?php echo $app_vtest_question->qstn_ansr4->FldCaption() ?><?php echo $Language->Phrase("SrchLegend") ?></span><span class="ewTableHeaderSort"><?php if ($app_vtest_question->qstn_ansr4->getSort() == "ASC") { ?><span class="caret ewSortUp"></span><?php } elseif ($app_vtest_question->qstn_ansr4->getSort() == "DESC") { ?><span class="caret"></span><?php } ?></span></div>
+		</div></div></th>
+	<?php } ?>
+<?php } ?>
+<?php if ($app_vtest_question->qstn_rep1->Visible) { // qstn_rep1 ?>
+	<?php if ($app_vtest_question->SortUrl($app_vtest_question->qstn_rep1) == "") { ?>
+		<th data-name="qstn_rep1" class="<?php echo $app_vtest_question->qstn_rep1->HeaderCellClass() ?>"><div id="elh_app_vtest_question_qstn_rep1" class="app_vtest_question_qstn_rep1"><div class="ewTableHeaderCaption"><?php echo $app_vtest_question->qstn_rep1->FldCaption() ?></div></div></th>
+	<?php } else { ?>
+		<th data-name="qstn_rep1" class="<?php echo $app_vtest_question->qstn_rep1->HeaderCellClass() ?>"><div class="ewPointer" onclick="ew_Sort(event,'<?php echo $app_vtest_question->SortUrl($app_vtest_question->qstn_rep1) ?>',1);"><div id="elh_app_vtest_question_qstn_rep1" class="app_vtest_question_qstn_rep1">
+			<div class="ewTableHeaderBtn"><span class="ewTableHeaderCaption"><?php echo $app_vtest_question->qstn_rep1->FldCaption() ?><?php echo $Language->Phrase("SrchLegend") ?></span><span class="ewTableHeaderSort"><?php if ($app_vtest_question->qstn_rep1->getSort() == "ASC") { ?><span class="caret ewSortUp"></span><?php } elseif ($app_vtest_question->qstn_rep1->getSort() == "DESC") { ?><span class="caret"></span><?php } ?></span></div>
+		</div></div></th>
+	<?php } ?>
+<?php } ?>
+<?php if ($app_vtest_question->qstn_rep2->Visible) { // qstn_rep2 ?>
+	<?php if ($app_vtest_question->SortUrl($app_vtest_question->qstn_rep2) == "") { ?>
+		<th data-name="qstn_rep2" class="<?php echo $app_vtest_question->qstn_rep2->HeaderCellClass() ?>"><div id="elh_app_vtest_question_qstn_rep2" class="app_vtest_question_qstn_rep2"><div class="ewTableHeaderCaption"><?php echo $app_vtest_question->qstn_rep2->FldCaption() ?></div></div></th>
+	<?php } else { ?>
+		<th data-name="qstn_rep2" class="<?php echo $app_vtest_question->qstn_rep2->HeaderCellClass() ?>"><div class="ewPointer" onclick="ew_Sort(event,'<?php echo $app_vtest_question->SortUrl($app_vtest_question->qstn_rep2) ?>',1);"><div id="elh_app_vtest_question_qstn_rep2" class="app_vtest_question_qstn_rep2">
+			<div class="ewTableHeaderBtn"><span class="ewTableHeaderCaption"><?php echo $app_vtest_question->qstn_rep2->FldCaption() ?><?php echo $Language->Phrase("SrchLegend") ?></span><span class="ewTableHeaderSort"><?php if ($app_vtest_question->qstn_rep2->getSort() == "ASC") { ?><span class="caret ewSortUp"></span><?php } elseif ($app_vtest_question->qstn_rep2->getSort() == "DESC") { ?><span class="caret"></span><?php } ?></span></div>
+		</div></div></th>
+	<?php } ?>
+<?php } ?>
+<?php if ($app_vtest_question->qstn_rep3->Visible) { // qstn_rep3 ?>
+	<?php if ($app_vtest_question->SortUrl($app_vtest_question->qstn_rep3) == "") { ?>
+		<th data-name="qstn_rep3" class="<?php echo $app_vtest_question->qstn_rep3->HeaderCellClass() ?>"><div id="elh_app_vtest_question_qstn_rep3" class="app_vtest_question_qstn_rep3"><div class="ewTableHeaderCaption"><?php echo $app_vtest_question->qstn_rep3->FldCaption() ?></div></div></th>
+	<?php } else { ?>
+		<th data-name="qstn_rep3" class="<?php echo $app_vtest_question->qstn_rep3->HeaderCellClass() ?>"><div class="ewPointer" onclick="ew_Sort(event,'<?php echo $app_vtest_question->SortUrl($app_vtest_question->qstn_rep3) ?>',1);"><div id="elh_app_vtest_question_qstn_rep3" class="app_vtest_question_qstn_rep3">
+			<div class="ewTableHeaderBtn"><span class="ewTableHeaderCaption"><?php echo $app_vtest_question->qstn_rep3->FldCaption() ?><?php echo $Language->Phrase("SrchLegend") ?></span><span class="ewTableHeaderSort"><?php if ($app_vtest_question->qstn_rep3->getSort() == "ASC") { ?><span class="caret ewSortUp"></span><?php } elseif ($app_vtest_question->qstn_rep3->getSort() == "DESC") { ?><span class="caret"></span><?php } ?></span></div>
+		</div></div></th>
+	<?php } ?>
+<?php } ?>
+<?php if ($app_vtest_question->qstn_rep4->Visible) { // qstn_rep4 ?>
+	<?php if ($app_vtest_question->SortUrl($app_vtest_question->qstn_rep4) == "") { ?>
+		<th data-name="qstn_rep4" class="<?php echo $app_vtest_question->qstn_rep4->HeaderCellClass() ?>"><div id="elh_app_vtest_question_qstn_rep4" class="app_vtest_question_qstn_rep4"><div class="ewTableHeaderCaption"><?php echo $app_vtest_question->qstn_rep4->FldCaption() ?></div></div></th>
+	<?php } else { ?>
+		<th data-name="qstn_rep4" class="<?php echo $app_vtest_question->qstn_rep4->HeaderCellClass() ?>"><div class="ewPointer" onclick="ew_Sort(event,'<?php echo $app_vtest_question->SortUrl($app_vtest_question->qstn_rep4) ?>',1);"><div id="elh_app_vtest_question_qstn_rep4" class="app_vtest_question_qstn_rep4">
+			<div class="ewTableHeaderBtn"><span class="ewTableHeaderCaption"><?php echo $app_vtest_question->qstn_rep4->FldCaption() ?><?php echo $Language->Phrase("SrchLegend") ?></span><span class="ewTableHeaderSort"><?php if ($app_vtest_question->qstn_rep4->getSort() == "ASC") { ?><span class="caret ewSortUp"></span><?php } elseif ($app_vtest_question->qstn_rep4->getSort() == "DESC") { ?><span class="caret"></span><?php } ?></span></div>
 		</div></div></th>
 	<?php } ?>
 <?php } ?>
@@ -2751,19 +2961,19 @@ while ($app_vtest_question_list->RecCnt < $app_vtest_question_list->StopRec) {
 // Render list options (body, left)
 $app_vtest_question_list->ListOptions->Render("body", "left", $app_vtest_question_list->RowCnt);
 ?>
-	<?php if ($app_vtest_question->test_id->Visible) { // test_id ?>
-		<td data-name="test_id"<?php echo $app_vtest_question->test_id->CellAttributes() ?>>
-<span id="el<?php echo $app_vtest_question_list->RowCnt ?>_app_vtest_question_test_id" class="app_vtest_question_test_id">
-<span<?php echo $app_vtest_question->test_id->ViewAttributes() ?>>
-<?php echo $app_vtest_question->test_id->ListViewValue() ?></span>
-</span>
-</td>
-	<?php } ?>
 	<?php if ($app_vtest_question->test_num->Visible) { // test_num ?>
 		<td data-name="test_num"<?php echo $app_vtest_question->test_num->CellAttributes() ?>>
 <span id="el<?php echo $app_vtest_question_list->RowCnt ?>_app_vtest_question_test_num" class="app_vtest_question_test_num">
 <span<?php echo $app_vtest_question->test_num->ViewAttributes() ?>>
 <?php echo $app_vtest_question->test_num->ListViewValue() ?></span>
+</span>
+</td>
+	<?php } ?>
+	<?php if ($app_vtest_question->lang_id->Visible) { // lang_id ?>
+		<td data-name="lang_id"<?php echo $app_vtest_question->lang_id->CellAttributes() ?>>
+<span id="el<?php echo $app_vtest_question_list->RowCnt ?>_app_vtest_question_lang_id" class="app_vtest_question_lang_id">
+<span<?php echo $app_vtest_question->lang_id->ViewAttributes() ?>>
+<?php echo $app_vtest_question->lang_id->ListViewValue() ?></span>
 </span>
 </td>
 	<?php } ?>
@@ -2794,24 +3004,9 @@ $app_vtest_question_list->ListOptions->Render("body", "left", $app_vtest_questio
 	<?php if ($app_vtest_question->test_image->Visible) { // test_image ?>
 		<td data-name="test_image"<?php echo $app_vtest_question->test_image->CellAttributes() ?>>
 <span id="el<?php echo $app_vtest_question_list->RowCnt ?>_app_vtest_question_test_image" class="app_vtest_question_test_image">
-<span<?php echo $app_vtest_question->test_image->ViewAttributes() ?>>
-<?php echo $app_vtest_question->test_image->ListViewValue() ?></span>
+<span>
+<?php echo ew_GetFileViewTag($app_vtest_question->test_image, $app_vtest_question->test_image->ListViewValue()) ?>
 </span>
-</td>
-	<?php } ?>
-	<?php if ($app_vtest_question->ntest_id->Visible) { // ntest_id ?>
-		<td data-name="ntest_id"<?php echo $app_vtest_question->ntest_id->CellAttributes() ?>>
-<span id="el<?php echo $app_vtest_question_list->RowCnt ?>_app_vtest_question_ntest_id" class="app_vtest_question_ntest_id">
-<span<?php echo $app_vtest_question->ntest_id->ViewAttributes() ?>>
-<?php echo $app_vtest_question->ntest_id->ListViewValue() ?></span>
-</span>
-</td>
-	<?php } ?>
-	<?php if ($app_vtest_question->lang_id->Visible) { // lang_id ?>
-		<td data-name="lang_id"<?php echo $app_vtest_question->lang_id->CellAttributes() ?>>
-<span id="el<?php echo $app_vtest_question_list->RowCnt ?>_app_vtest_question_lang_id" class="app_vtest_question_lang_id">
-<span<?php echo $app_vtest_question->lang_id->ViewAttributes() ?>>
-<?php echo $app_vtest_question->lang_id->ListViewValue() ?></span>
 </span>
 </td>
 	<?php } ?>
@@ -2823,11 +3018,11 @@ $app_vtest_question_list->ListOptions->Render("body", "left", $app_vtest_questio
 </span>
 </td>
 	<?php } ?>
-	<?php if ($app_vtest_question->qstn_id->Visible) { // qstn_id ?>
-		<td data-name="qstn_id"<?php echo $app_vtest_question->qstn_id->CellAttributes() ?>>
-<span id="el<?php echo $app_vtest_question_list->RowCnt ?>_app_vtest_question_qstn_id" class="app_vtest_question_qstn_id">
-<span<?php echo $app_vtest_question->qstn_id->ViewAttributes() ?>>
-<?php echo $app_vtest_question->qstn_id->ListViewValue() ?></span>
+	<?php if ($app_vtest_question->test_desc->Visible) { // test_desc ?>
+		<td data-name="test_desc"<?php echo $app_vtest_question->test_desc->CellAttributes() ?>>
+<span id="el<?php echo $app_vtest_question_list->RowCnt ?>_app_vtest_question_test_desc" class="app_vtest_question_test_desc">
+<span<?php echo $app_vtest_question->test_desc->ViewAttributes() ?>>
+<?php echo $app_vtest_question->test_desc->ListViewValue() ?></span>
 </span>
 </td>
 	<?php } ?>
@@ -2844,6 +3039,78 @@ $app_vtest_question_list->ListOptions->Render("body", "left", $app_vtest_questio
 <span id="el<?php echo $app_vtest_question_list->RowCnt ?>_app_vtest_question_qstn_num" class="app_vtest_question_qstn_num">
 <span<?php echo $app_vtest_question->qstn_num->ViewAttributes() ?>>
 <?php echo $app_vtest_question->qstn_num->ListViewValue() ?></span>
+</span>
+</td>
+	<?php } ?>
+	<?php if ($app_vtest_question->qstn_text->Visible) { // qstn_text ?>
+		<td data-name="qstn_text"<?php echo $app_vtest_question->qstn_text->CellAttributes() ?>>
+<span id="el<?php echo $app_vtest_question_list->RowCnt ?>_app_vtest_question_qstn_text" class="app_vtest_question_qstn_text">
+<span<?php echo $app_vtest_question->qstn_text->ViewAttributes() ?>>
+<?php echo $app_vtest_question->qstn_text->ListViewValue() ?></span>
+</span>
+</td>
+	<?php } ?>
+	<?php if ($app_vtest_question->qstn_ansr1->Visible) { // qstn_ansr1 ?>
+		<td data-name="qstn_ansr1"<?php echo $app_vtest_question->qstn_ansr1->CellAttributes() ?>>
+<span id="el<?php echo $app_vtest_question_list->RowCnt ?>_app_vtest_question_qstn_ansr1" class="app_vtest_question_qstn_ansr1">
+<span<?php echo $app_vtest_question->qstn_ansr1->ViewAttributes() ?>>
+<?php echo $app_vtest_question->qstn_ansr1->ListViewValue() ?></span>
+</span>
+</td>
+	<?php } ?>
+	<?php if ($app_vtest_question->qstn_ansr2->Visible) { // qstn_ansr2 ?>
+		<td data-name="qstn_ansr2"<?php echo $app_vtest_question->qstn_ansr2->CellAttributes() ?>>
+<span id="el<?php echo $app_vtest_question_list->RowCnt ?>_app_vtest_question_qstn_ansr2" class="app_vtest_question_qstn_ansr2">
+<span<?php echo $app_vtest_question->qstn_ansr2->ViewAttributes() ?>>
+<?php echo $app_vtest_question->qstn_ansr2->ListViewValue() ?></span>
+</span>
+</td>
+	<?php } ?>
+	<?php if ($app_vtest_question->qstn_ansr3->Visible) { // qstn_ansr3 ?>
+		<td data-name="qstn_ansr3"<?php echo $app_vtest_question->qstn_ansr3->CellAttributes() ?>>
+<span id="el<?php echo $app_vtest_question_list->RowCnt ?>_app_vtest_question_qstn_ansr3" class="app_vtest_question_qstn_ansr3">
+<span<?php echo $app_vtest_question->qstn_ansr3->ViewAttributes() ?>>
+<?php echo $app_vtest_question->qstn_ansr3->ListViewValue() ?></span>
+</span>
+</td>
+	<?php } ?>
+	<?php if ($app_vtest_question->qstn_ansr4->Visible) { // qstn_ansr4 ?>
+		<td data-name="qstn_ansr4"<?php echo $app_vtest_question->qstn_ansr4->CellAttributes() ?>>
+<span id="el<?php echo $app_vtest_question_list->RowCnt ?>_app_vtest_question_qstn_ansr4" class="app_vtest_question_qstn_ansr4">
+<span<?php echo $app_vtest_question->qstn_ansr4->ViewAttributes() ?>>
+<?php echo $app_vtest_question->qstn_ansr4->ListViewValue() ?></span>
+</span>
+</td>
+	<?php } ?>
+	<?php if ($app_vtest_question->qstn_rep1->Visible) { // qstn_rep1 ?>
+		<td data-name="qstn_rep1"<?php echo $app_vtest_question->qstn_rep1->CellAttributes() ?>>
+<span id="el<?php echo $app_vtest_question_list->RowCnt ?>_app_vtest_question_qstn_rep1" class="app_vtest_question_qstn_rep1">
+<span<?php echo $app_vtest_question->qstn_rep1->ViewAttributes() ?>>
+<?php echo $app_vtest_question->qstn_rep1->ListViewValue() ?></span>
+</span>
+</td>
+	<?php } ?>
+	<?php if ($app_vtest_question->qstn_rep2->Visible) { // qstn_rep2 ?>
+		<td data-name="qstn_rep2"<?php echo $app_vtest_question->qstn_rep2->CellAttributes() ?>>
+<span id="el<?php echo $app_vtest_question_list->RowCnt ?>_app_vtest_question_qstn_rep2" class="app_vtest_question_qstn_rep2">
+<span<?php echo $app_vtest_question->qstn_rep2->ViewAttributes() ?>>
+<?php echo $app_vtest_question->qstn_rep2->ListViewValue() ?></span>
+</span>
+</td>
+	<?php } ?>
+	<?php if ($app_vtest_question->qstn_rep3->Visible) { // qstn_rep3 ?>
+		<td data-name="qstn_rep3"<?php echo $app_vtest_question->qstn_rep3->CellAttributes() ?>>
+<span id="el<?php echo $app_vtest_question_list->RowCnt ?>_app_vtest_question_qstn_rep3" class="app_vtest_question_qstn_rep3">
+<span<?php echo $app_vtest_question->qstn_rep3->ViewAttributes() ?>>
+<?php echo $app_vtest_question->qstn_rep3->ListViewValue() ?></span>
+</span>
+</td>
+	<?php } ?>
+	<?php if ($app_vtest_question->qstn_rep4->Visible) { // qstn_rep4 ?>
+		<td data-name="qstn_rep4"<?php echo $app_vtest_question->qstn_rep4->CellAttributes() ?>>
+<span id="el<?php echo $app_vtest_question_list->RowCnt ?>_app_vtest_question_qstn_rep4" class="app_vtest_question_qstn_rep4">
+<span<?php echo $app_vtest_question->qstn_rep4->ViewAttributes() ?>>
+<?php echo $app_vtest_question->qstn_rep4->ListViewValue() ?></span>
 </span>
 </td>
 	<?php } ?>

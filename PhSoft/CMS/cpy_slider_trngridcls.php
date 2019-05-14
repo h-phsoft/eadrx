@@ -924,6 +924,8 @@ class ccpy_slider_trn_grid extends ccpy_slider_trn {
 			if ($this->getSqlOrderBy() <> "") {
 				$sOrderBy = $this->getSqlOrderBy();
 				$this->setSessionOrderBy($sOrderBy);
+				$this->slid_id->setSort("ASC");
+				$this->slid_order->setSort("ASC");
 			}
 		}
 	}

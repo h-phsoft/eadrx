@@ -1629,6 +1629,7 @@ class ccpy_slider_mst_list extends ccpy_slider_mst {
 			if ($this->getSqlOrderBy() <> "") {
 				$sOrderBy = $this->getSqlOrderBy();
 				$this->setSessionOrderBy($sOrderBy);
+				$this->slid_name->setSort("ASC");
 			}
 		}
 	}

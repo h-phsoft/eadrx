@@ -1766,6 +1766,8 @@ class cphs_menu_list extends cphs_menu {
 			if ($this->getSqlOrderBy() <> "") {
 				$sOrderBy = $this->getSqlOrderBy();
 				$this->setSessionOrderBy($sOrderBy);
+				$this->menu_pid->setSort("ASC");
+				$this->menu_id->setSort("ASC");
 			}
 		}
 	}

@@ -221,7 +221,7 @@ class ccpy_news extends cTable {
 	var $_SqlOrderBy = "";
 
 	function getSqlOrderBy() { // Order By
-		return ($this->_SqlOrderBy <> "") ? $this->_SqlOrderBy : "";
+		return ($this->_SqlOrderBy <> "") ? $this->_SqlOrderBy : "`news_date` DESC,`news_id` ASC";
 	}
 
 	function SqlOrderBy() { // For backward compatibility

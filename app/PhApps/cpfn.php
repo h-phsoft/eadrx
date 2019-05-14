@@ -27,6 +27,9 @@ include_once $PH_CLASS_PATH . "cTestQuestion.php";
 include_once $PH_CLASS_PATH . "cTestEvaluate.php";
 include_once $PH_CLASS_PATH . "cTest.php";
 include_once $PH_CLASS_PATH . "cNotification.php";
+include_once $PH_CLASS_PATH . "cTips.php";
+include_once $PH_CLASS_PATH . "cPackageCategory.php";
+include_once $PH_CLASS_PATH . "cPackage.php";
 
 if (!function_exists('cp_getRandomTip')) {
 
@@ -46,8 +49,8 @@ if (!function_exists('cp_getDailyTip')) {
     $nMin = ph_GetDBValue('Min(`tips_id`)', '`app_tips`', '`lang_id`=' . $nLang);
     $nMax = ph_GetDBValue('Max(`tips_id`)', '`app_tips`', '`lang_id`=' . $nLang);
     $nId = rand($nMin, $nMax);
-    $vTip = ph_GetDBValue('`tips_text`', '`app_tips`', '`tips_id`=' . $nId);
-    return $vTip;
+    $tip = cTips::getInstance($nId);
+    return $tip;
   }
 
 }

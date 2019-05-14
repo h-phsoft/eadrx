@@ -449,18 +449,13 @@ class capp_vcons_cat_list extends capp_vcons_cat {
 
 		// Setup export options
 		$this->SetupExportOptions();
-		$this->cat_id->SetVisibility();
-		if ($this->IsAdd() || $this->IsCopy() || $this->IsGridAdd())
-			$this->cat_id->Visible = FALSE;
 		$this->cat_order->SetVisibility();
+		$this->lang_id->SetVisibility();
 		$this->cat_iname->SetVisibility();
 		$this->status_id->SetVisibility();
 		$this->cat_price->SetVisibility();
-		$this->ncat_id->SetVisibility();
-		if ($this->IsAdd() || $this->IsCopy() || $this->IsGridAdd())
-			$this->ncat_id->Visible = FALSE;
-		$this->lang_id->SetVisibility();
 		$this->cat_name->SetVisibility();
+		$this->cat_desc->SetVisibility();
 
 		// Global Page Loading event (in userfn*.php)
 		Page_Loading();
@@ -792,13 +787,11 @@ class capp_vcons_cat_list extends capp_vcons_cat {
 		// Initialize
 		$sFilterList = "";
 		$sSavedFilterList = "";
-		$sFilterList = ew_Concat($sFilterList, $this->cat_id->AdvancedSearch->ToJson(), ","); // Field cat_id
 		$sFilterList = ew_Concat($sFilterList, $this->cat_order->AdvancedSearch->ToJson(), ","); // Field cat_order
+		$sFilterList = ew_Concat($sFilterList, $this->lang_id->AdvancedSearch->ToJson(), ","); // Field lang_id
 		$sFilterList = ew_Concat($sFilterList, $this->cat_iname->AdvancedSearch->ToJson(), ","); // Field cat_iname
 		$sFilterList = ew_Concat($sFilterList, $this->status_id->AdvancedSearch->ToJson(), ","); // Field status_id
 		$sFilterList = ew_Concat($sFilterList, $this->cat_price->AdvancedSearch->ToJson(), ","); // Field cat_price
-		$sFilterList = ew_Concat($sFilterList, $this->ncat_id->AdvancedSearch->ToJson(), ","); // Field ncat_id
-		$sFilterList = ew_Concat($sFilterList, $this->lang_id->AdvancedSearch->ToJson(), ","); // Field lang_id
 		$sFilterList = ew_Concat($sFilterList, $this->cat_name->AdvancedSearch->ToJson(), ","); // Field cat_name
 		$sFilterList = ew_Concat($sFilterList, $this->cat_desc->AdvancedSearch->ToJson(), ","); // Field cat_desc
 		if ($this->BasicSearch->Keyword <> "") {
@@ -845,14 +838,6 @@ class capp_vcons_cat_list extends capp_vcons_cat {
 		$filter = json_decode(@$_POST["filter"], TRUE);
 		$this->Command = "search";
 
-		// Field cat_id
-		$this->cat_id->AdvancedSearch->SearchValue = @$filter["x_cat_id"];
-		$this->cat_id->AdvancedSearch->SearchOperator = @$filter["z_cat_id"];
-		$this->cat_id->AdvancedSearch->SearchCondition = @$filter["v_cat_id"];
-		$this->cat_id->AdvancedSearch->SearchValue2 = @$filter["y_cat_id"];
-		$this->cat_id->AdvancedSearch->SearchOperator2 = @$filter["w_cat_id"];
-		$this->cat_id->AdvancedSearch->Save();
-
 		// Field cat_order
 		$this->cat_order->AdvancedSearch->SearchValue = @$filter["x_cat_order"];
 		$this->cat_order->AdvancedSearch->SearchOperator = @$filter["z_cat_order"];
@@ -860,6 +845,14 @@ class capp_vcons_cat_list extends capp_vcons_cat {
 		$this->cat_order->AdvancedSearch->SearchValue2 = @$filter["y_cat_order"];
 		$this->cat_order->AdvancedSearch->SearchOperator2 = @$filter["w_cat_order"];
 		$this->cat_order->AdvancedSearch->Save();
+
+		// Field lang_id
+		$this->lang_id->AdvancedSearch->SearchValue = @$filter["x_lang_id"];
+		$this->lang_id->AdvancedSearch->SearchOperator = @$filter["z_lang_id"];
+		$this->lang_id->AdvancedSearch->SearchCondition = @$filter["v_lang_id"];
+		$this->lang_id->AdvancedSearch->SearchValue2 = @$filter["y_lang_id"];
+		$this->lang_id->AdvancedSearch->SearchOperator2 = @$filter["w_lang_id"];
+		$this->lang_id->AdvancedSearch->Save();
 
 		// Field cat_iname
 		$this->cat_iname->AdvancedSearch->SearchValue = @$filter["x_cat_iname"];
@@ -884,22 +877,6 @@ class capp_vcons_cat_list extends capp_vcons_cat {
 		$this->cat_price->AdvancedSearch->SearchValue2 = @$filter["y_cat_price"];
 		$this->cat_price->AdvancedSearch->SearchOperator2 = @$filter["w_cat_price"];
 		$this->cat_price->AdvancedSearch->Save();
-
-		// Field ncat_id
-		$this->ncat_id->AdvancedSearch->SearchValue = @$filter["x_ncat_id"];
-		$this->ncat_id->AdvancedSearch->SearchOperator = @$filter["z_ncat_id"];
-		$this->ncat_id->AdvancedSearch->SearchCondition = @$filter["v_ncat_id"];
-		$this->ncat_id->AdvancedSearch->SearchValue2 = @$filter["y_ncat_id"];
-		$this->ncat_id->AdvancedSearch->SearchOperator2 = @$filter["w_ncat_id"];
-		$this->ncat_id->AdvancedSearch->Save();
-
-		// Field lang_id
-		$this->lang_id->AdvancedSearch->SearchValue = @$filter["x_lang_id"];
-		$this->lang_id->AdvancedSearch->SearchOperator = @$filter["z_lang_id"];
-		$this->lang_id->AdvancedSearch->SearchCondition = @$filter["v_lang_id"];
-		$this->lang_id->AdvancedSearch->SearchValue2 = @$filter["y_lang_id"];
-		$this->lang_id->AdvancedSearch->SearchOperator2 = @$filter["w_lang_id"];
-		$this->lang_id->AdvancedSearch->Save();
 
 		// Field cat_name
 		$this->cat_name->AdvancedSearch->SearchValue = @$filter["x_cat_name"];
@@ -1072,14 +1049,13 @@ class capp_vcons_cat_list extends capp_vcons_cat {
 		if (@$_GET["order"] <> "") {
 			$this->CurrentOrder = @$_GET["order"];
 			$this->CurrentOrderType = @$_GET["ordertype"];
-			$this->UpdateSort($this->cat_id); // cat_id
 			$this->UpdateSort($this->cat_order); // cat_order
+			$this->UpdateSort($this->lang_id); // lang_id
 			$this->UpdateSort($this->cat_iname); // cat_iname
 			$this->UpdateSort($this->status_id); // status_id
 			$this->UpdateSort($this->cat_price); // cat_price
-			$this->UpdateSort($this->ncat_id); // ncat_id
-			$this->UpdateSort($this->lang_id); // lang_id
 			$this->UpdateSort($this->cat_name); // cat_name
+			$this->UpdateSort($this->cat_desc); // cat_desc
 			$this->setStartRecordNumber(1); // Reset start position
 		}
 	}
@@ -1091,6 +1067,9 @@ class capp_vcons_cat_list extends capp_vcons_cat {
 			if ($this->getSqlOrderBy() <> "") {
 				$sOrderBy = $this->getSqlOrderBy();
 				$this->setSessionOrderBy($sOrderBy);
+				$this->lang_id->setSort("ASC");
+				$this->cat_order->setSort("ASC");
+				$this->cat_name->setSort("ASC");
 			}
 		}
 	}
@@ -1112,14 +1091,13 @@ class capp_vcons_cat_list extends capp_vcons_cat {
 			if ($this->Command == "resetsort") {
 				$sOrderBy = "";
 				$this->setSessionOrderBy($sOrderBy);
-				$this->cat_id->setSort("");
 				$this->cat_order->setSort("");
+				$this->lang_id->setSort("");
 				$this->cat_iname->setSort("");
 				$this->status_id->setSort("");
 				$this->cat_price->setSort("");
-				$this->ncat_id->setSort("");
-				$this->lang_id->setSort("");
 				$this->cat_name->setSort("");
+				$this->cat_desc->setSort("");
 			}
 
 			// Reset start position
@@ -1510,12 +1488,12 @@ class capp_vcons_cat_list extends capp_vcons_cat {
 		if (!$rs || $rs->EOF)
 			return;
 		$this->cat_id->setDbValue($row['cat_id']);
+		$this->ncat_id->setDbValue($row['ncat_id']);
 		$this->cat_order->setDbValue($row['cat_order']);
+		$this->lang_id->setDbValue($row['lang_id']);
 		$this->cat_iname->setDbValue($row['cat_iname']);
 		$this->status_id->setDbValue($row['status_id']);
 		$this->cat_price->setDbValue($row['cat_price']);
-		$this->ncat_id->setDbValue($row['ncat_id']);
-		$this->lang_id->setDbValue($row['lang_id']);
 		$this->cat_name->setDbValue($row['cat_name']);
 		$this->cat_desc->setDbValue($row['cat_desc']);
 	}
@@ -1524,12 +1502,12 @@ class capp_vcons_cat_list extends capp_vcons_cat {
 	function NewRow() {
 		$row = array();
 		$row['cat_id'] = NULL;
+		$row['ncat_id'] = NULL;
 		$row['cat_order'] = NULL;
+		$row['lang_id'] = NULL;
 		$row['cat_iname'] = NULL;
 		$row['status_id'] = NULL;
 		$row['cat_price'] = NULL;
-		$row['ncat_id'] = NULL;
-		$row['lang_id'] = NULL;
 		$row['cat_name'] = NULL;
 		$row['cat_desc'] = NULL;
 		return $row;
@@ -1541,12 +1519,12 @@ class capp_vcons_cat_list extends capp_vcons_cat {
 			return;
 		$row = is_array($rs) ? $rs : $rs->fields;
 		$this->cat_id->DbValue = $row['cat_id'];
+		$this->ncat_id->DbValue = $row['ncat_id'];
 		$this->cat_order->DbValue = $row['cat_order'];
+		$this->lang_id->DbValue = $row['lang_id'];
 		$this->cat_iname->DbValue = $row['cat_iname'];
 		$this->status_id->DbValue = $row['status_id'];
 		$this->cat_price->DbValue = $row['cat_price'];
-		$this->ncat_id->DbValue = $row['ncat_id'];
-		$this->lang_id->DbValue = $row['lang_id'];
 		$this->cat_name->DbValue = $row['cat_name'];
 		$this->cat_desc->DbValue = $row['cat_desc'];
 	}
@@ -1598,58 +1576,97 @@ class capp_vcons_cat_list extends capp_vcons_cat {
 
 		// Common render codes for all row types
 		// cat_id
+
+		$this->cat_id->CellCssStyle = "white-space: nowrap;";
+
+		// ncat_id
+		$this->ncat_id->CellCssStyle = "white-space: nowrap;";
+
 		// cat_order
+		// lang_id
 		// cat_iname
 		// status_id
 		// cat_price
-		// ncat_id
-		// lang_id
 		// cat_name
 		// cat_desc
 
 		if ($this->RowType == EW_ROWTYPE_VIEW) { // View row
 
-		// cat_id
-		$this->cat_id->ViewValue = $this->cat_id->CurrentValue;
-		$this->cat_id->ViewCustomAttributes = "";
-
 		// cat_order
 		$this->cat_order->ViewValue = $this->cat_order->CurrentValue;
 		$this->cat_order->ViewCustomAttributes = "";
+
+		// lang_id
+		if (strval($this->lang_id->CurrentValue) <> "") {
+			$sFilterWrk = "`lang_id`" . ew_SearchString("=", $this->lang_id->CurrentValue, EW_DATATYPE_NUMBER, "");
+		$sSqlWrk = "SELECT `lang_id`, `lang_name` AS `DispFld`, '' AS `Disp2Fld`, '' AS `Disp3Fld`, '' AS `Disp4Fld` FROM `phs_language`";
+		$sWhereWrk = "";
+		$this->lang_id->LookupFilters = array();
+		ew_AddFilter($sWhereWrk, $sFilterWrk);
+		$this->Lookup_Selecting($this->lang_id, $sWhereWrk); // Call Lookup Selecting
+		if ($sWhereWrk <> "") $sSqlWrk .= " WHERE " . $sWhereWrk;
+			$rswrk = Conn()->Execute($sSqlWrk);
+			if ($rswrk && !$rswrk->EOF) { // Lookup values found
+				$arwrk = array();
+				$arwrk[1] = $rswrk->fields('DispFld');
+				$this->lang_id->ViewValue = $this->lang_id->DisplayValue($arwrk);
+				$rswrk->Close();
+			} else {
+				$this->lang_id->ViewValue = $this->lang_id->CurrentValue;
+			}
+		} else {
+			$this->lang_id->ViewValue = NULL;
+		}
+		$this->lang_id->ViewCustomAttributes = "";
 
 		// cat_iname
 		$this->cat_iname->ViewValue = $this->cat_iname->CurrentValue;
 		$this->cat_iname->ViewCustomAttributes = "";
 
 		// status_id
-		$this->status_id->ViewValue = $this->status_id->CurrentValue;
+		if (strval($this->status_id->CurrentValue) <> "") {
+			$sFilterWrk = "`status_id`" . ew_SearchString("=", $this->status_id->CurrentValue, EW_DATATYPE_NUMBER, "");
+		$sSqlWrk = "SELECT `status_id`, `status_name` AS `DispFld`, '' AS `Disp2Fld`, '' AS `Disp3Fld`, '' AS `Disp4Fld` FROM `phs_status`";
+		$sWhereWrk = "";
+		$this->status_id->LookupFilters = array();
+		ew_AddFilter($sWhereWrk, $sFilterWrk);
+		$this->Lookup_Selecting($this->status_id, $sWhereWrk); // Call Lookup Selecting
+		if ($sWhereWrk <> "") $sSqlWrk .= " WHERE " . $sWhereWrk;
+			$rswrk = Conn()->Execute($sSqlWrk);
+			if ($rswrk && !$rswrk->EOF) { // Lookup values found
+				$arwrk = array();
+				$arwrk[1] = $rswrk->fields('DispFld');
+				$this->status_id->ViewValue = $this->status_id->DisplayValue($arwrk);
+				$rswrk->Close();
+			} else {
+				$this->status_id->ViewValue = $this->status_id->CurrentValue;
+			}
+		} else {
+			$this->status_id->ViewValue = NULL;
+		}
 		$this->status_id->ViewCustomAttributes = "";
 
 		// cat_price
 		$this->cat_price->ViewValue = $this->cat_price->CurrentValue;
 		$this->cat_price->ViewCustomAttributes = "";
 
-		// ncat_id
-		$this->ncat_id->ViewValue = $this->ncat_id->CurrentValue;
-		$this->ncat_id->ViewCustomAttributes = "";
-
-		// lang_id
-		$this->lang_id->ViewValue = $this->lang_id->CurrentValue;
-		$this->lang_id->ViewCustomAttributes = "";
-
 		// cat_name
 		$this->cat_name->ViewValue = $this->cat_name->CurrentValue;
 		$this->cat_name->ViewCustomAttributes = "";
 
-			// cat_id
-			$this->cat_id->LinkCustomAttributes = "";
-			$this->cat_id->HrefValue = "";
-			$this->cat_id->TooltipValue = "";
+		// cat_desc
+		$this->cat_desc->ViewValue = $this->cat_desc->CurrentValue;
+		$this->cat_desc->ViewCustomAttributes = "";
 
 			// cat_order
 			$this->cat_order->LinkCustomAttributes = "";
 			$this->cat_order->HrefValue = "";
 			$this->cat_order->TooltipValue = "";
+
+			// lang_id
+			$this->lang_id->LinkCustomAttributes = "";
+			$this->lang_id->HrefValue = "";
+			$this->lang_id->TooltipValue = "";
 
 			// cat_iname
 			$this->cat_iname->LinkCustomAttributes = "";
@@ -1666,20 +1683,15 @@ class capp_vcons_cat_list extends capp_vcons_cat {
 			$this->cat_price->HrefValue = "";
 			$this->cat_price->TooltipValue = "";
 
-			// ncat_id
-			$this->ncat_id->LinkCustomAttributes = "";
-			$this->ncat_id->HrefValue = "";
-			$this->ncat_id->TooltipValue = "";
-
-			// lang_id
-			$this->lang_id->LinkCustomAttributes = "";
-			$this->lang_id->HrefValue = "";
-			$this->lang_id->TooltipValue = "";
-
 			// cat_name
 			$this->cat_name->LinkCustomAttributes = "";
 			$this->cat_name->HrefValue = "";
 			$this->cat_name->TooltipValue = "";
+
+			// cat_desc
+			$this->cat_desc->LinkCustomAttributes = "";
+			$this->cat_desc->HrefValue = "";
+			$this->cat_desc->TooltipValue = "";
 		}
 
 		// Call Row Rendered event
@@ -2023,8 +2035,12 @@ fapp_vcons_catlist.Form_CustomValidate =
 fapp_vcons_catlist.ValidateRequired = <?php echo json_encode(EW_CLIENT_VALIDATE) ?>;
 
 // Dynamic selection lists
-// Form object for search
+fapp_vcons_catlist.Lists["x_lang_id"] = {"LinkField":"x_lang_id","Ajax":true,"AutoFill":false,"DisplayFields":["x_lang_name","","",""],"ParentFields":[],"ChildFields":[],"FilterFields":[],"Options":[],"Template":"","LinkTable":"phs_language"};
+fapp_vcons_catlist.Lists["x_lang_id"].Data = "<?php echo $app_vcons_cat_list->lang_id->LookupFilterQuery(FALSE, "list") ?>";
+fapp_vcons_catlist.Lists["x_status_id"] = {"LinkField":"x_status_id","Ajax":true,"AutoFill":false,"DisplayFields":["x_status_name","","",""],"ParentFields":[],"ChildFields":[],"FilterFields":[],"Options":[],"Template":"","LinkTable":"phs_status"};
+fapp_vcons_catlist.Lists["x_status_id"].Data = "<?php echo $app_vcons_cat_list->status_id->LookupFilterQuery(FALSE, "list") ?>";
 
+// Form object for search
 var CurrentSearchForm = fapp_vcons_catlistsrch = new ew_Form("fapp_vcons_catlistsrch");
 </script>
 <script type="text/javascript">
@@ -2190,21 +2206,21 @@ $app_vcons_cat_list->RenderListOptions();
 // Render list options (header, left)
 $app_vcons_cat_list->ListOptions->Render("header", "left");
 ?>
-<?php if ($app_vcons_cat->cat_id->Visible) { // cat_id ?>
-	<?php if ($app_vcons_cat->SortUrl($app_vcons_cat->cat_id) == "") { ?>
-		<th data-name="cat_id" class="<?php echo $app_vcons_cat->cat_id->HeaderCellClass() ?>"><div id="elh_app_vcons_cat_cat_id" class="app_vcons_cat_cat_id"><div class="ewTableHeaderCaption"><?php echo $app_vcons_cat->cat_id->FldCaption() ?></div></div></th>
-	<?php } else { ?>
-		<th data-name="cat_id" class="<?php echo $app_vcons_cat->cat_id->HeaderCellClass() ?>"><div class="ewPointer" onclick="ew_Sort(event,'<?php echo $app_vcons_cat->SortUrl($app_vcons_cat->cat_id) ?>',1);"><div id="elh_app_vcons_cat_cat_id" class="app_vcons_cat_cat_id">
-			<div class="ewTableHeaderBtn"><span class="ewTableHeaderCaption"><?php echo $app_vcons_cat->cat_id->FldCaption() ?></span><span class="ewTableHeaderSort"><?php if ($app_vcons_cat->cat_id->getSort() == "ASC") { ?><span class="caret ewSortUp"></span><?php } elseif ($app_vcons_cat->cat_id->getSort() == "DESC") { ?><span class="caret"></span><?php } ?></span></div>
-		</div></div></th>
-	<?php } ?>
-<?php } ?>
 <?php if ($app_vcons_cat->cat_order->Visible) { // cat_order ?>
 	<?php if ($app_vcons_cat->SortUrl($app_vcons_cat->cat_order) == "") { ?>
 		<th data-name="cat_order" class="<?php echo $app_vcons_cat->cat_order->HeaderCellClass() ?>"><div id="elh_app_vcons_cat_cat_order" class="app_vcons_cat_cat_order"><div class="ewTableHeaderCaption"><?php echo $app_vcons_cat->cat_order->FldCaption() ?></div></div></th>
 	<?php } else { ?>
 		<th data-name="cat_order" class="<?php echo $app_vcons_cat->cat_order->HeaderCellClass() ?>"><div class="ewPointer" onclick="ew_Sort(event,'<?php echo $app_vcons_cat->SortUrl($app_vcons_cat->cat_order) ?>',1);"><div id="elh_app_vcons_cat_cat_order" class="app_vcons_cat_cat_order">
 			<div class="ewTableHeaderBtn"><span class="ewTableHeaderCaption"><?php echo $app_vcons_cat->cat_order->FldCaption() ?></span><span class="ewTableHeaderSort"><?php if ($app_vcons_cat->cat_order->getSort() == "ASC") { ?><span class="caret ewSortUp"></span><?php } elseif ($app_vcons_cat->cat_order->getSort() == "DESC") { ?><span class="caret"></span><?php } ?></span></div>
+		</div></div></th>
+	<?php } ?>
+<?php } ?>
+<?php if ($app_vcons_cat->lang_id->Visible) { // lang_id ?>
+	<?php if ($app_vcons_cat->SortUrl($app_vcons_cat->lang_id) == "") { ?>
+		<th data-name="lang_id" class="<?php echo $app_vcons_cat->lang_id->HeaderCellClass() ?>"><div id="elh_app_vcons_cat_lang_id" class="app_vcons_cat_lang_id"><div class="ewTableHeaderCaption"><?php echo $app_vcons_cat->lang_id->FldCaption() ?></div></div></th>
+	<?php } else { ?>
+		<th data-name="lang_id" class="<?php echo $app_vcons_cat->lang_id->HeaderCellClass() ?>"><div class="ewPointer" onclick="ew_Sort(event,'<?php echo $app_vcons_cat->SortUrl($app_vcons_cat->lang_id) ?>',1);"><div id="elh_app_vcons_cat_lang_id" class="app_vcons_cat_lang_id">
+			<div class="ewTableHeaderBtn"><span class="ewTableHeaderCaption"><?php echo $app_vcons_cat->lang_id->FldCaption() ?></span><span class="ewTableHeaderSort"><?php if ($app_vcons_cat->lang_id->getSort() == "ASC") { ?><span class="caret ewSortUp"></span><?php } elseif ($app_vcons_cat->lang_id->getSort() == "DESC") { ?><span class="caret"></span><?php } ?></span></div>
 		</div></div></th>
 	<?php } ?>
 <?php } ?>
@@ -2235,30 +2251,21 @@ $app_vcons_cat_list->ListOptions->Render("header", "left");
 		</div></div></th>
 	<?php } ?>
 <?php } ?>
-<?php if ($app_vcons_cat->ncat_id->Visible) { // ncat_id ?>
-	<?php if ($app_vcons_cat->SortUrl($app_vcons_cat->ncat_id) == "") { ?>
-		<th data-name="ncat_id" class="<?php echo $app_vcons_cat->ncat_id->HeaderCellClass() ?>"><div id="elh_app_vcons_cat_ncat_id" class="app_vcons_cat_ncat_id"><div class="ewTableHeaderCaption"><?php echo $app_vcons_cat->ncat_id->FldCaption() ?></div></div></th>
-	<?php } else { ?>
-		<th data-name="ncat_id" class="<?php echo $app_vcons_cat->ncat_id->HeaderCellClass() ?>"><div class="ewPointer" onclick="ew_Sort(event,'<?php echo $app_vcons_cat->SortUrl($app_vcons_cat->ncat_id) ?>',1);"><div id="elh_app_vcons_cat_ncat_id" class="app_vcons_cat_ncat_id">
-			<div class="ewTableHeaderBtn"><span class="ewTableHeaderCaption"><?php echo $app_vcons_cat->ncat_id->FldCaption() ?></span><span class="ewTableHeaderSort"><?php if ($app_vcons_cat->ncat_id->getSort() == "ASC") { ?><span class="caret ewSortUp"></span><?php } elseif ($app_vcons_cat->ncat_id->getSort() == "DESC") { ?><span class="caret"></span><?php } ?></span></div>
-		</div></div></th>
-	<?php } ?>
-<?php } ?>
-<?php if ($app_vcons_cat->lang_id->Visible) { // lang_id ?>
-	<?php if ($app_vcons_cat->SortUrl($app_vcons_cat->lang_id) == "") { ?>
-		<th data-name="lang_id" class="<?php echo $app_vcons_cat->lang_id->HeaderCellClass() ?>"><div id="elh_app_vcons_cat_lang_id" class="app_vcons_cat_lang_id"><div class="ewTableHeaderCaption"><?php echo $app_vcons_cat->lang_id->FldCaption() ?></div></div></th>
-	<?php } else { ?>
-		<th data-name="lang_id" class="<?php echo $app_vcons_cat->lang_id->HeaderCellClass() ?>"><div class="ewPointer" onclick="ew_Sort(event,'<?php echo $app_vcons_cat->SortUrl($app_vcons_cat->lang_id) ?>',1);"><div id="elh_app_vcons_cat_lang_id" class="app_vcons_cat_lang_id">
-			<div class="ewTableHeaderBtn"><span class="ewTableHeaderCaption"><?php echo $app_vcons_cat->lang_id->FldCaption() ?></span><span class="ewTableHeaderSort"><?php if ($app_vcons_cat->lang_id->getSort() == "ASC") { ?><span class="caret ewSortUp"></span><?php } elseif ($app_vcons_cat->lang_id->getSort() == "DESC") { ?><span class="caret"></span><?php } ?></span></div>
-		</div></div></th>
-	<?php } ?>
-<?php } ?>
 <?php if ($app_vcons_cat->cat_name->Visible) { // cat_name ?>
 	<?php if ($app_vcons_cat->SortUrl($app_vcons_cat->cat_name) == "") { ?>
 		<th data-name="cat_name" class="<?php echo $app_vcons_cat->cat_name->HeaderCellClass() ?>"><div id="elh_app_vcons_cat_cat_name" class="app_vcons_cat_cat_name"><div class="ewTableHeaderCaption"><?php echo $app_vcons_cat->cat_name->FldCaption() ?></div></div></th>
 	<?php } else { ?>
 		<th data-name="cat_name" class="<?php echo $app_vcons_cat->cat_name->HeaderCellClass() ?>"><div class="ewPointer" onclick="ew_Sort(event,'<?php echo $app_vcons_cat->SortUrl($app_vcons_cat->cat_name) ?>',1);"><div id="elh_app_vcons_cat_cat_name" class="app_vcons_cat_cat_name">
 			<div class="ewTableHeaderBtn"><span class="ewTableHeaderCaption"><?php echo $app_vcons_cat->cat_name->FldCaption() ?><?php echo $Language->Phrase("SrchLegend") ?></span><span class="ewTableHeaderSort"><?php if ($app_vcons_cat->cat_name->getSort() == "ASC") { ?><span class="caret ewSortUp"></span><?php } elseif ($app_vcons_cat->cat_name->getSort() == "DESC") { ?><span class="caret"></span><?php } ?></span></div>
+		</div></div></th>
+	<?php } ?>
+<?php } ?>
+<?php if ($app_vcons_cat->cat_desc->Visible) { // cat_desc ?>
+	<?php if ($app_vcons_cat->SortUrl($app_vcons_cat->cat_desc) == "") { ?>
+		<th data-name="cat_desc" class="<?php echo $app_vcons_cat->cat_desc->HeaderCellClass() ?>"><div id="elh_app_vcons_cat_cat_desc" class="app_vcons_cat_cat_desc"><div class="ewTableHeaderCaption"><?php echo $app_vcons_cat->cat_desc->FldCaption() ?></div></div></th>
+	<?php } else { ?>
+		<th data-name="cat_desc" class="<?php echo $app_vcons_cat->cat_desc->HeaderCellClass() ?>"><div class="ewPointer" onclick="ew_Sort(event,'<?php echo $app_vcons_cat->SortUrl($app_vcons_cat->cat_desc) ?>',1);"><div id="elh_app_vcons_cat_cat_desc" class="app_vcons_cat_cat_desc">
+			<div class="ewTableHeaderBtn"><span class="ewTableHeaderCaption"><?php echo $app_vcons_cat->cat_desc->FldCaption() ?><?php echo $Language->Phrase("SrchLegend") ?></span><span class="ewTableHeaderSort"><?php if ($app_vcons_cat->cat_desc->getSort() == "ASC") { ?><span class="caret ewSortUp"></span><?php } elseif ($app_vcons_cat->cat_desc->getSort() == "DESC") { ?><span class="caret"></span><?php } ?></span></div>
 		</div></div></th>
 	<?php } ?>
 <?php } ?>
@@ -2327,19 +2334,19 @@ while ($app_vcons_cat_list->RecCnt < $app_vcons_cat_list->StopRec) {
 // Render list options (body, left)
 $app_vcons_cat_list->ListOptions->Render("body", "left", $app_vcons_cat_list->RowCnt);
 ?>
-	<?php if ($app_vcons_cat->cat_id->Visible) { // cat_id ?>
-		<td data-name="cat_id"<?php echo $app_vcons_cat->cat_id->CellAttributes() ?>>
-<span id="el<?php echo $app_vcons_cat_list->RowCnt ?>_app_vcons_cat_cat_id" class="app_vcons_cat_cat_id">
-<span<?php echo $app_vcons_cat->cat_id->ViewAttributes() ?>>
-<?php echo $app_vcons_cat->cat_id->ListViewValue() ?></span>
-</span>
-</td>
-	<?php } ?>
 	<?php if ($app_vcons_cat->cat_order->Visible) { // cat_order ?>
 		<td data-name="cat_order"<?php echo $app_vcons_cat->cat_order->CellAttributes() ?>>
 <span id="el<?php echo $app_vcons_cat_list->RowCnt ?>_app_vcons_cat_cat_order" class="app_vcons_cat_cat_order">
 <span<?php echo $app_vcons_cat->cat_order->ViewAttributes() ?>>
 <?php echo $app_vcons_cat->cat_order->ListViewValue() ?></span>
+</span>
+</td>
+	<?php } ?>
+	<?php if ($app_vcons_cat->lang_id->Visible) { // lang_id ?>
+		<td data-name="lang_id"<?php echo $app_vcons_cat->lang_id->CellAttributes() ?>>
+<span id="el<?php echo $app_vcons_cat_list->RowCnt ?>_app_vcons_cat_lang_id" class="app_vcons_cat_lang_id">
+<span<?php echo $app_vcons_cat->lang_id->ViewAttributes() ?>>
+<?php echo $app_vcons_cat->lang_id->ListViewValue() ?></span>
 </span>
 </td>
 	<?php } ?>
@@ -2367,27 +2374,19 @@ $app_vcons_cat_list->ListOptions->Render("body", "left", $app_vcons_cat_list->Ro
 </span>
 </td>
 	<?php } ?>
-	<?php if ($app_vcons_cat->ncat_id->Visible) { // ncat_id ?>
-		<td data-name="ncat_id"<?php echo $app_vcons_cat->ncat_id->CellAttributes() ?>>
-<span id="el<?php echo $app_vcons_cat_list->RowCnt ?>_app_vcons_cat_ncat_id" class="app_vcons_cat_ncat_id">
-<span<?php echo $app_vcons_cat->ncat_id->ViewAttributes() ?>>
-<?php echo $app_vcons_cat->ncat_id->ListViewValue() ?></span>
-</span>
-</td>
-	<?php } ?>
-	<?php if ($app_vcons_cat->lang_id->Visible) { // lang_id ?>
-		<td data-name="lang_id"<?php echo $app_vcons_cat->lang_id->CellAttributes() ?>>
-<span id="el<?php echo $app_vcons_cat_list->RowCnt ?>_app_vcons_cat_lang_id" class="app_vcons_cat_lang_id">
-<span<?php echo $app_vcons_cat->lang_id->ViewAttributes() ?>>
-<?php echo $app_vcons_cat->lang_id->ListViewValue() ?></span>
-</span>
-</td>
-	<?php } ?>
 	<?php if ($app_vcons_cat->cat_name->Visible) { // cat_name ?>
 		<td data-name="cat_name"<?php echo $app_vcons_cat->cat_name->CellAttributes() ?>>
 <span id="el<?php echo $app_vcons_cat_list->RowCnt ?>_app_vcons_cat_cat_name" class="app_vcons_cat_cat_name">
 <span<?php echo $app_vcons_cat->cat_name->ViewAttributes() ?>>
 <?php echo $app_vcons_cat->cat_name->ListViewValue() ?></span>
+</span>
+</td>
+	<?php } ?>
+	<?php if ($app_vcons_cat->cat_desc->Visible) { // cat_desc ?>
+		<td data-name="cat_desc"<?php echo $app_vcons_cat->cat_desc->CellAttributes() ?>>
+<span id="el<?php echo $app_vcons_cat_list->RowCnt ?>_app_vcons_cat_cat_desc" class="app_vcons_cat_cat_desc">
+<span<?php echo $app_vcons_cat->cat_desc->ViewAttributes() ?>>
+<?php echo $app_vcons_cat->cat_desc->ListViewValue() ?></span>
 </span>
 </td>
 	<?php } ?>

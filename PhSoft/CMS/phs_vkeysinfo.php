@@ -8,17 +8,17 @@ $phs_vkeys = NULL;
 //
 class cphs_vkeys extends cTable {
 	var $key_id;
+	var $lang_id;
+	var $kval_id;
 	var $key_name;
 	var $key_defvalue;
-	var $lang_id;
 	var $lang_name;
-	var $lang_dir;
-	var $status_id;
-	var $lang_code;
-	var $kval_id;
 	var $key_value;
 	var $key_rvalue;
 	var $key_text;
+	var $lang_dir;
+	var $status_id;
+	var $lang_code;
 
 	//
 	// Table class constructor
@@ -58,6 +58,18 @@ class cphs_vkeys extends cTable {
 		$this->key_id->FldDefaultErrMsg = $Language->Phrase("IncorrectInteger");
 		$this->fields['key_id'] = &$this->key_id;
 
+		// lang_id
+		$this->lang_id = new cField('phs_vkeys', 'phs_vkeys', 'x_lang_id', 'lang_id', '`lang_id`', '`lang_id`', 3, -1, FALSE, '`lang_id`', FALSE, FALSE, FALSE, 'FORMATTED TEXT', 'NO');
+		$this->lang_id->Sortable = FALSE; // Allow sort
+		$this->lang_id->FldDefaultErrMsg = $Language->Phrase("IncorrectInteger");
+		$this->fields['lang_id'] = &$this->lang_id;
+
+		// kval_id
+		$this->kval_id = new cField('phs_vkeys', 'phs_vkeys', 'x_kval_id', 'kval_id', '`kval_id`', '`kval_id`', 3, -1, FALSE, '`kval_id`', FALSE, FALSE, FALSE, 'FORMATTED TEXT', 'NO');
+		$this->kval_id->Sortable = FALSE; // Allow sort
+		$this->kval_id->FldDefaultErrMsg = $Language->Phrase("IncorrectInteger");
+		$this->fields['kval_id'] = &$this->kval_id;
+
 		// key_name
 		$this->key_name = new cField('phs_vkeys', 'phs_vkeys', 'x_key_name', 'key_name', '`key_name`', '`key_name`', 200, -1, FALSE, '`key_name`', FALSE, FALSE, FALSE, 'FORMATTED TEXT', 'TEXT');
 		$this->key_name->Sortable = TRUE; // Allow sort
@@ -68,16 +80,25 @@ class cphs_vkeys extends cTable {
 		$this->key_defvalue->Sortable = TRUE; // Allow sort
 		$this->fields['key_defvalue'] = &$this->key_defvalue;
 
-		// lang_id
-		$this->lang_id = new cField('phs_vkeys', 'phs_vkeys', 'x_lang_id', 'lang_id', '`lang_id`', '`lang_id`', 3, -1, FALSE, '`lang_id`', FALSE, FALSE, FALSE, 'FORMATTED TEXT', 'NO');
-		$this->lang_id->Sortable = FALSE; // Allow sort
-		$this->lang_id->FldDefaultErrMsg = $Language->Phrase("IncorrectInteger");
-		$this->fields['lang_id'] = &$this->lang_id;
-
 		// lang_name
 		$this->lang_name = new cField('phs_vkeys', 'phs_vkeys', 'x_lang_name', 'lang_name', '`lang_name`', '`lang_name`', 200, -1, FALSE, '`lang_name`', FALSE, FALSE, FALSE, 'FORMATTED TEXT', 'TEXT');
 		$this->lang_name->Sortable = TRUE; // Allow sort
 		$this->fields['lang_name'] = &$this->lang_name;
+
+		// key_value
+		$this->key_value = new cField('phs_vkeys', 'phs_vkeys', 'x_key_value', 'key_value', '`key_value`', '`key_value`', 200, -1, FALSE, '`key_value`', FALSE, FALSE, FALSE, 'FORMATTED TEXT', 'TEXT');
+		$this->key_value->Sortable = TRUE; // Allow sort
+		$this->fields['key_value'] = &$this->key_value;
+
+		// key_rvalue
+		$this->key_rvalue = new cField('phs_vkeys', 'phs_vkeys', 'x_key_rvalue', 'key_rvalue', '`key_rvalue`', '`key_rvalue`', 200, -1, FALSE, '`key_rvalue`', FALSE, FALSE, FALSE, 'FORMATTED TEXT', 'TEXT');
+		$this->key_rvalue->Sortable = TRUE; // Allow sort
+		$this->fields['key_rvalue'] = &$this->key_rvalue;
+
+		// key_text
+		$this->key_text = new cField('phs_vkeys', 'phs_vkeys', 'x_key_text', 'key_text', '`key_text`', '`key_text`', 201, -1, FALSE, '`key_text`', FALSE, FALSE, FALSE, 'FORMATTED TEXT', 'TEXTAREA');
+		$this->key_text->Sortable = TRUE; // Allow sort
+		$this->fields['key_text'] = &$this->key_text;
 
 		// lang_dir
 		$this->lang_dir = new cField('phs_vkeys', 'phs_vkeys', 'x_lang_dir', 'lang_dir', '`lang_dir`', '`lang_dir`', 200, -1, FALSE, '`lang_dir`', FALSE, FALSE, FALSE, 'FORMATTED TEXT', 'TEXT');
@@ -94,27 +115,6 @@ class cphs_vkeys extends cTable {
 		$this->lang_code = new cField('phs_vkeys', 'phs_vkeys', 'x_lang_code', 'lang_code', '`lang_code`', '`lang_code`', 200, -1, FALSE, '`lang_code`', FALSE, FALSE, FALSE, 'FORMATTED TEXT', 'TEXT');
 		$this->lang_code->Sortable = FALSE; // Allow sort
 		$this->fields['lang_code'] = &$this->lang_code;
-
-		// kval_id
-		$this->kval_id = new cField('phs_vkeys', 'phs_vkeys', 'x_kval_id', 'kval_id', '`kval_id`', '`kval_id`', 3, -1, FALSE, '`kval_id`', FALSE, FALSE, FALSE, 'FORMATTED TEXT', 'NO');
-		$this->kval_id->Sortable = FALSE; // Allow sort
-		$this->kval_id->FldDefaultErrMsg = $Language->Phrase("IncorrectInteger");
-		$this->fields['kval_id'] = &$this->kval_id;
-
-		// key_value
-		$this->key_value = new cField('phs_vkeys', 'phs_vkeys', 'x_key_value', 'key_value', '`key_value`', '`key_value`', 200, -1, FALSE, '`key_value`', FALSE, FALSE, FALSE, 'FORMATTED TEXT', 'TEXT');
-		$this->key_value->Sortable = TRUE; // Allow sort
-		$this->fields['key_value'] = &$this->key_value;
-
-		// key_rvalue
-		$this->key_rvalue = new cField('phs_vkeys', 'phs_vkeys', 'x_key_rvalue', 'key_rvalue', '`key_rvalue`', '`key_rvalue`', 200, -1, FALSE, '`key_rvalue`', FALSE, FALSE, FALSE, 'FORMATTED TEXT', 'TEXT');
-		$this->key_rvalue->Sortable = TRUE; // Allow sort
-		$this->fields['key_rvalue'] = &$this->key_rvalue;
-
-		// key_text
-		$this->key_text = new cField('phs_vkeys', 'phs_vkeys', 'x_key_text', 'key_text', '`key_text`', '`key_text`', 201, -1, FALSE, '`key_text`', FALSE, FALSE, FALSE, 'FORMATTED TEXT', 'TEXTAREA');
-		$this->key_text->Sortable = TRUE; // Allow sort
-		$this->fields['key_text'] = &$this->key_text;
 	}
 
 	// Field Visibility
@@ -226,7 +226,7 @@ class cphs_vkeys extends cTable {
 	var $_SqlOrderBy = "";
 
 	function getSqlOrderBy() { // Order By
-		return ($this->_SqlOrderBy <> "") ? $this->_SqlOrderBy : "";
+		return ($this->_SqlOrderBy <> "") ? $this->_SqlOrderBy : "`key_name` ASC,`lang_id` ASC";
 	}
 
 	function SqlOrderBy() { // For backward compatibility
@@ -704,17 +704,17 @@ class cphs_vkeys extends cTable {
 	// Load row values from recordset
 	function LoadListRowValues(&$rs) {
 		$this->key_id->setDbValue($rs->fields('key_id'));
+		$this->lang_id->setDbValue($rs->fields('lang_id'));
+		$this->kval_id->setDbValue($rs->fields('kval_id'));
 		$this->key_name->setDbValue($rs->fields('key_name'));
 		$this->key_defvalue->setDbValue($rs->fields('key_defvalue'));
-		$this->lang_id->setDbValue($rs->fields('lang_id'));
 		$this->lang_name->setDbValue($rs->fields('lang_name'));
-		$this->lang_dir->setDbValue($rs->fields('lang_dir'));
-		$this->status_id->setDbValue($rs->fields('status_id'));
-		$this->lang_code->setDbValue($rs->fields('lang_code'));
-		$this->kval_id->setDbValue($rs->fields('kval_id'));
 		$this->key_value->setDbValue($rs->fields('key_value'));
 		$this->key_rvalue->setDbValue($rs->fields('key_rvalue'));
 		$this->key_text->setDbValue($rs->fields('key_text'));
+		$this->lang_dir->setDbValue($rs->fields('lang_dir'));
+		$this->status_id->setDbValue($rs->fields('status_id'));
+		$this->lang_code->setDbValue($rs->fields('lang_code'));
 	}
 
 	// Render list row values
@@ -729,13 +729,18 @@ class cphs_vkeys extends cTable {
 
 		$this->key_id->CellCssStyle = "white-space: nowrap;";
 
-		// key_name
-		// key_defvalue
 		// lang_id
-
 		$this->lang_id->CellCssStyle = "white-space: nowrap;";
 
+		// kval_id
+		$this->kval_id->CellCssStyle = "white-space: nowrap;";
+
+		// key_name
+		// key_defvalue
 		// lang_name
+		// key_value
+		// key_rvalue
+		// key_text
 		// lang_dir
 
 		$this->lang_dir->CellCssStyle = "white-space: nowrap;";
@@ -746,16 +751,17 @@ class cphs_vkeys extends cTable {
 		// lang_code
 		$this->lang_code->CellCssStyle = "white-space: nowrap;";
 
-		// kval_id
-		$this->kval_id->CellCssStyle = "white-space: nowrap;";
-
-		// key_value
-		// key_rvalue
-		// key_text
 		// key_id
-
 		$this->key_id->ViewValue = $this->key_id->CurrentValue;
 		$this->key_id->ViewCustomAttributes = "";
+
+		// lang_id
+		$this->lang_id->ViewValue = $this->lang_id->CurrentValue;
+		$this->lang_id->ViewCustomAttributes = "";
+
+		// kval_id
+		$this->kval_id->ViewValue = $this->kval_id->CurrentValue;
+		$this->kval_id->ViewCustomAttributes = "";
 
 		// key_name
 		$this->key_name->ViewValue = $this->key_name->CurrentValue;
@@ -765,29 +771,9 @@ class cphs_vkeys extends cTable {
 		$this->key_defvalue->ViewValue = $this->key_defvalue->CurrentValue;
 		$this->key_defvalue->ViewCustomAttributes = "";
 
-		// lang_id
-		$this->lang_id->ViewValue = $this->lang_id->CurrentValue;
-		$this->lang_id->ViewCustomAttributes = "";
-
 		// lang_name
 		$this->lang_name->ViewValue = $this->lang_name->CurrentValue;
 		$this->lang_name->ViewCustomAttributes = "";
-
-		// lang_dir
-		$this->lang_dir->ViewValue = $this->lang_dir->CurrentValue;
-		$this->lang_dir->ViewCustomAttributes = "";
-
-		// status_id
-		$this->status_id->ViewValue = $this->status_id->CurrentValue;
-		$this->status_id->ViewCustomAttributes = "";
-
-		// lang_code
-		$this->lang_code->ViewValue = $this->lang_code->CurrentValue;
-		$this->lang_code->ViewCustomAttributes = "";
-
-		// kval_id
-		$this->kval_id->ViewValue = $this->kval_id->CurrentValue;
-		$this->kval_id->ViewCustomAttributes = "";
 
 		// key_value
 		$this->key_value->ViewValue = $this->key_value->CurrentValue;
@@ -801,10 +787,32 @@ class cphs_vkeys extends cTable {
 		$this->key_text->ViewValue = $this->key_text->CurrentValue;
 		$this->key_text->ViewCustomAttributes = "";
 
+		// lang_dir
+		$this->lang_dir->ViewValue = $this->lang_dir->CurrentValue;
+		$this->lang_dir->ViewCustomAttributes = "";
+
+		// status_id
+		$this->status_id->ViewValue = $this->status_id->CurrentValue;
+		$this->status_id->ViewCustomAttributes = "";
+
+		// lang_code
+		$this->lang_code->ViewValue = $this->lang_code->CurrentValue;
+		$this->lang_code->ViewCustomAttributes = "";
+
 		// key_id
 		$this->key_id->LinkCustomAttributes = "";
 		$this->key_id->HrefValue = "";
 		$this->key_id->TooltipValue = "";
+
+		// lang_id
+		$this->lang_id->LinkCustomAttributes = "";
+		$this->lang_id->HrefValue = "";
+		$this->lang_id->TooltipValue = "";
+
+		// kval_id
+		$this->kval_id->LinkCustomAttributes = "";
+		$this->kval_id->HrefValue = "";
+		$this->kval_id->TooltipValue = "";
 
 		// key_name
 		$this->key_name->LinkCustomAttributes = "";
@@ -816,35 +824,10 @@ class cphs_vkeys extends cTable {
 		$this->key_defvalue->HrefValue = "";
 		$this->key_defvalue->TooltipValue = "";
 
-		// lang_id
-		$this->lang_id->LinkCustomAttributes = "";
-		$this->lang_id->HrefValue = "";
-		$this->lang_id->TooltipValue = "";
-
 		// lang_name
 		$this->lang_name->LinkCustomAttributes = "";
 		$this->lang_name->HrefValue = "";
 		$this->lang_name->TooltipValue = "";
-
-		// lang_dir
-		$this->lang_dir->LinkCustomAttributes = "";
-		$this->lang_dir->HrefValue = "";
-		$this->lang_dir->TooltipValue = "";
-
-		// status_id
-		$this->status_id->LinkCustomAttributes = "";
-		$this->status_id->HrefValue = "";
-		$this->status_id->TooltipValue = "";
-
-		// lang_code
-		$this->lang_code->LinkCustomAttributes = "";
-		$this->lang_code->HrefValue = "";
-		$this->lang_code->TooltipValue = "";
-
-		// kval_id
-		$this->kval_id->LinkCustomAttributes = "";
-		$this->kval_id->HrefValue = "";
-		$this->kval_id->TooltipValue = "";
 
 		// key_value
 		$this->key_value->LinkCustomAttributes = "";
@@ -860,6 +843,21 @@ class cphs_vkeys extends cTable {
 		$this->key_text->LinkCustomAttributes = "";
 		$this->key_text->HrefValue = "";
 		$this->key_text->TooltipValue = "";
+
+		// lang_dir
+		$this->lang_dir->LinkCustomAttributes = "";
+		$this->lang_dir->HrefValue = "";
+		$this->lang_dir->TooltipValue = "";
+
+		// status_id
+		$this->status_id->LinkCustomAttributes = "";
+		$this->status_id->HrefValue = "";
+		$this->status_id->TooltipValue = "";
+
+		// lang_code
+		$this->lang_code->LinkCustomAttributes = "";
+		$this->lang_code->HrefValue = "";
+		$this->lang_code->TooltipValue = "";
 
 		// Call Row Rendered event
 		$this->Row_Rendered();
@@ -881,6 +879,18 @@ class cphs_vkeys extends cTable {
 		$this->key_id->EditValue = $this->key_id->CurrentValue;
 		$this->key_id->ViewCustomAttributes = "";
 
+		// lang_id
+		$this->lang_id->EditAttrs["class"] = "form-control";
+		$this->lang_id->EditCustomAttributes = "";
+		$this->lang_id->EditValue = $this->lang_id->CurrentValue;
+		$this->lang_id->ViewCustomAttributes = "";
+
+		// kval_id
+		$this->kval_id->EditAttrs["class"] = "form-control";
+		$this->kval_id->EditCustomAttributes = "";
+		$this->kval_id->EditValue = $this->kval_id->CurrentValue;
+		$this->kval_id->ViewCustomAttributes = "";
+
 		// key_name
 		$this->key_name->EditAttrs["class"] = "form-control";
 		$this->key_name->EditCustomAttributes = "";
@@ -893,41 +903,11 @@ class cphs_vkeys extends cTable {
 		$this->key_defvalue->EditValue = $this->key_defvalue->CurrentValue;
 		$this->key_defvalue->PlaceHolder = ew_RemoveHtml($this->key_defvalue->FldCaption());
 
-		// lang_id
-		$this->lang_id->EditAttrs["class"] = "form-control";
-		$this->lang_id->EditCustomAttributes = "";
-		$this->lang_id->EditValue = $this->lang_id->CurrentValue;
-		$this->lang_id->ViewCustomAttributes = "";
-
 		// lang_name
 		$this->lang_name->EditAttrs["class"] = "form-control";
 		$this->lang_name->EditCustomAttributes = "";
 		$this->lang_name->EditValue = $this->lang_name->CurrentValue;
 		$this->lang_name->PlaceHolder = ew_RemoveHtml($this->lang_name->FldCaption());
-
-		// lang_dir
-		$this->lang_dir->EditAttrs["class"] = "form-control";
-		$this->lang_dir->EditCustomAttributes = "";
-		$this->lang_dir->EditValue = $this->lang_dir->CurrentValue;
-		$this->lang_dir->PlaceHolder = ew_RemoveHtml($this->lang_dir->FldCaption());
-
-		// status_id
-		$this->status_id->EditAttrs["class"] = "form-control";
-		$this->status_id->EditCustomAttributes = "";
-		$this->status_id->EditValue = $this->status_id->CurrentValue;
-		$this->status_id->PlaceHolder = ew_RemoveHtml($this->status_id->FldCaption());
-
-		// lang_code
-		$this->lang_code->EditAttrs["class"] = "form-control";
-		$this->lang_code->EditCustomAttributes = "";
-		$this->lang_code->EditValue = $this->lang_code->CurrentValue;
-		$this->lang_code->PlaceHolder = ew_RemoveHtml($this->lang_code->FldCaption());
-
-		// kval_id
-		$this->kval_id->EditAttrs["class"] = "form-control";
-		$this->kval_id->EditCustomAttributes = "";
-		$this->kval_id->EditValue = $this->kval_id->CurrentValue;
-		$this->kval_id->ViewCustomAttributes = "";
 
 		// key_value
 		$this->key_value->EditAttrs["class"] = "form-control";
@@ -946,6 +926,24 @@ class cphs_vkeys extends cTable {
 		$this->key_text->EditCustomAttributes = "";
 		$this->key_text->EditValue = $this->key_text->CurrentValue;
 		$this->key_text->PlaceHolder = ew_RemoveHtml($this->key_text->FldCaption());
+
+		// lang_dir
+		$this->lang_dir->EditAttrs["class"] = "form-control";
+		$this->lang_dir->EditCustomAttributes = "";
+		$this->lang_dir->EditValue = $this->lang_dir->CurrentValue;
+		$this->lang_dir->PlaceHolder = ew_RemoveHtml($this->lang_dir->FldCaption());
+
+		// status_id
+		$this->status_id->EditAttrs["class"] = "form-control";
+		$this->status_id->EditCustomAttributes = "";
+		$this->status_id->EditValue = $this->status_id->CurrentValue;
+		$this->status_id->PlaceHolder = ew_RemoveHtml($this->status_id->FldCaption());
+
+		// lang_code
+		$this->lang_code->EditAttrs["class"] = "form-control";
+		$this->lang_code->EditCustomAttributes = "";
+		$this->lang_code->EditValue = $this->lang_code->CurrentValue;
+		$this->lang_code->PlaceHolder = ew_RemoveHtml($this->lang_code->FldCaption());
 
 		// Call Row Rendered event
 		$this->Row_Rendered();

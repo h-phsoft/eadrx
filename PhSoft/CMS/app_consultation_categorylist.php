@@ -1648,6 +1648,8 @@ class capp_consultation_category_list extends capp_consultation_category {
 			if ($this->getSqlOrderBy() <> "") {
 				$sOrderBy = $this->getSqlOrderBy();
 				$this->setSessionOrderBy($sOrderBy);
+				$this->cat_order->setSort("ASC");
+				$this->cat_name->setSort("ASC");
 			}
 		}
 	}

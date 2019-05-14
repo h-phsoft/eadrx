@@ -15,7 +15,7 @@ class cBook {
   var $Book_Title = "";
   var $Book_Desc = "";
   var $Book_Image = "";
-  var $Book_Price = "0";
+  var $Book_Price = 0;
   var $aPages = array();
 
   public static function getArray($vCond = "", $full = true) {

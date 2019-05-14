@@ -1062,6 +1062,7 @@ class cphs_vkeys_list extends cphs_vkeys {
 			if ($this->getSqlOrderBy() <> "") {
 				$sOrderBy = $this->getSqlOrderBy();
 				$this->setSessionOrderBy($sOrderBy);
+				$this->key_name->setSort("ASC");
 			}
 		}
 	}
@@ -1479,34 +1480,34 @@ class cphs_vkeys_list extends cphs_vkeys {
 		if (!$rs || $rs->EOF)
 			return;
 		$this->key_id->setDbValue($row['key_id']);
+		$this->lang_id->setDbValue($row['lang_id']);
+		$this->kval_id->setDbValue($row['kval_id']);
 		$this->key_name->setDbValue($row['key_name']);
 		$this->key_defvalue->setDbValue($row['key_defvalue']);
-		$this->lang_id->setDbValue($row['lang_id']);
 		$this->lang_name->setDbValue($row['lang_name']);
-		$this->lang_dir->setDbValue($row['lang_dir']);
-		$this->status_id->setDbValue($row['status_id']);
-		$this->lang_code->setDbValue($row['lang_code']);
-		$this->kval_id->setDbValue($row['kval_id']);
 		$this->key_value->setDbValue($row['key_value']);
 		$this->key_rvalue->setDbValue($row['key_rvalue']);
 		$this->key_text->setDbValue($row['key_text']);
+		$this->lang_dir->setDbValue($row['lang_dir']);
+		$this->status_id->setDbValue($row['status_id']);
+		$this->lang_code->setDbValue($row['lang_code']);
 	}
 
 	// Return a row with default values
 	function NewRow() {
 		$row = array();
 		$row['key_id'] = NULL;
+		$row['lang_id'] = NULL;
+		$row['kval_id'] = NULL;
 		$row['key_name'] = NULL;
 		$row['key_defvalue'] = NULL;
-		$row['lang_id'] = NULL;
 		$row['lang_name'] = NULL;
-		$row['lang_dir'] = NULL;
-		$row['status_id'] = NULL;
-		$row['lang_code'] = NULL;
-		$row['kval_id'] = NULL;
 		$row['key_value'] = NULL;
 		$row['key_rvalue'] = NULL;
 		$row['key_text'] = NULL;
+		$row['lang_dir'] = NULL;
+		$row['status_id'] = NULL;
+		$row['lang_code'] = NULL;
 		return $row;
 	}
 
@@ -1516,17 +1517,17 @@ class cphs_vkeys_list extends cphs_vkeys {
 			return;
 		$row = is_array($rs) ? $rs : $rs->fields;
 		$this->key_id->DbValue = $row['key_id'];
+		$this->lang_id->DbValue = $row['lang_id'];
+		$this->kval_id->DbValue = $row['kval_id'];
 		$this->key_name->DbValue = $row['key_name'];
 		$this->key_defvalue->DbValue = $row['key_defvalue'];
-		$this->lang_id->DbValue = $row['lang_id'];
 		$this->lang_name->DbValue = $row['lang_name'];
-		$this->lang_dir->DbValue = $row['lang_dir'];
-		$this->status_id->DbValue = $row['status_id'];
-		$this->lang_code->DbValue = $row['lang_code'];
-		$this->kval_id->DbValue = $row['kval_id'];
 		$this->key_value->DbValue = $row['key_value'];
 		$this->key_rvalue->DbValue = $row['key_rvalue'];
 		$this->key_text->DbValue = $row['key_text'];
+		$this->lang_dir->DbValue = $row['lang_dir'];
+		$this->status_id->DbValue = $row['status_id'];
+		$this->lang_code->DbValue = $row['lang_code'];
 	}
 
 	// Load old record
@@ -1579,13 +1580,18 @@ class cphs_vkeys_list extends cphs_vkeys {
 
 		$this->key_id->CellCssStyle = "white-space: nowrap;";
 
-		// key_name
-		// key_defvalue
 		// lang_id
-
 		$this->lang_id->CellCssStyle = "white-space: nowrap;";
 
+		// kval_id
+		$this->kval_id->CellCssStyle = "white-space: nowrap;";
+
+		// key_name
+		// key_defvalue
 		// lang_name
+		// key_value
+		// key_rvalue
+		// key_text
 		// lang_dir
 
 		$this->lang_dir->CellCssStyle = "white-space: nowrap;";
@@ -1595,14 +1601,6 @@ class cphs_vkeys_list extends cphs_vkeys {
 
 		// lang_code
 		$this->lang_code->CellCssStyle = "white-space: nowrap;";
-
-		// kval_id
-		$this->kval_id->CellCssStyle = "white-space: nowrap;";
-
-		// key_value
-		// key_rvalue
-		// key_text
-
 		if ($this->RowType == EW_ROWTYPE_VIEW) { // View row
 
 		// key_name

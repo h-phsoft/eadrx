@@ -1669,6 +1669,7 @@ class ccpy_news_list extends ccpy_news {
 			if ($this->getSqlOrderBy() <> "") {
 				$sOrderBy = $this->getSqlOrderBy();
 				$this->setSessionOrderBy($sOrderBy);
+				$this->news_date->setSort("DESC");
 			}
 		}
 	}

@@ -163,7 +163,7 @@ class cphs_slider_type extends cTable {
 	var $_SqlOrderBy = "";
 
 	function getSqlOrderBy() { // Order By
-		return ($this->_SqlOrderBy <> "") ? $this->_SqlOrderBy : "";
+		return ($this->_SqlOrderBy <> "") ? $this->_SqlOrderBy : "`stype_jd` ASC";
 	}
 
 	function SqlOrderBy() { // For backward compatibility

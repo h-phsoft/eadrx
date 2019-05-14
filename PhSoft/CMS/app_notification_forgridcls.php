@@ -912,6 +912,8 @@ class capp_notification_for_grid extends capp_notification_for {
 			if ($this->getSqlOrderBy() <> "") {
 				$sOrderBy = $this->getSqlOrderBy();
 				$this->setSessionOrderBy($sOrderBy);
+				$this->notif_id->setSort("ASC");
+				$this->user_id->setSort("ASC");
 			}
 		}
 	}

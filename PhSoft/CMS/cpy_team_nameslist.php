@@ -1697,6 +1697,8 @@ class ccpy_team_names_list extends ccpy_team_names {
 			if ($this->getSqlOrderBy() <> "") {
 				$sOrderBy = $this->getSqlOrderBy();
 				$this->setSessionOrderBy($sOrderBy);
+				$this->team_id->setSort("ASC");
+				$this->lang_id->setSort("ASC");
 			}
 		}
 	}

@@ -238,7 +238,7 @@ class capp_notification extends cTable {
 	var $_SqlOrderBy = "";
 
 	function getSqlOrderBy() { // Order By
-		return ($this->_SqlOrderBy <> "") ? $this->_SqlOrderBy : "";
+		return ($this->_SqlOrderBy <> "") ? $this->_SqlOrderBy : "`ins_datetime` ASC,`for_id` ASC,`lang_id` ASC";
 	}
 
 	function SqlOrderBy() { // For backward compatibility

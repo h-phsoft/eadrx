@@ -1698,6 +1698,9 @@ class capp_notification_list extends capp_notification {
 			if ($this->getSqlOrderBy() <> "") {
 				$sOrderBy = $this->getSqlOrderBy();
 				$this->setSessionOrderBy($sOrderBy);
+				$this->ins_datetime->setSort("ASC");
+				$this->for_id->setSort("ASC");
+				$this->lang_id->setSort("ASC");
 			}
 		}
 	}

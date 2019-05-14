@@ -8,12 +8,12 @@ $app_vcons_cat = NULL;
 //
 class capp_vcons_cat extends cTable {
 	var $cat_id;
+	var $ncat_id;
 	var $cat_order;
+	var $lang_id;
 	var $cat_iname;
 	var $status_id;
 	var $cat_price;
-	var $ncat_id;
-	var $lang_id;
 	var $cat_name;
 	var $cat_desc;
 
@@ -51,9 +51,15 @@ class capp_vcons_cat extends cTable {
 
 		// cat_id
 		$this->cat_id = new cField('app_vcons_cat', 'app_vcons_cat', 'x_cat_id', 'cat_id', '`cat_id`', '`cat_id`', 3, -1, FALSE, '`cat_id`', FALSE, FALSE, FALSE, 'FORMATTED TEXT', 'NO');
-		$this->cat_id->Sortable = TRUE; // Allow sort
+		$this->cat_id->Sortable = FALSE; // Allow sort
 		$this->cat_id->FldDefaultErrMsg = $Language->Phrase("IncorrectInteger");
 		$this->fields['cat_id'] = &$this->cat_id;
+
+		// ncat_id
+		$this->ncat_id = new cField('app_vcons_cat', 'app_vcons_cat', 'x_ncat_id', 'ncat_id', '`ncat_id`', '`ncat_id`', 3, -1, FALSE, '`ncat_id`', FALSE, FALSE, FALSE, 'FORMATTED TEXT', 'NO');
+		$this->ncat_id->Sortable = FALSE; // Allow sort
+		$this->ncat_id->FldDefaultErrMsg = $Language->Phrase("IncorrectInteger");
+		$this->fields['ncat_id'] = &$this->ncat_id;
 
 		// cat_order
 		$this->cat_order = new cField('app_vcons_cat', 'app_vcons_cat', 'x_cat_order', 'cat_order', '`cat_order`', '`cat_order`', 16, -1, FALSE, '`cat_order`', FALSE, FALSE, FALSE, 'FORMATTED TEXT', 'TEXT');
@@ -61,14 +67,24 @@ class capp_vcons_cat extends cTable {
 		$this->cat_order->FldDefaultErrMsg = $Language->Phrase("IncorrectInteger");
 		$this->fields['cat_order'] = &$this->cat_order;
 
+		// lang_id
+		$this->lang_id = new cField('app_vcons_cat', 'app_vcons_cat', 'x_lang_id', 'lang_id', '`lang_id`', '`lang_id`', 3, -1, FALSE, '`lang_id`', FALSE, FALSE, FALSE, 'FORMATTED TEXT', 'SELECT');
+		$this->lang_id->Sortable = TRUE; // Allow sort
+		$this->lang_id->UsePleaseSelect = TRUE; // Use PleaseSelect by default
+		$this->lang_id->PleaseSelectText = $Language->Phrase("PleaseSelect"); // PleaseSelect text
+		$this->lang_id->FldDefaultErrMsg = $Language->Phrase("IncorrectInteger");
+		$this->fields['lang_id'] = &$this->lang_id;
+
 		// cat_iname
 		$this->cat_iname = new cField('app_vcons_cat', 'app_vcons_cat', 'x_cat_iname', 'cat_iname', '`cat_iname`', '`cat_iname`', 200, -1, FALSE, '`cat_iname`', FALSE, FALSE, FALSE, 'FORMATTED TEXT', 'TEXT');
 		$this->cat_iname->Sortable = TRUE; // Allow sort
 		$this->fields['cat_iname'] = &$this->cat_iname;
 
 		// status_id
-		$this->status_id = new cField('app_vcons_cat', 'app_vcons_cat', 'x_status_id', 'status_id', '`status_id`', '`status_id`', 16, -1, FALSE, '`status_id`', FALSE, FALSE, FALSE, 'FORMATTED TEXT', 'TEXT');
+		$this->status_id = new cField('app_vcons_cat', 'app_vcons_cat', 'x_status_id', 'status_id', '`status_id`', '`status_id`', 16, -1, FALSE, '`status_id`', FALSE, FALSE, FALSE, 'FORMATTED TEXT', 'SELECT');
 		$this->status_id->Sortable = TRUE; // Allow sort
+		$this->status_id->UsePleaseSelect = TRUE; // Use PleaseSelect by default
+		$this->status_id->PleaseSelectText = $Language->Phrase("PleaseSelect"); // PleaseSelect text
 		$this->status_id->FldDefaultErrMsg = $Language->Phrase("IncorrectInteger");
 		$this->fields['status_id'] = &$this->status_id;
 
@@ -77,18 +93,6 @@ class capp_vcons_cat extends cTable {
 		$this->cat_price->Sortable = TRUE; // Allow sort
 		$this->cat_price->FldDefaultErrMsg = $Language->Phrase("IncorrectFloat");
 		$this->fields['cat_price'] = &$this->cat_price;
-
-		// ncat_id
-		$this->ncat_id = new cField('app_vcons_cat', 'app_vcons_cat', 'x_ncat_id', 'ncat_id', '`ncat_id`', '`ncat_id`', 3, -1, FALSE, '`ncat_id`', FALSE, FALSE, FALSE, 'FORMATTED TEXT', 'NO');
-		$this->ncat_id->Sortable = TRUE; // Allow sort
-		$this->ncat_id->FldDefaultErrMsg = $Language->Phrase("IncorrectInteger");
-		$this->fields['ncat_id'] = &$this->ncat_id;
-
-		// lang_id
-		$this->lang_id = new cField('app_vcons_cat', 'app_vcons_cat', 'x_lang_id', 'lang_id', '`lang_id`', '`lang_id`', 3, -1, FALSE, '`lang_id`', FALSE, FALSE, FALSE, 'FORMATTED TEXT', 'TEXT');
-		$this->lang_id->Sortable = TRUE; // Allow sort
-		$this->lang_id->FldDefaultErrMsg = $Language->Phrase("IncorrectInteger");
-		$this->fields['lang_id'] = &$this->lang_id;
 
 		// cat_name
 		$this->cat_name = new cField('app_vcons_cat', 'app_vcons_cat', 'x_cat_name', 'cat_name', '`cat_name`', '`cat_name`', 200, -1, FALSE, '`cat_name`', FALSE, FALSE, FALSE, 'FORMATTED TEXT', 'TEXT');
@@ -210,7 +214,7 @@ class capp_vcons_cat extends cTable {
 	var $_SqlOrderBy = "";
 
 	function getSqlOrderBy() { // Order By
-		return ($this->_SqlOrderBy <> "") ? $this->_SqlOrderBy : "";
+		return ($this->_SqlOrderBy <> "") ? $this->_SqlOrderBy : "`lang_id` ASC,`cat_order` ASC,`cat_name` ASC";
 	}
 
 	function SqlOrderBy() { // For backward compatibility
@@ -661,12 +665,12 @@ class capp_vcons_cat extends cTable {
 	// Load row values from recordset
 	function LoadListRowValues(&$rs) {
 		$this->cat_id->setDbValue($rs->fields('cat_id'));
+		$this->ncat_id->setDbValue($rs->fields('ncat_id'));
 		$this->cat_order->setDbValue($rs->fields('cat_order'));
+		$this->lang_id->setDbValue($rs->fields('lang_id'));
 		$this->cat_iname->setDbValue($rs->fields('cat_iname'));
 		$this->status_id->setDbValue($rs->fields('status_id'));
 		$this->cat_price->setDbValue($rs->fields('cat_price'));
-		$this->ncat_id->setDbValue($rs->fields('ncat_id'));
-		$this->lang_id->setDbValue($rs->fields('lang_id'));
 		$this->cat_name->setDbValue($rs->fields('cat_name'));
 		$this->cat_desc->setDbValue($rs->fields('cat_desc'));
 	}
@@ -680,12 +684,17 @@ class capp_vcons_cat extends cTable {
 
 	// Common render codes
 		// cat_id
+
+		$this->cat_id->CellCssStyle = "white-space: nowrap;";
+
+		// ncat_id
+		$this->ncat_id->CellCssStyle = "white-space: nowrap;";
+
 		// cat_order
+		// lang_id
 		// cat_iname
 		// status_id
 		// cat_price
-		// ncat_id
-		// lang_id
 		// cat_name
 		// cat_desc
 		// cat_id
@@ -693,29 +702,67 @@ class capp_vcons_cat extends cTable {
 		$this->cat_id->ViewValue = $this->cat_id->CurrentValue;
 		$this->cat_id->ViewCustomAttributes = "";
 
+		// ncat_id
+		$this->ncat_id->ViewValue = $this->ncat_id->CurrentValue;
+		$this->ncat_id->ViewCustomAttributes = "";
+
 		// cat_order
 		$this->cat_order->ViewValue = $this->cat_order->CurrentValue;
 		$this->cat_order->ViewCustomAttributes = "";
+
+		// lang_id
+		if (strval($this->lang_id->CurrentValue) <> "") {
+			$sFilterWrk = "`lang_id`" . ew_SearchString("=", $this->lang_id->CurrentValue, EW_DATATYPE_NUMBER, "");
+		$sSqlWrk = "SELECT `lang_id`, `lang_name` AS `DispFld`, '' AS `Disp2Fld`, '' AS `Disp3Fld`, '' AS `Disp4Fld` FROM `phs_language`";
+		$sWhereWrk = "";
+		$this->lang_id->LookupFilters = array();
+		ew_AddFilter($sWhereWrk, $sFilterWrk);
+		$this->Lookup_Selecting($this->lang_id, $sWhereWrk); // Call Lookup Selecting
+		if ($sWhereWrk <> "") $sSqlWrk .= " WHERE " . $sWhereWrk;
+			$rswrk = Conn()->Execute($sSqlWrk);
+			if ($rswrk && !$rswrk->EOF) { // Lookup values found
+				$arwrk = array();
+				$arwrk[1] = $rswrk->fields('DispFld');
+				$this->lang_id->ViewValue = $this->lang_id->DisplayValue($arwrk);
+				$rswrk->Close();
+			} else {
+				$this->lang_id->ViewValue = $this->lang_id->CurrentValue;
+			}
+		} else {
+			$this->lang_id->ViewValue = NULL;
+		}
+		$this->lang_id->ViewCustomAttributes = "";
 
 		// cat_iname
 		$this->cat_iname->ViewValue = $this->cat_iname->CurrentValue;
 		$this->cat_iname->ViewCustomAttributes = "";
 
 		// status_id
-		$this->status_id->ViewValue = $this->status_id->CurrentValue;
+		if (strval($this->status_id->CurrentValue) <> "") {
+			$sFilterWrk = "`status_id`" . ew_SearchString("=", $this->status_id->CurrentValue, EW_DATATYPE_NUMBER, "");
+		$sSqlWrk = "SELECT `status_id`, `status_name` AS `DispFld`, '' AS `Disp2Fld`, '' AS `Disp3Fld`, '' AS `Disp4Fld` FROM `phs_status`";
+		$sWhereWrk = "";
+		$this->status_id->LookupFilters = array();
+		ew_AddFilter($sWhereWrk, $sFilterWrk);
+		$this->Lookup_Selecting($this->status_id, $sWhereWrk); // Call Lookup Selecting
+		if ($sWhereWrk <> "") $sSqlWrk .= " WHERE " . $sWhereWrk;
+			$rswrk = Conn()->Execute($sSqlWrk);
+			if ($rswrk && !$rswrk->EOF) { // Lookup values found
+				$arwrk = array();
+				$arwrk[1] = $rswrk->fields('DispFld');
+				$this->status_id->ViewValue = $this->status_id->DisplayValue($arwrk);
+				$rswrk->Close();
+			} else {
+				$this->status_id->ViewValue = $this->status_id->CurrentValue;
+			}
+		} else {
+			$this->status_id->ViewValue = NULL;
+		}
 		$this->status_id->ViewCustomAttributes = "";
 
 		// cat_price
 		$this->cat_price->ViewValue = $this->cat_price->CurrentValue;
 		$this->cat_price->ViewCustomAttributes = "";
-
-		// ncat_id
-		$this->ncat_id->ViewValue = $this->ncat_id->CurrentValue;
-		$this->ncat_id->ViewCustomAttributes = "";
-
-		// lang_id
-		$this->lang_id->ViewValue = $this->lang_id->CurrentValue;
-		$this->lang_id->ViewCustomAttributes = "";
 
 		// cat_name
 		$this->cat_name->ViewValue = $this->cat_name->CurrentValue;
@@ -730,10 +777,20 @@ class capp_vcons_cat extends cTable {
 		$this->cat_id->HrefValue = "";
 		$this->cat_id->TooltipValue = "";
 
+		// ncat_id
+		$this->ncat_id->LinkCustomAttributes = "";
+		$this->ncat_id->HrefValue = "";
+		$this->ncat_id->TooltipValue = "";
+
 		// cat_order
 		$this->cat_order->LinkCustomAttributes = "";
 		$this->cat_order->HrefValue = "";
 		$this->cat_order->TooltipValue = "";
+
+		// lang_id
+		$this->lang_id->LinkCustomAttributes = "";
+		$this->lang_id->HrefValue = "";
+		$this->lang_id->TooltipValue = "";
 
 		// cat_iname
 		$this->cat_iname->LinkCustomAttributes = "";
@@ -749,16 +806,6 @@ class capp_vcons_cat extends cTable {
 		$this->cat_price->LinkCustomAttributes = "";
 		$this->cat_price->HrefValue = "";
 		$this->cat_price->TooltipValue = "";
-
-		// ncat_id
-		$this->ncat_id->LinkCustomAttributes = "";
-		$this->ncat_id->HrefValue = "";
-		$this->ncat_id->TooltipValue = "";
-
-		// lang_id
-		$this->lang_id->LinkCustomAttributes = "";
-		$this->lang_id->HrefValue = "";
-		$this->lang_id->TooltipValue = "";
 
 		// cat_name
 		$this->cat_name->LinkCustomAttributes = "";
@@ -790,11 +837,21 @@ class capp_vcons_cat extends cTable {
 		$this->cat_id->EditValue = $this->cat_id->CurrentValue;
 		$this->cat_id->ViewCustomAttributes = "";
 
+		// ncat_id
+		$this->ncat_id->EditAttrs["class"] = "form-control";
+		$this->ncat_id->EditCustomAttributes = "";
+		$this->ncat_id->EditValue = $this->ncat_id->CurrentValue;
+		$this->ncat_id->ViewCustomAttributes = "";
+
 		// cat_order
 		$this->cat_order->EditAttrs["class"] = "form-control";
 		$this->cat_order->EditCustomAttributes = "";
 		$this->cat_order->EditValue = $this->cat_order->CurrentValue;
 		$this->cat_order->PlaceHolder = ew_RemoveHtml($this->cat_order->FldCaption());
+
+		// lang_id
+		$this->lang_id->EditAttrs["class"] = "form-control";
+		$this->lang_id->EditCustomAttributes = "";
 
 		// cat_iname
 		$this->cat_iname->EditAttrs["class"] = "form-control";
@@ -805,8 +862,6 @@ class capp_vcons_cat extends cTable {
 		// status_id
 		$this->status_id->EditAttrs["class"] = "form-control";
 		$this->status_id->EditCustomAttributes = "";
-		$this->status_id->EditValue = $this->status_id->CurrentValue;
-		$this->status_id->PlaceHolder = ew_RemoveHtml($this->status_id->FldCaption());
 
 		// cat_price
 		$this->cat_price->EditAttrs["class"] = "form-control";
@@ -814,18 +869,6 @@ class capp_vcons_cat extends cTable {
 		$this->cat_price->EditValue = $this->cat_price->CurrentValue;
 		$this->cat_price->PlaceHolder = ew_RemoveHtml($this->cat_price->FldCaption());
 		if (strval($this->cat_price->EditValue) <> "" && is_numeric($this->cat_price->EditValue)) $this->cat_price->EditValue = ew_FormatNumber($this->cat_price->EditValue, -2, -1, -2, 0);
-
-		// ncat_id
-		$this->ncat_id->EditAttrs["class"] = "form-control";
-		$this->ncat_id->EditCustomAttributes = "";
-		$this->ncat_id->EditValue = $this->ncat_id->CurrentValue;
-		$this->ncat_id->ViewCustomAttributes = "";
-
-		// lang_id
-		$this->lang_id->EditAttrs["class"] = "form-control";
-		$this->lang_id->EditCustomAttributes = "";
-		$this->lang_id->EditValue = $this->lang_id->CurrentValue;
-		$this->lang_id->PlaceHolder = ew_RemoveHtml($this->lang_id->FldCaption());
 
 		// cat_name
 		$this->cat_name->EditAttrs["class"] = "form-control";
@@ -866,24 +909,21 @@ class capp_vcons_cat extends cTable {
 			if ($Doc->Horizontal) { // Horizontal format, write header
 				$Doc->BeginExportRow();
 				if ($ExportPageType == "view") {
-					if ($this->cat_id->Exportable) $Doc->ExportCaption($this->cat_id);
 					if ($this->cat_order->Exportable) $Doc->ExportCaption($this->cat_order);
+					if ($this->lang_id->Exportable) $Doc->ExportCaption($this->lang_id);
 					if ($this->cat_iname->Exportable) $Doc->ExportCaption($this->cat_iname);
 					if ($this->status_id->Exportable) $Doc->ExportCaption($this->status_id);
 					if ($this->cat_price->Exportable) $Doc->ExportCaption($this->cat_price);
-					if ($this->ncat_id->Exportable) $Doc->ExportCaption($this->ncat_id);
-					if ($this->lang_id->Exportable) $Doc->ExportCaption($this->lang_id);
 					if ($this->cat_name->Exportable) $Doc->ExportCaption($this->cat_name);
 					if ($this->cat_desc->Exportable) $Doc->ExportCaption($this->cat_desc);
 				} else {
-					if ($this->cat_id->Exportable) $Doc->ExportCaption($this->cat_id);
 					if ($this->cat_order->Exportable) $Doc->ExportCaption($this->cat_order);
+					if ($this->lang_id->Exportable) $Doc->ExportCaption($this->lang_id);
 					if ($this->cat_iname->Exportable) $Doc->ExportCaption($this->cat_iname);
 					if ($this->status_id->Exportable) $Doc->ExportCaption($this->status_id);
 					if ($this->cat_price->Exportable) $Doc->ExportCaption($this->cat_price);
-					if ($this->ncat_id->Exportable) $Doc->ExportCaption($this->ncat_id);
-					if ($this->lang_id->Exportable) $Doc->ExportCaption($this->lang_id);
 					if ($this->cat_name->Exportable) $Doc->ExportCaption($this->cat_name);
+					if ($this->cat_desc->Exportable) $Doc->ExportCaption($this->cat_desc);
 				}
 				$Doc->EndExportRow();
 			}
@@ -915,24 +955,21 @@ class capp_vcons_cat extends cTable {
 				if (!$Doc->ExportCustom) {
 					$Doc->BeginExportRow($RowCnt); // Allow CSS styles if enabled
 					if ($ExportPageType == "view") {
-						if ($this->cat_id->Exportable) $Doc->ExportField($this->cat_id);
 						if ($this->cat_order->Exportable) $Doc->ExportField($this->cat_order);
+						if ($this->lang_id->Exportable) $Doc->ExportField($this->lang_id);
 						if ($this->cat_iname->Exportable) $Doc->ExportField($this->cat_iname);
 						if ($this->status_id->Exportable) $Doc->ExportField($this->status_id);
 						if ($this->cat_price->Exportable) $Doc->ExportField($this->cat_price);
-						if ($this->ncat_id->Exportable) $Doc->ExportField($this->ncat_id);
-						if ($this->lang_id->Exportable) $Doc->ExportField($this->lang_id);
 						if ($this->cat_name->Exportable) $Doc->ExportField($this->cat_name);
 						if ($this->cat_desc->Exportable) $Doc->ExportField($this->cat_desc);
 					} else {
-						if ($this->cat_id->Exportable) $Doc->ExportField($this->cat_id);
 						if ($this->cat_order->Exportable) $Doc->ExportField($this->cat_order);
+						if ($this->lang_id->Exportable) $Doc->ExportField($this->lang_id);
 						if ($this->cat_iname->Exportable) $Doc->ExportField($this->cat_iname);
 						if ($this->status_id->Exportable) $Doc->ExportField($this->status_id);
 						if ($this->cat_price->Exportable) $Doc->ExportField($this->cat_price);
-						if ($this->ncat_id->Exportable) $Doc->ExportField($this->ncat_id);
-						if ($this->lang_id->Exportable) $Doc->ExportField($this->lang_id);
 						if ($this->cat_name->Exportable) $Doc->ExportField($this->cat_name);
+						if ($this->cat_desc->Exportable) $Doc->ExportField($this->cat_desc);
 					}
 					$Doc->EndExportRow($RowCnt);
 				}

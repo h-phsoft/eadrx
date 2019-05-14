@@ -1765,6 +1765,12 @@ class ccpy_ads_list extends ccpy_ads {
 			if ($this->getSqlOrderBy() <> "") {
 				$sOrderBy = $this->getSqlOrderBy();
 				$this->setSessionOrderBy($sOrderBy);
+				$this->ads_sdate->setSort("DESC");
+				$this->ads_edate->setSort("DESC");
+				$this->hour_sid->setSort("ASC");
+				$this->hour_eid->setSort("ASC");
+				$this->repeat_id->setSort("ASC");
+				$this->every_id->setSort("ASC");
 			}
 		}
 	}

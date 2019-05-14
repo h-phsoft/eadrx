@@ -1649,6 +1649,7 @@ class ccpy_page_list extends ccpy_page {
 			if ($this->getSqlOrderBy() <> "") {
 				$sOrderBy = $this->getSqlOrderBy();
 				$this->setSessionOrderBy($sOrderBy);
+				$this->page_name->setSort("ASC");
 			}
 		}
 	}

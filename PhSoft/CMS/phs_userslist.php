@@ -1628,6 +1628,7 @@ class cphs_users_list extends cphs_users {
 			if ($this->getSqlOrderBy() <> "") {
 				$sOrderBy = $this->getSqlOrderBy();
 				$this->setSessionOrderBy($sOrderBy);
+				$this->pgrp_id->setSort("ASC");
 			}
 		}
 	}

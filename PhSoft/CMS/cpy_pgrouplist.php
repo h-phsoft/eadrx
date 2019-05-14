@@ -1573,6 +1573,7 @@ class ccpy_pgroup_list extends ccpy_pgroup {
 			if ($this->getSqlOrderBy() <> "") {
 				$sOrderBy = $this->getSqlOrderBy();
 				$this->setSessionOrderBy($sOrderBy);
+				$this->pgrp_name->setSort("ASC");
 			}
 		}
 	}

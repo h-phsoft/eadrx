@@ -1572,6 +1572,7 @@ class cphs_pgroup_list extends cphs_pgroup {
 			if ($this->getSqlOrderBy() <> "") {
 				$sOrderBy = $this->getSqlOrderBy();
 				$this->setSessionOrderBy($sOrderBy);
+				$this->pgrp_id->setSort("ASC");
 			}
 		}
 	}

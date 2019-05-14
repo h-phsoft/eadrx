@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: May 09, 2019 at 04:08 PM
+-- Generation Time: May 14, 2019 at 01:50 PM
 -- Server version: 5.7.24
 -- PHP Version: 7.2.14
 
@@ -32,7 +32,7 @@ DROP TABLE IF EXISTS `app_book`;
 CREATE TABLE IF NOT EXISTS `app_book` (
   `book_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Auto PK',
   `lang_id` int(11) NOT NULL COMMENT 'Language, FK',
-  `status_id` tinyint(4) NOT NULL DEFAULT '0' COMMENT 'Status',
+  `status_id` tinyint(4) NOT NULL DEFAULT '1' COMMENT 'Status',
   `book_title` varchar(200) NOT NULL COMMENT 'Title',
   `book_desc` mediumtext NOT NULL COMMENT 'Description',
   `book_image` char(150) NOT NULL COMMENT 'Image',
@@ -251,7 +251,7 @@ CREATE TABLE IF NOT EXISTS `app_consultation` (
 --
 
 INSERT INTO `app_consultation` (`cons_id`, `user_id`, `cat_id`, `cstatus_id`, `cons_amount`, `cons_message`, `cons_file`, `cons_audio`, `ins_datetime`) VALUES
-(1, 2, 1, 1, '0.00', 'النجدةةةةةةةةةةةةةةةةةةةةةة', NULL, NULL, '2019-03-13 17:04:23');
+(0, 0, 0, 3, '0.00', 'None', NULL, NULL, '2019-03-13 17:04:23');
 
 -- --------------------------------------------------------
 
@@ -349,13 +349,6 @@ CREATE TABLE IF NOT EXISTS `app_consult_answer` (
   KEY `cons_id` (`cons_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `app_consult_answer`
---
-
-INSERT INTO `app_consult_answer` (`answer_id`, `user_id`, `cons_id`, `answer_text`, `answer_file`, `answer_audio`, `ins_datetime`) VALUES
-(1, 2, 1, 'ىورةىءؤرءؤرىلانؤرولازؤر', NULL, NULL, '2019-03-13 17:05:07');
-
 -- --------------------------------------------------------
 
 --
@@ -374,13 +367,6 @@ CREATE TABLE IF NOT EXISTS `app_consult_assign` (
   KEY `cons_id` (`cons_id`),
   KEY `status_id` (`status_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `app_consult_assign`
---
-
-INSERT INTO `app_consult_assign` (`assign_id`, `user_id`, `cons_id`, `status_id`, `ins_datetime`) VALUES
-(1, 1, 1, 1, '2019-03-13 17:04:40');
 
 -- --------------------------------------------------------
 
@@ -428,7 +414,7 @@ CREATE TABLE IF NOT EXISTS `app_notification_for` (
   KEY `notif_id` (`notif_id`),
   KEY `user_id` (`user_id`),
   KEY `nstatus_id` (`nstatus_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `app_notification_for`
@@ -436,7 +422,9 @@ CREATE TABLE IF NOT EXISTS `app_notification_for` (
 
 INSERT INTO `app_notification_for` (`nfor_id`, `notif_id`, `user_id`, `nstatus_id`) VALUES
 (3, 1, 4, 3),
-(4, 2, 4, 3);
+(4, 2, 4, 3),
+(5, 1, 1, 3),
+(6, 2, 1, 3);
 
 -- --------------------------------------------------------
 
@@ -553,8 +541,8 @@ CREATE TABLE IF NOT EXISTS `app_subscribe` (
   `subs_end` date NOT NULL COMMENT 'End',
   `subs_qnt` decimal(10,0) NOT NULL DEFAULT '1' COMMENT 'QTY',
   `subs_price` decimal(10,0) NOT NULL DEFAULT '0' COMMENT 'Price',
-  `subs_amt` decimal(10,0) NOT NULL DEFAULT '0',
-  `ins_datetime` datetime NOT NULL COMMENT 'Inserted Datetime',
+  `subs_amt` decimal(10,0) NOT NULL DEFAULT '0' COMMENT 'Amount',
+  `ins_datetime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Inserted Datetime',
   PRIMARY KEY (`subs_id`),
   KEY `serv_id` (`serv_id`),
   KEY `user_id` (`user_id`),
@@ -564,7 +552,14 @@ CREATE TABLE IF NOT EXISTS `app_subscribe` (
   KEY `test_id` (`test_id`),
   KEY `cons_id` (`cons_id`),
   KEY `cat_id` (`cat_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `app_subscribe`
+--
+
+INSERT INTO `app_subscribe` (`subs_id`, `serv_id`, `user_id`, `cycle_id`, `book_id`, `tcat_id`, `test_id`, `cat_id`, `cons_id`, `subs_start`, `subs_end`, `subs_qnt`, `subs_price`, `subs_amt`, `ins_datetime`) VALUES
+(16, 1, 4, 1, 1, 0, 0, 0, 0, '2019-05-11', '2099-12-31', '1', '10', '10', '2019-05-11 16:04:54');
 
 -- --------------------------------------------------------
 
@@ -1753,10 +1748,25 @@ DROP TABLE IF EXISTS `app_tips_package`;
 CREATE TABLE IF NOT EXISTS `app_tips_package` (
   `pkg_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Auto PK',
   `cycle_id` smallint(6) NOT NULL COMMENT 'Cycle',
+  `status_id` tinyint(4) NOT NULL DEFAULT '1',
+  `pkg_order` int(11) NOT NULL DEFAULT '0',
+  `pkg_name` varchar(200) NOT NULL,
   `pkg_price` decimal(10,0) NOT NULL DEFAULT '0' COMMENT 'Price',
   PRIMARY KEY (`pkg_id`),
-  KEY `cycle_id` (`cycle_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  KEY `cycle_id` (`cycle_id`),
+  KEY `status_id` (`status_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `app_tips_package`
+--
+
+INSERT INTO `app_tips_package` (`pkg_id`, `cycle_id`, `status_id`, `pkg_order`, `pkg_name`, `pkg_price`) VALUES
+(1, 5, 1, 1, 'Sexual Tips', '10'),
+(2, 6, 1, 2, 'Sexual Tips', '21'),
+(3, 8, 1, 3, 'Sexual Tips', '32'),
+(4, 9, 1, 4, 'Sexual Tips', '50'),
+(5, 10, 1, 5, 'Sexual Tips', '70');
 
 -- --------------------------------------------------------
 
@@ -1772,7 +1782,18 @@ CREATE TABLE IF NOT EXISTS `app_tips_pkg_cat` (
   PRIMARY KEY (`tpkg_id`),
   UNIQUE KEY `pkg_id` (`pkg_id`,`tcat_id`),
   KEY `tcat_id` (`tcat_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `app_tips_pkg_cat`
+--
+
+INSERT INTO `app_tips_pkg_cat` (`tpkg_id`, `pkg_id`, `tcat_id`) VALUES
+(1, 1, 2),
+(2, 2, 2),
+(3, 3, 2),
+(4, 4, 2),
+(5, 5, 2);
 
 -- --------------------------------------------------------
 
@@ -1912,6 +1933,26 @@ CREATE TABLE IF NOT EXISTS `app_vtips` (
 ,`status_id` tinyint(4)
 ,`tips_text` mediumtext
 ,`ins_datetime` timestamp
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `app_vtips_package`
+-- (See below for the actual view)
+--
+DROP VIEW IF EXISTS `app_vtips_package`;
+CREATE TABLE IF NOT EXISTS `app_vtips_package` (
+`pkg_id` int(11)
+,`pkg_name` varchar(200)
+,`tcat_id` int(11)
+,`status_id` tinyint(4)
+,`tcat_name` varchar(100)
+,`cycle_id` smallint(6)
+,`cycle_name` varchar(200)
+,`cycle_desc` varchar(200)
+,`pkg_price` decimal(10,0)
+,`tpkg_id` int(11)
 );
 
 -- --------------------------------------------------------
@@ -2468,25 +2509,26 @@ DROP TABLE IF EXISTS `phs_bill_cycle`;
 CREATE TABLE IF NOT EXISTS `phs_bill_cycle` (
   `cycle_id` smallint(6) NOT NULL AUTO_INCREMENT COMMENT 'Auto PK',
   `cycle_name` varchar(200) NOT NULL COMMENT 'Name',
-  `cycle_Desc` varchar(200) NOT NULL COMMENT 'Description',
+  `cycle_desc` varchar(200) NOT NULL COMMENT 'Description',
   PRIMARY KEY (`cycle_id`),
   UNIQUE KEY `cycle_name` (`cycle_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `phs_bill_cycle`
 --
 
-INSERT INTO `phs_bill_cycle` (`cycle_id`, `cycle_name`, `cycle_Desc`) VALUES
+INSERT INTO `phs_bill_cycle` (`cycle_id`, `cycle_name`, `cycle_desc`) VALUES
 (1, 'One Time', 'Pay One\'s Use all time'),
 (2, 'One Time Use', 'Pay One for One'),
 (3, 'Daily', ''),
-(4, 'Weekly', ''),
-(5, 'Monthly', ''),
-(6, 'Quarterly', ''),
+(4, 'Week', ''),
+(5, '1 Month', ''),
+(6, '3 Months', ''),
 (7, '4 Months', ''),
 (8, '6 Months', ''),
-(9, 'Yearly', '');
+(9, '9 Months', ''),
+(10, '12 Months', '');
 
 -- --------------------------------------------------------
 
@@ -3550,7 +3592,7 @@ INSERT INTO `phs_setting` (`set_id`, `set_name`, `set_val`) VALUES
 (48, 'Nav-Right-Menu', '4'),
 (49, 'TIPS-FREE', '1'),
 (50, 'TIPS-PAID', '2'),
-(51, 'APP-DISP-ADS', '0'),
+(51, 'APP-DISP-ADS', '1'),
 (52, 'APP-DISP-FreeTips', '1'),
 (53, 'Currency-Sign', '$'),
 (54, 'Path-Ads-Images', '../assets/img/adsImages/'),
@@ -3746,6 +3788,15 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- --------------------------------------------------------
 
 --
+-- Structure for view `app_vtips_package`
+--
+DROP TABLE IF EXISTS `app_vtips_package`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `app_vtips_package`  AS  select `m`.`pkg_id` AS `pkg_id`,`m`.`pkg_name` AS `pkg_name`,`c`.`tcat_id` AS `tcat_id`,`c`.`status_id` AS `status_id`,`c`.`tcat_name` AS `tcat_name`,`y`.`cycle_id` AS `cycle_id`,`y`.`cycle_name` AS `cycle_name`,`y`.`cycle_desc` AS `cycle_desc`,`m`.`pkg_price` AS `pkg_price`,`t`.`tpkg_id` AS `tpkg_id` from (((`app_tips_package` `m` join `app_tips_pkg_cat` `t`) join `app_tips_category` `c`) join `phs_bill_cycle` `y`) where ((`t`.`pkg_id` = `m`.`pkg_id`) and (`t`.`tcat_id` = `c`.`tcat_id`) and (`m`.`cycle_id` = `y`.`cycle_id`)) ;
+
+-- --------------------------------------------------------
+
+--
 -- Structure for view `cpy_vteam`
 --
 DROP TABLE IF EXISTS `cpy_vteam`;
@@ -3901,7 +3952,8 @@ ALTER TABLE `app_tips_category`
 -- Constraints for table `app_tips_package`
 --
 ALTER TABLE `app_tips_package`
-  ADD CONSTRAINT `app_tips_package_ibfk_1` FOREIGN KEY (`cycle_id`) REFERENCES `phs_bill_cycle` (`cycle_id`);
+  ADD CONSTRAINT `app_tips_package_ibfk_1` FOREIGN KEY (`cycle_id`) REFERENCES `phs_bill_cycle` (`cycle_id`),
+  ADD CONSTRAINT `app_tips_package_ibfk_2` FOREIGN KEY (`status_id`) REFERENCES `phs_status` (`status_id`);
 
 --
 -- Constraints for table `app_tips_pkg_cat`

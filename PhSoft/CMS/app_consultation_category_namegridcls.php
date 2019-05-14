@@ -915,6 +915,8 @@ class capp_consultation_category_name_grid extends capp_consultation_category_na
 			if ($this->getSqlOrderBy() <> "") {
 				$sOrderBy = $this->getSqlOrderBy();
 				$this->setSessionOrderBy($sOrderBy);
+				$this->cat_id->setSort("ASC");
+				$this->lang_id->setSort("ASC");
 			}
 		}
 	}

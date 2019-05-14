@@ -1498,6 +1498,8 @@ class capp_notification_status_list extends capp_notification_status {
 			if ($this->getSqlOrderBy() <> "") {
 				$sOrderBy = $this->getSqlOrderBy();
 				$this->setSessionOrderBy($sOrderBy);
+				$this->notif_id->setSort("ASC");
+				$this->user_id->setSort("ASC");
 			}
 		}
 	}

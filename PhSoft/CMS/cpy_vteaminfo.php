@@ -8,12 +8,12 @@ $cpy_vteam = NULL;
 //
 class ccpy_vteam extends cTable {
 	var $team_id;
-	var $team_iname;
-	var $team_order;
-	var $team_photo;
 	var $teamn_id;
+	var $team_order;
 	var $lang_id;
 	var $team_name;
+	var $team_iname;
+	var $team_photo;
 	var $team_title;
 	var $team_position;
 	var $team_text;
@@ -56,27 +56,17 @@ class ccpy_vteam extends cTable {
 		$this->team_id->FldDefaultErrMsg = $Language->Phrase("IncorrectInteger");
 		$this->fields['team_id'] = &$this->team_id;
 
-		// team_iname
-		$this->team_iname = new cField('cpy_vteam', 'cpy_vteam', 'x_team_iname', 'team_iname', '`team_iname`', '`team_iname`', 200, -1, FALSE, '`team_iname`', FALSE, FALSE, FALSE, 'FORMATTED TEXT', 'TEXT');
-		$this->team_iname->Sortable = TRUE; // Allow sort
-		$this->fields['team_iname'] = &$this->team_iname;
+		// teamn_id
+		$this->teamn_id = new cField('cpy_vteam', 'cpy_vteam', 'x_teamn_id', 'teamn_id', '`teamn_id`', '`teamn_id`', 3, -1, FALSE, '`teamn_id`', FALSE, FALSE, FALSE, 'FORMATTED TEXT', 'NO');
+		$this->teamn_id->Sortable = FALSE; // Allow sort
+		$this->teamn_id->FldDefaultErrMsg = $Language->Phrase("IncorrectInteger");
+		$this->fields['teamn_id'] = &$this->teamn_id;
 
 		// team_order
 		$this->team_order = new cField('cpy_vteam', 'cpy_vteam', 'x_team_order', 'team_order', '`team_order`', '`team_order`', 2, -1, FALSE, '`team_order`', FALSE, FALSE, FALSE, 'FORMATTED TEXT', 'TEXT');
 		$this->team_order->Sortable = TRUE; // Allow sort
 		$this->team_order->FldDefaultErrMsg = $Language->Phrase("IncorrectInteger");
 		$this->fields['team_order'] = &$this->team_order;
-
-		// team_photo
-		$this->team_photo = new cField('cpy_vteam', 'cpy_vteam', 'x_team_photo', 'team_photo', '`team_photo`', '`team_photo`', 200, -1, TRUE, '`team_photo`', FALSE, FALSE, FALSE, 'IMAGE', 'FILE');
-		$this->team_photo->Sortable = TRUE; // Allow sort
-		$this->fields['team_photo'] = &$this->team_photo;
-
-		// teamn_id
-		$this->teamn_id = new cField('cpy_vteam', 'cpy_vteam', 'x_teamn_id', 'teamn_id', '`teamn_id`', '`teamn_id`', 3, -1, FALSE, '`teamn_id`', FALSE, FALSE, FALSE, 'FORMATTED TEXT', 'NO');
-		$this->teamn_id->Sortable = FALSE; // Allow sort
-		$this->teamn_id->FldDefaultErrMsg = $Language->Phrase("IncorrectInteger");
-		$this->fields['teamn_id'] = &$this->teamn_id;
 
 		// lang_id
 		$this->lang_id = new cField('cpy_vteam', 'cpy_vteam', 'x_lang_id', 'lang_id', '`lang_id`', '`lang_id`', 3, -1, FALSE, '`lang_id`', FALSE, FALSE, FALSE, 'FORMATTED TEXT', 'SELECT');
@@ -90,6 +80,16 @@ class ccpy_vteam extends cTable {
 		$this->team_name = new cField('cpy_vteam', 'cpy_vteam', 'x_team_name', 'team_name', '`team_name`', '`team_name`', 200, -1, FALSE, '`team_name`', FALSE, FALSE, FALSE, 'FORMATTED TEXT', 'TEXT');
 		$this->team_name->Sortable = TRUE; // Allow sort
 		$this->fields['team_name'] = &$this->team_name;
+
+		// team_iname
+		$this->team_iname = new cField('cpy_vteam', 'cpy_vteam', 'x_team_iname', 'team_iname', '`team_iname`', '`team_iname`', 200, -1, FALSE, '`team_iname`', FALSE, FALSE, FALSE, 'FORMATTED TEXT', 'TEXT');
+		$this->team_iname->Sortable = TRUE; // Allow sort
+		$this->fields['team_iname'] = &$this->team_iname;
+
+		// team_photo
+		$this->team_photo = new cField('cpy_vteam', 'cpy_vteam', 'x_team_photo', 'team_photo', '`team_photo`', '`team_photo`', 200, -1, TRUE, '`team_photo`', FALSE, FALSE, FALSE, 'IMAGE', 'FILE');
+		$this->team_photo->Sortable = TRUE; // Allow sort
+		$this->fields['team_photo'] = &$this->team_photo;
 
 		// team_title
 		$this->team_title = new cField('cpy_vteam', 'cpy_vteam', 'x_team_title', 'team_title', '`team_title`', '`team_title`', 200, -1, FALSE, '`team_title`', FALSE, FALSE, FALSE, 'FORMATTED TEXT', 'TEXT');
@@ -216,7 +216,7 @@ class ccpy_vteam extends cTable {
 	var $_SqlOrderBy = "";
 
 	function getSqlOrderBy() { // Order By
-		return ($this->_SqlOrderBy <> "") ? $this->_SqlOrderBy : "";
+		return ($this->_SqlOrderBy <> "") ? $this->_SqlOrderBy : "`team_order` ASC,`lang_id` ASC,`team_name` ASC";
 	}
 
 	function SqlOrderBy() { // For backward compatibility
@@ -667,12 +667,12 @@ class ccpy_vteam extends cTable {
 	// Load row values from recordset
 	function LoadListRowValues(&$rs) {
 		$this->team_id->setDbValue($rs->fields('team_id'));
-		$this->team_iname->setDbValue($rs->fields('team_iname'));
-		$this->team_order->setDbValue($rs->fields('team_order'));
-		$this->team_photo->Upload->DbValue = $rs->fields('team_photo');
 		$this->teamn_id->setDbValue($rs->fields('teamn_id'));
+		$this->team_order->setDbValue($rs->fields('team_order'));
 		$this->lang_id->setDbValue($rs->fields('lang_id'));
 		$this->team_name->setDbValue($rs->fields('team_name'));
+		$this->team_iname->setDbValue($rs->fields('team_iname'));
+		$this->team_photo->Upload->DbValue = $rs->fields('team_photo');
 		$this->team_title->setDbValue($rs->fields('team_title'));
 		$this->team_position->setDbValue($rs->fields('team_position'));
 		$this->team_text->setDbValue($rs->fields('team_text'));
@@ -687,15 +687,15 @@ class ccpy_vteam extends cTable {
 
 	// Common render codes
 		// team_id
-		// team_iname
-		// team_order
-		// team_photo
 		// teamn_id
 
 		$this->teamn_id->CellCssStyle = "white-space: nowrap;";
 
+		// team_order
 		// lang_id
 		// team_name
+		// team_iname
+		// team_photo
 		// team_title
 		// team_position
 		// team_text
@@ -704,29 +704,13 @@ class ccpy_vteam extends cTable {
 		$this->team_id->ViewValue = $this->team_id->CurrentValue;
 		$this->team_id->ViewCustomAttributes = "";
 
-		// team_iname
-		$this->team_iname->ViewValue = $this->team_iname->CurrentValue;
-		$this->team_iname->ViewCustomAttributes = "";
+		// teamn_id
+		$this->teamn_id->ViewValue = $this->teamn_id->CurrentValue;
+		$this->teamn_id->ViewCustomAttributes = "";
 
 		// team_order
 		$this->team_order->ViewValue = $this->team_order->CurrentValue;
 		$this->team_order->ViewCustomAttributes = "";
-
-		// team_photo
-		$this->team_photo->UploadPath = '../../assets/corporate/img/teamImages';
-		if (!ew_Empty($this->team_photo->Upload->DbValue)) {
-			$this->team_photo->ImageWidth = 100;
-			$this->team_photo->ImageHeight = 0;
-			$this->team_photo->ImageAlt = $this->team_photo->FldAlt();
-			$this->team_photo->ViewValue = $this->team_photo->Upload->DbValue;
-		} else {
-			$this->team_photo->ViewValue = "";
-		}
-		$this->team_photo->ViewCustomAttributes = "";
-
-		// teamn_id
-		$this->teamn_id->ViewValue = $this->teamn_id->CurrentValue;
-		$this->teamn_id->ViewCustomAttributes = "";
 
 		// lang_id
 		if (strval($this->lang_id->CurrentValue) <> "") {
@@ -758,6 +742,22 @@ class ccpy_vteam extends cTable {
 		$this->team_name->ViewValue = $this->team_name->CurrentValue;
 		$this->team_name->ViewCustomAttributes = "";
 
+		// team_iname
+		$this->team_iname->ViewValue = $this->team_iname->CurrentValue;
+		$this->team_iname->ViewCustomAttributes = "";
+
+		// team_photo
+		$this->team_photo->UploadPath = '../../assets/corporate/img/teamImages';
+		if (!ew_Empty($this->team_photo->Upload->DbValue)) {
+			$this->team_photo->ImageWidth = 100;
+			$this->team_photo->ImageHeight = 0;
+			$this->team_photo->ImageAlt = $this->team_photo->FldAlt();
+			$this->team_photo->ViewValue = $this->team_photo->Upload->DbValue;
+		} else {
+			$this->team_photo->ViewValue = "";
+		}
+		$this->team_photo->ViewCustomAttributes = "";
+
 		// team_title
 		$this->team_title->ViewValue = $this->team_title->CurrentValue;
 		$this->team_title->ViewCustomAttributes = "";
@@ -775,15 +775,30 @@ class ccpy_vteam extends cTable {
 		$this->team_id->HrefValue = "";
 		$this->team_id->TooltipValue = "";
 
-		// team_iname
-		$this->team_iname->LinkCustomAttributes = "";
-		$this->team_iname->HrefValue = "";
-		$this->team_iname->TooltipValue = "";
+		// teamn_id
+		$this->teamn_id->LinkCustomAttributes = "";
+		$this->teamn_id->HrefValue = "";
+		$this->teamn_id->TooltipValue = "";
 
 		// team_order
 		$this->team_order->LinkCustomAttributes = "";
 		$this->team_order->HrefValue = "";
 		$this->team_order->TooltipValue = "";
+
+		// lang_id
+		$this->lang_id->LinkCustomAttributes = "";
+		$this->lang_id->HrefValue = "";
+		$this->lang_id->TooltipValue = "";
+
+		// team_name
+		$this->team_name->LinkCustomAttributes = "";
+		$this->team_name->HrefValue = "";
+		$this->team_name->TooltipValue = "";
+
+		// team_iname
+		$this->team_iname->LinkCustomAttributes = "";
+		$this->team_iname->HrefValue = "";
+		$this->team_iname->TooltipValue = "";
 
 		// team_photo
 		$this->team_photo->LinkCustomAttributes = "";
@@ -803,21 +818,6 @@ class ccpy_vteam extends cTable {
 			$this->team_photo->LinkAttrs["data-rel"] = "cpy_vteam_x_team_photo";
 			ew_AppendClass($this->team_photo->LinkAttrs["class"], "ewLightbox");
 		}
-
-		// teamn_id
-		$this->teamn_id->LinkCustomAttributes = "";
-		$this->teamn_id->HrefValue = "";
-		$this->teamn_id->TooltipValue = "";
-
-		// lang_id
-		$this->lang_id->LinkCustomAttributes = "";
-		$this->lang_id->HrefValue = "";
-		$this->lang_id->TooltipValue = "";
-
-		// team_name
-		$this->team_name->LinkCustomAttributes = "";
-		$this->team_name->HrefValue = "";
-		$this->team_name->TooltipValue = "";
 
 		// team_title
 		$this->team_title->LinkCustomAttributes = "";
@@ -854,17 +854,33 @@ class ccpy_vteam extends cTable {
 		$this->team_id->EditValue = $this->team_id->CurrentValue;
 		$this->team_id->ViewCustomAttributes = "";
 
-		// team_iname
-		$this->team_iname->EditAttrs["class"] = "form-control";
-		$this->team_iname->EditCustomAttributes = "";
-		$this->team_iname->EditValue = $this->team_iname->CurrentValue;
-		$this->team_iname->PlaceHolder = ew_RemoveHtml($this->team_iname->FldCaption());
+		// teamn_id
+		$this->teamn_id->EditAttrs["class"] = "form-control";
+		$this->teamn_id->EditCustomAttributes = "";
+		$this->teamn_id->EditValue = $this->teamn_id->CurrentValue;
+		$this->teamn_id->ViewCustomAttributes = "";
 
 		// team_order
 		$this->team_order->EditAttrs["class"] = "form-control";
 		$this->team_order->EditCustomAttributes = "";
 		$this->team_order->EditValue = $this->team_order->CurrentValue;
 		$this->team_order->PlaceHolder = ew_RemoveHtml($this->team_order->FldCaption());
+
+		// lang_id
+		$this->lang_id->EditAttrs["class"] = "form-control";
+		$this->lang_id->EditCustomAttributes = "";
+
+		// team_name
+		$this->team_name->EditAttrs["class"] = "form-control";
+		$this->team_name->EditCustomAttributes = "";
+		$this->team_name->EditValue = $this->team_name->CurrentValue;
+		$this->team_name->PlaceHolder = ew_RemoveHtml($this->team_name->FldCaption());
+
+		// team_iname
+		$this->team_iname->EditAttrs["class"] = "form-control";
+		$this->team_iname->EditCustomAttributes = "";
+		$this->team_iname->EditValue = $this->team_iname->CurrentValue;
+		$this->team_iname->PlaceHolder = ew_RemoveHtml($this->team_iname->FldCaption());
 
 		// team_photo
 		$this->team_photo->EditAttrs["class"] = "form-control";
@@ -880,22 +896,6 @@ class ccpy_vteam extends cTable {
 		}
 		if (!ew_Empty($this->team_photo->CurrentValue))
 				$this->team_photo->Upload->FileName = $this->team_photo->CurrentValue;
-
-		// teamn_id
-		$this->teamn_id->EditAttrs["class"] = "form-control";
-		$this->teamn_id->EditCustomAttributes = "";
-		$this->teamn_id->EditValue = $this->teamn_id->CurrentValue;
-		$this->teamn_id->ViewCustomAttributes = "";
-
-		// lang_id
-		$this->lang_id->EditAttrs["class"] = "form-control";
-		$this->lang_id->EditCustomAttributes = "";
-
-		// team_name
-		$this->team_name->EditAttrs["class"] = "form-control";
-		$this->team_name->EditCustomAttributes = "";
-		$this->team_name->EditValue = $this->team_name->CurrentValue;
-		$this->team_name->PlaceHolder = ew_RemoveHtml($this->team_name->FldCaption());
 
 		// team_title
 		$this->team_title->EditAttrs["class"] = "form-control";
@@ -943,21 +943,21 @@ class ccpy_vteam extends cTable {
 				$Doc->BeginExportRow();
 				if ($ExportPageType == "view") {
 					if ($this->team_id->Exportable) $Doc->ExportCaption($this->team_id);
-					if ($this->team_iname->Exportable) $Doc->ExportCaption($this->team_iname);
 					if ($this->team_order->Exportable) $Doc->ExportCaption($this->team_order);
-					if ($this->team_photo->Exportable) $Doc->ExportCaption($this->team_photo);
 					if ($this->lang_id->Exportable) $Doc->ExportCaption($this->lang_id);
 					if ($this->team_name->Exportable) $Doc->ExportCaption($this->team_name);
+					if ($this->team_iname->Exportable) $Doc->ExportCaption($this->team_iname);
+					if ($this->team_photo->Exportable) $Doc->ExportCaption($this->team_photo);
 					if ($this->team_title->Exportable) $Doc->ExportCaption($this->team_title);
 					if ($this->team_position->Exportable) $Doc->ExportCaption($this->team_position);
 					if ($this->team_text->Exportable) $Doc->ExportCaption($this->team_text);
 				} else {
 					if ($this->team_id->Exportable) $Doc->ExportCaption($this->team_id);
-					if ($this->team_iname->Exportable) $Doc->ExportCaption($this->team_iname);
 					if ($this->team_order->Exportable) $Doc->ExportCaption($this->team_order);
-					if ($this->team_photo->Exportable) $Doc->ExportCaption($this->team_photo);
 					if ($this->lang_id->Exportable) $Doc->ExportCaption($this->lang_id);
 					if ($this->team_name->Exportable) $Doc->ExportCaption($this->team_name);
+					if ($this->team_iname->Exportable) $Doc->ExportCaption($this->team_iname);
+					if ($this->team_photo->Exportable) $Doc->ExportCaption($this->team_photo);
 					if ($this->team_title->Exportable) $Doc->ExportCaption($this->team_title);
 					if ($this->team_position->Exportable) $Doc->ExportCaption($this->team_position);
 					if ($this->team_text->Exportable) $Doc->ExportCaption($this->team_text);
@@ -993,21 +993,21 @@ class ccpy_vteam extends cTable {
 					$Doc->BeginExportRow($RowCnt); // Allow CSS styles if enabled
 					if ($ExportPageType == "view") {
 						if ($this->team_id->Exportable) $Doc->ExportField($this->team_id);
-						if ($this->team_iname->Exportable) $Doc->ExportField($this->team_iname);
 						if ($this->team_order->Exportable) $Doc->ExportField($this->team_order);
-						if ($this->team_photo->Exportable) $Doc->ExportField($this->team_photo);
 						if ($this->lang_id->Exportable) $Doc->ExportField($this->lang_id);
 						if ($this->team_name->Exportable) $Doc->ExportField($this->team_name);
+						if ($this->team_iname->Exportable) $Doc->ExportField($this->team_iname);
+						if ($this->team_photo->Exportable) $Doc->ExportField($this->team_photo);
 						if ($this->team_title->Exportable) $Doc->ExportField($this->team_title);
 						if ($this->team_position->Exportable) $Doc->ExportField($this->team_position);
 						if ($this->team_text->Exportable) $Doc->ExportField($this->team_text);
 					} else {
 						if ($this->team_id->Exportable) $Doc->ExportField($this->team_id);
-						if ($this->team_iname->Exportable) $Doc->ExportField($this->team_iname);
 						if ($this->team_order->Exportable) $Doc->ExportField($this->team_order);
-						if ($this->team_photo->Exportable) $Doc->ExportField($this->team_photo);
 						if ($this->lang_id->Exportable) $Doc->ExportField($this->lang_id);
 						if ($this->team_name->Exportable) $Doc->ExportField($this->team_name);
+						if ($this->team_iname->Exportable) $Doc->ExportField($this->team_iname);
+						if ($this->team_photo->Exportable) $Doc->ExportField($this->team_photo);
 						if ($this->team_title->Exportable) $Doc->ExportField($this->team_title);
 						if ($this->team_position->Exportable) $Doc->ExportField($this->team_position);
 						if ($this->team_text->Exportable) $Doc->ExportField($this->team_text);

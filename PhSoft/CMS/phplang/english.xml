@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<ew-language date="2019/4/27" version="14.0.0" id="en" name="English" desc="English" author="e.World Technology Ltd.">
+<ew-language date="2019/5/14" version="14.0.0" id="en" name="English" desc="English" author="e.World Technology Ltd.">
   <!-- 
 	*** Important Notes:
 	1. Language ID should follow: https://developers.google.com/recaptcha/docs/language,
@@ -616,6 +616,18 @@
   <project>
     <phrase id="bodytitle" value="Eve Adam CMS" />
     <phrase id="footertext" value=" &amp;copy;2019 PhSoft. All rights reserved." />
+    <menu id="72">
+      <phrase id="menutext" value="cpy log" />
+    </menu>
+    <menu id="73">
+      <phrase id="menutext" value="phs log" />
+    </menu>
+    <menu id="74">
+      <phrase id="menutext" value="Tips" />
+    </menu>
+    <menu id="75">
+      <phrase id="menutext" value="Tips Packages" />
+    </menu>
     <menu id="17">
       <phrase id="menutext" value="NEWS" />
     </menu>
@@ -640,11 +652,17 @@
     <menu id="16">
       <phrase id="menutext" value="FAQ Category" />
     </menu>
+    <menu id="71">
+      <phrase id="menutext" value="Tips Packages" />
+    </menu>
     <menu id="23">
       <phrase id="menutext" value="Slider" />
     </menu>
     <menu id="27">
       <phrase id="menutext" value="Members" />
+    </menu>
+    <menu id="68">
+      <phrase id="menutext" value="Subscribes" />
     </menu>
     <menu id="28">
       <phrase id="menutext" value="Video" />
@@ -709,6 +727,9 @@
     <menu id="9">
       <phrase id="menutext" value="Test Names" />
     </menu>
+    <menu id="70">
+      <phrase id="menutext" value="Bill Cycle" />
+    </menu>
     <menu id="10">
       <phrase id="menutext" value="Test Question" />
     </menu>
@@ -732,6 +753,12 @@
     </menu>
     <menu id="60">
       <phrase id="menutext" value="Consultation Category Name" />
+    </menu>
+    <menu id="67">
+      <phrase id="menutext" value="Services" />
+    </menu>
+    <menu id="69">
+      <phrase id="menutext" value="Tips Package Categories" />
     </menu>
     <menu id="15">
       <phrase id="menutext" value="FAQ" />
@@ -1449,23 +1476,23 @@
       <field id="team_id">
         <phrase id="fldcaption" value="Id" />
       </field>
-      <field id="team_iname">
-        <phrase id="fldcaption" value="Name" />
+      <field id="teamn_id">
+        <phrase id="fldcaption" value="teamn id" />
       </field>
       <field id="team_order">
         <phrase id="fldcaption" value="Order" />
-      </field>
-      <field id="team_photo">
-        <phrase id="fldcaption" value="Image" />
-      </field>
-      <field id="teamn_id">
-        <phrase id="fldcaption" value="teamn id" />
       </field>
       <field id="lang_id">
         <phrase id="fldcaption" value="Language" />
       </field>
       <field id="team_name">
         <phrase id="fldcaption" value="Name By Language" />
+      </field>
+      <field id="team_iname">
+        <phrase id="fldcaption" value="Name" />
+      </field>
+      <field id="team_photo">
+        <phrase id="fldcaption" value="Image" />
       </field>
       <field id="team_title">
         <phrase id="fldcaption" value="Title" />
@@ -1624,6 +1651,21 @@
         <phrase id="fldcaption" value="URL" />
       </field>
     </table>
+    <table id="cpy_log">
+      <phrase id="tblcaption" value="cpy log" />
+      <field id="log_id">
+        <phrase id="fldcaption" value="Id" />
+      </field>
+      <field id="user_id">
+        <phrase id="fldcaption" value="User" />
+      </field>
+      <field id="log_date">
+        <phrase id="fldcaption" value="Datetime" />
+      </field>
+      <field id="log_text">
+        <phrase id="fldcaption" value="Text" />
+      </field>
+    </table>
     <table id="phs_block_type">
       <phrase id="tblcaption" value="Block Type" />
       <field id="type_id">
@@ -1691,6 +1733,18 @@
       </field>
       <field id="gend_name">
         <phrase id="fldcaption" value="Name" />
+      </field>
+    </table>
+    <table id="phs_bill_cycle">
+      <phrase id="tblcaption" value="Bill Cycle" />
+      <field id="cycle_id">
+        <phrase id="fldcaption" value="Id" />
+      </field>
+      <field id="cycle_name">
+        <phrase id="fldcaption" value="Name" />
+      </field>
+      <field id="cycle_desc">
+        <phrase id="fldcaption" value="Desc" />
       </field>
     </table>
     <table id="phs_hour">
@@ -1811,6 +1865,246 @@
         <phrase id="fldcaption" value="Name" />
       </field>
     </table>
+    <table id="phs_vkeys">
+      <phrase id="tblcaption" value="Keys" />
+      <field id="key_id">
+        <phrase id="fldcaption" value="Id" />
+      </field>
+      <field id="lang_id">
+        <phrase id="fldcaption" value="lang id" />
+      </field>
+      <field id="kval_id">
+        <phrase id="fldcaption" value="kval id" />
+      </field>
+      <field id="key_name">
+        <phrase id="fldcaption" value="Name" />
+      </field>
+      <field id="key_defvalue">
+        <phrase id="fldcaption" value="Default Value" />
+      </field>
+      <field id="lang_name">
+        <phrase id="fldcaption" value="Language" />
+      </field>
+      <field id="key_value">
+        <phrase id="fldcaption" value="Value" />
+      </field>
+      <field id="key_rvalue">
+        <phrase id="fldcaption" value="Related Value" />
+      </field>
+      <field id="key_text">
+        <phrase id="fldcaption" value="Text" />
+      </field>
+      <field id="lang_dir">
+        <phrase id="fldcaption" value="lang dir" />
+      </field>
+      <field id="status_id">
+        <phrase id="fldcaption" value="status id" />
+      </field>
+      <field id="lang_code">
+        <phrase id="fldcaption" value="lang code" />
+      </field>
+    </table>
+    <table id="app_vbook">
+      <phrase id="tblcaption" value="Books" />
+      <field id="book_id">
+        <phrase id="fldcaption" value="book id" />
+      </field>
+      <field id="bpage_id">
+        <phrase id="fldcaption" value="bpage id" />
+      </field>
+      <field id="lang_id">
+        <phrase id="fldcaption" value="lang id" />
+      </field>
+      <field id="status_id">
+        <phrase id="fldcaption" value="status id" />
+      </field>
+      <field id="book_title">
+        <phrase id="fldcaption" value="Title" />
+      </field>
+      <field id="book_desc">
+        <phrase id="fldcaption" value="Description" />
+      </field>
+      <field id="book_image">
+        <phrase id="fldcaption" value="Image" />
+      </field>
+      <field id="book_price">
+        <phrase id="fldcaption" value="Price" />
+      </field>
+      <field id="page_num">
+        <phrase id="fldcaption" value="Page Number" />
+      </field>
+      <field id="page_image">
+        <phrase id="fldcaption" value="Page Image" />
+      </field>
+      <field id="page_text">
+        <phrase id="fldcaption" value="Text" />
+      </field>
+      <field id="ins_datetime">
+        <phrase id="fldcaption" value="ins datetime" />
+      </field>
+    </table>
+    <table id="app_vtest">
+      <phrase id="tblcaption" value="Tests" />
+      <field id="test_id">
+        <phrase id="fldcaption" value="Id" />
+      </field>
+      <field id="ntest_id">
+        <phrase id="fldcaption" value="ntest id" />
+      </field>
+      <field id="lang_id">
+        <phrase id="fldcaption" value="Language" />
+      </field>
+      <field id="test_num">
+        <phrase id="fldcaption" value="Number" />
+      </field>
+      <field id="test_name">
+        <phrase id="fldcaption" value="Name" />
+      </field>
+      <field id="test_iname">
+        <phrase id="fldcaption" value="IName" />
+      </field>
+      <field id="status_id">
+        <phrase id="fldcaption" value="Status" />
+      </field>
+      <field id="test_image">
+        <phrase id="fldcaption" value="Image" />
+      </field>
+      <field id="test_price">
+        <phrase id="fldcaption" value="Price" />
+      </field>
+      <field id="test_desc">
+        <phrase id="fldcaption" value="Descritpion" />
+      </field>
+    </table>
+    <table id="app_vtest_evaluate">
+      <phrase id="tblcaption" value="Test Evaluation" />
+      <field id="test_id">
+        <phrase id="fldcaption" value="TId" />
+      </field>
+      <field id="ntest_id">
+        <phrase id="fldcaption" value="NId" />
+      </field>
+      <field id="eval_id">
+        <phrase id="fldcaption" value="EId" />
+      </field>
+      <field id="test_num">
+        <phrase id="fldcaption" value="Number" />
+      </field>
+      <field id="test_iname">
+        <phrase id="fldcaption" value="IName" />
+      </field>
+      <field id="lang_id">
+        <phrase id="fldcaption" value="Language" />
+      </field>
+      <field id="status_id">
+        <phrase id="fldcaption" value="Status" />
+      </field>
+      <field id="test_price">
+        <phrase id="fldcaption" value="Price" />
+      </field>
+      <field id="test_image">
+        <phrase id="fldcaption" value="Image" />
+      </field>
+      <field id="test_name">
+        <phrase id="fldcaption" value="Name" />
+      </field>
+      <field id="test_desc">
+        <phrase id="fldcaption" value="Description" />
+      </field>
+      <field id="gend_id">
+        <phrase id="fldcaption" value="Gender" />
+      </field>
+      <field id="eval_from">
+        <phrase id="fldcaption" value="From" />
+      </field>
+      <field id="eval_to">
+        <phrase id="fldcaption" value="To" />
+      </field>
+      <field id="eval_text">
+        <phrase id="fldcaption" value="Text" />
+      </field>
+    </table>
+    <table id="app_vtest_question">
+      <phrase id="tblcaption" value="Test Questions" />
+      <field id="test_id">
+        <phrase id="fldcaption" value="test id" />
+      </field>
+      <field id="ntest_id">
+        <phrase id="fldcaption" value="ntest id" />
+      </field>
+      <field id="qstn_id">
+        <phrase id="fldcaption" value="qstn id" />
+      </field>
+      <field id="test_num">
+        <phrase id="fldcaption" value="Number" />
+      </field>
+      <field id="lang_id">
+        <phrase id="fldcaption" value="Language" />
+      </field>
+      <field id="test_iname">
+        <phrase id="fldcaption" value="IName" />
+      </field>
+      <field id="status_id">
+        <phrase id="fldcaption" value="Status" />
+      </field>
+      <field id="test_price">
+        <phrase id="fldcaption" value="Price" />
+      </field>
+      <field id="test_image">
+        <phrase id="fldcaption" value="Image" />
+      </field>
+      <field id="test_name">
+        <phrase id="fldcaption" value="Name" />
+      </field>
+      <field id="test_desc">
+        <phrase id="fldcaption" value="Description" />
+      </field>
+      <field id="gend_id">
+        <phrase id="fldcaption" value="Gender" />
+      </field>
+      <field id="qstn_num">
+        <phrase id="fldcaption" value="Question Number" />
+      </field>
+      <field id="qstn_text">
+        <phrase id="fldcaption" value="Question Text" />
+      </field>
+      <field id="qstn_ansr1">
+        <phrase id="fldcaption" value="Answer1" />
+      </field>
+      <field id="qstn_ansr2">
+        <phrase id="fldcaption" value="Answer2" />
+      </field>
+      <field id="qstn_ansr3">
+        <phrase id="fldcaption" value="Answer3" />
+      </field>
+      <field id="qstn_ansr4">
+        <phrase id="fldcaption" value="Answer4" />
+      </field>
+      <field id="qstn_rep1">
+        <phrase id="fldcaption" value="Reply1" />
+      </field>
+      <field id="qstn_rep2">
+        <phrase id="fldcaption" value="Reply2" />
+      </field>
+      <field id="qstn_rep3">
+        <phrase id="fldcaption" value="Reply3" />
+      </field>
+      <field id="qstn_rep4">
+        <phrase id="fldcaption" value="Reply4" />
+      </field>
+      <field id="qstn_val1">
+        <phrase id="fldcaption" value="Value1" />
+      </field>
+      <field id="qstn_val2">
+        <phrase id="fldcaption" value="Value2" />
+      </field>
+      <field id="qstn_val3">
+        <phrase id="fldcaption" value="Value3" />
+      </field>
+      <field id="qstn_val4">
+        <phrase id="fldcaption" value="Value4" />
+      </field>
+    </table>
     <table id="phs_metta">
       <phrase id="tblcaption" value="Metta Data" />
       <field id="mtta_id">
@@ -1845,246 +2139,6 @@
       </field>
       <field id="perm_perm">
         <phrase id="fldcaption" value="Permission" />
-      </field>
-    </table>
-    <table id="phs_vkeys">
-      <phrase id="tblcaption" value="Keys" />
-      <field id="key_id">
-        <phrase id="fldcaption" value="Id" />
-      </field>
-      <field id="key_name">
-        <phrase id="fldcaption" value="Name" />
-      </field>
-      <field id="key_defvalue">
-        <phrase id="fldcaption" value="Default Value" />
-      </field>
-      <field id="lang_id">
-        <phrase id="fldcaption" value="lang id" />
-      </field>
-      <field id="lang_name">
-        <phrase id="fldcaption" value="Language" />
-      </field>
-      <field id="lang_dir">
-        <phrase id="fldcaption" value="lang dir" />
-      </field>
-      <field id="status_id">
-        <phrase id="fldcaption" value="status id" />
-      </field>
-      <field id="lang_code">
-        <phrase id="fldcaption" value="lang code" />
-      </field>
-      <field id="kval_id">
-        <phrase id="fldcaption" value="kval id" />
-      </field>
-      <field id="key_value">
-        <phrase id="fldcaption" value="Value" />
-      </field>
-      <field id="key_rvalue">
-        <phrase id="fldcaption" value="Related Value" />
-      </field>
-      <field id="key_text">
-        <phrase id="fldcaption" value="Text" />
-      </field>
-    </table>
-    <table id="app_vbook">
-      <phrase id="tblcaption" value="Books" />
-      <field id="book_id">
-        <phrase id="fldcaption" value="book id" />
-      </field>
-      <field id="lang_id">
-        <phrase id="fldcaption" value="lang id" />
-      </field>
-      <field id="status_id">
-        <phrase id="fldcaption" value="status id" />
-      </field>
-      <field id="book_title">
-        <phrase id="fldcaption" value="book title" />
-      </field>
-      <field id="book_desc">
-        <phrase id="fldcaption" value="book desc" />
-      </field>
-      <field id="book_image">
-        <phrase id="fldcaption" value="book image" />
-      </field>
-      <field id="book_price">
-        <phrase id="fldcaption" value="book price" />
-      </field>
-      <field id="ins_datetime">
-        <phrase id="fldcaption" value="ins datetime" />
-      </field>
-      <field id="bpage_id">
-        <phrase id="fldcaption" value="bpage id" />
-      </field>
-      <field id="page_num">
-        <phrase id="fldcaption" value="page num" />
-      </field>
-      <field id="page_image">
-        <phrase id="fldcaption" value="page image" />
-      </field>
-      <field id="page_text">
-        <phrase id="fldcaption" value="page text" />
-      </field>
-    </table>
-    <table id="app_vtest">
-      <phrase id="tblcaption" value="Tests" />
-      <field id="test_id">
-        <phrase id="fldcaption" value="test id" />
-      </field>
-      <field id="test_num">
-        <phrase id="fldcaption" value="test num" />
-      </field>
-      <field id="test_iname">
-        <phrase id="fldcaption" value="test iname" />
-      </field>
-      <field id="status_id">
-        <phrase id="fldcaption" value="status id" />
-      </field>
-      <field id="test_price">
-        <phrase id="fldcaption" value="test price" />
-      </field>
-      <field id="test_image">
-        <phrase id="fldcaption" value="test image" />
-      </field>
-      <field id="ntest_id">
-        <phrase id="fldcaption" value="ntest id" />
-      </field>
-      <field id="lang_id">
-        <phrase id="fldcaption" value="lang id" />
-      </field>
-      <field id="test_name">
-        <phrase id="fldcaption" value="test name" />
-      </field>
-      <field id="test_desc">
-        <phrase id="fldcaption" value="test desc" />
-      </field>
-    </table>
-    <table id="app_vtest_evaluate">
-      <phrase id="tblcaption" value="Test Evaluation" />
-      <field id="test_id">
-        <phrase id="fldcaption" value="test id" />
-      </field>
-      <field id="test_num">
-        <phrase id="fldcaption" value="test num" />
-      </field>
-      <field id="test_iname">
-        <phrase id="fldcaption" value="test iname" />
-      </field>
-      <field id="status_id">
-        <phrase id="fldcaption" value="status id" />
-      </field>
-      <field id="test_price">
-        <phrase id="fldcaption" value="test price" />
-      </field>
-      <field id="test_image">
-        <phrase id="fldcaption" value="test image" />
-      </field>
-      <field id="ntest_id">
-        <phrase id="fldcaption" value="ntest id" />
-      </field>
-      <field id="lang_id">
-        <phrase id="fldcaption" value="lang id" />
-      </field>
-      <field id="test_name">
-        <phrase id="fldcaption" value="test name" />
-      </field>
-      <field id="test_desc">
-        <phrase id="fldcaption" value="test desc" />
-      </field>
-      <field id="eval_id">
-        <phrase id="fldcaption" value="eval id" />
-      </field>
-      <field id="gend_id">
-        <phrase id="fldcaption" value="gend id" />
-      </field>
-      <field id="eval_from">
-        <phrase id="fldcaption" value="eval from" />
-      </field>
-      <field id="eval_to">
-        <phrase id="fldcaption" value="eval to" />
-      </field>
-      <field id="eval_text">
-        <phrase id="fldcaption" value="eval text" />
-      </field>
-    </table>
-    <table id="app_vtest_question">
-      <phrase id="tblcaption" value="Test Questions" />
-      <field id="test_id">
-        <phrase id="fldcaption" value="test id" />
-      </field>
-      <field id="test_num">
-        <phrase id="fldcaption" value="test num" />
-      </field>
-      <field id="test_iname">
-        <phrase id="fldcaption" value="test iname" />
-      </field>
-      <field id="status_id">
-        <phrase id="fldcaption" value="status id" />
-      </field>
-      <field id="test_price">
-        <phrase id="fldcaption" value="test price" />
-      </field>
-      <field id="test_image">
-        <phrase id="fldcaption" value="test image" />
-      </field>
-      <field id="ntest_id">
-        <phrase id="fldcaption" value="ntest id" />
-      </field>
-      <field id="lang_id">
-        <phrase id="fldcaption" value="lang id" />
-      </field>
-      <field id="test_name">
-        <phrase id="fldcaption" value="test name" />
-      </field>
-      <field id="test_desc">
-        <phrase id="fldcaption" value="test desc" />
-      </field>
-      <field id="qstn_id">
-        <phrase id="fldcaption" value="qstn id" />
-      </field>
-      <field id="gend_id">
-        <phrase id="fldcaption" value="gend id" />
-      </field>
-      <field id="qstn_num">
-        <phrase id="fldcaption" value="qstn num" />
-      </field>
-      <field id="qstn_text">
-        <phrase id="fldcaption" value="qstn text" />
-      </field>
-      <field id="qstn_ansr1">
-        <phrase id="fldcaption" value="qstn ansr 1" />
-      </field>
-      <field id="qstn_ansr2">
-        <phrase id="fldcaption" value="qstn ansr 2" />
-      </field>
-      <field id="qstn_ansr3">
-        <phrase id="fldcaption" value="qstn ansr 3" />
-      </field>
-      <field id="qstn_ansr4">
-        <phrase id="fldcaption" value="qstn ansr 4" />
-      </field>
-      <field id="qstn_rep1">
-        <phrase id="fldcaption" value="qstn rep 1" />
-      </field>
-      <field id="qstn_rep2">
-        <phrase id="fldcaption" value="qstn rep 2" />
-      </field>
-      <field id="qstn_rep3">
-        <phrase id="fldcaption" value="qstn rep 3" />
-      </field>
-      <field id="qstn_rep4">
-        <phrase id="fldcaption" value="qstn rep 4" />
-      </field>
-      <field id="qstn_val1">
-        <phrase id="fldcaption" value="qstn val 1" />
-      </field>
-      <field id="qstn_val2">
-        <phrase id="fldcaption" value="qstn val 2" />
-      </field>
-      <field id="qstn_val3">
-        <phrase id="fldcaption" value="qstn val 3" />
-      </field>
-      <field id="qstn_val4">
-        <phrase id="fldcaption" value="qstn val 4" />
       </field>
     </table>
     <table id="phs_pgroup">
@@ -2126,6 +2180,36 @@
         <phrase id="fldcaption" value="Name" />
       </field>
     </table>
+    <table id="app_vcons_cat">
+      <phrase id="tblcaption" value="Consultation Categories" />
+      <field id="cat_id">
+        <phrase id="fldcaption" value="CId" />
+      </field>
+      <field id="ncat_id">
+        <phrase id="fldcaption" value="NId" />
+      </field>
+      <field id="cat_order">
+        <phrase id="fldcaption" value="Order" />
+      </field>
+      <field id="lang_id">
+        <phrase id="fldcaption" value="Language" />
+      </field>
+      <field id="cat_iname">
+        <phrase id="fldcaption" value="IName" />
+      </field>
+      <field id="status_id">
+        <phrase id="fldcaption" value="Status" />
+      </field>
+      <field id="cat_price">
+        <phrase id="fldcaption" value="Price" />
+      </field>
+      <field id="cat_name">
+        <phrase id="fldcaption" value="Name" />
+      </field>
+      <field id="cat_desc">
+        <phrase id="fldcaption" value="Description" />
+      </field>
+    </table>
     <table id="phs_slider_type">
       <phrase id="tblcaption" value="Slider Types" />
       <field id="stype_jd">
@@ -2142,36 +2226,6 @@
       </field>
       <field id="status_name">
         <phrase id="fldcaption" value="Name" />
-      </field>
-    </table>
-    <table id="app_vcons_cat">
-      <phrase id="tblcaption" value="Consultation Categories" />
-      <field id="cat_id">
-        <phrase id="fldcaption" value="cat id" />
-      </field>
-      <field id="cat_order">
-        <phrase id="fldcaption" value="cat order" />
-      </field>
-      <field id="cat_iname">
-        <phrase id="fldcaption" value="cat iname" />
-      </field>
-      <field id="status_id">
-        <phrase id="fldcaption" value="status id" />
-      </field>
-      <field id="cat_price">
-        <phrase id="fldcaption" value="cat price" />
-      </field>
-      <field id="ncat_id">
-        <phrase id="fldcaption" value="ncat id" />
-      </field>
-      <field id="lang_id">
-        <phrase id="fldcaption" value="lang id" />
-      </field>
-      <field id="cat_name">
-        <phrase id="fldcaption" value="cat name" />
-      </field>
-      <field id="cat_desc">
-        <phrase id="fldcaption" value="cat desc" />
       </field>
     </table>
     <table id="phs_users">
@@ -2196,6 +2250,171 @@
       </field>
       <field id="user_email">
         <phrase id="fldcaption" value="Email" />
+      </field>
+    </table>
+    <table id="phs_log">
+      <phrase id="tblcaption" value="phs log" />
+      <field id="log_id">
+        <phrase id="fldcaption" value="Id" />
+      </field>
+      <field id="log_date">
+        <phrase id="fldcaption" value="Datetime" />
+      </field>
+      <field id="log_action">
+        <phrase id="fldcaption" value="Action" />
+      </field>
+      <field id="log_text">
+        <phrase id="fldcaption" value="Text" />
+      </field>
+    </table>
+    <table id="app_service">
+      <phrase id="tblcaption" value="Services" />
+      <field id="serv_id">
+        <phrase id="fldcaption" value="Id" />
+      </field>
+      <field id="serv_name">
+        <phrase id="fldcaption" value="Name" />
+      </field>
+    </table>
+    <table id="app_vtips">
+      <phrase id="tblcaption" value="Tips" />
+      <field id="tcat_id">
+        <phrase id="fldcaption" value="CId" />
+      </field>
+      <field id="tips_id">
+        <phrase id="fldcaption" value="TId" />
+      </field>
+      <field id="tcat_name">
+        <phrase id="fldcaption" value="Category" />
+      </field>
+      <field id="cstatus_id">
+        <phrase id="fldcaption" value="Category Status" />
+      </field>
+      <field id="lang_id">
+        <phrase id="fldcaption" value="Language" />
+      </field>
+      <field id="status_id">
+        <phrase id="fldcaption" value="Status" />
+      </field>
+      <field id="tips_text">
+        <phrase id="fldcaption" value="Text" />
+      </field>
+      <field id="ins_datetime">
+        <phrase id="fldcaption" value="Datetime" />
+      </field>
+    </table>
+    <table id="app_vtips_package">
+      <phrase id="tblcaption" value="Tips Packages" />
+      <field id="pkg_id">
+        <phrase id="fldcaption" value="PId" />
+      </field>
+      <field id="tcat_id">
+        <phrase id="fldcaption" value="CId" />
+      </field>
+      <field id="cycle_id">
+        <phrase id="fldcaption" value="CycleId" />
+      </field>
+      <field id="tpkg_id">
+        <phrase id="fldcaption" value="Id" />
+      </field>
+      <field id="cycle_desc">
+        <phrase id="fldcaption" value="Cycle Description" />
+      </field>
+      <field id="pkg_name">
+        <phrase id="fldcaption" value="Package Name" />
+      </field>
+      <field id="status_id">
+        <phrase id="fldcaption" value="Status" />
+      </field>
+      <field id="tcat_name">
+        <phrase id="fldcaption" value="Category" />
+      </field>
+      <field id="cycle_name">
+        <phrase id="fldcaption" value="Cycle" />
+      </field>
+      <field id="pkg_price">
+        <phrase id="fldcaption" value="Price" />
+      </field>
+    </table>
+    <table id="app_subscribe">
+      <phrase id="tblcaption" value="Subscribes" />
+      <field id="subs_id">
+        <phrase id="fldcaption" value="Id" />
+      </field>
+      <field id="serv_id">
+        <phrase id="fldcaption" value="Service" />
+      </field>
+      <field id="user_id">
+        <phrase id="fldcaption" value="User" />
+      </field>
+      <field id="cycle_id">
+        <phrase id="fldcaption" value="Cycle" />
+      </field>
+      <field id="book_id">
+        <phrase id="fldcaption" value="Book" />
+      </field>
+      <field id="tcat_id">
+        <phrase id="fldcaption" value="Tips Category" />
+      </field>
+      <field id="test_id">
+        <phrase id="fldcaption" value="Test" />
+      </field>
+      <field id="cat_id">
+        <phrase id="fldcaption" value="Consultation Category" />
+      </field>
+      <field id="cons_id">
+        <phrase id="fldcaption" value="Consultation" />
+      </field>
+      <field id="subs_start">
+        <phrase id="fldcaption" value="Start" />
+      </field>
+      <field id="subs_end">
+        <phrase id="fldcaption" value="End" />
+      </field>
+      <field id="subs_qnt">
+        <phrase id="fldcaption" value="QTY" />
+      </field>
+      <field id="subs_price">
+        <phrase id="fldcaption" value="Price" />
+      </field>
+      <field id="subs_amt">
+        <phrase id="fldcaption" value="Amount" />
+      </field>
+      <field id="ins_datetime">
+        <phrase id="fldcaption" value="Datetime" />
+      </field>
+    </table>
+    <table id="app_tips_package">
+      <phrase id="tblcaption" value="Tips Packages" />
+      <field id="pkg_id">
+        <phrase id="fldcaption" value="Id" />
+      </field>
+      <field id="cycle_id">
+        <phrase id="fldcaption" value="Cycle" />
+      </field>
+      <field id="status_id">
+        <phrase id="fldcaption" value="Status" />
+      </field>
+      <field id="pkg_order">
+        <phrase id="fldcaption" value="Order" />
+      </field>
+      <field id="pkg_name">
+        <phrase id="fldcaption" value="Name" />
+      </field>
+      <field id="pkg_price">
+        <phrase id="fldcaption" value="Price" />
+      </field>
+    </table>
+    <table id="app_tips_pkg_cat">
+      <phrase id="tblcaption" value="Tips Package Categories" />
+      <field id="tpkg_id">
+        <phrase id="fldcaption" value="Id" />
+      </field>
+      <field id="pkg_id">
+        <phrase id="fldcaption" value="Package" />
+      </field>
+      <field id="tcat_id">
+        <phrase id="fldcaption" value="Tips Category" />
       </field>
     </table>
   </project>

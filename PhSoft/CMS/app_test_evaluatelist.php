@@ -1677,6 +1677,11 @@ class capp_test_evaluate_list extends capp_test_evaluate {
 			if ($this->getSqlOrderBy() <> "") {
 				$sOrderBy = $this->getSqlOrderBy();
 				$this->setSessionOrderBy($sOrderBy);
+				$this->test_id->setSort("ASC");
+				$this->lang_id->setSort("ASC");
+				$this->gend_id->setSort("ASC");
+				$this->eval_from->setSort("ASC");
+				$this->eval_to->setSort("ASC");
 			}
 		}
 	}

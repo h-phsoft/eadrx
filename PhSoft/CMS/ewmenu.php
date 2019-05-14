@@ -2,6 +2,10 @@
 
 // Menu
 $RootMenu = new cMenu("RootMenu", TRUE);
+$RootMenu->AddMenuItem(72, "mi_cpy_log", $Language->MenuPhrase("72", "MenuText"), "cpy_loglist.php", -1, "", AllowListMenu('{0D45E216-03EA-4B51-B419-4F1A34666877}cpy_log'), FALSE, FALSE, "");
+$RootMenu->AddMenuItem(73, "mi_phs_log", $Language->MenuPhrase("73", "MenuText"), "phs_loglist.php", -1, "", AllowListMenu('{0D45E216-03EA-4B51-B419-4F1A34666877}phs_log'), FALSE, FALSE, "");
+$RootMenu->AddMenuItem(74, "mi_app_vtips", $Language->MenuPhrase("74", "MenuText"), "app_vtipslist.php", -1, "", AllowListMenu('{0D45E216-03EA-4B51-B419-4F1A34666877}app_vtips'), FALSE, FALSE, "");
+$RootMenu->AddMenuItem(75, "mi_app_vtips_package", $Language->MenuPhrase("75", "MenuText"), "app_vtips_packagelist.php", -1, "", AllowListMenu('{0D45E216-03EA-4B51-B419-4F1A34666877}app_vtips_package'), FALSE, FALSE, "");
 $RootMenu->AddMenuItem(17, "mi_cpy_news", $Language->MenuPhrase("17", "MenuText"), "cpy_newslist.php", -1, "", AllowListMenu('{0D45E216-03EA-4B51-B419-4F1A34666877}cpy_news'), FALSE, FALSE, "");
 $RootMenu->AddMenuItem(14, "mi_cpy_ads", $Language->MenuPhrase("14", "MenuText"), "cpy_adslist.php", -1, "", AllowListMenu('{0D45E216-03EA-4B51-B419-4F1A34666877}cpy_ads'), FALSE, FALSE, "");
 $RootMenu->AddMenuItem(64, "mi_app_notification", $Language->MenuPhrase("64", "MenuText"), "app_notificationlist.php", -1, "", AllowListMenu('{0D45E216-03EA-4B51-B419-4F1A34666877}app_notification'), FALSE, FALSE, "");
@@ -10,8 +14,10 @@ $RootMenu->AddMenuItem(1, "mi_app_book", $Language->MenuPhrase("1", "MenuText"),
 $RootMenu->AddMenuItem(7, "mi_app_test", $Language->MenuPhrase("7", "MenuText"), "app_testlist.php", -1, "", AllowListMenu('{0D45E216-03EA-4B51-B419-4F1A34666877}app_test'), FALSE, FALSE, "");
 $RootMenu->AddMenuItem(13, "mi_app_tips_category", $Language->MenuPhrase("13", "MenuText"), "app_tips_categorylist.php", -1, "", AllowListMenu('{0D45E216-03EA-4B51-B419-4F1A34666877}app_tips_category'), FALSE, FALSE, "");
 $RootMenu->AddMenuItem(16, "mi_cpy_faq_category", $Language->MenuPhrase("16", "MenuText"), "cpy_faq_categorylist.php", -1, "", AllowListMenu('{0D45E216-03EA-4B51-B419-4F1A34666877}cpy_faq_category'), FALSE, FALSE, "");
+$RootMenu->AddMenuItem(71, "mi_app_tips_package", $Language->MenuPhrase("71", "MenuText"), "app_tips_packagelist.php", -1, "", AllowListMenu('{0D45E216-03EA-4B51-B419-4F1A34666877}app_tips_package'), FALSE, FALSE, "");
 $RootMenu->AddMenuItem(23, "mi_cpy_slider_mst", $Language->MenuPhrase("23", "MenuText"), "cpy_slider_mstlist.php", -1, "", AllowListMenu('{0D45E216-03EA-4B51-B419-4F1A34666877}cpy_slider_mst'), FALSE, FALSE, "");
 $RootMenu->AddMenuItem(27, "mi_cpy_user", $Language->MenuPhrase("27", "MenuText"), "cpy_userlist.php", -1, "", AllowListMenu('{0D45E216-03EA-4B51-B419-4F1A34666877}cpy_user'), FALSE, FALSE, "");
+$RootMenu->AddMenuItem(68, "mi_app_subscribe", $Language->MenuPhrase("68", "MenuText"), "app_subscribelist.php", -1, "", AllowListMenu('{0D45E216-03EA-4B51-B419-4F1A34666877}app_subscribe'), FALSE, FALSE, "");
 $RootMenu->AddMenuItem(28, "mi_cpy_video", $Language->MenuPhrase("28", "MenuText"), "cpy_videolist.php", -1, "", AllowListMenu('{0D45E216-03EA-4B51-B419-4F1A34666877}cpy_video'), FALSE, FALSE, "");
 $RootMenu->AddMenuItem(37, "mi_phs_keys", $Language->MenuPhrase("37", "MenuText"), "phs_keyslist.php", -1, "", AllowListMenu('{0D45E216-03EA-4B51-B419-4F1A34666877}phs_keys'), FALSE, FALSE, "");
 $RootMenu->AddMenuItem(53, "mci_Views", $Language->MenuPhrase("53", "MenuText"), "", -1, "", TRUE, FALSE, TRUE, "");
@@ -33,6 +39,7 @@ $RootMenu->AddMenuItem(2, "mi_app_book_page", $Language->MenuPhrase("2", "MenuTe
 $RootMenu->AddMenuItem(24, "mi_cpy_slider_trn", $Language->MenuPhrase("24", "MenuText"), "cpy_slider_trnlist.php?cmd=resetall", 52, "", AllowListMenu('{0D45E216-03EA-4B51-B419-4F1A34666877}cpy_slider_trn'), FALSE, FALSE, "");
 $RootMenu->AddMenuItem(18, "mi_cpy_news_images", $Language->MenuPhrase("18", "MenuText"), "cpy_news_imageslist.php?cmd=resetall", 52, "", AllowListMenu('{0D45E216-03EA-4B51-B419-4F1A34666877}cpy_news_images'), FALSE, FALSE, "");
 $RootMenu->AddMenuItem(9, "mi_app_test_name", $Language->MenuPhrase("9", "MenuText"), "app_test_namelist.php?cmd=resetall", 52, "", AllowListMenu('{0D45E216-03EA-4B51-B419-4F1A34666877}app_test_name'), FALSE, FALSE, "");
+$RootMenu->AddMenuItem(70, "mi_phs_bill_cycle", $Language->MenuPhrase("70", "MenuText"), "phs_bill_cyclelist.php", 52, "", AllowListMenu('{0D45E216-03EA-4B51-B419-4F1A34666877}phs_bill_cycle'), FALSE, FALSE, "");
 $RootMenu->AddMenuItem(10, "mi_app_test_question", $Language->MenuPhrase("10", "MenuText"), "app_test_questionlist.php?cmd=resetall", 52, "", AllowListMenu('{0D45E216-03EA-4B51-B419-4F1A34666877}app_test_question'), FALSE, FALSE, "");
 $RootMenu->AddMenuItem(8, "mi_app_test_evaluate", $Language->MenuPhrase("8", "MenuText"), "app_test_evaluatelist.php?cmd=resetall", 52, "", AllowListMenu('{0D45E216-03EA-4B51-B419-4F1A34666877}app_test_evaluate'), FALSE, FALSE, "");
 $RootMenu->AddMenuItem(12, "mi_app_tips", $Language->MenuPhrase("12", "MenuText"), "app_tipslist.php?cmd=resetall", 52, "", AllowListMenu('{0D45E216-03EA-4B51-B419-4F1A34666877}app_tips'), FALSE, FALSE, "");
@@ -41,6 +48,8 @@ $RootMenu->AddMenuItem(61, "mi_app_notif_for", $Language->MenuPhrase("61", "Menu
 $RootMenu->AddMenuItem(62, "mi_app_notification_status", $Language->MenuPhrase("62", "MenuText"), "app_notification_statuslist.php?cmd=resetall", 52, "", AllowListMenu('{0D45E216-03EA-4B51-B419-4F1A34666877}app_notification_status'), FALSE, FALSE, "");
 $RootMenu->AddMenuItem(63, "mi_app_notif_status", $Language->MenuPhrase("63", "MenuText"), "app_notif_statuslist.php", 52, "", AllowListMenu('{0D45E216-03EA-4B51-B419-4F1A34666877}app_notif_status'), FALSE, FALSE, "");
 $RootMenu->AddMenuItem(60, "mi_app_consultation_category_name", $Language->MenuPhrase("60", "MenuText"), "app_consultation_category_namelist.php?cmd=resetall", 52, "", AllowListMenu('{0D45E216-03EA-4B51-B419-4F1A34666877}app_consultation_category_name'), FALSE, FALSE, "");
+$RootMenu->AddMenuItem(67, "mi_app_service", $Language->MenuPhrase("67", "MenuText"), "app_servicelist.php", 52, "", AllowListMenu('{0D45E216-03EA-4B51-B419-4F1A34666877}app_service'), FALSE, FALSE, "");
+$RootMenu->AddMenuItem(69, "mi_app_tips_pkg_cat", $Language->MenuPhrase("69", "MenuText"), "app_tips_pkg_catlist.php", 52, "", AllowListMenu('{0D45E216-03EA-4B51-B419-4F1A34666877}app_tips_pkg_cat'), FALSE, FALSE, "");
 $RootMenu->AddMenuItem(15, "mi_cpy_faq", $Language->MenuPhrase("15", "MenuText"), "cpy_faqlist.php", 52, "", AllowListMenu('{0D45E216-03EA-4B51-B419-4F1A34666877}cpy_faq'), FALSE, FALSE, "");
 $RootMenu->AddMenuItem(6, "mi_app_consultation_status", $Language->MenuPhrase("6", "MenuText"), "app_consultation_statuslist.php", 52, "", AllowListMenu('{0D45E216-03EA-4B51-B419-4F1A34666877}app_consultation_status'), FALSE, FALSE, "");
 $RootMenu->AddMenuItem(19, "mi_cpy_page", $Language->MenuPhrase("19", "MenuText"), "cpy_pagelist.php", 52, "", AllowListMenu('{0D45E216-03EA-4B51-B419-4F1A34666877}cpy_page'), FALSE, FALSE, "");

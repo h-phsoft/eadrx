@@ -1685,6 +1685,7 @@ class capp_test_list extends capp_test {
 			if ($this->getSqlOrderBy() <> "") {
 				$sOrderBy = $this->getSqlOrderBy();
 				$this->setSessionOrderBy($sOrderBy);
+				$this->test_num->setSort("ASC");
 			}
 		}
 	}

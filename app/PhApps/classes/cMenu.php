@@ -86,7 +86,7 @@ class cMenu {
     $rMenu = cMenu::getInstance($nId, $full, $ascDec);
     $vMenu = chr(13);
     foreach ($rMenu->aSubs as $menu) {
-      $menuRef = "?l=" . $nLang . "&m=" . $menu->Menu_Id;
+      $menuRef = "?" . $nLang . "/" . $menu->Menu_Id;
       if ($menu->Menu_URL != '') {
         $menuRef = $menu->Menu_URL;
       }

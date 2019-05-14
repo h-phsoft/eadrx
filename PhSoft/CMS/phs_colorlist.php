@@ -1593,6 +1593,7 @@ class cphs_color_list extends cphs_color {
 			if ($this->getSqlOrderBy() <> "") {
 				$sOrderBy = $this->getSqlOrderBy();
 				$this->setSessionOrderBy($sOrderBy);
+				$this->color_name->setSort("ASC");
 			}
 		}
 	}

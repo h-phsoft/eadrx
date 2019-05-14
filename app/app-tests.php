@@ -3,6 +3,7 @@
   $aTests = cTest::getArray("`lang_id`=" . $curLang->Lang_Id);
   if (count($aTests) > 0) {
     foreach ($aTests as $test) {
+      $nCount = ph_GetDBValue('count(*)', '`app_subscribe`', '`user_id`=' . $nUserId . ' AND `serv_id`=4 AND `test_id`=' . $test->Test_Id);
       ?>
       <div class="block col-12 col-sm-12 my-3">
         <div class="block-body">
@@ -28,8 +29,14 @@
               </div>
               <div class="row my-3">
                 <div class="col-12 text-right">
-                  <a class="btn btn-success" href="?<?php echo $nLang . '/' . ph_Setting('App-Menu-Test') . '/' . $test->Test_Id; ?>"><?php echo ph_DBKey('Results', $curLang->Lang_Id); ?></a>
-                  <a class="btn btn-info" href="?<?php echo $nLang . '/' . ph_Setting('App-Menu-Take-Test') . '/' . $test->Test_Id; ?>"><?php echo ph_DBKey('Take it', $curLang->Lang_Id) . ' ' . $test->Test_Price . ph_Setting('Currency-Sign'); ?></a>
+                  <?php
+                  if ($nCount > 0) {
+                    ?>
+                    <a class="btn btn-success" href="?<?php echo $nLang . '/' . ph_Setting('App-Menu-Test') . '/' . $test->Test_Id; ?>"><?php echo ph_DBKey('Results', $curLang->Lang_Id); ?></a>
+                    <?php
+                  }
+                  ?>
+                  <a class="btn btn-info" href="?<?php echo $nLang . '/' . ph_Setting('App-Menu-Take-Test') . '/' . $test->Test_Id; ?>"><?php echo ph_DBKey('Take test', $curLang->Lang_Id) . ' ' . $test->Test_Price . ph_Setting('Currency-Sign'); ?></a>
                 </div>
               </div>
             </div>

@@ -238,7 +238,7 @@ class capp_consult_assign extends cTable {
 	var $_SqlOrderBy = "";
 
 	function getSqlOrderBy() { // Order By
-		return ($this->_SqlOrderBy <> "") ? $this->_SqlOrderBy : "";
+		return ($this->_SqlOrderBy <> "") ? $this->_SqlOrderBy : "`cons_id` ASC,`user_id` ASC";
 	}
 
 	function SqlOrderBy() { // For backward compatibility

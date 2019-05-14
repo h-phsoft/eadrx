@@ -1789,6 +1789,8 @@ class ccpy_page_row_block_list extends ccpy_page_row_block {
 			if ($this->getSqlOrderBy() <> "") {
 				$sOrderBy = $this->getSqlOrderBy();
 				$this->setSessionOrderBy($sOrderBy);
+				$this->row_id->setSort("ASC");
+				$this->blk_order->setSort("ASC");
 			}
 		}
 	}

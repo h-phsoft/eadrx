@@ -8,14 +8,14 @@ $app_vtest = NULL;
 //
 class capp_vtest extends cTable {
 	var $test_id;
-	var $test_num;
-	var $test_iname;
-	var $status_id;
-	var $test_price;
-	var $test_image;
 	var $ntest_id;
 	var $lang_id;
+	var $test_num;
 	var $test_name;
+	var $test_iname;
+	var $status_id;
+	var $test_image;
+	var $test_price;
 	var $test_desc;
 
 	//
@@ -52,9 +52,23 @@ class capp_vtest extends cTable {
 
 		// test_id
 		$this->test_id = new cField('app_vtest', 'app_vtest', 'x_test_id', 'test_id', '`test_id`', '`test_id`', 3, -1, FALSE, '`test_id`', FALSE, FALSE, FALSE, 'FORMATTED TEXT', 'NO');
-		$this->test_id->Sortable = TRUE; // Allow sort
+		$this->test_id->Sortable = FALSE; // Allow sort
 		$this->test_id->FldDefaultErrMsg = $Language->Phrase("IncorrectInteger");
 		$this->fields['test_id'] = &$this->test_id;
+
+		// ntest_id
+		$this->ntest_id = new cField('app_vtest', 'app_vtest', 'x_ntest_id', 'ntest_id', '`ntest_id`', '`ntest_id`', 3, -1, FALSE, '`ntest_id`', FALSE, FALSE, FALSE, 'FORMATTED TEXT', 'NO');
+		$this->ntest_id->Sortable = FALSE; // Allow sort
+		$this->ntest_id->FldDefaultErrMsg = $Language->Phrase("IncorrectInteger");
+		$this->fields['ntest_id'] = &$this->ntest_id;
+
+		// lang_id
+		$this->lang_id = new cField('app_vtest', 'app_vtest', 'x_lang_id', 'lang_id', '`lang_id`', '`lang_id`', 3, -1, FALSE, '`lang_id`', FALSE, FALSE, FALSE, 'FORMATTED TEXT', 'SELECT');
+		$this->lang_id->Sortable = TRUE; // Allow sort
+		$this->lang_id->UsePleaseSelect = TRUE; // Use PleaseSelect by default
+		$this->lang_id->PleaseSelectText = $Language->Phrase("PleaseSelect"); // PleaseSelect text
+		$this->lang_id->FldDefaultErrMsg = $Language->Phrase("IncorrectInteger");
+		$this->fields['lang_id'] = &$this->lang_id;
 
 		// test_num
 		$this->test_num = new cField('app_vtest', 'app_vtest', 'x_test_num', 'test_num', '`test_num`', '`test_num`', 16, -1, FALSE, '`test_num`', FALSE, FALSE, FALSE, 'FORMATTED TEXT', 'TEXT');
@@ -62,44 +76,34 @@ class capp_vtest extends cTable {
 		$this->test_num->FldDefaultErrMsg = $Language->Phrase("IncorrectInteger");
 		$this->fields['test_num'] = &$this->test_num;
 
+		// test_name
+		$this->test_name = new cField('app_vtest', 'app_vtest', 'x_test_name', 'test_name', '`test_name`', '`test_name`', 200, -1, FALSE, '`test_name`', FALSE, FALSE, FALSE, 'FORMATTED TEXT', 'TEXT');
+		$this->test_name->Sortable = TRUE; // Allow sort
+		$this->fields['test_name'] = &$this->test_name;
+
 		// test_iname
 		$this->test_iname = new cField('app_vtest', 'app_vtest', 'x_test_iname', 'test_iname', '`test_iname`', '`test_iname`', 200, -1, FALSE, '`test_iname`', FALSE, FALSE, FALSE, 'FORMATTED TEXT', 'TEXT');
 		$this->test_iname->Sortable = TRUE; // Allow sort
 		$this->fields['test_iname'] = &$this->test_iname;
 
 		// status_id
-		$this->status_id = new cField('app_vtest', 'app_vtest', 'x_status_id', 'status_id', '`status_id`', '`status_id`', 16, -1, FALSE, '`status_id`', FALSE, FALSE, FALSE, 'FORMATTED TEXT', 'TEXT');
+		$this->status_id = new cField('app_vtest', 'app_vtest', 'x_status_id', 'status_id', '`status_id`', '`status_id`', 16, -1, FALSE, '`status_id`', FALSE, FALSE, FALSE, 'FORMATTED TEXT', 'SELECT');
 		$this->status_id->Sortable = TRUE; // Allow sort
+		$this->status_id->UsePleaseSelect = TRUE; // Use PleaseSelect by default
+		$this->status_id->PleaseSelectText = $Language->Phrase("PleaseSelect"); // PleaseSelect text
 		$this->status_id->FldDefaultErrMsg = $Language->Phrase("IncorrectInteger");
 		$this->fields['status_id'] = &$this->status_id;
+
+		// test_image
+		$this->test_image = new cField('app_vtest', 'app_vtest', 'x_test_image', 'test_image', '`test_image`', '`test_image`', 200, -1, TRUE, '`test_image`', FALSE, FALSE, FALSE, 'IMAGE', 'FILE');
+		$this->test_image->Sortable = TRUE; // Allow sort
+		$this->fields['test_image'] = &$this->test_image;
 
 		// test_price
 		$this->test_price = new cField('app_vtest', 'app_vtest', 'x_test_price', 'test_price', '`test_price`', '`test_price`', 131, -1, FALSE, '`test_price`', FALSE, FALSE, FALSE, 'FORMATTED TEXT', 'TEXT');
 		$this->test_price->Sortable = TRUE; // Allow sort
 		$this->test_price->FldDefaultErrMsg = $Language->Phrase("IncorrectFloat");
 		$this->fields['test_price'] = &$this->test_price;
-
-		// test_image
-		$this->test_image = new cField('app_vtest', 'app_vtest', 'x_test_image', 'test_image', '`test_image`', '`test_image`', 200, -1, FALSE, '`test_image`', FALSE, FALSE, FALSE, 'FORMATTED TEXT', 'TEXT');
-		$this->test_image->Sortable = TRUE; // Allow sort
-		$this->fields['test_image'] = &$this->test_image;
-
-		// ntest_id
-		$this->ntest_id = new cField('app_vtest', 'app_vtest', 'x_ntest_id', 'ntest_id', '`ntest_id`', '`ntest_id`', 3, -1, FALSE, '`ntest_id`', FALSE, FALSE, FALSE, 'FORMATTED TEXT', 'NO');
-		$this->ntest_id->Sortable = TRUE; // Allow sort
-		$this->ntest_id->FldDefaultErrMsg = $Language->Phrase("IncorrectInteger");
-		$this->fields['ntest_id'] = &$this->ntest_id;
-
-		// lang_id
-		$this->lang_id = new cField('app_vtest', 'app_vtest', 'x_lang_id', 'lang_id', '`lang_id`', '`lang_id`', 3, -1, FALSE, '`lang_id`', FALSE, FALSE, FALSE, 'FORMATTED TEXT', 'TEXT');
-		$this->lang_id->Sortable = TRUE; // Allow sort
-		$this->lang_id->FldDefaultErrMsg = $Language->Phrase("IncorrectInteger");
-		$this->fields['lang_id'] = &$this->lang_id;
-
-		// test_name
-		$this->test_name = new cField('app_vtest', 'app_vtest', 'x_test_name', 'test_name', '`test_name`', '`test_name`', 200, -1, FALSE, '`test_name`', FALSE, FALSE, FALSE, 'FORMATTED TEXT', 'TEXT');
-		$this->test_name->Sortable = TRUE; // Allow sort
-		$this->fields['test_name'] = &$this->test_name;
 
 		// test_desc
 		$this->test_desc = new cField('app_vtest', 'app_vtest', 'x_test_desc', 'test_desc', '`test_desc`', '`test_desc`', 201, -1, FALSE, '`test_desc`', FALSE, FALSE, FALSE, 'FORMATTED TEXT', 'TEXTAREA');
@@ -216,7 +220,7 @@ class capp_vtest extends cTable {
 	var $_SqlOrderBy = "";
 
 	function getSqlOrderBy() { // Order By
-		return ($this->_SqlOrderBy <> "") ? $this->_SqlOrderBy : "";
+		return ($this->_SqlOrderBy <> "") ? $this->_SqlOrderBy : "`lang_id` ASC,`test_num` ASC";
 	}
 
 	function SqlOrderBy() { // For backward compatibility
@@ -667,14 +671,14 @@ class capp_vtest extends cTable {
 	// Load row values from recordset
 	function LoadListRowValues(&$rs) {
 		$this->test_id->setDbValue($rs->fields('test_id'));
-		$this->test_num->setDbValue($rs->fields('test_num'));
-		$this->test_iname->setDbValue($rs->fields('test_iname'));
-		$this->status_id->setDbValue($rs->fields('status_id'));
-		$this->test_price->setDbValue($rs->fields('test_price'));
-		$this->test_image->setDbValue($rs->fields('test_image'));
 		$this->ntest_id->setDbValue($rs->fields('ntest_id'));
 		$this->lang_id->setDbValue($rs->fields('lang_id'));
+		$this->test_num->setDbValue($rs->fields('test_num'));
 		$this->test_name->setDbValue($rs->fields('test_name'));
+		$this->test_iname->setDbValue($rs->fields('test_iname'));
+		$this->status_id->setDbValue($rs->fields('status_id'));
+		$this->test_image->Upload->DbValue = $rs->fields('test_image');
+		$this->test_price->setDbValue($rs->fields('test_price'));
 		$this->test_desc->setDbValue($rs->fields('test_desc'));
 	}
 
@@ -687,51 +691,102 @@ class capp_vtest extends cTable {
 
 	// Common render codes
 		// test_id
+
+		$this->test_id->CellCssStyle = "white-space: nowrap;";
+
+		// ntest_id
+		$this->ntest_id->CellCssStyle = "white-space: nowrap;";
+
+		// lang_id
 		// test_num
+		// test_name
 		// test_iname
 		// status_id
-		// test_price
 		// test_image
-		// ntest_id
-		// lang_id
-		// test_name
+		// test_price
 		// test_desc
 		// test_id
 
 		$this->test_id->ViewValue = $this->test_id->CurrentValue;
 		$this->test_id->ViewCustomAttributes = "";
 
+		// ntest_id
+		$this->ntest_id->ViewValue = $this->ntest_id->CurrentValue;
+		$this->ntest_id->ViewCustomAttributes = "";
+
+		// lang_id
+		if (strval($this->lang_id->CurrentValue) <> "") {
+			$sFilterWrk = "`lang_id`" . ew_SearchString("=", $this->lang_id->CurrentValue, EW_DATATYPE_NUMBER, "");
+		$sSqlWrk = "SELECT `lang_id`, `lang_name` AS `DispFld`, '' AS `Disp2Fld`, '' AS `Disp3Fld`, '' AS `Disp4Fld` FROM `phs_language`";
+		$sWhereWrk = "";
+		$this->lang_id->LookupFilters = array();
+		ew_AddFilter($sWhereWrk, $sFilterWrk);
+		$this->Lookup_Selecting($this->lang_id, $sWhereWrk); // Call Lookup Selecting
+		if ($sWhereWrk <> "") $sSqlWrk .= " WHERE " . $sWhereWrk;
+			$rswrk = Conn()->Execute($sSqlWrk);
+			if ($rswrk && !$rswrk->EOF) { // Lookup values found
+				$arwrk = array();
+				$arwrk[1] = $rswrk->fields('DispFld');
+				$this->lang_id->ViewValue = $this->lang_id->DisplayValue($arwrk);
+				$rswrk->Close();
+			} else {
+				$this->lang_id->ViewValue = $this->lang_id->CurrentValue;
+			}
+		} else {
+			$this->lang_id->ViewValue = NULL;
+		}
+		$this->lang_id->ViewCustomAttributes = "";
+
 		// test_num
 		$this->test_num->ViewValue = $this->test_num->CurrentValue;
 		$this->test_num->ViewCustomAttributes = "";
+
+		// test_name
+		$this->test_name->ViewValue = $this->test_name->CurrentValue;
+		$this->test_name->ViewCustomAttributes = "";
 
 		// test_iname
 		$this->test_iname->ViewValue = $this->test_iname->CurrentValue;
 		$this->test_iname->ViewCustomAttributes = "";
 
 		// status_id
-		$this->status_id->ViewValue = $this->status_id->CurrentValue;
+		if (strval($this->status_id->CurrentValue) <> "") {
+			$sFilterWrk = "`status_id`" . ew_SearchString("=", $this->status_id->CurrentValue, EW_DATATYPE_NUMBER, "");
+		$sSqlWrk = "SELECT `status_id`, `status_name` AS `DispFld`, '' AS `Disp2Fld`, '' AS `Disp3Fld`, '' AS `Disp4Fld` FROM `phs_status`";
+		$sWhereWrk = "";
+		$this->status_id->LookupFilters = array();
+		ew_AddFilter($sWhereWrk, $sFilterWrk);
+		$this->Lookup_Selecting($this->status_id, $sWhereWrk); // Call Lookup Selecting
+		if ($sWhereWrk <> "") $sSqlWrk .= " WHERE " . $sWhereWrk;
+			$rswrk = Conn()->Execute($sSqlWrk);
+			if ($rswrk && !$rswrk->EOF) { // Lookup values found
+				$arwrk = array();
+				$arwrk[1] = $rswrk->fields('DispFld');
+				$this->status_id->ViewValue = $this->status_id->DisplayValue($arwrk);
+				$rswrk->Close();
+			} else {
+				$this->status_id->ViewValue = $this->status_id->CurrentValue;
+			}
+		} else {
+			$this->status_id->ViewValue = NULL;
+		}
 		$this->status_id->ViewCustomAttributes = "";
+
+		// test_image
+		$this->test_image->UploadPath = '../../assets/img/testImages';
+		if (!ew_Empty($this->test_image->Upload->DbValue)) {
+			$this->test_image->ImageWidth = 200;
+			$this->test_image->ImageHeight = 0;
+			$this->test_image->ImageAlt = $this->test_image->FldAlt();
+			$this->test_image->ViewValue = $this->test_image->Upload->DbValue;
+		} else {
+			$this->test_image->ViewValue = "";
+		}
+		$this->test_image->ViewCustomAttributes = "";
 
 		// test_price
 		$this->test_price->ViewValue = $this->test_price->CurrentValue;
 		$this->test_price->ViewCustomAttributes = "";
-
-		// test_image
-		$this->test_image->ViewValue = $this->test_image->CurrentValue;
-		$this->test_image->ViewCustomAttributes = "";
-
-		// ntest_id
-		$this->ntest_id->ViewValue = $this->ntest_id->CurrentValue;
-		$this->ntest_id->ViewCustomAttributes = "";
-
-		// lang_id
-		$this->lang_id->ViewValue = $this->lang_id->CurrentValue;
-		$this->lang_id->ViewCustomAttributes = "";
-
-		// test_name
-		$this->test_name->ViewValue = $this->test_name->CurrentValue;
-		$this->test_name->ViewCustomAttributes = "";
 
 		// test_desc
 		$this->test_desc->ViewValue = $this->test_desc->CurrentValue;
@@ -741,31 +796,6 @@ class capp_vtest extends cTable {
 		$this->test_id->LinkCustomAttributes = "";
 		$this->test_id->HrefValue = "";
 		$this->test_id->TooltipValue = "";
-
-		// test_num
-		$this->test_num->LinkCustomAttributes = "";
-		$this->test_num->HrefValue = "";
-		$this->test_num->TooltipValue = "";
-
-		// test_iname
-		$this->test_iname->LinkCustomAttributes = "";
-		$this->test_iname->HrefValue = "";
-		$this->test_iname->TooltipValue = "";
-
-		// status_id
-		$this->status_id->LinkCustomAttributes = "";
-		$this->status_id->HrefValue = "";
-		$this->status_id->TooltipValue = "";
-
-		// test_price
-		$this->test_price->LinkCustomAttributes = "";
-		$this->test_price->HrefValue = "";
-		$this->test_price->TooltipValue = "";
-
-		// test_image
-		$this->test_image->LinkCustomAttributes = "";
-		$this->test_image->HrefValue = "";
-		$this->test_image->TooltipValue = "";
 
 		// ntest_id
 		$this->ntest_id->LinkCustomAttributes = "";
@@ -777,10 +807,49 @@ class capp_vtest extends cTable {
 		$this->lang_id->HrefValue = "";
 		$this->lang_id->TooltipValue = "";
 
+		// test_num
+		$this->test_num->LinkCustomAttributes = "";
+		$this->test_num->HrefValue = "";
+		$this->test_num->TooltipValue = "";
+
 		// test_name
 		$this->test_name->LinkCustomAttributes = "";
 		$this->test_name->HrefValue = "";
 		$this->test_name->TooltipValue = "";
+
+		// test_iname
+		$this->test_iname->LinkCustomAttributes = "";
+		$this->test_iname->HrefValue = "";
+		$this->test_iname->TooltipValue = "";
+
+		// status_id
+		$this->status_id->LinkCustomAttributes = "";
+		$this->status_id->HrefValue = "";
+		$this->status_id->TooltipValue = "";
+
+		// test_image
+		$this->test_image->LinkCustomAttributes = "";
+		$this->test_image->UploadPath = '../../assets/img/testImages';
+		if (!ew_Empty($this->test_image->Upload->DbValue)) {
+			$this->test_image->HrefValue = ew_GetFileUploadUrl($this->test_image, $this->test_image->Upload->DbValue); // Add prefix/suffix
+			$this->test_image->LinkAttrs["target"] = ""; // Add target
+			if ($this->Export <> "") $this->test_image->HrefValue = ew_FullUrl($this->test_image->HrefValue, "href");
+		} else {
+			$this->test_image->HrefValue = "";
+		}
+		$this->test_image->HrefValue2 = $this->test_image->UploadPath . $this->test_image->Upload->DbValue;
+		$this->test_image->TooltipValue = "";
+		if ($this->test_image->UseColorbox) {
+			if (ew_Empty($this->test_image->TooltipValue))
+				$this->test_image->LinkAttrs["title"] = $Language->Phrase("ViewImageGallery");
+			$this->test_image->LinkAttrs["data-rel"] = "app_vtest_x_test_image";
+			ew_AppendClass($this->test_image->LinkAttrs["class"], "ewLightbox");
+		}
+
+		// test_price
+		$this->test_price->LinkCustomAttributes = "";
+		$this->test_price->HrefValue = "";
+		$this->test_price->TooltipValue = "";
 
 		// test_desc
 		$this->test_desc->LinkCustomAttributes = "";
@@ -807,11 +876,27 @@ class capp_vtest extends cTable {
 		$this->test_id->EditValue = $this->test_id->CurrentValue;
 		$this->test_id->ViewCustomAttributes = "";
 
+		// ntest_id
+		$this->ntest_id->EditAttrs["class"] = "form-control";
+		$this->ntest_id->EditCustomAttributes = "";
+		$this->ntest_id->EditValue = $this->ntest_id->CurrentValue;
+		$this->ntest_id->ViewCustomAttributes = "";
+
+		// lang_id
+		$this->lang_id->EditAttrs["class"] = "form-control";
+		$this->lang_id->EditCustomAttributes = "";
+
 		// test_num
 		$this->test_num->EditAttrs["class"] = "form-control";
 		$this->test_num->EditCustomAttributes = "";
 		$this->test_num->EditValue = $this->test_num->CurrentValue;
 		$this->test_num->PlaceHolder = ew_RemoveHtml($this->test_num->FldCaption());
+
+		// test_name
+		$this->test_name->EditAttrs["class"] = "form-control";
+		$this->test_name->EditCustomAttributes = "";
+		$this->test_name->EditValue = $this->test_name->CurrentValue;
+		$this->test_name->PlaceHolder = ew_RemoveHtml($this->test_name->FldCaption());
 
 		// test_iname
 		$this->test_iname->EditAttrs["class"] = "form-control";
@@ -822,8 +907,21 @@ class capp_vtest extends cTable {
 		// status_id
 		$this->status_id->EditAttrs["class"] = "form-control";
 		$this->status_id->EditCustomAttributes = "";
-		$this->status_id->EditValue = $this->status_id->CurrentValue;
-		$this->status_id->PlaceHolder = ew_RemoveHtml($this->status_id->FldCaption());
+
+		// test_image
+		$this->test_image->EditAttrs["class"] = "form-control";
+		$this->test_image->EditCustomAttributes = "";
+		$this->test_image->UploadPath = '../../assets/img/testImages';
+		if (!ew_Empty($this->test_image->Upload->DbValue)) {
+			$this->test_image->ImageWidth = 200;
+			$this->test_image->ImageHeight = 0;
+			$this->test_image->ImageAlt = $this->test_image->FldAlt();
+			$this->test_image->EditValue = $this->test_image->Upload->DbValue;
+		} else {
+			$this->test_image->EditValue = "";
+		}
+		if (!ew_Empty($this->test_image->CurrentValue))
+				$this->test_image->Upload->FileName = $this->test_image->CurrentValue;
 
 		// test_price
 		$this->test_price->EditAttrs["class"] = "form-control";
@@ -831,30 +929,6 @@ class capp_vtest extends cTable {
 		$this->test_price->EditValue = $this->test_price->CurrentValue;
 		$this->test_price->PlaceHolder = ew_RemoveHtml($this->test_price->FldCaption());
 		if (strval($this->test_price->EditValue) <> "" && is_numeric($this->test_price->EditValue)) $this->test_price->EditValue = ew_FormatNumber($this->test_price->EditValue, -2, -1, -2, 0);
-
-		// test_image
-		$this->test_image->EditAttrs["class"] = "form-control";
-		$this->test_image->EditCustomAttributes = "";
-		$this->test_image->EditValue = $this->test_image->CurrentValue;
-		$this->test_image->PlaceHolder = ew_RemoveHtml($this->test_image->FldCaption());
-
-		// ntest_id
-		$this->ntest_id->EditAttrs["class"] = "form-control";
-		$this->ntest_id->EditCustomAttributes = "";
-		$this->ntest_id->EditValue = $this->ntest_id->CurrentValue;
-		$this->ntest_id->ViewCustomAttributes = "";
-
-		// lang_id
-		$this->lang_id->EditAttrs["class"] = "form-control";
-		$this->lang_id->EditCustomAttributes = "";
-		$this->lang_id->EditValue = $this->lang_id->CurrentValue;
-		$this->lang_id->PlaceHolder = ew_RemoveHtml($this->lang_id->FldCaption());
-
-		// test_name
-		$this->test_name->EditAttrs["class"] = "form-control";
-		$this->test_name->EditCustomAttributes = "";
-		$this->test_name->EditValue = $this->test_name->CurrentValue;
-		$this->test_name->PlaceHolder = ew_RemoveHtml($this->test_name->FldCaption());
 
 		// test_desc
 		$this->test_desc->EditAttrs["class"] = "form-control";
@@ -889,26 +963,23 @@ class capp_vtest extends cTable {
 			if ($Doc->Horizontal) { // Horizontal format, write header
 				$Doc->BeginExportRow();
 				if ($ExportPageType == "view") {
-					if ($this->test_id->Exportable) $Doc->ExportCaption($this->test_id);
+					if ($this->lang_id->Exportable) $Doc->ExportCaption($this->lang_id);
 					if ($this->test_num->Exportable) $Doc->ExportCaption($this->test_num);
+					if ($this->test_name->Exportable) $Doc->ExportCaption($this->test_name);
 					if ($this->test_iname->Exportable) $Doc->ExportCaption($this->test_iname);
 					if ($this->status_id->Exportable) $Doc->ExportCaption($this->status_id);
-					if ($this->test_price->Exportable) $Doc->ExportCaption($this->test_price);
 					if ($this->test_image->Exportable) $Doc->ExportCaption($this->test_image);
-					if ($this->ntest_id->Exportable) $Doc->ExportCaption($this->ntest_id);
-					if ($this->lang_id->Exportable) $Doc->ExportCaption($this->lang_id);
-					if ($this->test_name->Exportable) $Doc->ExportCaption($this->test_name);
+					if ($this->test_price->Exportable) $Doc->ExportCaption($this->test_price);
 					if ($this->test_desc->Exportable) $Doc->ExportCaption($this->test_desc);
 				} else {
-					if ($this->test_id->Exportable) $Doc->ExportCaption($this->test_id);
+					if ($this->lang_id->Exportable) $Doc->ExportCaption($this->lang_id);
 					if ($this->test_num->Exportable) $Doc->ExportCaption($this->test_num);
+					if ($this->test_name->Exportable) $Doc->ExportCaption($this->test_name);
 					if ($this->test_iname->Exportable) $Doc->ExportCaption($this->test_iname);
 					if ($this->status_id->Exportable) $Doc->ExportCaption($this->status_id);
-					if ($this->test_price->Exportable) $Doc->ExportCaption($this->test_price);
 					if ($this->test_image->Exportable) $Doc->ExportCaption($this->test_image);
-					if ($this->ntest_id->Exportable) $Doc->ExportCaption($this->ntest_id);
-					if ($this->lang_id->Exportable) $Doc->ExportCaption($this->lang_id);
-					if ($this->test_name->Exportable) $Doc->ExportCaption($this->test_name);
+					if ($this->test_price->Exportable) $Doc->ExportCaption($this->test_price);
+					if ($this->test_desc->Exportable) $Doc->ExportCaption($this->test_desc);
 				}
 				$Doc->EndExportRow();
 			}
@@ -940,26 +1011,23 @@ class capp_vtest extends cTable {
 				if (!$Doc->ExportCustom) {
 					$Doc->BeginExportRow($RowCnt); // Allow CSS styles if enabled
 					if ($ExportPageType == "view") {
-						if ($this->test_id->Exportable) $Doc->ExportField($this->test_id);
+						if ($this->lang_id->Exportable) $Doc->ExportField($this->lang_id);
 						if ($this->test_num->Exportable) $Doc->ExportField($this->test_num);
+						if ($this->test_name->Exportable) $Doc->ExportField($this->test_name);
 						if ($this->test_iname->Exportable) $Doc->ExportField($this->test_iname);
 						if ($this->status_id->Exportable) $Doc->ExportField($this->status_id);
-						if ($this->test_price->Exportable) $Doc->ExportField($this->test_price);
 						if ($this->test_image->Exportable) $Doc->ExportField($this->test_image);
-						if ($this->ntest_id->Exportable) $Doc->ExportField($this->ntest_id);
-						if ($this->lang_id->Exportable) $Doc->ExportField($this->lang_id);
-						if ($this->test_name->Exportable) $Doc->ExportField($this->test_name);
+						if ($this->test_price->Exportable) $Doc->ExportField($this->test_price);
 						if ($this->test_desc->Exportable) $Doc->ExportField($this->test_desc);
 					} else {
-						if ($this->test_id->Exportable) $Doc->ExportField($this->test_id);
+						if ($this->lang_id->Exportable) $Doc->ExportField($this->lang_id);
 						if ($this->test_num->Exportable) $Doc->ExportField($this->test_num);
+						if ($this->test_name->Exportable) $Doc->ExportField($this->test_name);
 						if ($this->test_iname->Exportable) $Doc->ExportField($this->test_iname);
 						if ($this->status_id->Exportable) $Doc->ExportField($this->status_id);
-						if ($this->test_price->Exportable) $Doc->ExportField($this->test_price);
 						if ($this->test_image->Exportable) $Doc->ExportField($this->test_image);
-						if ($this->ntest_id->Exportable) $Doc->ExportField($this->ntest_id);
-						if ($this->lang_id->Exportable) $Doc->ExportField($this->lang_id);
-						if ($this->test_name->Exportable) $Doc->ExportField($this->test_name);
+						if ($this->test_price->Exportable) $Doc->ExportField($this->test_price);
+						if ($this->test_desc->Exportable) $Doc->ExportField($this->test_desc);
 					}
 					$Doc->EndExportRow($RowCnt);
 				}

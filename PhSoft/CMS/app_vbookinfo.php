@@ -8,17 +8,17 @@ $app_vbook = NULL;
 //
 class capp_vbook extends cTable {
 	var $book_id;
+	var $bpage_id;
 	var $lang_id;
 	var $status_id;
 	var $book_title;
 	var $book_desc;
 	var $book_image;
 	var $book_price;
-	var $ins_datetime;
-	var $bpage_id;
 	var $page_num;
 	var $page_image;
 	var $page_text;
+	var $ins_datetime;
 
 	//
 	// Table class constructor
@@ -54,19 +54,29 @@ class capp_vbook extends cTable {
 
 		// book_id
 		$this->book_id = new cField('app_vbook', 'app_vbook', 'x_book_id', 'book_id', '`book_id`', '`book_id`', 3, -1, FALSE, '`book_id`', FALSE, FALSE, FALSE, 'FORMATTED TEXT', 'NO');
-		$this->book_id->Sortable = TRUE; // Allow sort
+		$this->book_id->Sortable = FALSE; // Allow sort
 		$this->book_id->FldDefaultErrMsg = $Language->Phrase("IncorrectInteger");
 		$this->fields['book_id'] = &$this->book_id;
 
+		// bpage_id
+		$this->bpage_id = new cField('app_vbook', 'app_vbook', 'x_bpage_id', 'bpage_id', '`bpage_id`', '`bpage_id`', 3, -1, FALSE, '`bpage_id`', FALSE, FALSE, FALSE, 'FORMATTED TEXT', 'NO');
+		$this->bpage_id->Sortable = FALSE; // Allow sort
+		$this->bpage_id->FldDefaultErrMsg = $Language->Phrase("IncorrectInteger");
+		$this->fields['bpage_id'] = &$this->bpage_id;
+
 		// lang_id
-		$this->lang_id = new cField('app_vbook', 'app_vbook', 'x_lang_id', 'lang_id', '`lang_id`', '`lang_id`', 3, -1, FALSE, '`lang_id`', FALSE, FALSE, FALSE, 'FORMATTED TEXT', 'TEXT');
+		$this->lang_id = new cField('app_vbook', 'app_vbook', 'x_lang_id', 'lang_id', '`lang_id`', '`lang_id`', 3, -1, FALSE, '`lang_id`', FALSE, FALSE, FALSE, 'FORMATTED TEXT', 'SELECT');
 		$this->lang_id->Sortable = TRUE; // Allow sort
+		$this->lang_id->UsePleaseSelect = TRUE; // Use PleaseSelect by default
+		$this->lang_id->PleaseSelectText = $Language->Phrase("PleaseSelect"); // PleaseSelect text
 		$this->lang_id->FldDefaultErrMsg = $Language->Phrase("IncorrectInteger");
 		$this->fields['lang_id'] = &$this->lang_id;
 
 		// status_id
-		$this->status_id = new cField('app_vbook', 'app_vbook', 'x_status_id', 'status_id', '`status_id`', '`status_id`', 16, -1, FALSE, '`status_id`', FALSE, FALSE, FALSE, 'FORMATTED TEXT', 'TEXT');
+		$this->status_id = new cField('app_vbook', 'app_vbook', 'x_status_id', 'status_id', '`status_id`', '`status_id`', 16, -1, FALSE, '`status_id`', FALSE, FALSE, FALSE, 'FORMATTED TEXT', 'SELECT');
 		$this->status_id->Sortable = TRUE; // Allow sort
+		$this->status_id->UsePleaseSelect = TRUE; // Use PleaseSelect by default
+		$this->status_id->PleaseSelectText = $Language->Phrase("PleaseSelect"); // PleaseSelect text
 		$this->status_id->FldDefaultErrMsg = $Language->Phrase("IncorrectInteger");
 		$this->fields['status_id'] = &$this->status_id;
 
@@ -81,7 +91,7 @@ class capp_vbook extends cTable {
 		$this->fields['book_desc'] = &$this->book_desc;
 
 		// book_image
-		$this->book_image = new cField('app_vbook', 'app_vbook', 'x_book_image', 'book_image', '`book_image`', '`book_image`', 200, -1, FALSE, '`book_image`', FALSE, FALSE, FALSE, 'FORMATTED TEXT', 'TEXT');
+		$this->book_image = new cField('app_vbook', 'app_vbook', 'x_book_image', 'book_image', '`book_image`', '`book_image`', 200, -1, TRUE, '`book_image`', FALSE, FALSE, FALSE, 'IMAGE', 'FILE');
 		$this->book_image->Sortable = TRUE; // Allow sort
 		$this->fields['book_image'] = &$this->book_image;
 
@@ -90,18 +100,6 @@ class capp_vbook extends cTable {
 		$this->book_price->Sortable = TRUE; // Allow sort
 		$this->book_price->FldDefaultErrMsg = $Language->Phrase("IncorrectFloat");
 		$this->fields['book_price'] = &$this->book_price;
-
-		// ins_datetime
-		$this->ins_datetime = new cField('app_vbook', 'app_vbook', 'x_ins_datetime', 'ins_datetime', '`ins_datetime`', ew_CastDateFieldForLike('`ins_datetime`', 0, "DB"), 135, 0, FALSE, '`ins_datetime`', FALSE, FALSE, FALSE, 'FORMATTED TEXT', 'TEXT');
-		$this->ins_datetime->Sortable = TRUE; // Allow sort
-		$this->ins_datetime->FldDefaultErrMsg = str_replace("%s", $GLOBALS["EW_DATE_FORMAT"], $Language->Phrase("IncorrectDate"));
-		$this->fields['ins_datetime'] = &$this->ins_datetime;
-
-		// bpage_id
-		$this->bpage_id = new cField('app_vbook', 'app_vbook', 'x_bpage_id', 'bpage_id', '`bpage_id`', '`bpage_id`', 3, -1, FALSE, '`bpage_id`', FALSE, FALSE, FALSE, 'FORMATTED TEXT', 'NO');
-		$this->bpage_id->Sortable = TRUE; // Allow sort
-		$this->bpage_id->FldDefaultErrMsg = $Language->Phrase("IncorrectInteger");
-		$this->fields['bpage_id'] = &$this->bpage_id;
 
 		// page_num
 		$this->page_num = new cField('app_vbook', 'app_vbook', 'x_page_num', 'page_num', '`page_num`', '`page_num`', 2, -1, FALSE, '`page_num`', FALSE, FALSE, FALSE, 'FORMATTED TEXT', 'TEXT');
@@ -118,6 +116,12 @@ class capp_vbook extends cTable {
 		$this->page_text = new cField('app_vbook', 'app_vbook', 'x_page_text', 'page_text', '`page_text`', '`page_text`', 201, -1, FALSE, '`page_text`', FALSE, FALSE, FALSE, 'FORMATTED TEXT', 'TEXTAREA');
 		$this->page_text->Sortable = TRUE; // Allow sort
 		$this->fields['page_text'] = &$this->page_text;
+
+		// ins_datetime
+		$this->ins_datetime = new cField('app_vbook', 'app_vbook', 'x_ins_datetime', 'ins_datetime', '`ins_datetime`', ew_CastDateFieldForLike('`ins_datetime`', 0, "DB"), 135, 0, FALSE, '`ins_datetime`', FALSE, FALSE, FALSE, 'FORMATTED TEXT', 'TEXT');
+		$this->ins_datetime->Sortable = TRUE; // Allow sort
+		$this->ins_datetime->FldDefaultErrMsg = str_replace("%s", $GLOBALS["EW_DATE_FORMAT"], $Language->Phrase("IncorrectDate"));
+		$this->fields['ins_datetime'] = &$this->ins_datetime;
 	}
 
 	// Field Visibility
@@ -229,7 +233,7 @@ class capp_vbook extends cTable {
 	var $_SqlOrderBy = "";
 
 	function getSqlOrderBy() { // Order By
-		return ($this->_SqlOrderBy <> "") ? $this->_SqlOrderBy : "";
+		return ($this->_SqlOrderBy <> "") ? $this->_SqlOrderBy : "`lang_id` ASC,`book_title` ASC,`page_num` ASC";
 	}
 
 	function SqlOrderBy() { // For backward compatibility
@@ -680,17 +684,17 @@ class capp_vbook extends cTable {
 	// Load row values from recordset
 	function LoadListRowValues(&$rs) {
 		$this->book_id->setDbValue($rs->fields('book_id'));
+		$this->bpage_id->setDbValue($rs->fields('bpage_id'));
 		$this->lang_id->setDbValue($rs->fields('lang_id'));
 		$this->status_id->setDbValue($rs->fields('status_id'));
 		$this->book_title->setDbValue($rs->fields('book_title'));
 		$this->book_desc->setDbValue($rs->fields('book_desc'));
-		$this->book_image->setDbValue($rs->fields('book_image'));
+		$this->book_image->Upload->DbValue = $rs->fields('book_image');
 		$this->book_price->setDbValue($rs->fields('book_price'));
-		$this->ins_datetime->setDbValue($rs->fields('ins_datetime'));
-		$this->bpage_id->setDbValue($rs->fields('bpage_id'));
 		$this->page_num->setDbValue($rs->fields('page_num'));
 		$this->page_image->setDbValue($rs->fields('page_image'));
 		$this->page_text->setDbValue($rs->fields('page_text'));
+		$this->ins_datetime->setDbValue($rs->fields('ins_datetime'));
 	}
 
 	// Render list row values
@@ -702,28 +706,75 @@ class capp_vbook extends cTable {
 
 	// Common render codes
 		// book_id
+
+		$this->book_id->CellCssStyle = "white-space: nowrap;";
+
+		// bpage_id
+		$this->bpage_id->CellCssStyle = "white-space: nowrap;";
+
 		// lang_id
 		// status_id
 		// book_title
 		// book_desc
 		// book_image
 		// book_price
-		// ins_datetime
-		// bpage_id
 		// page_num
 		// page_image
 		// page_text
+		// ins_datetime
 		// book_id
 
 		$this->book_id->ViewValue = $this->book_id->CurrentValue;
 		$this->book_id->ViewCustomAttributes = "";
 
+		// bpage_id
+		$this->bpage_id->ViewValue = $this->bpage_id->CurrentValue;
+		$this->bpage_id->ViewCustomAttributes = "";
+
 		// lang_id
-		$this->lang_id->ViewValue = $this->lang_id->CurrentValue;
+		if (strval($this->lang_id->CurrentValue) <> "") {
+			$sFilterWrk = "`lang_id`" . ew_SearchString("=", $this->lang_id->CurrentValue, EW_DATATYPE_NUMBER, "");
+		$sSqlWrk = "SELECT `lang_id`, `lang_name` AS `DispFld`, '' AS `Disp2Fld`, '' AS `Disp3Fld`, '' AS `Disp4Fld` FROM `phs_language`";
+		$sWhereWrk = "";
+		$this->lang_id->LookupFilters = array();
+		ew_AddFilter($sWhereWrk, $sFilterWrk);
+		$this->Lookup_Selecting($this->lang_id, $sWhereWrk); // Call Lookup Selecting
+		if ($sWhereWrk <> "") $sSqlWrk .= " WHERE " . $sWhereWrk;
+			$rswrk = Conn()->Execute($sSqlWrk);
+			if ($rswrk && !$rswrk->EOF) { // Lookup values found
+				$arwrk = array();
+				$arwrk[1] = $rswrk->fields('DispFld');
+				$this->lang_id->ViewValue = $this->lang_id->DisplayValue($arwrk);
+				$rswrk->Close();
+			} else {
+				$this->lang_id->ViewValue = $this->lang_id->CurrentValue;
+			}
+		} else {
+			$this->lang_id->ViewValue = NULL;
+		}
 		$this->lang_id->ViewCustomAttributes = "";
 
 		// status_id
-		$this->status_id->ViewValue = $this->status_id->CurrentValue;
+		if (strval($this->status_id->CurrentValue) <> "") {
+			$sFilterWrk = "`status_id`" . ew_SearchString("=", $this->status_id->CurrentValue, EW_DATATYPE_NUMBER, "");
+		$sSqlWrk = "SELECT `status_id`, `status_name` AS `DispFld`, '' AS `Disp2Fld`, '' AS `Disp3Fld`, '' AS `Disp4Fld` FROM `phs_status`";
+		$sWhereWrk = "";
+		$this->status_id->LookupFilters = array();
+		ew_AddFilter($sWhereWrk, $sFilterWrk);
+		$this->Lookup_Selecting($this->status_id, $sWhereWrk); // Call Lookup Selecting
+		if ($sWhereWrk <> "") $sSqlWrk .= " WHERE " . $sWhereWrk;
+			$rswrk = Conn()->Execute($sSqlWrk);
+			if ($rswrk && !$rswrk->EOF) { // Lookup values found
+				$arwrk = array();
+				$arwrk[1] = $rswrk->fields('DispFld');
+				$this->status_id->ViewValue = $this->status_id->DisplayValue($arwrk);
+				$rswrk->Close();
+			} else {
+				$this->status_id->ViewValue = $this->status_id->CurrentValue;
+			}
+		} else {
+			$this->status_id->ViewValue = NULL;
+		}
 		$this->status_id->ViewCustomAttributes = "";
 
 		// book_title
@@ -735,21 +786,20 @@ class capp_vbook extends cTable {
 		$this->book_desc->ViewCustomAttributes = "";
 
 		// book_image
-		$this->book_image->ViewValue = $this->book_image->CurrentValue;
+		$this->book_image->UploadPath = '../../assets/img/bookImages';
+		if (!ew_Empty($this->book_image->Upload->DbValue)) {
+			$this->book_image->ImageWidth = 200;
+			$this->book_image->ImageHeight = 0;
+			$this->book_image->ImageAlt = $this->book_image->FldAlt();
+			$this->book_image->ViewValue = $this->book_image->Upload->DbValue;
+		} else {
+			$this->book_image->ViewValue = "";
+		}
 		$this->book_image->ViewCustomAttributes = "";
 
 		// book_price
 		$this->book_price->ViewValue = $this->book_price->CurrentValue;
 		$this->book_price->ViewCustomAttributes = "";
-
-		// ins_datetime
-		$this->ins_datetime->ViewValue = $this->ins_datetime->CurrentValue;
-		$this->ins_datetime->ViewValue = ew_FormatDateTime($this->ins_datetime->ViewValue, 0);
-		$this->ins_datetime->ViewCustomAttributes = "";
-
-		// bpage_id
-		$this->bpage_id->ViewValue = $this->bpage_id->CurrentValue;
-		$this->bpage_id->ViewCustomAttributes = "";
 
 		// page_num
 		$this->page_num->ViewValue = $this->page_num->CurrentValue;
@@ -763,10 +813,20 @@ class capp_vbook extends cTable {
 		$this->page_text->ViewValue = $this->page_text->CurrentValue;
 		$this->page_text->ViewCustomAttributes = "";
 
+		// ins_datetime
+		$this->ins_datetime->ViewValue = $this->ins_datetime->CurrentValue;
+		$this->ins_datetime->ViewValue = ew_FormatDateTime($this->ins_datetime->ViewValue, 0);
+		$this->ins_datetime->ViewCustomAttributes = "";
+
 		// book_id
 		$this->book_id->LinkCustomAttributes = "";
 		$this->book_id->HrefValue = "";
 		$this->book_id->TooltipValue = "";
+
+		// bpage_id
+		$this->bpage_id->LinkCustomAttributes = "";
+		$this->bpage_id->HrefValue = "";
+		$this->bpage_id->TooltipValue = "";
 
 		// lang_id
 		$this->lang_id->LinkCustomAttributes = "";
@@ -790,23 +850,27 @@ class capp_vbook extends cTable {
 
 		// book_image
 		$this->book_image->LinkCustomAttributes = "";
-		$this->book_image->HrefValue = "";
+		$this->book_image->UploadPath = '../../assets/img/bookImages';
+		if (!ew_Empty($this->book_image->Upload->DbValue)) {
+			$this->book_image->HrefValue = ew_GetFileUploadUrl($this->book_image, $this->book_image->Upload->DbValue); // Add prefix/suffix
+			$this->book_image->LinkAttrs["target"] = ""; // Add target
+			if ($this->Export <> "") $this->book_image->HrefValue = ew_FullUrl($this->book_image->HrefValue, "href");
+		} else {
+			$this->book_image->HrefValue = "";
+		}
+		$this->book_image->HrefValue2 = $this->book_image->UploadPath . $this->book_image->Upload->DbValue;
 		$this->book_image->TooltipValue = "";
+		if ($this->book_image->UseColorbox) {
+			if (ew_Empty($this->book_image->TooltipValue))
+				$this->book_image->LinkAttrs["title"] = $Language->Phrase("ViewImageGallery");
+			$this->book_image->LinkAttrs["data-rel"] = "app_vbook_x_book_image";
+			ew_AppendClass($this->book_image->LinkAttrs["class"], "ewLightbox");
+		}
 
 		// book_price
 		$this->book_price->LinkCustomAttributes = "";
 		$this->book_price->HrefValue = "";
 		$this->book_price->TooltipValue = "";
-
-		// ins_datetime
-		$this->ins_datetime->LinkCustomAttributes = "";
-		$this->ins_datetime->HrefValue = "";
-		$this->ins_datetime->TooltipValue = "";
-
-		// bpage_id
-		$this->bpage_id->LinkCustomAttributes = "";
-		$this->bpage_id->HrefValue = "";
-		$this->bpage_id->TooltipValue = "";
 
 		// page_num
 		$this->page_num->LinkCustomAttributes = "";
@@ -822,6 +886,11 @@ class capp_vbook extends cTable {
 		$this->page_text->LinkCustomAttributes = "";
 		$this->page_text->HrefValue = "";
 		$this->page_text->TooltipValue = "";
+
+		// ins_datetime
+		$this->ins_datetime->LinkCustomAttributes = "";
+		$this->ins_datetime->HrefValue = "";
+		$this->ins_datetime->TooltipValue = "";
 
 		// Call Row Rendered event
 		$this->Row_Rendered();
@@ -843,17 +912,19 @@ class capp_vbook extends cTable {
 		$this->book_id->EditValue = $this->book_id->CurrentValue;
 		$this->book_id->ViewCustomAttributes = "";
 
+		// bpage_id
+		$this->bpage_id->EditAttrs["class"] = "form-control";
+		$this->bpage_id->EditCustomAttributes = "";
+		$this->bpage_id->EditValue = $this->bpage_id->CurrentValue;
+		$this->bpage_id->ViewCustomAttributes = "";
+
 		// lang_id
 		$this->lang_id->EditAttrs["class"] = "form-control";
 		$this->lang_id->EditCustomAttributes = "";
-		$this->lang_id->EditValue = $this->lang_id->CurrentValue;
-		$this->lang_id->PlaceHolder = ew_RemoveHtml($this->lang_id->FldCaption());
 
 		// status_id
 		$this->status_id->EditAttrs["class"] = "form-control";
 		$this->status_id->EditCustomAttributes = "";
-		$this->status_id->EditValue = $this->status_id->CurrentValue;
-		$this->status_id->PlaceHolder = ew_RemoveHtml($this->status_id->FldCaption());
 
 		// book_title
 		$this->book_title->EditAttrs["class"] = "form-control";
@@ -870,8 +941,17 @@ class capp_vbook extends cTable {
 		// book_image
 		$this->book_image->EditAttrs["class"] = "form-control";
 		$this->book_image->EditCustomAttributes = "";
-		$this->book_image->EditValue = $this->book_image->CurrentValue;
-		$this->book_image->PlaceHolder = ew_RemoveHtml($this->book_image->FldCaption());
+		$this->book_image->UploadPath = '../../assets/img/bookImages';
+		if (!ew_Empty($this->book_image->Upload->DbValue)) {
+			$this->book_image->ImageWidth = 200;
+			$this->book_image->ImageHeight = 0;
+			$this->book_image->ImageAlt = $this->book_image->FldAlt();
+			$this->book_image->EditValue = $this->book_image->Upload->DbValue;
+		} else {
+			$this->book_image->EditValue = "";
+		}
+		if (!ew_Empty($this->book_image->CurrentValue))
+				$this->book_image->Upload->FileName = $this->book_image->CurrentValue;
 
 		// book_price
 		$this->book_price->EditAttrs["class"] = "form-control";
@@ -879,18 +959,6 @@ class capp_vbook extends cTable {
 		$this->book_price->EditValue = $this->book_price->CurrentValue;
 		$this->book_price->PlaceHolder = ew_RemoveHtml($this->book_price->FldCaption());
 		if (strval($this->book_price->EditValue) <> "" && is_numeric($this->book_price->EditValue)) $this->book_price->EditValue = ew_FormatNumber($this->book_price->EditValue, -2, -1, -2, 0);
-
-		// ins_datetime
-		$this->ins_datetime->EditAttrs["class"] = "form-control";
-		$this->ins_datetime->EditCustomAttributes = "";
-		$this->ins_datetime->EditValue = ew_FormatDateTime($this->ins_datetime->CurrentValue, 8);
-		$this->ins_datetime->PlaceHolder = ew_RemoveHtml($this->ins_datetime->FldCaption());
-
-		// bpage_id
-		$this->bpage_id->EditAttrs["class"] = "form-control";
-		$this->bpage_id->EditCustomAttributes = "";
-		$this->bpage_id->EditValue = $this->bpage_id->CurrentValue;
-		$this->bpage_id->ViewCustomAttributes = "";
 
 		// page_num
 		$this->page_num->EditAttrs["class"] = "form-control";
@@ -909,6 +977,12 @@ class capp_vbook extends cTable {
 		$this->page_text->EditCustomAttributes = "";
 		$this->page_text->EditValue = $this->page_text->CurrentValue;
 		$this->page_text->PlaceHolder = ew_RemoveHtml($this->page_text->FldCaption());
+
+		// ins_datetime
+		$this->ins_datetime->EditAttrs["class"] = "form-control";
+		$this->ins_datetime->EditCustomAttributes = "";
+		$this->ins_datetime->EditValue = ew_FormatDateTime($this->ins_datetime->CurrentValue, 8);
+		$this->ins_datetime->PlaceHolder = ew_RemoveHtml($this->ins_datetime->FldCaption());
 
 		// Call Row Rendered event
 		$this->Row_Rendered();
@@ -937,29 +1011,27 @@ class capp_vbook extends cTable {
 			if ($Doc->Horizontal) { // Horizontal format, write header
 				$Doc->BeginExportRow();
 				if ($ExportPageType == "view") {
-					if ($this->book_id->Exportable) $Doc->ExportCaption($this->book_id);
 					if ($this->lang_id->Exportable) $Doc->ExportCaption($this->lang_id);
 					if ($this->status_id->Exportable) $Doc->ExportCaption($this->status_id);
 					if ($this->book_title->Exportable) $Doc->ExportCaption($this->book_title);
 					if ($this->book_desc->Exportable) $Doc->ExportCaption($this->book_desc);
 					if ($this->book_image->Exportable) $Doc->ExportCaption($this->book_image);
 					if ($this->book_price->Exportable) $Doc->ExportCaption($this->book_price);
-					if ($this->ins_datetime->Exportable) $Doc->ExportCaption($this->ins_datetime);
-					if ($this->bpage_id->Exportable) $Doc->ExportCaption($this->bpage_id);
 					if ($this->page_num->Exportable) $Doc->ExportCaption($this->page_num);
 					if ($this->page_image->Exportable) $Doc->ExportCaption($this->page_image);
 					if ($this->page_text->Exportable) $Doc->ExportCaption($this->page_text);
+					if ($this->ins_datetime->Exportable) $Doc->ExportCaption($this->ins_datetime);
 				} else {
-					if ($this->book_id->Exportable) $Doc->ExportCaption($this->book_id);
 					if ($this->lang_id->Exportable) $Doc->ExportCaption($this->lang_id);
 					if ($this->status_id->Exportable) $Doc->ExportCaption($this->status_id);
 					if ($this->book_title->Exportable) $Doc->ExportCaption($this->book_title);
+					if ($this->book_desc->Exportable) $Doc->ExportCaption($this->book_desc);
 					if ($this->book_image->Exportable) $Doc->ExportCaption($this->book_image);
 					if ($this->book_price->Exportable) $Doc->ExportCaption($this->book_price);
-					if ($this->ins_datetime->Exportable) $Doc->ExportCaption($this->ins_datetime);
-					if ($this->bpage_id->Exportable) $Doc->ExportCaption($this->bpage_id);
 					if ($this->page_num->Exportable) $Doc->ExportCaption($this->page_num);
 					if ($this->page_image->Exportable) $Doc->ExportCaption($this->page_image);
+					if ($this->page_text->Exportable) $Doc->ExportCaption($this->page_text);
+					if ($this->ins_datetime->Exportable) $Doc->ExportCaption($this->ins_datetime);
 				}
 				$Doc->EndExportRow();
 			}
@@ -991,29 +1063,27 @@ class capp_vbook extends cTable {
 				if (!$Doc->ExportCustom) {
 					$Doc->BeginExportRow($RowCnt); // Allow CSS styles if enabled
 					if ($ExportPageType == "view") {
-						if ($this->book_id->Exportable) $Doc->ExportField($this->book_id);
 						if ($this->lang_id->Exportable) $Doc->ExportField($this->lang_id);
 						if ($this->status_id->Exportable) $Doc->ExportField($this->status_id);
 						if ($this->book_title->Exportable) $Doc->ExportField($this->book_title);
 						if ($this->book_desc->Exportable) $Doc->ExportField($this->book_desc);
 						if ($this->book_image->Exportable) $Doc->ExportField($this->book_image);
 						if ($this->book_price->Exportable) $Doc->ExportField($this->book_price);
-						if ($this->ins_datetime->Exportable) $Doc->ExportField($this->ins_datetime);
-						if ($this->bpage_id->Exportable) $Doc->ExportField($this->bpage_id);
 						if ($this->page_num->Exportable) $Doc->ExportField($this->page_num);
 						if ($this->page_image->Exportable) $Doc->ExportField($this->page_image);
 						if ($this->page_text->Exportable) $Doc->ExportField($this->page_text);
+						if ($this->ins_datetime->Exportable) $Doc->ExportField($this->ins_datetime);
 					} else {
-						if ($this->book_id->Exportable) $Doc->ExportField($this->book_id);
 						if ($this->lang_id->Exportable) $Doc->ExportField($this->lang_id);
 						if ($this->status_id->Exportable) $Doc->ExportField($this->status_id);
 						if ($this->book_title->Exportable) $Doc->ExportField($this->book_title);
+						if ($this->book_desc->Exportable) $Doc->ExportField($this->book_desc);
 						if ($this->book_image->Exportable) $Doc->ExportField($this->book_image);
 						if ($this->book_price->Exportable) $Doc->ExportField($this->book_price);
-						if ($this->ins_datetime->Exportable) $Doc->ExportField($this->ins_datetime);
-						if ($this->bpage_id->Exportable) $Doc->ExportField($this->bpage_id);
 						if ($this->page_num->Exportable) $Doc->ExportField($this->page_num);
 						if ($this->page_image->Exportable) $Doc->ExportField($this->page_image);
+						if ($this->page_text->Exportable) $Doc->ExportField($this->page_text);
+						if ($this->ins_datetime->Exportable) $Doc->ExportField($this->ins_datetime);
 					}
 					$Doc->EndExportRow($RowCnt);
 				}

@@ -452,11 +452,11 @@ class ccpy_vteam_list extends ccpy_vteam {
 		$this->team_id->SetVisibility();
 		if ($this->IsAdd() || $this->IsCopy() || $this->IsGridAdd())
 			$this->team_id->Visible = FALSE;
-		$this->team_iname->SetVisibility();
 		$this->team_order->SetVisibility();
-		$this->team_photo->SetVisibility();
 		$this->lang_id->SetVisibility();
 		$this->team_name->SetVisibility();
+		$this->team_iname->SetVisibility();
+		$this->team_photo->SetVisibility();
 		$this->team_title->SetVisibility();
 		$this->team_position->SetVisibility();
 		$this->team_text->SetVisibility();
@@ -792,11 +792,11 @@ class ccpy_vteam_list extends ccpy_vteam {
 		$sFilterList = "";
 		$sSavedFilterList = "";
 		$sFilterList = ew_Concat($sFilterList, $this->team_id->AdvancedSearch->ToJson(), ","); // Field team_id
-		$sFilterList = ew_Concat($sFilterList, $this->team_iname->AdvancedSearch->ToJson(), ","); // Field team_iname
 		$sFilterList = ew_Concat($sFilterList, $this->team_order->AdvancedSearch->ToJson(), ","); // Field team_order
-		$sFilterList = ew_Concat($sFilterList, $this->team_photo->AdvancedSearch->ToJson(), ","); // Field team_photo
 		$sFilterList = ew_Concat($sFilterList, $this->lang_id->AdvancedSearch->ToJson(), ","); // Field lang_id
 		$sFilterList = ew_Concat($sFilterList, $this->team_name->AdvancedSearch->ToJson(), ","); // Field team_name
+		$sFilterList = ew_Concat($sFilterList, $this->team_iname->AdvancedSearch->ToJson(), ","); // Field team_iname
+		$sFilterList = ew_Concat($sFilterList, $this->team_photo->AdvancedSearch->ToJson(), ","); // Field team_photo
 		$sFilterList = ew_Concat($sFilterList, $this->team_title->AdvancedSearch->ToJson(), ","); // Field team_title
 		$sFilterList = ew_Concat($sFilterList, $this->team_position->AdvancedSearch->ToJson(), ","); // Field team_position
 		$sFilterList = ew_Concat($sFilterList, $this->team_text->AdvancedSearch->ToJson(), ","); // Field team_text
@@ -852,14 +852,6 @@ class ccpy_vteam_list extends ccpy_vteam {
 		$this->team_id->AdvancedSearch->SearchOperator2 = @$filter["w_team_id"];
 		$this->team_id->AdvancedSearch->Save();
 
-		// Field team_iname
-		$this->team_iname->AdvancedSearch->SearchValue = @$filter["x_team_iname"];
-		$this->team_iname->AdvancedSearch->SearchOperator = @$filter["z_team_iname"];
-		$this->team_iname->AdvancedSearch->SearchCondition = @$filter["v_team_iname"];
-		$this->team_iname->AdvancedSearch->SearchValue2 = @$filter["y_team_iname"];
-		$this->team_iname->AdvancedSearch->SearchOperator2 = @$filter["w_team_iname"];
-		$this->team_iname->AdvancedSearch->Save();
-
 		// Field team_order
 		$this->team_order->AdvancedSearch->SearchValue = @$filter["x_team_order"];
 		$this->team_order->AdvancedSearch->SearchOperator = @$filter["z_team_order"];
@@ -867,14 +859,6 @@ class ccpy_vteam_list extends ccpy_vteam {
 		$this->team_order->AdvancedSearch->SearchValue2 = @$filter["y_team_order"];
 		$this->team_order->AdvancedSearch->SearchOperator2 = @$filter["w_team_order"];
 		$this->team_order->AdvancedSearch->Save();
-
-		// Field team_photo
-		$this->team_photo->AdvancedSearch->SearchValue = @$filter["x_team_photo"];
-		$this->team_photo->AdvancedSearch->SearchOperator = @$filter["z_team_photo"];
-		$this->team_photo->AdvancedSearch->SearchCondition = @$filter["v_team_photo"];
-		$this->team_photo->AdvancedSearch->SearchValue2 = @$filter["y_team_photo"];
-		$this->team_photo->AdvancedSearch->SearchOperator2 = @$filter["w_team_photo"];
-		$this->team_photo->AdvancedSearch->Save();
 
 		// Field lang_id
 		$this->lang_id->AdvancedSearch->SearchValue = @$filter["x_lang_id"];
@@ -891,6 +875,22 @@ class ccpy_vteam_list extends ccpy_vteam {
 		$this->team_name->AdvancedSearch->SearchValue2 = @$filter["y_team_name"];
 		$this->team_name->AdvancedSearch->SearchOperator2 = @$filter["w_team_name"];
 		$this->team_name->AdvancedSearch->Save();
+
+		// Field team_iname
+		$this->team_iname->AdvancedSearch->SearchValue = @$filter["x_team_iname"];
+		$this->team_iname->AdvancedSearch->SearchOperator = @$filter["z_team_iname"];
+		$this->team_iname->AdvancedSearch->SearchCondition = @$filter["v_team_iname"];
+		$this->team_iname->AdvancedSearch->SearchValue2 = @$filter["y_team_iname"];
+		$this->team_iname->AdvancedSearch->SearchOperator2 = @$filter["w_team_iname"];
+		$this->team_iname->AdvancedSearch->Save();
+
+		// Field team_photo
+		$this->team_photo->AdvancedSearch->SearchValue = @$filter["x_team_photo"];
+		$this->team_photo->AdvancedSearch->SearchOperator = @$filter["z_team_photo"];
+		$this->team_photo->AdvancedSearch->SearchCondition = @$filter["v_team_photo"];
+		$this->team_photo->AdvancedSearch->SearchValue2 = @$filter["y_team_photo"];
+		$this->team_photo->AdvancedSearch->SearchOperator2 = @$filter["w_team_photo"];
+		$this->team_photo->AdvancedSearch->Save();
 
 		// Field team_title
 		$this->team_title->AdvancedSearch->SearchValue = @$filter["x_team_title"];
@@ -922,9 +922,9 @@ class ccpy_vteam_list extends ccpy_vteam {
 	// Return basic search SQL
 	function BasicSearchSQL($arKeywords, $type) {
 		$sWhere = "";
+		$this->BuildBasicSearchSQL($sWhere, $this->team_name, $arKeywords, $type);
 		$this->BuildBasicSearchSQL($sWhere, $this->team_iname, $arKeywords, $type);
 		$this->BuildBasicSearchSQL($sWhere, $this->team_photo, $arKeywords, $type);
-		$this->BuildBasicSearchSQL($sWhere, $this->team_name, $arKeywords, $type);
 		$this->BuildBasicSearchSQL($sWhere, $this->team_title, $arKeywords, $type);
 		$this->BuildBasicSearchSQL($sWhere, $this->team_position, $arKeywords, $type);
 		$this->BuildBasicSearchSQL($sWhere, $this->team_text, $arKeywords, $type);
@@ -1075,11 +1075,11 @@ class ccpy_vteam_list extends ccpy_vteam {
 			$this->CurrentOrder = @$_GET["order"];
 			$this->CurrentOrderType = @$_GET["ordertype"];
 			$this->UpdateSort($this->team_id); // team_id
-			$this->UpdateSort($this->team_iname); // team_iname
 			$this->UpdateSort($this->team_order); // team_order
-			$this->UpdateSort($this->team_photo); // team_photo
 			$this->UpdateSort($this->lang_id); // lang_id
 			$this->UpdateSort($this->team_name); // team_name
+			$this->UpdateSort($this->team_iname); // team_iname
+			$this->UpdateSort($this->team_photo); // team_photo
 			$this->UpdateSort($this->team_title); // team_title
 			$this->UpdateSort($this->team_position); // team_position
 			$this->UpdateSort($this->team_text); // team_text
@@ -1094,6 +1094,9 @@ class ccpy_vteam_list extends ccpy_vteam {
 			if ($this->getSqlOrderBy() <> "") {
 				$sOrderBy = $this->getSqlOrderBy();
 				$this->setSessionOrderBy($sOrderBy);
+				$this->team_order->setSort("ASC");
+				$this->lang_id->setSort("ASC");
+				$this->team_name->setSort("ASC");
 			}
 		}
 	}
@@ -1116,11 +1119,11 @@ class ccpy_vteam_list extends ccpy_vteam {
 				$sOrderBy = "";
 				$this->setSessionOrderBy($sOrderBy);
 				$this->team_id->setSort("");
-				$this->team_iname->setSort("");
 				$this->team_order->setSort("");
-				$this->team_photo->setSort("");
 				$this->lang_id->setSort("");
 				$this->team_name->setSort("");
+				$this->team_iname->setSort("");
+				$this->team_photo->setSort("");
 				$this->team_title->setSort("");
 				$this->team_position->setSort("");
 				$this->team_text->setSort("");
@@ -1514,13 +1517,13 @@ class ccpy_vteam_list extends ccpy_vteam {
 		if (!$rs || $rs->EOF)
 			return;
 		$this->team_id->setDbValue($row['team_id']);
-		$this->team_iname->setDbValue($row['team_iname']);
-		$this->team_order->setDbValue($row['team_order']);
-		$this->team_photo->Upload->DbValue = $row['team_photo'];
-		$this->team_photo->setDbValue($this->team_photo->Upload->DbValue);
 		$this->teamn_id->setDbValue($row['teamn_id']);
+		$this->team_order->setDbValue($row['team_order']);
 		$this->lang_id->setDbValue($row['lang_id']);
 		$this->team_name->setDbValue($row['team_name']);
+		$this->team_iname->setDbValue($row['team_iname']);
+		$this->team_photo->Upload->DbValue = $row['team_photo'];
+		$this->team_photo->setDbValue($this->team_photo->Upload->DbValue);
 		$this->team_title->setDbValue($row['team_title']);
 		$this->team_position->setDbValue($row['team_position']);
 		$this->team_text->setDbValue($row['team_text']);
@@ -1530,12 +1533,12 @@ class ccpy_vteam_list extends ccpy_vteam {
 	function NewRow() {
 		$row = array();
 		$row['team_id'] = NULL;
-		$row['team_iname'] = NULL;
-		$row['team_order'] = NULL;
-		$row['team_photo'] = NULL;
 		$row['teamn_id'] = NULL;
+		$row['team_order'] = NULL;
 		$row['lang_id'] = NULL;
 		$row['team_name'] = NULL;
+		$row['team_iname'] = NULL;
+		$row['team_photo'] = NULL;
 		$row['team_title'] = NULL;
 		$row['team_position'] = NULL;
 		$row['team_text'] = NULL;
@@ -1548,12 +1551,12 @@ class ccpy_vteam_list extends ccpy_vteam {
 			return;
 		$row = is_array($rs) ? $rs : $rs->fields;
 		$this->team_id->DbValue = $row['team_id'];
-		$this->team_iname->DbValue = $row['team_iname'];
-		$this->team_order->DbValue = $row['team_order'];
-		$this->team_photo->Upload->DbValue = $row['team_photo'];
 		$this->teamn_id->DbValue = $row['teamn_id'];
+		$this->team_order->DbValue = $row['team_order'];
 		$this->lang_id->DbValue = $row['lang_id'];
 		$this->team_name->DbValue = $row['team_name'];
+		$this->team_iname->DbValue = $row['team_iname'];
+		$this->team_photo->Upload->DbValue = $row['team_photo'];
 		$this->team_title->DbValue = $row['team_title'];
 		$this->team_position->DbValue = $row['team_position'];
 		$this->team_text->DbValue = $row['team_text'];
@@ -1602,15 +1605,15 @@ class ccpy_vteam_list extends ccpy_vteam {
 
 		// Common render codes for all row types
 		// team_id
-		// team_iname
-		// team_order
-		// team_photo
 		// teamn_id
 
 		$this->teamn_id->CellCssStyle = "white-space: nowrap;";
 
+		// team_order
 		// lang_id
 		// team_name
+		// team_iname
+		// team_photo
 		// team_title
 		// team_position
 		// team_text
@@ -1621,25 +1624,9 @@ class ccpy_vteam_list extends ccpy_vteam {
 		$this->team_id->ViewValue = $this->team_id->CurrentValue;
 		$this->team_id->ViewCustomAttributes = "";
 
-		// team_iname
-		$this->team_iname->ViewValue = $this->team_iname->CurrentValue;
-		$this->team_iname->ViewCustomAttributes = "";
-
 		// team_order
 		$this->team_order->ViewValue = $this->team_order->CurrentValue;
 		$this->team_order->ViewCustomAttributes = "";
-
-		// team_photo
-		$this->team_photo->UploadPath = '../../assets/corporate/img/teamImages';
-		if (!ew_Empty($this->team_photo->Upload->DbValue)) {
-			$this->team_photo->ImageWidth = 100;
-			$this->team_photo->ImageHeight = 0;
-			$this->team_photo->ImageAlt = $this->team_photo->FldAlt();
-			$this->team_photo->ViewValue = $this->team_photo->Upload->DbValue;
-		} else {
-			$this->team_photo->ViewValue = "";
-		}
-		$this->team_photo->ViewCustomAttributes = "";
 
 		// lang_id
 		if (strval($this->lang_id->CurrentValue) <> "") {
@@ -1671,6 +1658,22 @@ class ccpy_vteam_list extends ccpy_vteam {
 		$this->team_name->ViewValue = $this->team_name->CurrentValue;
 		$this->team_name->ViewCustomAttributes = "";
 
+		// team_iname
+		$this->team_iname->ViewValue = $this->team_iname->CurrentValue;
+		$this->team_iname->ViewCustomAttributes = "";
+
+		// team_photo
+		$this->team_photo->UploadPath = '../../assets/corporate/img/teamImages';
+		if (!ew_Empty($this->team_photo->Upload->DbValue)) {
+			$this->team_photo->ImageWidth = 100;
+			$this->team_photo->ImageHeight = 0;
+			$this->team_photo->ImageAlt = $this->team_photo->FldAlt();
+			$this->team_photo->ViewValue = $this->team_photo->Upload->DbValue;
+		} else {
+			$this->team_photo->ViewValue = "";
+		}
+		$this->team_photo->ViewCustomAttributes = "";
+
 		// team_title
 		$this->team_title->ViewValue = $this->team_title->CurrentValue;
 		$this->team_title->ViewCustomAttributes = "";
@@ -1688,15 +1691,25 @@ class ccpy_vteam_list extends ccpy_vteam {
 			$this->team_id->HrefValue = "";
 			$this->team_id->TooltipValue = "";
 
-			// team_iname
-			$this->team_iname->LinkCustomAttributes = "";
-			$this->team_iname->HrefValue = "";
-			$this->team_iname->TooltipValue = "";
-
 			// team_order
 			$this->team_order->LinkCustomAttributes = "";
 			$this->team_order->HrefValue = "";
 			$this->team_order->TooltipValue = "";
+
+			// lang_id
+			$this->lang_id->LinkCustomAttributes = "";
+			$this->lang_id->HrefValue = "";
+			$this->lang_id->TooltipValue = "";
+
+			// team_name
+			$this->team_name->LinkCustomAttributes = "";
+			$this->team_name->HrefValue = "";
+			$this->team_name->TooltipValue = "";
+
+			// team_iname
+			$this->team_iname->LinkCustomAttributes = "";
+			$this->team_iname->HrefValue = "";
+			$this->team_iname->TooltipValue = "";
 
 			// team_photo
 			$this->team_photo->LinkCustomAttributes = "";
@@ -1716,16 +1729,6 @@ class ccpy_vteam_list extends ccpy_vteam {
 				$this->team_photo->LinkAttrs["data-rel"] = "cpy_vteam_x" . $this->RowCnt . "_team_photo";
 				ew_AppendClass($this->team_photo->LinkAttrs["class"], "ewLightbox");
 			}
-
-			// lang_id
-			$this->lang_id->LinkCustomAttributes = "";
-			$this->lang_id->HrefValue = "";
-			$this->lang_id->TooltipValue = "";
-
-			// team_name
-			$this->team_name->LinkCustomAttributes = "";
-			$this->team_name->HrefValue = "";
-			$this->team_name->TooltipValue = "";
 
 			// team_title
 			$this->team_title->LinkCustomAttributes = "";
@@ -2262,30 +2265,12 @@ $cpy_vteam_list->ListOptions->Render("header", "left");
 		</div></div></th>
 	<?php } ?>
 <?php } ?>
-<?php if ($cpy_vteam->team_iname->Visible) { // team_iname ?>
-	<?php if ($cpy_vteam->SortUrl($cpy_vteam->team_iname) == "") { ?>
-		<th data-name="team_iname" class="<?php echo $cpy_vteam->team_iname->HeaderCellClass() ?>"><div id="elh_cpy_vteam_team_iname" class="cpy_vteam_team_iname"><div class="ewTableHeaderCaption"><?php echo $cpy_vteam->team_iname->FldCaption() ?></div></div></th>
-	<?php } else { ?>
-		<th data-name="team_iname" class="<?php echo $cpy_vteam->team_iname->HeaderCellClass() ?>"><div class="ewPointer" onclick="ew_Sort(event,'<?php echo $cpy_vteam->SortUrl($cpy_vteam->team_iname) ?>',1);"><div id="elh_cpy_vteam_team_iname" class="cpy_vteam_team_iname">
-			<div class="ewTableHeaderBtn"><span class="ewTableHeaderCaption"><?php echo $cpy_vteam->team_iname->FldCaption() ?><?php echo $Language->Phrase("SrchLegend") ?></span><span class="ewTableHeaderSort"><?php if ($cpy_vteam->team_iname->getSort() == "ASC") { ?><span class="caret ewSortUp"></span><?php } elseif ($cpy_vteam->team_iname->getSort() == "DESC") { ?><span class="caret"></span><?php } ?></span></div>
-		</div></div></th>
-	<?php } ?>
-<?php } ?>
 <?php if ($cpy_vteam->team_order->Visible) { // team_order ?>
 	<?php if ($cpy_vteam->SortUrl($cpy_vteam->team_order) == "") { ?>
 		<th data-name="team_order" class="<?php echo $cpy_vteam->team_order->HeaderCellClass() ?>"><div id="elh_cpy_vteam_team_order" class="cpy_vteam_team_order"><div class="ewTableHeaderCaption"><?php echo $cpy_vteam->team_order->FldCaption() ?></div></div></th>
 	<?php } else { ?>
 		<th data-name="team_order" class="<?php echo $cpy_vteam->team_order->HeaderCellClass() ?>"><div class="ewPointer" onclick="ew_Sort(event,'<?php echo $cpy_vteam->SortUrl($cpy_vteam->team_order) ?>',1);"><div id="elh_cpy_vteam_team_order" class="cpy_vteam_team_order">
 			<div class="ewTableHeaderBtn"><span class="ewTableHeaderCaption"><?php echo $cpy_vteam->team_order->FldCaption() ?></span><span class="ewTableHeaderSort"><?php if ($cpy_vteam->team_order->getSort() == "ASC") { ?><span class="caret ewSortUp"></span><?php } elseif ($cpy_vteam->team_order->getSort() == "DESC") { ?><span class="caret"></span><?php } ?></span></div>
-		</div></div></th>
-	<?php } ?>
-<?php } ?>
-<?php if ($cpy_vteam->team_photo->Visible) { // team_photo ?>
-	<?php if ($cpy_vteam->SortUrl($cpy_vteam->team_photo) == "") { ?>
-		<th data-name="team_photo" class="<?php echo $cpy_vteam->team_photo->HeaderCellClass() ?>"><div id="elh_cpy_vteam_team_photo" class="cpy_vteam_team_photo"><div class="ewTableHeaderCaption"><?php echo $cpy_vteam->team_photo->FldCaption() ?></div></div></th>
-	<?php } else { ?>
-		<th data-name="team_photo" class="<?php echo $cpy_vteam->team_photo->HeaderCellClass() ?>"><div class="ewPointer" onclick="ew_Sort(event,'<?php echo $cpy_vteam->SortUrl($cpy_vteam->team_photo) ?>',1);"><div id="elh_cpy_vteam_team_photo" class="cpy_vteam_team_photo">
-			<div class="ewTableHeaderBtn"><span class="ewTableHeaderCaption"><?php echo $cpy_vteam->team_photo->FldCaption() ?><?php echo $Language->Phrase("SrchLegend") ?></span><span class="ewTableHeaderSort"><?php if ($cpy_vteam->team_photo->getSort() == "ASC") { ?><span class="caret ewSortUp"></span><?php } elseif ($cpy_vteam->team_photo->getSort() == "DESC") { ?><span class="caret"></span><?php } ?></span></div>
 		</div></div></th>
 	<?php } ?>
 <?php } ?>
@@ -2304,6 +2289,24 @@ $cpy_vteam_list->ListOptions->Render("header", "left");
 	<?php } else { ?>
 		<th data-name="team_name" class="<?php echo $cpy_vteam->team_name->HeaderCellClass() ?>"><div class="ewPointer" onclick="ew_Sort(event,'<?php echo $cpy_vteam->SortUrl($cpy_vteam->team_name) ?>',1);"><div id="elh_cpy_vteam_team_name" class="cpy_vteam_team_name">
 			<div class="ewTableHeaderBtn"><span class="ewTableHeaderCaption"><?php echo $cpy_vteam->team_name->FldCaption() ?><?php echo $Language->Phrase("SrchLegend") ?></span><span class="ewTableHeaderSort"><?php if ($cpy_vteam->team_name->getSort() == "ASC") { ?><span class="caret ewSortUp"></span><?php } elseif ($cpy_vteam->team_name->getSort() == "DESC") { ?><span class="caret"></span><?php } ?></span></div>
+		</div></div></th>
+	<?php } ?>
+<?php } ?>
+<?php if ($cpy_vteam->team_iname->Visible) { // team_iname ?>
+	<?php if ($cpy_vteam->SortUrl($cpy_vteam->team_iname) == "") { ?>
+		<th data-name="team_iname" class="<?php echo $cpy_vteam->team_iname->HeaderCellClass() ?>"><div id="elh_cpy_vteam_team_iname" class="cpy_vteam_team_iname"><div class="ewTableHeaderCaption"><?php echo $cpy_vteam->team_iname->FldCaption() ?></div></div></th>
+	<?php } else { ?>
+		<th data-name="team_iname" class="<?php echo $cpy_vteam->team_iname->HeaderCellClass() ?>"><div class="ewPointer" onclick="ew_Sort(event,'<?php echo $cpy_vteam->SortUrl($cpy_vteam->team_iname) ?>',1);"><div id="elh_cpy_vteam_team_iname" class="cpy_vteam_team_iname">
+			<div class="ewTableHeaderBtn"><span class="ewTableHeaderCaption"><?php echo $cpy_vteam->team_iname->FldCaption() ?><?php echo $Language->Phrase("SrchLegend") ?></span><span class="ewTableHeaderSort"><?php if ($cpy_vteam->team_iname->getSort() == "ASC") { ?><span class="caret ewSortUp"></span><?php } elseif ($cpy_vteam->team_iname->getSort() == "DESC") { ?><span class="caret"></span><?php } ?></span></div>
+		</div></div></th>
+	<?php } ?>
+<?php } ?>
+<?php if ($cpy_vteam->team_photo->Visible) { // team_photo ?>
+	<?php if ($cpy_vteam->SortUrl($cpy_vteam->team_photo) == "") { ?>
+		<th data-name="team_photo" class="<?php echo $cpy_vteam->team_photo->HeaderCellClass() ?>"><div id="elh_cpy_vteam_team_photo" class="cpy_vteam_team_photo"><div class="ewTableHeaderCaption"><?php echo $cpy_vteam->team_photo->FldCaption() ?></div></div></th>
+	<?php } else { ?>
+		<th data-name="team_photo" class="<?php echo $cpy_vteam->team_photo->HeaderCellClass() ?>"><div class="ewPointer" onclick="ew_Sort(event,'<?php echo $cpy_vteam->SortUrl($cpy_vteam->team_photo) ?>',1);"><div id="elh_cpy_vteam_team_photo" class="cpy_vteam_team_photo">
+			<div class="ewTableHeaderBtn"><span class="ewTableHeaderCaption"><?php echo $cpy_vteam->team_photo->FldCaption() ?><?php echo $Language->Phrase("SrchLegend") ?></span><span class="ewTableHeaderSort"><?php if ($cpy_vteam->team_photo->getSort() == "ASC") { ?><span class="caret ewSortUp"></span><?php } elseif ($cpy_vteam->team_photo->getSort() == "DESC") { ?><span class="caret"></span><?php } ?></span></div>
 		</div></div></th>
 	<?php } ?>
 <?php } ?>
@@ -2407,28 +2410,11 @@ $cpy_vteam_list->ListOptions->Render("body", "left", $cpy_vteam_list->RowCnt);
 </span>
 </td>
 	<?php } ?>
-	<?php if ($cpy_vteam->team_iname->Visible) { // team_iname ?>
-		<td data-name="team_iname"<?php echo $cpy_vteam->team_iname->CellAttributes() ?>>
-<span id="el<?php echo $cpy_vteam_list->RowCnt ?>_cpy_vteam_team_iname" class="cpy_vteam_team_iname">
-<span<?php echo $cpy_vteam->team_iname->ViewAttributes() ?>>
-<?php echo $cpy_vteam->team_iname->ListViewValue() ?></span>
-</span>
-</td>
-	<?php } ?>
 	<?php if ($cpy_vteam->team_order->Visible) { // team_order ?>
 		<td data-name="team_order"<?php echo $cpy_vteam->team_order->CellAttributes() ?>>
 <span id="el<?php echo $cpy_vteam_list->RowCnt ?>_cpy_vteam_team_order" class="cpy_vteam_team_order">
 <span<?php echo $cpy_vteam->team_order->ViewAttributes() ?>>
 <?php echo $cpy_vteam->team_order->ListViewValue() ?></span>
-</span>
-</td>
-	<?php } ?>
-	<?php if ($cpy_vteam->team_photo->Visible) { // team_photo ?>
-		<td data-name="team_photo"<?php echo $cpy_vteam->team_photo->CellAttributes() ?>>
-<span id="el<?php echo $cpy_vteam_list->RowCnt ?>_cpy_vteam_team_photo" class="cpy_vteam_team_photo">
-<span>
-<?php echo ew_GetFileViewTag($cpy_vteam->team_photo, $cpy_vteam->team_photo->ListViewValue()) ?>
-</span>
 </span>
 </td>
 	<?php } ?>
@@ -2445,6 +2431,23 @@ $cpy_vteam_list->ListOptions->Render("body", "left", $cpy_vteam_list->RowCnt);
 <span id="el<?php echo $cpy_vteam_list->RowCnt ?>_cpy_vteam_team_name" class="cpy_vteam_team_name">
 <span<?php echo $cpy_vteam->team_name->ViewAttributes() ?>>
 <?php echo $cpy_vteam->team_name->ListViewValue() ?></span>
+</span>
+</td>
+	<?php } ?>
+	<?php if ($cpy_vteam->team_iname->Visible) { // team_iname ?>
+		<td data-name="team_iname"<?php echo $cpy_vteam->team_iname->CellAttributes() ?>>
+<span id="el<?php echo $cpy_vteam_list->RowCnt ?>_cpy_vteam_team_iname" class="cpy_vteam_team_iname">
+<span<?php echo $cpy_vteam->team_iname->ViewAttributes() ?>>
+<?php echo $cpy_vteam->team_iname->ListViewValue() ?></span>
+</span>
+</td>
+	<?php } ?>
+	<?php if ($cpy_vteam->team_photo->Visible) { // team_photo ?>
+		<td data-name="team_photo"<?php echo $cpy_vteam->team_photo->CellAttributes() ?>>
+<span id="el<?php echo $cpy_vteam_list->RowCnt ?>_cpy_vteam_team_photo" class="cpy_vteam_team_photo">
+<span>
+<?php echo ew_GetFileViewTag($cpy_vteam->team_photo, $cpy_vteam->team_photo->ListViewValue()) ?>
+</span>
 </span>
 </td>
 	<?php } ?>

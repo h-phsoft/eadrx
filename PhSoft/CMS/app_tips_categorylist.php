@@ -1590,6 +1590,7 @@ class capp_tips_category_list extends capp_tips_category {
 			if ($this->getSqlOrderBy() <> "") {
 				$sOrderBy = $this->getSqlOrderBy();
 				$this->setSessionOrderBy($sOrderBy);
+				$this->tcat_name->setSort("ASC");
 			}
 		}
 	}

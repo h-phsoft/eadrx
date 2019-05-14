@@ -1766,6 +1766,12 @@ class ccpy_user_list extends ccpy_user {
 			if ($this->getSqlOrderBy() <> "") {
 				$sOrderBy = $this->getSqlOrderBy();
 				$this->setSessionOrderBy($sOrderBy);
+				$this->pgrp_id->setSort("ASC");
+				$this->cntry_id->setSort("ASC");
+				$this->gend_id->setSort("ASC");
+				$this->lang_id->setSort("ASC");
+				$this->status_id->setSort("ASC");
+				$this->user_name->setSort("ASC");
 			}
 		}
 	}
@@ -3469,6 +3475,25 @@ class ccpy_user_list extends ccpy_user {
 		$sFilter = $this->KeyFilter();
 		$sFilter = $this->ApplyUserIDFilters($sFilter);
 		$conn = &$this->Connection();
+		if ($this->user_name->CurrentValue <> "") { // Check field with unique index
+			$sFilterChk = "(`user_name` = '" . ew_AdjustSql($this->user_name->CurrentValue, $this->DBID) . "')";
+			$sFilterChk .= " AND NOT (" . $sFilter . ")";
+			$this->CurrentFilter = $sFilterChk;
+			$sSqlChk = $this->SQL();
+			$conn->raiseErrorFn = $GLOBALS["EW_ERROR_FN"];
+			$rsChk = $conn->Execute($sSqlChk);
+			$conn->raiseErrorFn = '';
+			if ($rsChk === FALSE) {
+				return FALSE;
+			} elseif (!$rsChk->EOF) {
+				$sIdxErrMsg = str_replace("%f", $this->user_name->FldCaption(), $Language->Phrase("DupIndex"));
+				$sIdxErrMsg = str_replace("%v", $this->user_name->CurrentValue, $sIdxErrMsg);
+				$this->setFailureMessage($sIdxErrMsg);
+				$rsChk->Close();
+				return FALSE;
+			}
+			$rsChk->Close();
+		}
 		if ($this->user_email->CurrentValue <> "") { // Check field with unique index
 			$sFilterChk = "(`user_email` = '" . ew_AdjustSql($this->user_email->CurrentValue, $this->DBID) . "')";
 			$sFilterChk .= " AND NOT (" . $sFilter . ")";
@@ -3595,6 +3620,17 @@ class ccpy_user_list extends ccpy_user {
 	// Add record
 	function AddRow($rsold = NULL) {
 		global $Language, $Security;
+		if ($this->user_name->CurrentValue <> "") { // Check field with unique index
+			$sFilter = "(user_name = '" . ew_AdjustSql($this->user_name->CurrentValue, $this->DBID) . "')";
+			$rsChk = $this->LoadRs($sFilter);
+			if ($rsChk && !$rsChk->EOF) {
+				$sIdxErrMsg = str_replace("%f", $this->user_name->FldCaption(), $Language->Phrase("DupIndex"));
+				$sIdxErrMsg = str_replace("%v", $this->user_name->CurrentValue, $sIdxErrMsg);
+				$this->setFailureMessage($sIdxErrMsg);
+				$rsChk->Close();
+				return FALSE;
+			}
+		}
 		if ($this->user_email->CurrentValue <> "") { // Check field with unique index
 			$sFilter = "(user_email = '" . ew_AdjustSql($this->user_email->CurrentValue, $this->DBID) . "')";
 			$rsChk = $this->LoadRs($sFilter);

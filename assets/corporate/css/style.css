@@ -399,7 +399,7 @@ Header and header elements
   box-shadow: 0 1px 3px #ddd;
   background: #fff;
   border-radius: 0;
-  margin-bottom: 23px;
+  /*margin-bottom: 23px;*/
   z-index: 999;
   position: relative;
 }

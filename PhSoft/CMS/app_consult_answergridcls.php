@@ -921,6 +921,8 @@ class capp_consult_answer_grid extends capp_consult_answer {
 			if ($this->getSqlOrderBy() <> "") {
 				$sOrderBy = $this->getSqlOrderBy();
 				$this->setSessionOrderBy($sOrderBy);
+				$this->cons_id->setSort("ASC");
+				$this->ins_datetime->setSort("DESC");
 			}
 		}
 	}

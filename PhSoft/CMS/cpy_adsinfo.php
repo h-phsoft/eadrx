@@ -247,7 +247,7 @@ class ccpy_ads extends cTable {
 	var $_SqlOrderBy = "";
 
 	function getSqlOrderBy() { // Order By
-		return ($this->_SqlOrderBy <> "") ? $this->_SqlOrderBy : "";
+		return ($this->_SqlOrderBy <> "") ? $this->_SqlOrderBy : "`ads_sdate` DESC,`ads_edate` DESC,`hour_sid` ASC,`hour_eid` ASC,`repeat_id` ASC,`every_id` ASC";
 	}
 
 	function SqlOrderBy() { // For backward compatibility

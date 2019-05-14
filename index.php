@@ -225,9 +225,9 @@ if ($pageName == '') {
       <?php
     }
     ?>
-
-    <?php include $pageName; ?>
-
+    <section id="mainSection" style="padding: 0; margin: 0">
+      <?php include $pageName; ?>
+    </section>
     <?php
     if ($ph_Setting_DispPreFooter == 1) {
       ?>

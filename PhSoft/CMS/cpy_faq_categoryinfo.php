@@ -179,7 +179,7 @@ class ccpy_faq_category extends cTable {
 	var $_SqlOrderBy = "";
 
 	function getSqlOrderBy() { // Order By
-		return ($this->_SqlOrderBy <> "") ? $this->_SqlOrderBy : "";
+		return ($this->_SqlOrderBy <> "") ? $this->_SqlOrderBy : "`fcat_order` ASC,`fcat_id` ASC";
 	}
 
 	function SqlOrderBy() { // For backward compatibility

@@ -244,7 +244,7 @@ class capp_tips extends cTable {
 	var $_SqlOrderBy = "";
 
 	function getSqlOrderBy() { // Order By
-		return ($this->_SqlOrderBy <> "") ? $this->_SqlOrderBy : "";
+		return ($this->_SqlOrderBy <> "") ? $this->_SqlOrderBy : "`tcat_id` ASC,`lang_id` ASC,`tips_id` ASC";
 	}
 
 	function SqlOrderBy() { // For backward compatibility

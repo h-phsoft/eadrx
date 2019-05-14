@@ -375,6 +375,8 @@ class cdefault {
 			$this->Page_Terminate("cpy_userlist.php");
 		if ($Security->AllowList(CurrentProjectID() . 'cpy_video'))
 			$this->Page_Terminate("cpy_videolist.php");
+		if ($Security->AllowList(CurrentProjectID() . 'cpy_log'))
+			$this->Page_Terminate("cpy_loglist.php");
 		if ($Security->AllowList(CurrentProjectID() . 'phs_block_type'))
 			$this->Page_Terminate("phs_block_typelist.php");
 		if ($Security->AllowList(CurrentProjectID() . 'phs_color'))
@@ -387,6 +389,8 @@ class cdefault {
 			$this->Page_Terminate("phs_everylist.php");
 		if ($Security->AllowList(CurrentProjectID() . 'phs_gender'))
 			$this->Page_Terminate("phs_genderlist.php");
+		if ($Security->AllowList(CurrentProjectID() . 'phs_bill_cycle'))
+			$this->Page_Terminate("phs_bill_cyclelist.php");
 		if ($Security->AllowList(CurrentProjectID() . 'phs_hour'))
 			$this->Page_Terminate("phs_hourlist.php");
 		if ($Security->AllowList(CurrentProjectID() . 'phs_keys'))
@@ -399,10 +403,6 @@ class cdefault {
 			$this->Page_Terminate("phs_menulist.php");
 		if ($Security->AllowList(CurrentProjectID() . 'phs_menu_type'))
 			$this->Page_Terminate("phs_menu_typelist.php");
-		if ($Security->AllowList(CurrentProjectID() . 'phs_metta'))
-			$this->Page_Terminate("phs_mettalist.php");
-		if ($Security->AllowList(CurrentProjectID() . 'phs_perms'))
-			$this->Page_Terminate("phs_permslist.php");
 		if ($Security->AllowList(CurrentProjectID() . 'phs_vkeys'))
 			$this->Page_Terminate("phs_vkeyslist.php");
 		if ($Security->AllowList(CurrentProjectID() . 'app_vbook'))
@@ -413,6 +413,10 @@ class cdefault {
 			$this->Page_Terminate("app_vtest_evaluatelist.php");
 		if ($Security->AllowList(CurrentProjectID() . 'app_vtest_question'))
 			$this->Page_Terminate("app_vtest_questionlist.php");
+		if ($Security->AllowList(CurrentProjectID() . 'phs_metta'))
+			$this->Page_Terminate("phs_mettalist.php");
+		if ($Security->AllowList(CurrentProjectID() . 'phs_perms'))
+			$this->Page_Terminate("phs_permslist.php");
 		if ($Security->AllowList(CurrentProjectID() . 'phs_pgroup'))
 			$this->Page_Terminate("phs_pgrouplist.php");
 		if ($Security->AllowList(CurrentProjectID() . 'phs_repeat'))
@@ -421,14 +425,28 @@ class cdefault {
 			$this->Page_Terminate("phs_settinglist.php");
 		if ($Security->AllowList(CurrentProjectID() . 'phs_slider_cols'))
 			$this->Page_Terminate("phs_slider_colslist.php");
+		if ($Security->AllowList(CurrentProjectID() . 'app_vcons_cat'))
+			$this->Page_Terminate("app_vcons_catlist.php");
 		if ($Security->AllowList(CurrentProjectID() . 'phs_slider_type'))
 			$this->Page_Terminate("phs_slider_typelist.php");
 		if ($Security->AllowList(CurrentProjectID() . 'phs_status'))
 			$this->Page_Terminate("phs_statuslist.php");
-		if ($Security->AllowList(CurrentProjectID() . 'app_vcons_cat'))
-			$this->Page_Terminate("app_vcons_catlist.php");
 		if ($Security->AllowList(CurrentProjectID() . 'phs_users'))
 			$this->Page_Terminate("phs_userslist.php");
+		if ($Security->AllowList(CurrentProjectID() . 'phs_log'))
+			$this->Page_Terminate("phs_loglist.php");
+		if ($Security->AllowList(CurrentProjectID() . 'app_service'))
+			$this->Page_Terminate("app_servicelist.php");
+		if ($Security->AllowList(CurrentProjectID() . 'app_vtips'))
+			$this->Page_Terminate("app_vtipslist.php");
+		if ($Security->AllowList(CurrentProjectID() . 'app_vtips_package'))
+			$this->Page_Terminate("app_vtips_packagelist.php");
+		if ($Security->AllowList(CurrentProjectID() . 'app_subscribe'))
+			$this->Page_Terminate("app_subscribelist.php");
+		if ($Security->AllowList(CurrentProjectID() . 'app_tips_package'))
+			$this->Page_Terminate("app_tips_packagelist.php");
+		if ($Security->AllowList(CurrentProjectID() . 'app_tips_pkg_cat'))
+			$this->Page_Terminate("app_tips_pkg_catlist.php");
 		if ($Security->IsLoggedIn()) {
 			$this->setFailureMessage(ew_DeniedMsg() . "<br><br><a href=\"logout.php\">" . $Language->Phrase("BackToLogin") . "</a>");
 		} else {

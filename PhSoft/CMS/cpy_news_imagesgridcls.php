@@ -912,6 +912,8 @@ class ccpy_news_images_grid extends ccpy_news_images {
 			if ($this->getSqlOrderBy() <> "") {
 				$sOrderBy = $this->getSqlOrderBy();
 				$this->setSessionOrderBy($sOrderBy);
+				$this->news_id->setSort("ASC");
+				$this->nimg_order->setSort("ASC");
 			}
 		}
 	}

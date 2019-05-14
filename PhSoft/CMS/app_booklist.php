@@ -1684,6 +1684,8 @@ class capp_book_list extends capp_book {
 			if ($this->getSqlOrderBy() <> "") {
 				$sOrderBy = $this->getSqlOrderBy();
 				$this->setSessionOrderBy($sOrderBy);
+				$this->lang_id->setSort("ASC");
+				$this->book_title->setSort("ASC");
 			}
 		}
 	}

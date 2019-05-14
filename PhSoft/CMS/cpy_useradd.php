@@ -1188,6 +1188,17 @@ class ccpy_user_add extends ccpy_user {
 	// Add record
 	function AddRow($rsold = NULL) {
 		global $Language, $Security;
+		if ($this->user_name->CurrentValue <> "") { // Check field with unique index
+			$sFilter = "(user_name = '" . ew_AdjustSql($this->user_name->CurrentValue, $this->DBID) . "')";
+			$rsChk = $this->LoadRs($sFilter);
+			if ($rsChk && !$rsChk->EOF) {
+				$sIdxErrMsg = str_replace("%f", $this->user_name->FldCaption(), $Language->Phrase("DupIndex"));
+				$sIdxErrMsg = str_replace("%v", $this->user_name->CurrentValue, $sIdxErrMsg);
+				$this->setFailureMessage($sIdxErrMsg);
+				$rsChk->Close();
+				return FALSE;
+			}
+		}
 		if ($this->user_email->CurrentValue <> "") { // Check field with unique index
 			$sFilter = "(user_email = '" . ew_AdjustSql($this->user_email->CurrentValue, $this->DBID) . "')";
 			$rsChk = $this->LoadRs($sFilter);

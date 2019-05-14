@@ -21,17 +21,17 @@
   --block-padding: 0.5rem;
   --overlay-background: rgba(0, 0, 0, 0.7);
   --title-color: #999;
-  --text-color: #555;
+  --text-color: #000;
   --main-background: #44D1C8;
   --main-background1: #C7E6E6;
   --main-background2: #44D1C8;
   --title-background: whitesmoke;
   --block-background: #fff;
-  --block-color: #555;
-  --block-title-color: #b90303;
+  --block-color: #000;
+  --block-title-color: #AB04AB;
   --block-footer-color: #7386D5;
   --block-body-background: whitesmoke;
-  --block-body-color: #b90303;
+  --block-body-color: #000;
   --dismiss-background: #fff;
   --dismiss-color: #fff;
   --dismiss-hover-background: #fff;
@@ -54,6 +54,7 @@
 body {
   font-family: 'Droid Arabic Kufi', sans-serif;
   background: var(--main-background) !important;
+  color: var(--text-color);
 }
 
 .align-items-stretch {

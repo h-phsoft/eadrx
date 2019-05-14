@@ -292,7 +292,7 @@ class ccpy_page_row extends cTable {
 	var $_SqlOrderBy = "";
 
 	function getSqlOrderBy() { // Order By
-		return ($this->_SqlOrderBy <> "") ? $this->_SqlOrderBy : "";
+		return ($this->_SqlOrderBy <> "") ? $this->_SqlOrderBy : "`page_id` ASC,`lang_id` ASC,`row_order` ASC,`row_id` ASC";
 	}
 
 	function SqlOrderBy() { // For backward compatibility

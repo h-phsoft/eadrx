@@ -918,6 +918,8 @@ class cphs_keyvalues_grid extends cphs_keyvalues {
 			if ($this->getSqlOrderBy() <> "") {
 				$sOrderBy = $this->getSqlOrderBy();
 				$this->setSessionOrderBy($sOrderBy);
+				$this->key_id->setSort("ASC");
+				$this->lang_id->setSort("ASC");
 			}
 		}
 	}

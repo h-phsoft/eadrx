@@ -1591,6 +1591,7 @@ class cphs_keys_list extends cphs_keys {
 			if ($this->getSqlOrderBy() <> "") {
 				$sOrderBy = $this->getSqlOrderBy();
 				$this->setSessionOrderBy($sOrderBy);
+				$this->key_name->setSort("ASC");
 			}
 		}
 	}

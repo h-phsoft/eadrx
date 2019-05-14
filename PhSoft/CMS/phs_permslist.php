@@ -1591,6 +1591,8 @@ class cphs_perms_list extends cphs_perms {
 			if ($this->getSqlOrderBy() <> "") {
 				$sOrderBy = $this->getSqlOrderBy();
 				$this->setSessionOrderBy($sOrderBy);
+				$this->pgrp_id->setSort("ASC");
+				$this->perm_table->setSort("ASC");
 			}
 		}
 	}

@@ -915,6 +915,8 @@ class capp_consult_assign_grid extends capp_consult_assign {
 			if ($this->getSqlOrderBy() <> "") {
 				$sOrderBy = $this->getSqlOrderBy();
 				$this->setSessionOrderBy($sOrderBy);
+				$this->cons_id->setSort("ASC");
+				$this->user_id->setSort("ASC");
 			}
 		}
 	}

@@ -4,6 +4,11 @@
   if (count($aBooks) > 0) {
     foreach ($aBooks as $book) {
       $bookLang = cLang::getInstance($book->Lang_Id);
+      if ($nUPGrp < 0) {
+        $nCount = 1;
+      } else {
+        $nCount = ph_GetDBValue('count(*)', '`app_subscribe`', '`user_id`=' . $nUserId . ' AND `serv_id`=1 AND `book_id`=' . $book->Book_Id);
+      }
       ?>
       <div class="block col-12 col-sm-12">
         <div class="block-body">
@@ -28,8 +33,17 @@
               </div>
               <div class="row">
                 <div class="col-12 text-right">
-                  <a class="btn btn-success" href="<?php echo $PH_BASE_PATH . '?' . $nLang . '/' . ph_Setting('App-Menu-Book') . '/' . $book->Book_Id; ?>"><?php echo ph_DBKey('Read', $curLang->Lang_Id); ?></a>
-                  <a class="btn btn-info" href="<?php echo $PH_BASE_PATH . '?' . $nLang . '/' . ph_Setting('App-Menu-Book-Subscribe') . '/' . $book->Book_Id; ?>"><?php echo ph_DBKey('Subscribe', $curLang->Lang_Id) . ' ' . $book->Book_Price . ph_Setting('Currency-Sign'); ?></a>
+                  <?php
+                  if ($nCount > 0) {
+                    ?>
+                    <a class="btn btn-success" href="<?php echo $PH_BASE_PATH . '?' . $nLang . '/' . ph_Setting('App-Menu-Book') . '/' . $book->Book_Id; ?>"><?php echo ph_DBKey('Read', $curLang->Lang_Id); ?></a>
+                    <?php
+                  } else {
+                    ?>
+                    <a class="btn btn-info" href="<?php echo $PH_BASE_PATH . '?' . $nLang . '/' . ph_Setting('App-Menu-Book-Subscribe') . '/' . $book->Book_Id; ?>"><?php echo ph_DBKey('Purchase', $curLang->Lang_Id) . ' ' . $book->Book_Price . ph_Setting('Currency-Sign'); ?></a>
+                    <?php
+                  }
+                  ?>
                 </div>
               </div>
             </div>

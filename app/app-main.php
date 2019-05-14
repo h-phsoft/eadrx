@@ -1,16 +1,4 @@
 <?php
-if (ph_Setting('APP-DISP-FreeTips') == 1) {
-  ?>
-  <div class="row my-3">
-    <div class="block col-12 col-sm-12">
-      <div class="block-body text-center px-5">
-        <h5 class="block-title">Tip of the day</h5>
-        <div class="block-text text-justify-last-center"><?php echo cp_getDailyTip($nLang); ?></div>
-      </div>
-    </div>
-  </div>
-  <?php
-}
 if (ph_Setting('APP-DISP-ADS') == 1) {
   $sSQL = 'SELECT ALL '
           . '`ads_id`  , `status_id`, `repeat_id`, `every_id` , `ads_title`,'
@@ -86,3 +74,19 @@ if (ph_Setting('APP-DISP-ADS') == 1) {
     <?php
   }
 }
+?>
+<?php
+if (ph_Setting('APP-DISP-FreeTips') == 1) {
+  $tip = cp_getDailyTip($nLang);
+  ?>
+  <div class="row my-3">
+    <div class="block col-12 col-sm-12">
+      <div class="block-body text-center px-5">
+        <h5 class="block-title"><?php echo $tip->TCat_Name; ?></h5>
+        <div class="block-text text-justify-last-center"><?php echo $tip->Tips_Text; ?></div>
+      </div>
+    </div>
+  </div>
+  <?php
+}
+?>

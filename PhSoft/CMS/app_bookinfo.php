@@ -231,7 +231,7 @@ class capp_book extends cTable {
 	var $_SqlOrderBy = "";
 
 	function getSqlOrderBy() { // Order By
-		return ($this->_SqlOrderBy <> "") ? $this->_SqlOrderBy : "";
+		return ($this->_SqlOrderBy <> "") ? $this->_SqlOrderBy : "`lang_id` ASC,`book_title` ASC";
 	}
 
 	function SqlOrderBy() { // For backward compatibility

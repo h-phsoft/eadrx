@@ -944,6 +944,9 @@ class ccpy_page_row_grid extends ccpy_page_row {
 			if ($this->getSqlOrderBy() <> "") {
 				$sOrderBy = $this->getSqlOrderBy();
 				$this->setSessionOrderBy($sOrderBy);
+				$this->page_id->setSort("ASC");
+				$this->lang_id->setSort("ASC");
+				$this->row_order->setSort("ASC");
 			}
 		}
 	}

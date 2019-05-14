@@ -178,7 +178,7 @@ class cphs_metta extends cTable {
 	var $_SqlOrderBy = "";
 
 	function getSqlOrderBy() { // Order By
-		return ($this->_SqlOrderBy <> "") ? $this->_SqlOrderBy : "";
+		return ($this->_SqlOrderBy <> "") ? $this->_SqlOrderBy : "`metta_type` ASC,`metta_name` ASC";
 	}
 
 	function SqlOrderBy() { // For backward compatibility

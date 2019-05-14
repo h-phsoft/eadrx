@@ -144,7 +144,7 @@ var ewVar = <?php echo json_encode($EW_CLIENT_VAR); ?>;
 			<!-- mini logo for sidebar mini 50x50 pixels -->
 			<span class="logo-mini"></span>
 			<!-- logo for regular state and mobile devices -->
-			<span class="logo-lg">PHPMaker 2018</span>
+			<span class="logo-lg">PhSoft 2018</span>
 		</div>
 		<!-- Header Navbar -->
 		<nav class="navbar navbar-static-top" role="navigation">

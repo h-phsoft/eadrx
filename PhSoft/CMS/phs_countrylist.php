@@ -1592,6 +1592,8 @@ class cphs_country_list extends cphs_country {
 			if ($this->getSqlOrderBy() <> "") {
 				$sOrderBy = $this->getSqlOrderBy();
 				$this->setSessionOrderBy($sOrderBy);
+				$this->cntry_code->setSort("ASC");
+				$this->cntry_name->setSort("ASC");
 			}
 		}
 	}

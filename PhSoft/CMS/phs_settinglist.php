@@ -1573,6 +1573,7 @@ class cphs_setting_list extends cphs_setting {
 			if ($this->getSqlOrderBy() <> "") {
 				$sOrderBy = $this->getSqlOrderBy();
 				$this->setSessionOrderBy($sOrderBy);
+				$this->set_name->setSort("ASC");
 			}
 		}
 	}

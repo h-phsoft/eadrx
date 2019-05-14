@@ -295,7 +295,7 @@ class ccpy_page_row_block extends cTable {
 	var $_SqlOrderBy = "";
 
 	function getSqlOrderBy() { // Order By
-		return ($this->_SqlOrderBy <> "") ? $this->_SqlOrderBy : "";
+		return ($this->_SqlOrderBy <> "") ? $this->_SqlOrderBy : "`row_id` ASC,`blk_order` ASC,`blk_id` ASC";
 	}
 
 	function SqlOrderBy() { // For backward compatibility

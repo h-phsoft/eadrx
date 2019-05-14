@@ -918,6 +918,8 @@ class capp_tips_grid extends capp_tips {
 			if ($this->getSqlOrderBy() <> "") {
 				$sOrderBy = $this->getSqlOrderBy();
 				$this->setSessionOrderBy($sOrderBy);
+				$this->tcat_id->setSort("ASC");
+				$this->lang_id->setSort("ASC");
 			}
 		}
 	}

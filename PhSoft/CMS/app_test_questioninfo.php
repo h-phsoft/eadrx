@@ -320,7 +320,7 @@ class capp_test_question extends cTable {
 	var $_SqlOrderBy = "";
 
 	function getSqlOrderBy() { // Order By
-		return ($this->_SqlOrderBy <> "") ? $this->_SqlOrderBy : "";
+		return ($this->_SqlOrderBy <> "") ? $this->_SqlOrderBy : "`test_id` ASC,`lang_id` ASC,`qstn_num` ASC";
 	}
 
 	function SqlOrderBy() { // For backward compatibility

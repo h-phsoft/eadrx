@@ -163,7 +163,7 @@ class capp_notif_status extends cTable {
 	var $_SqlOrderBy = "";
 
 	function getSqlOrderBy() { // Order By
-		return ($this->_SqlOrderBy <> "") ? $this->_SqlOrderBy : "";
+		return ($this->_SqlOrderBy <> "") ? $this->_SqlOrderBy : "`nstatus_id` ASC";
 	}
 
 	function SqlOrderBy() { // For backward compatibility

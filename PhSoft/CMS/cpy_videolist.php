@@ -1573,6 +1573,7 @@ class ccpy_video_list extends ccpy_video {
 			if ($this->getSqlOrderBy() <> "") {
 				$sOrderBy = $this->getSqlOrderBy();
 				$this->setSessionOrderBy($sOrderBy);
+				$this->video_name->setSort("ASC");
 			}
 		}
 	}

@@ -244,7 +244,7 @@ class capp_consultation extends cTable {
 	var $_SqlOrderBy = "";
 
 	function getSqlOrderBy() { // Order By
-		return ($this->_SqlOrderBy <> "") ? $this->_SqlOrderBy : "";
+		return ($this->_SqlOrderBy <> "") ? $this->_SqlOrderBy : "`ins_datetime` DESC";
 	}
 
 	function SqlOrderBy() { // For backward compatibility

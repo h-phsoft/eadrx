@@ -1591,6 +1591,7 @@ class ccpy_faq_category_list extends ccpy_faq_category {
 			if ($this->getSqlOrderBy() <> "") {
 				$sOrderBy = $this->getSqlOrderBy();
 				$this->setSessionOrderBy($sOrderBy);
+				$this->fcat_order->setSort("ASC");
 			}
 		}
 	}

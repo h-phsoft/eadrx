@@ -1715,6 +1715,7 @@ class capp_consultation_list extends capp_consultation {
 			if ($this->getSqlOrderBy() <> "") {
 				$sOrderBy = $this->getSqlOrderBy();
 				$this->setSessionOrderBy($sOrderBy);
+				$this->ins_datetime->setSort("DESC");
 			}
 		}
 	}

@@ -163,7 +163,7 @@ class capp_consultation_status extends cTable {
 	var $_SqlOrderBy = "";
 
 	function getSqlOrderBy() { // Order By
-		return ($this->_SqlOrderBy <> "") ? $this->_SqlOrderBy : "";
+		return ($this->_SqlOrderBy <> "") ? $this->_SqlOrderBy : "`cstatus_id` ASC";
 	}
 
 	function SqlOrderBy() { // For backward compatibility

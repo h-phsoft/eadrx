@@ -226,7 +226,7 @@ class ccpy_news_images extends cTable {
 	var $_SqlOrderBy = "";
 
 	function getSqlOrderBy() { // Order By
-		return ($this->_SqlOrderBy <> "") ? $this->_SqlOrderBy : "";
+		return ($this->_SqlOrderBy <> "") ? $this->_SqlOrderBy : "`news_id` ASC,`nimg_order` ASC,`nimg_id` ASC";
 	}
 
 	function SqlOrderBy() { // For backward compatibility

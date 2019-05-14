@@ -449,20 +449,16 @@ class capp_vbook_list extends capp_vbook {
 
 		// Setup export options
 		$this->SetupExportOptions();
-		$this->book_id->SetVisibility();
-		if ($this->IsAdd() || $this->IsCopy() || $this->IsGridAdd())
-			$this->book_id->Visible = FALSE;
 		$this->lang_id->SetVisibility();
 		$this->status_id->SetVisibility();
 		$this->book_title->SetVisibility();
+		$this->book_desc->SetVisibility();
 		$this->book_image->SetVisibility();
 		$this->book_price->SetVisibility();
-		$this->ins_datetime->SetVisibility();
-		$this->bpage_id->SetVisibility();
-		if ($this->IsAdd() || $this->IsCopy() || $this->IsGridAdd())
-			$this->bpage_id->Visible = FALSE;
 		$this->page_num->SetVisibility();
 		$this->page_image->SetVisibility();
+		$this->page_text->SetVisibility();
+		$this->ins_datetime->SetVisibility();
 
 		// Global Page Loading event (in userfn*.php)
 		Page_Loading();
@@ -794,18 +790,16 @@ class capp_vbook_list extends capp_vbook {
 		// Initialize
 		$sFilterList = "";
 		$sSavedFilterList = "";
-		$sFilterList = ew_Concat($sFilterList, $this->book_id->AdvancedSearch->ToJson(), ","); // Field book_id
 		$sFilterList = ew_Concat($sFilterList, $this->lang_id->AdvancedSearch->ToJson(), ","); // Field lang_id
 		$sFilterList = ew_Concat($sFilterList, $this->status_id->AdvancedSearch->ToJson(), ","); // Field status_id
 		$sFilterList = ew_Concat($sFilterList, $this->book_title->AdvancedSearch->ToJson(), ","); // Field book_title
 		$sFilterList = ew_Concat($sFilterList, $this->book_desc->AdvancedSearch->ToJson(), ","); // Field book_desc
 		$sFilterList = ew_Concat($sFilterList, $this->book_image->AdvancedSearch->ToJson(), ","); // Field book_image
 		$sFilterList = ew_Concat($sFilterList, $this->book_price->AdvancedSearch->ToJson(), ","); // Field book_price
-		$sFilterList = ew_Concat($sFilterList, $this->ins_datetime->AdvancedSearch->ToJson(), ","); // Field ins_datetime
-		$sFilterList = ew_Concat($sFilterList, $this->bpage_id->AdvancedSearch->ToJson(), ","); // Field bpage_id
 		$sFilterList = ew_Concat($sFilterList, $this->page_num->AdvancedSearch->ToJson(), ","); // Field page_num
 		$sFilterList = ew_Concat($sFilterList, $this->page_image->AdvancedSearch->ToJson(), ","); // Field page_image
 		$sFilterList = ew_Concat($sFilterList, $this->page_text->AdvancedSearch->ToJson(), ","); // Field page_text
+		$sFilterList = ew_Concat($sFilterList, $this->ins_datetime->AdvancedSearch->ToJson(), ","); // Field ins_datetime
 		if ($this->BasicSearch->Keyword <> "") {
 			$sWrk = "\"" . EW_TABLE_BASIC_SEARCH . "\":\"" . ew_JsEncode2($this->BasicSearch->Keyword) . "\",\"" . EW_TABLE_BASIC_SEARCH_TYPE . "\":\"" . ew_JsEncode2($this->BasicSearch->Type) . "\"";
 			$sFilterList = ew_Concat($sFilterList, $sWrk, ",");
@@ -849,14 +843,6 @@ class capp_vbook_list extends capp_vbook {
 			return FALSE;
 		$filter = json_decode(@$_POST["filter"], TRUE);
 		$this->Command = "search";
-
-		// Field book_id
-		$this->book_id->AdvancedSearch->SearchValue = @$filter["x_book_id"];
-		$this->book_id->AdvancedSearch->SearchOperator = @$filter["z_book_id"];
-		$this->book_id->AdvancedSearch->SearchCondition = @$filter["v_book_id"];
-		$this->book_id->AdvancedSearch->SearchValue2 = @$filter["y_book_id"];
-		$this->book_id->AdvancedSearch->SearchOperator2 = @$filter["w_book_id"];
-		$this->book_id->AdvancedSearch->Save();
 
 		// Field lang_id
 		$this->lang_id->AdvancedSearch->SearchValue = @$filter["x_lang_id"];
@@ -906,22 +892,6 @@ class capp_vbook_list extends capp_vbook {
 		$this->book_price->AdvancedSearch->SearchOperator2 = @$filter["w_book_price"];
 		$this->book_price->AdvancedSearch->Save();
 
-		// Field ins_datetime
-		$this->ins_datetime->AdvancedSearch->SearchValue = @$filter["x_ins_datetime"];
-		$this->ins_datetime->AdvancedSearch->SearchOperator = @$filter["z_ins_datetime"];
-		$this->ins_datetime->AdvancedSearch->SearchCondition = @$filter["v_ins_datetime"];
-		$this->ins_datetime->AdvancedSearch->SearchValue2 = @$filter["y_ins_datetime"];
-		$this->ins_datetime->AdvancedSearch->SearchOperator2 = @$filter["w_ins_datetime"];
-		$this->ins_datetime->AdvancedSearch->Save();
-
-		// Field bpage_id
-		$this->bpage_id->AdvancedSearch->SearchValue = @$filter["x_bpage_id"];
-		$this->bpage_id->AdvancedSearch->SearchOperator = @$filter["z_bpage_id"];
-		$this->bpage_id->AdvancedSearch->SearchCondition = @$filter["v_bpage_id"];
-		$this->bpage_id->AdvancedSearch->SearchValue2 = @$filter["y_bpage_id"];
-		$this->bpage_id->AdvancedSearch->SearchOperator2 = @$filter["w_bpage_id"];
-		$this->bpage_id->AdvancedSearch->Save();
-
 		// Field page_num
 		$this->page_num->AdvancedSearch->SearchValue = @$filter["x_page_num"];
 		$this->page_num->AdvancedSearch->SearchOperator = @$filter["z_page_num"];
@@ -945,6 +915,14 @@ class capp_vbook_list extends capp_vbook {
 		$this->page_text->AdvancedSearch->SearchValue2 = @$filter["y_page_text"];
 		$this->page_text->AdvancedSearch->SearchOperator2 = @$filter["w_page_text"];
 		$this->page_text->AdvancedSearch->Save();
+
+		// Field ins_datetime
+		$this->ins_datetime->AdvancedSearch->SearchValue = @$filter["x_ins_datetime"];
+		$this->ins_datetime->AdvancedSearch->SearchOperator = @$filter["z_ins_datetime"];
+		$this->ins_datetime->AdvancedSearch->SearchCondition = @$filter["v_ins_datetime"];
+		$this->ins_datetime->AdvancedSearch->SearchValue2 = @$filter["y_ins_datetime"];
+		$this->ins_datetime->AdvancedSearch->SearchOperator2 = @$filter["w_ins_datetime"];
+		$this->ins_datetime->AdvancedSearch->Save();
 		$this->BasicSearch->setKeyword(@$filter[EW_TABLE_BASIC_SEARCH]);
 		$this->BasicSearch->setType(@$filter[EW_TABLE_BASIC_SEARCH_TYPE]);
 	}
@@ -1103,16 +1081,16 @@ class capp_vbook_list extends capp_vbook {
 		if (@$_GET["order"] <> "") {
 			$this->CurrentOrder = @$_GET["order"];
 			$this->CurrentOrderType = @$_GET["ordertype"];
-			$this->UpdateSort($this->book_id); // book_id
 			$this->UpdateSort($this->lang_id); // lang_id
 			$this->UpdateSort($this->status_id); // status_id
 			$this->UpdateSort($this->book_title); // book_title
+			$this->UpdateSort($this->book_desc); // book_desc
 			$this->UpdateSort($this->book_image); // book_image
 			$this->UpdateSort($this->book_price); // book_price
-			$this->UpdateSort($this->ins_datetime); // ins_datetime
-			$this->UpdateSort($this->bpage_id); // bpage_id
 			$this->UpdateSort($this->page_num); // page_num
 			$this->UpdateSort($this->page_image); // page_image
+			$this->UpdateSort($this->page_text); // page_text
+			$this->UpdateSort($this->ins_datetime); // ins_datetime
 			$this->setStartRecordNumber(1); // Reset start position
 		}
 	}
@@ -1124,6 +1102,9 @@ class capp_vbook_list extends capp_vbook {
 			if ($this->getSqlOrderBy() <> "") {
 				$sOrderBy = $this->getSqlOrderBy();
 				$this->setSessionOrderBy($sOrderBy);
+				$this->lang_id->setSort("ASC");
+				$this->book_title->setSort("ASC");
+				$this->page_num->setSort("ASC");
 			}
 		}
 	}
@@ -1145,16 +1126,16 @@ class capp_vbook_list extends capp_vbook {
 			if ($this->Command == "resetsort") {
 				$sOrderBy = "";
 				$this->setSessionOrderBy($sOrderBy);
-				$this->book_id->setSort("");
 				$this->lang_id->setSort("");
 				$this->status_id->setSort("");
 				$this->book_title->setSort("");
+				$this->book_desc->setSort("");
 				$this->book_image->setSort("");
 				$this->book_price->setSort("");
-				$this->ins_datetime->setSort("");
-				$this->bpage_id->setSort("");
 				$this->page_num->setSort("");
 				$this->page_image->setSort("");
+				$this->page_text->setSort("");
+				$this->ins_datetime->setSort("");
 			}
 
 			// Reset start position
@@ -1545,34 +1526,35 @@ class capp_vbook_list extends capp_vbook {
 		if (!$rs || $rs->EOF)
 			return;
 		$this->book_id->setDbValue($row['book_id']);
+		$this->bpage_id->setDbValue($row['bpage_id']);
 		$this->lang_id->setDbValue($row['lang_id']);
 		$this->status_id->setDbValue($row['status_id']);
 		$this->book_title->setDbValue($row['book_title']);
 		$this->book_desc->setDbValue($row['book_desc']);
-		$this->book_image->setDbValue($row['book_image']);
+		$this->book_image->Upload->DbValue = $row['book_image'];
+		$this->book_image->setDbValue($this->book_image->Upload->DbValue);
 		$this->book_price->setDbValue($row['book_price']);
-		$this->ins_datetime->setDbValue($row['ins_datetime']);
-		$this->bpage_id->setDbValue($row['bpage_id']);
 		$this->page_num->setDbValue($row['page_num']);
 		$this->page_image->setDbValue($row['page_image']);
 		$this->page_text->setDbValue($row['page_text']);
+		$this->ins_datetime->setDbValue($row['ins_datetime']);
 	}
 
 	// Return a row with default values
 	function NewRow() {
 		$row = array();
 		$row['book_id'] = NULL;
+		$row['bpage_id'] = NULL;
 		$row['lang_id'] = NULL;
 		$row['status_id'] = NULL;
 		$row['book_title'] = NULL;
 		$row['book_desc'] = NULL;
 		$row['book_image'] = NULL;
 		$row['book_price'] = NULL;
-		$row['ins_datetime'] = NULL;
-		$row['bpage_id'] = NULL;
 		$row['page_num'] = NULL;
 		$row['page_image'] = NULL;
 		$row['page_text'] = NULL;
+		$row['ins_datetime'] = NULL;
 		return $row;
 	}
 
@@ -1582,17 +1564,17 @@ class capp_vbook_list extends capp_vbook {
 			return;
 		$row = is_array($rs) ? $rs : $rs->fields;
 		$this->book_id->DbValue = $row['book_id'];
+		$this->bpage_id->DbValue = $row['bpage_id'];
 		$this->lang_id->DbValue = $row['lang_id'];
 		$this->status_id->DbValue = $row['status_id'];
 		$this->book_title->DbValue = $row['book_title'];
 		$this->book_desc->DbValue = $row['book_desc'];
-		$this->book_image->DbValue = $row['book_image'];
+		$this->book_image->Upload->DbValue = $row['book_image'];
 		$this->book_price->DbValue = $row['book_price'];
-		$this->ins_datetime->DbValue = $row['ins_datetime'];
-		$this->bpage_id->DbValue = $row['bpage_id'];
 		$this->page_num->DbValue = $row['page_num'];
 		$this->page_image->DbValue = $row['page_image'];
 		$this->page_text->DbValue = $row['page_text'];
+		$this->ins_datetime->DbValue = $row['ins_datetime'];
 	}
 
 	// Load old record
@@ -1642,52 +1624,94 @@ class capp_vbook_list extends capp_vbook {
 
 		// Common render codes for all row types
 		// book_id
+
+		$this->book_id->CellCssStyle = "white-space: nowrap;";
+
+		// bpage_id
+		$this->bpage_id->CellCssStyle = "white-space: nowrap;";
+
 		// lang_id
 		// status_id
 		// book_title
 		// book_desc
 		// book_image
 		// book_price
-		// ins_datetime
-		// bpage_id
 		// page_num
 		// page_image
 		// page_text
+		// ins_datetime
 
 		if ($this->RowType == EW_ROWTYPE_VIEW) { // View row
 
-		// book_id
-		$this->book_id->ViewValue = $this->book_id->CurrentValue;
-		$this->book_id->ViewCustomAttributes = "";
-
 		// lang_id
-		$this->lang_id->ViewValue = $this->lang_id->CurrentValue;
+		if (strval($this->lang_id->CurrentValue) <> "") {
+			$sFilterWrk = "`lang_id`" . ew_SearchString("=", $this->lang_id->CurrentValue, EW_DATATYPE_NUMBER, "");
+		$sSqlWrk = "SELECT `lang_id`, `lang_name` AS `DispFld`, '' AS `Disp2Fld`, '' AS `Disp3Fld`, '' AS `Disp4Fld` FROM `phs_language`";
+		$sWhereWrk = "";
+		$this->lang_id->LookupFilters = array();
+		ew_AddFilter($sWhereWrk, $sFilterWrk);
+		$this->Lookup_Selecting($this->lang_id, $sWhereWrk); // Call Lookup Selecting
+		if ($sWhereWrk <> "") $sSqlWrk .= " WHERE " . $sWhereWrk;
+			$rswrk = Conn()->Execute($sSqlWrk);
+			if ($rswrk && !$rswrk->EOF) { // Lookup values found
+				$arwrk = array();
+				$arwrk[1] = $rswrk->fields('DispFld');
+				$this->lang_id->ViewValue = $this->lang_id->DisplayValue($arwrk);
+				$rswrk->Close();
+			} else {
+				$this->lang_id->ViewValue = $this->lang_id->CurrentValue;
+			}
+		} else {
+			$this->lang_id->ViewValue = NULL;
+		}
 		$this->lang_id->ViewCustomAttributes = "";
 
 		// status_id
-		$this->status_id->ViewValue = $this->status_id->CurrentValue;
+		if (strval($this->status_id->CurrentValue) <> "") {
+			$sFilterWrk = "`status_id`" . ew_SearchString("=", $this->status_id->CurrentValue, EW_DATATYPE_NUMBER, "");
+		$sSqlWrk = "SELECT `status_id`, `status_name` AS `DispFld`, '' AS `Disp2Fld`, '' AS `Disp3Fld`, '' AS `Disp4Fld` FROM `phs_status`";
+		$sWhereWrk = "";
+		$this->status_id->LookupFilters = array();
+		ew_AddFilter($sWhereWrk, $sFilterWrk);
+		$this->Lookup_Selecting($this->status_id, $sWhereWrk); // Call Lookup Selecting
+		if ($sWhereWrk <> "") $sSqlWrk .= " WHERE " . $sWhereWrk;
+			$rswrk = Conn()->Execute($sSqlWrk);
+			if ($rswrk && !$rswrk->EOF) { // Lookup values found
+				$arwrk = array();
+				$arwrk[1] = $rswrk->fields('DispFld');
+				$this->status_id->ViewValue = $this->status_id->DisplayValue($arwrk);
+				$rswrk->Close();
+			} else {
+				$this->status_id->ViewValue = $this->status_id->CurrentValue;
+			}
+		} else {
+			$this->status_id->ViewValue = NULL;
+		}
 		$this->status_id->ViewCustomAttributes = "";
 
 		// book_title
 		$this->book_title->ViewValue = $this->book_title->CurrentValue;
 		$this->book_title->ViewCustomAttributes = "";
 
+		// book_desc
+		$this->book_desc->ViewValue = $this->book_desc->CurrentValue;
+		$this->book_desc->ViewCustomAttributes = "";
+
 		// book_image
-		$this->book_image->ViewValue = $this->book_image->CurrentValue;
+		$this->book_image->UploadPath = '../../assets/img/bookImages';
+		if (!ew_Empty($this->book_image->Upload->DbValue)) {
+			$this->book_image->ImageWidth = 200;
+			$this->book_image->ImageHeight = 0;
+			$this->book_image->ImageAlt = $this->book_image->FldAlt();
+			$this->book_image->ViewValue = $this->book_image->Upload->DbValue;
+		} else {
+			$this->book_image->ViewValue = "";
+		}
 		$this->book_image->ViewCustomAttributes = "";
 
 		// book_price
 		$this->book_price->ViewValue = $this->book_price->CurrentValue;
 		$this->book_price->ViewCustomAttributes = "";
-
-		// ins_datetime
-		$this->ins_datetime->ViewValue = $this->ins_datetime->CurrentValue;
-		$this->ins_datetime->ViewValue = ew_FormatDateTime($this->ins_datetime->ViewValue, 0);
-		$this->ins_datetime->ViewCustomAttributes = "";
-
-		// bpage_id
-		$this->bpage_id->ViewValue = $this->bpage_id->CurrentValue;
-		$this->bpage_id->ViewCustomAttributes = "";
 
 		// page_num
 		$this->page_num->ViewValue = $this->page_num->CurrentValue;
@@ -1697,10 +1721,14 @@ class capp_vbook_list extends capp_vbook {
 		$this->page_image->ViewValue = $this->page_image->CurrentValue;
 		$this->page_image->ViewCustomAttributes = "";
 
-			// book_id
-			$this->book_id->LinkCustomAttributes = "";
-			$this->book_id->HrefValue = "";
-			$this->book_id->TooltipValue = "";
+		// page_text
+		$this->page_text->ViewValue = $this->page_text->CurrentValue;
+		$this->page_text->ViewCustomAttributes = "";
+
+		// ins_datetime
+		$this->ins_datetime->ViewValue = $this->ins_datetime->CurrentValue;
+		$this->ins_datetime->ViewValue = ew_FormatDateTime($this->ins_datetime->ViewValue, 0);
+		$this->ins_datetime->ViewCustomAttributes = "";
 
 			// lang_id
 			$this->lang_id->LinkCustomAttributes = "";
@@ -1717,25 +1745,34 @@ class capp_vbook_list extends capp_vbook {
 			$this->book_title->HrefValue = "";
 			$this->book_title->TooltipValue = "";
 
+			// book_desc
+			$this->book_desc->LinkCustomAttributes = "";
+			$this->book_desc->HrefValue = "";
+			$this->book_desc->TooltipValue = "";
+
 			// book_image
 			$this->book_image->LinkCustomAttributes = "";
-			$this->book_image->HrefValue = "";
+			$this->book_image->UploadPath = '../../assets/img/bookImages';
+			if (!ew_Empty($this->book_image->Upload->DbValue)) {
+				$this->book_image->HrefValue = ew_GetFileUploadUrl($this->book_image, $this->book_image->Upload->DbValue); // Add prefix/suffix
+				$this->book_image->LinkAttrs["target"] = ""; // Add target
+				if ($this->Export <> "") $this->book_image->HrefValue = ew_FullUrl($this->book_image->HrefValue, "href");
+			} else {
+				$this->book_image->HrefValue = "";
+			}
+			$this->book_image->HrefValue2 = $this->book_image->UploadPath . $this->book_image->Upload->DbValue;
 			$this->book_image->TooltipValue = "";
+			if ($this->book_image->UseColorbox) {
+				if (ew_Empty($this->book_image->TooltipValue))
+					$this->book_image->LinkAttrs["title"] = $Language->Phrase("ViewImageGallery");
+				$this->book_image->LinkAttrs["data-rel"] = "app_vbook_x" . $this->RowCnt . "_book_image";
+				ew_AppendClass($this->book_image->LinkAttrs["class"], "ewLightbox");
+			}
 
 			// book_price
 			$this->book_price->LinkCustomAttributes = "";
 			$this->book_price->HrefValue = "";
 			$this->book_price->TooltipValue = "";
-
-			// ins_datetime
-			$this->ins_datetime->LinkCustomAttributes = "";
-			$this->ins_datetime->HrefValue = "";
-			$this->ins_datetime->TooltipValue = "";
-
-			// bpage_id
-			$this->bpage_id->LinkCustomAttributes = "";
-			$this->bpage_id->HrefValue = "";
-			$this->bpage_id->TooltipValue = "";
 
 			// page_num
 			$this->page_num->LinkCustomAttributes = "";
@@ -1746,6 +1783,16 @@ class capp_vbook_list extends capp_vbook {
 			$this->page_image->LinkCustomAttributes = "";
 			$this->page_image->HrefValue = "";
 			$this->page_image->TooltipValue = "";
+
+			// page_text
+			$this->page_text->LinkCustomAttributes = "";
+			$this->page_text->HrefValue = "";
+			$this->page_text->TooltipValue = "";
+
+			// ins_datetime
+			$this->ins_datetime->LinkCustomAttributes = "";
+			$this->ins_datetime->HrefValue = "";
+			$this->ins_datetime->TooltipValue = "";
 		}
 
 		// Call Row Rendered event
@@ -2089,8 +2136,12 @@ fapp_vbooklist.Form_CustomValidate =
 fapp_vbooklist.ValidateRequired = <?php echo json_encode(EW_CLIENT_VALIDATE) ?>;
 
 // Dynamic selection lists
-// Form object for search
+fapp_vbooklist.Lists["x_lang_id"] = {"LinkField":"x_lang_id","Ajax":true,"AutoFill":false,"DisplayFields":["x_lang_name","","",""],"ParentFields":[],"ChildFields":[],"FilterFields":[],"Options":[],"Template":"","LinkTable":"phs_language"};
+fapp_vbooklist.Lists["x_lang_id"].Data = "<?php echo $app_vbook_list->lang_id->LookupFilterQuery(FALSE, "list") ?>";
+fapp_vbooklist.Lists["x_status_id"] = {"LinkField":"x_status_id","Ajax":true,"AutoFill":false,"DisplayFields":["x_status_name","","",""],"ParentFields":[],"ChildFields":[],"FilterFields":[],"Options":[],"Template":"","LinkTable":"phs_status"};
+fapp_vbooklist.Lists["x_status_id"].Data = "<?php echo $app_vbook_list->status_id->LookupFilterQuery(FALSE, "list") ?>";
 
+// Form object for search
 var CurrentSearchForm = fapp_vbooklistsrch = new ew_Form("fapp_vbooklistsrch");
 </script>
 <script type="text/javascript">
@@ -2256,15 +2307,6 @@ $app_vbook_list->RenderListOptions();
 // Render list options (header, left)
 $app_vbook_list->ListOptions->Render("header", "left");
 ?>
-<?php if ($app_vbook->book_id->Visible) { // book_id ?>
-	<?php if ($app_vbook->SortUrl($app_vbook->book_id) == "") { ?>
-		<th data-name="book_id" class="<?php echo $app_vbook->book_id->HeaderCellClass() ?>"><div id="elh_app_vbook_book_id" class="app_vbook_book_id"><div class="ewTableHeaderCaption"><?php echo $app_vbook->book_id->FldCaption() ?></div></div></th>
-	<?php } else { ?>
-		<th data-name="book_id" class="<?php echo $app_vbook->book_id->HeaderCellClass() ?>"><div class="ewPointer" onclick="ew_Sort(event,'<?php echo $app_vbook->SortUrl($app_vbook->book_id) ?>',1);"><div id="elh_app_vbook_book_id" class="app_vbook_book_id">
-			<div class="ewTableHeaderBtn"><span class="ewTableHeaderCaption"><?php echo $app_vbook->book_id->FldCaption() ?></span><span class="ewTableHeaderSort"><?php if ($app_vbook->book_id->getSort() == "ASC") { ?><span class="caret ewSortUp"></span><?php } elseif ($app_vbook->book_id->getSort() == "DESC") { ?><span class="caret"></span><?php } ?></span></div>
-		</div></div></th>
-	<?php } ?>
-<?php } ?>
 <?php if ($app_vbook->lang_id->Visible) { // lang_id ?>
 	<?php if ($app_vbook->SortUrl($app_vbook->lang_id) == "") { ?>
 		<th data-name="lang_id" class="<?php echo $app_vbook->lang_id->HeaderCellClass() ?>"><div id="elh_app_vbook_lang_id" class="app_vbook_lang_id"><div class="ewTableHeaderCaption"><?php echo $app_vbook->lang_id->FldCaption() ?></div></div></th>
@@ -2292,6 +2334,15 @@ $app_vbook_list->ListOptions->Render("header", "left");
 		</div></div></th>
 	<?php } ?>
 <?php } ?>
+<?php if ($app_vbook->book_desc->Visible) { // book_desc ?>
+	<?php if ($app_vbook->SortUrl($app_vbook->book_desc) == "") { ?>
+		<th data-name="book_desc" class="<?php echo $app_vbook->book_desc->HeaderCellClass() ?>"><div id="elh_app_vbook_book_desc" class="app_vbook_book_desc"><div class="ewTableHeaderCaption"><?php echo $app_vbook->book_desc->FldCaption() ?></div></div></th>
+	<?php } else { ?>
+		<th data-name="book_desc" class="<?php echo $app_vbook->book_desc->HeaderCellClass() ?>"><div class="ewPointer" onclick="ew_Sort(event,'<?php echo $app_vbook->SortUrl($app_vbook->book_desc) ?>',1);"><div id="elh_app_vbook_book_desc" class="app_vbook_book_desc">
+			<div class="ewTableHeaderBtn"><span class="ewTableHeaderCaption"><?php echo $app_vbook->book_desc->FldCaption() ?><?php echo $Language->Phrase("SrchLegend") ?></span><span class="ewTableHeaderSort"><?php if ($app_vbook->book_desc->getSort() == "ASC") { ?><span class="caret ewSortUp"></span><?php } elseif ($app_vbook->book_desc->getSort() == "DESC") { ?><span class="caret"></span><?php } ?></span></div>
+		</div></div></th>
+	<?php } ?>
+<?php } ?>
 <?php if ($app_vbook->book_image->Visible) { // book_image ?>
 	<?php if ($app_vbook->SortUrl($app_vbook->book_image) == "") { ?>
 		<th data-name="book_image" class="<?php echo $app_vbook->book_image->HeaderCellClass() ?>"><div id="elh_app_vbook_book_image" class="app_vbook_book_image"><div class="ewTableHeaderCaption"><?php echo $app_vbook->book_image->FldCaption() ?></div></div></th>
@@ -2310,24 +2361,6 @@ $app_vbook_list->ListOptions->Render("header", "left");
 		</div></div></th>
 	<?php } ?>
 <?php } ?>
-<?php if ($app_vbook->ins_datetime->Visible) { // ins_datetime ?>
-	<?php if ($app_vbook->SortUrl($app_vbook->ins_datetime) == "") { ?>
-		<th data-name="ins_datetime" class="<?php echo $app_vbook->ins_datetime->HeaderCellClass() ?>"><div id="elh_app_vbook_ins_datetime" class="app_vbook_ins_datetime"><div class="ewTableHeaderCaption"><?php echo $app_vbook->ins_datetime->FldCaption() ?></div></div></th>
-	<?php } else { ?>
-		<th data-name="ins_datetime" class="<?php echo $app_vbook->ins_datetime->HeaderCellClass() ?>"><div class="ewPointer" onclick="ew_Sort(event,'<?php echo $app_vbook->SortUrl($app_vbook->ins_datetime) ?>',1);"><div id="elh_app_vbook_ins_datetime" class="app_vbook_ins_datetime">
-			<div class="ewTableHeaderBtn"><span class="ewTableHeaderCaption"><?php echo $app_vbook->ins_datetime->FldCaption() ?></span><span class="ewTableHeaderSort"><?php if ($app_vbook->ins_datetime->getSort() == "ASC") { ?><span class="caret ewSortUp"></span><?php } elseif ($app_vbook->ins_datetime->getSort() == "DESC") { ?><span class="caret"></span><?php } ?></span></div>
-		</div></div></th>
-	<?php } ?>
-<?php } ?>
-<?php if ($app_vbook->bpage_id->Visible) { // bpage_id ?>
-	<?php if ($app_vbook->SortUrl($app_vbook->bpage_id) == "") { ?>
-		<th data-name="bpage_id" class="<?php echo $app_vbook->bpage_id->HeaderCellClass() ?>"><div id="elh_app_vbook_bpage_id" class="app_vbook_bpage_id"><div class="ewTableHeaderCaption"><?php echo $app_vbook->bpage_id->FldCaption() ?></div></div></th>
-	<?php } else { ?>
-		<th data-name="bpage_id" class="<?php echo $app_vbook->bpage_id->HeaderCellClass() ?>"><div class="ewPointer" onclick="ew_Sort(event,'<?php echo $app_vbook->SortUrl($app_vbook->bpage_id) ?>',1);"><div id="elh_app_vbook_bpage_id" class="app_vbook_bpage_id">
-			<div class="ewTableHeaderBtn"><span class="ewTableHeaderCaption"><?php echo $app_vbook->bpage_id->FldCaption() ?></span><span class="ewTableHeaderSort"><?php if ($app_vbook->bpage_id->getSort() == "ASC") { ?><span class="caret ewSortUp"></span><?php } elseif ($app_vbook->bpage_id->getSort() == "DESC") { ?><span class="caret"></span><?php } ?></span></div>
-		</div></div></th>
-	<?php } ?>
-<?php } ?>
 <?php if ($app_vbook->page_num->Visible) { // page_num ?>
 	<?php if ($app_vbook->SortUrl($app_vbook->page_num) == "") { ?>
 		<th data-name="page_num" class="<?php echo $app_vbook->page_num->HeaderCellClass() ?>"><div id="elh_app_vbook_page_num" class="app_vbook_page_num"><div class="ewTableHeaderCaption"><?php echo $app_vbook->page_num->FldCaption() ?></div></div></th>
@@ -2343,6 +2376,24 @@ $app_vbook_list->ListOptions->Render("header", "left");
 	<?php } else { ?>
 		<th data-name="page_image" class="<?php echo $app_vbook->page_image->HeaderCellClass() ?>"><div class="ewPointer" onclick="ew_Sort(event,'<?php echo $app_vbook->SortUrl($app_vbook->page_image) ?>',1);"><div id="elh_app_vbook_page_image" class="app_vbook_page_image">
 			<div class="ewTableHeaderBtn"><span class="ewTableHeaderCaption"><?php echo $app_vbook->page_image->FldCaption() ?><?php echo $Language->Phrase("SrchLegend") ?></span><span class="ewTableHeaderSort"><?php if ($app_vbook->page_image->getSort() == "ASC") { ?><span class="caret ewSortUp"></span><?php } elseif ($app_vbook->page_image->getSort() == "DESC") { ?><span class="caret"></span><?php } ?></span></div>
+		</div></div></th>
+	<?php } ?>
+<?php } ?>
+<?php if ($app_vbook->page_text->Visible) { // page_text ?>
+	<?php if ($app_vbook->SortUrl($app_vbook->page_text) == "") { ?>
+		<th data-name="page_text" class="<?php echo $app_vbook->page_text->HeaderCellClass() ?>"><div id="elh_app_vbook_page_text" class="app_vbook_page_text"><div class="ewTableHeaderCaption"><?php echo $app_vbook->page_text->FldCaption() ?></div></div></th>
+	<?php } else { ?>
+		<th data-name="page_text" class="<?php echo $app_vbook->page_text->HeaderCellClass() ?>"><div class="ewPointer" onclick="ew_Sort(event,'<?php echo $app_vbook->SortUrl($app_vbook->page_text) ?>',1);"><div id="elh_app_vbook_page_text" class="app_vbook_page_text">
+			<div class="ewTableHeaderBtn"><span class="ewTableHeaderCaption"><?php echo $app_vbook->page_text->FldCaption() ?><?php echo $Language->Phrase("SrchLegend") ?></span><span class="ewTableHeaderSort"><?php if ($app_vbook->page_text->getSort() == "ASC") { ?><span class="caret ewSortUp"></span><?php } elseif ($app_vbook->page_text->getSort() == "DESC") { ?><span class="caret"></span><?php } ?></span></div>
+		</div></div></th>
+	<?php } ?>
+<?php } ?>
+<?php if ($app_vbook->ins_datetime->Visible) { // ins_datetime ?>
+	<?php if ($app_vbook->SortUrl($app_vbook->ins_datetime) == "") { ?>
+		<th data-name="ins_datetime" class="<?php echo $app_vbook->ins_datetime->HeaderCellClass() ?>"><div id="elh_app_vbook_ins_datetime" class="app_vbook_ins_datetime"><div class="ewTableHeaderCaption"><?php echo $app_vbook->ins_datetime->FldCaption() ?></div></div></th>
+	<?php } else { ?>
+		<th data-name="ins_datetime" class="<?php echo $app_vbook->ins_datetime->HeaderCellClass() ?>"><div class="ewPointer" onclick="ew_Sort(event,'<?php echo $app_vbook->SortUrl($app_vbook->ins_datetime) ?>',1);"><div id="elh_app_vbook_ins_datetime" class="app_vbook_ins_datetime">
+			<div class="ewTableHeaderBtn"><span class="ewTableHeaderCaption"><?php echo $app_vbook->ins_datetime->FldCaption() ?></span><span class="ewTableHeaderSort"><?php if ($app_vbook->ins_datetime->getSort() == "ASC") { ?><span class="caret ewSortUp"></span><?php } elseif ($app_vbook->ins_datetime->getSort() == "DESC") { ?><span class="caret"></span><?php } ?></span></div>
 		</div></div></th>
 	<?php } ?>
 <?php } ?>
@@ -2411,14 +2462,6 @@ while ($app_vbook_list->RecCnt < $app_vbook_list->StopRec) {
 // Render list options (body, left)
 $app_vbook_list->ListOptions->Render("body", "left", $app_vbook_list->RowCnt);
 ?>
-	<?php if ($app_vbook->book_id->Visible) { // book_id ?>
-		<td data-name="book_id"<?php echo $app_vbook->book_id->CellAttributes() ?>>
-<span id="el<?php echo $app_vbook_list->RowCnt ?>_app_vbook_book_id" class="app_vbook_book_id">
-<span<?php echo $app_vbook->book_id->ViewAttributes() ?>>
-<?php echo $app_vbook->book_id->ListViewValue() ?></span>
-</span>
-</td>
-	<?php } ?>
 	<?php if ($app_vbook->lang_id->Visible) { // lang_id ?>
 		<td data-name="lang_id"<?php echo $app_vbook->lang_id->CellAttributes() ?>>
 <span id="el<?php echo $app_vbook_list->RowCnt ?>_app_vbook_lang_id" class="app_vbook_lang_id">
@@ -2443,11 +2486,20 @@ $app_vbook_list->ListOptions->Render("body", "left", $app_vbook_list->RowCnt);
 </span>
 </td>
 	<?php } ?>
+	<?php if ($app_vbook->book_desc->Visible) { // book_desc ?>
+		<td data-name="book_desc"<?php echo $app_vbook->book_desc->CellAttributes() ?>>
+<span id="el<?php echo $app_vbook_list->RowCnt ?>_app_vbook_book_desc" class="app_vbook_book_desc">
+<span<?php echo $app_vbook->book_desc->ViewAttributes() ?>>
+<?php echo $app_vbook->book_desc->ListViewValue() ?></span>
+</span>
+</td>
+	<?php } ?>
 	<?php if ($app_vbook->book_image->Visible) { // book_image ?>
 		<td data-name="book_image"<?php echo $app_vbook->book_image->CellAttributes() ?>>
 <span id="el<?php echo $app_vbook_list->RowCnt ?>_app_vbook_book_image" class="app_vbook_book_image">
-<span<?php echo $app_vbook->book_image->ViewAttributes() ?>>
-<?php echo $app_vbook->book_image->ListViewValue() ?></span>
+<span>
+<?php echo ew_GetFileViewTag($app_vbook->book_image, $app_vbook->book_image->ListViewValue()) ?>
+</span>
 </span>
 </td>
 	<?php } ?>
@@ -2456,22 +2508,6 @@ $app_vbook_list->ListOptions->Render("body", "left", $app_vbook_list->RowCnt);
 <span id="el<?php echo $app_vbook_list->RowCnt ?>_app_vbook_book_price" class="app_vbook_book_price">
 <span<?php echo $app_vbook->book_price->ViewAttributes() ?>>
 <?php echo $app_vbook->book_price->ListViewValue() ?></span>
-</span>
-</td>
-	<?php } ?>
-	<?php if ($app_vbook->ins_datetime->Visible) { // ins_datetime ?>
-		<td data-name="ins_datetime"<?php echo $app_vbook->ins_datetime->CellAttributes() ?>>
-<span id="el<?php echo $app_vbook_list->RowCnt ?>_app_vbook_ins_datetime" class="app_vbook_ins_datetime">
-<span<?php echo $app_vbook->ins_datetime->ViewAttributes() ?>>
-<?php echo $app_vbook->ins_datetime->ListViewValue() ?></span>
-</span>
-</td>
-	<?php } ?>
-	<?php if ($app_vbook->bpage_id->Visible) { // bpage_id ?>
-		<td data-name="bpage_id"<?php echo $app_vbook->bpage_id->CellAttributes() ?>>
-<span id="el<?php echo $app_vbook_list->RowCnt ?>_app_vbook_bpage_id" class="app_vbook_bpage_id">
-<span<?php echo $app_vbook->bpage_id->ViewAttributes() ?>>
-<?php echo $app_vbook->bpage_id->ListViewValue() ?></span>
 </span>
 </td>
 	<?php } ?>
@@ -2488,6 +2524,22 @@ $app_vbook_list->ListOptions->Render("body", "left", $app_vbook_list->RowCnt);
 <span id="el<?php echo $app_vbook_list->RowCnt ?>_app_vbook_page_image" class="app_vbook_page_image">
 <span<?php echo $app_vbook->page_image->ViewAttributes() ?>>
 <?php echo $app_vbook->page_image->ListViewValue() ?></span>
+</span>
+</td>
+	<?php } ?>
+	<?php if ($app_vbook->page_text->Visible) { // page_text ?>
+		<td data-name="page_text"<?php echo $app_vbook->page_text->CellAttributes() ?>>
+<span id="el<?php echo $app_vbook_list->RowCnt ?>_app_vbook_page_text" class="app_vbook_page_text">
+<span<?php echo $app_vbook->page_text->ViewAttributes() ?>>
+<?php echo $app_vbook->page_text->ListViewValue() ?></span>
+</span>
+</td>
+	<?php } ?>
+	<?php if ($app_vbook->ins_datetime->Visible) { // ins_datetime ?>
+		<td data-name="ins_datetime"<?php echo $app_vbook->ins_datetime->CellAttributes() ?>>
+<span id="el<?php echo $app_vbook_list->RowCnt ?>_app_vbook_ins_datetime" class="app_vbook_ins_datetime">
+<span<?php echo $app_vbook->ins_datetime->ViewAttributes() ?>>
+<?php echo $app_vbook->ins_datetime->ListViewValue() ?></span>
 </span>
 </td>
 	<?php } ?>

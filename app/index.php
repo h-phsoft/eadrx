@@ -19,6 +19,7 @@ global $dbKeys;
 ph_PrepareGets();
 ph_PreparePosts();
 
+$nUPGrp = 1;
 $nLang = '2';
 $nMode = ph_Setting('App-Mode-Login');
 $nId = 0;
@@ -84,6 +85,7 @@ if ($nUserId == null || $nUserId == '' || $nMode == ph_Setting('App-Mode-Logout'
 }
 if ($nUserId > 0) {
   $vUserName = cp_UserName($nUserId);
+  $nUPGrp = ph_GetDBValue('pgrp_id', '`cpy_user`', '`user_id`=' . $nUserId);
 }
 
 // PhSoft Setting
@@ -118,16 +120,16 @@ if ($pageName == '') {
       $nPages = ph_GetDBValue('count(*)', 'app_book_page', '(`book_id`=' . $nId . ')');
     }
     $pageName = ph_Setting('App-Page-Book');
-  } else if ($nMode == ph_Setting('App-Menu-Take-Test')) {
-    if ($nId != 0) {
-      $vHeader = ph_GetDBValue('test_name', 'app_vtest', '(`test_id`=' . $nId . ' AND `lang_id`=' . $curLang->Lang_Id . ')');
-    }
-    $pageName = ph_Setting('App-Page-Take-Test');
   } else if ($nMode == ph_Setting('App-Menu-Book-Subscribe')) {
     if ($nId != 0) {
       $vHeader = ph_GetDBValue('book_title', 'app_book', '(`book_id`=' . $nId . ')');
     }
     $pageName = ph_Setting('App-Page-Book-Subscribe');
+  } else if ($nMode == ph_Setting('App-Menu-Take-Test')) {
+    if ($nId != 0) {
+      $vHeader = ph_GetDBValue('test_name', 'app_vtest', '(`test_id`=' . $nId . ' AND `lang_id`=' . $curLang->Lang_Id . ')');
+    }
+    $pageName = ph_Setting('App-Page-Take-Test');
   } else {
     $vHeader = ph_Setting('App-Application-Name');
     $pageName = 'app-main.php';

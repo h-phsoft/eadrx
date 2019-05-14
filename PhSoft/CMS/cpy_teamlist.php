@@ -1610,6 +1610,8 @@ class ccpy_team_list extends ccpy_team {
 			if ($this->getSqlOrderBy() <> "") {
 				$sOrderBy = $this->getSqlOrderBy();
 				$this->setSessionOrderBy($sOrderBy);
+				$this->team_order->setSort("ASC");
+				$this->team_iname->setSort("ASC");
 			}
 		}
 	}

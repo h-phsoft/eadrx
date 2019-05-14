@@ -163,7 +163,7 @@ class cphs_pgroup extends cTable {
 	var $_SqlOrderBy = "";
 
 	function getSqlOrderBy() { // Order By
-		return ($this->_SqlOrderBy <> "") ? $this->_SqlOrderBy : "";
+		return ($this->_SqlOrderBy <> "") ? $this->_SqlOrderBy : "`pgrp_id` ASC";
 	}
 
 	function SqlOrderBy() { // For backward compatibility

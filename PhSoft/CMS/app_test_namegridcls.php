@@ -912,6 +912,8 @@ class capp_test_name_grid extends capp_test_name {
 			if ($this->getSqlOrderBy() <> "") {
 				$sOrderBy = $this->getSqlOrderBy();
 				$this->setSessionOrderBy($sOrderBy);
+				$this->test_id->setSort("ASC");
+				$this->lang_id->setSort("ASC");
 			}
 		}
 	}

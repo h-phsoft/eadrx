@@ -241,7 +241,7 @@ class capp_test_results extends cTable {
 	var $_SqlOrderBy = "";
 
 	function getSqlOrderBy() { // Order By
-		return ($this->_SqlOrderBy <> "") ? $this->_SqlOrderBy : "";
+		return ($this->_SqlOrderBy <> "") ? $this->_SqlOrderBy : "`user_id` ASC,`test_id` ASC,`ins_datetime` DESC";
 	}
 
 	function SqlOrderBy() { // For backward compatibility

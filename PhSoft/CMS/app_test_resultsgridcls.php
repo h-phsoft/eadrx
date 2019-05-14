@@ -918,6 +918,9 @@ class capp_test_results_grid extends capp_test_results {
 			if ($this->getSqlOrderBy() <> "") {
 				$sOrderBy = $this->getSqlOrderBy();
 				$this->setSessionOrderBy($sOrderBy);
+				$this->user_id->setSort("ASC");
+				$this->test_id->setSort("ASC");
+				$this->ins_datetime->setSort("DESC");
 			}
 		}
 	}
