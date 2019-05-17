@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: May 16, 2019 at 03:21 PM
+-- Generation Time: May 17, 2019 at 09:49 PM
 -- Server version: 5.7.24
 -- PHP Version: 7.2.14
 
@@ -31,7 +31,7 @@ SET time_zone = "+00:00";
 DROP TABLE IF EXISTS `app_book`;
 CREATE TABLE IF NOT EXISTS `app_book` (
   `book_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Auto PK',
-  `lang_id` int(11) NOT NULL COMMENT 'Language, FK',
+  `lang_id` int(11) NOT NULL DEFAULT '0' COMMENT 'Language, FK',
   `status_id` tinyint(4) NOT NULL DEFAULT '1' COMMENT 'Status',
   `book_title` varchar(200) NOT NULL COMMENT 'Title',
   `book_desc` mediumtext NOT NULL COMMENT 'Description',
@@ -60,8 +60,8 @@ INSERT INTO `app_book` (`book_id`, `lang_id`, `status_id`, `book_title`, `book_d
 DROP TABLE IF EXISTS `app_book_page`;
 CREATE TABLE IF NOT EXISTS `app_book_page` (
   `bpage_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Auto PK',
-  `book_id` int(11) NOT NULL COMMENT 'Book',
-  `page_num` smallint(6) NOT NULL COMMENT 'Page Number',
+  `book_id` int(11) NOT NULL DEFAULT '0' COMMENT 'Book',
+  `page_num` smallint(6) NOT NULL DEFAULT '0' COMMENT 'Page Number',
   `page_image` varchar(200) DEFAULT NULL COMMENT 'Image',
   `page_text` text NOT NULL COMMENT 'Text',
   PRIMARY KEY (`bpage_id`),
@@ -262,7 +262,7 @@ INSERT INTO `app_consultation` (`cons_id`, `user_id`, `cat_id`, `cstatus_id`, `c
 DROP TABLE IF EXISTS `app_consultation_category`;
 CREATE TABLE IF NOT EXISTS `app_consultation_category` (
   `cat_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Auto PK',
-  `status_id` tinyint(4) NOT NULL COMMENT 'Status',
+  `status_id` tinyint(4) NOT NULL DEFAULT '1' COMMENT 'Status',
   `cat_order` tinyint(4) NOT NULL DEFAULT '0' COMMENT 'Order',
   `cat_name` varchar(200) NOT NULL COMMENT 'Name',
   `cat_Price` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT 'Price',
@@ -288,8 +288,8 @@ INSERT INTO `app_consultation_category` (`cat_id`, `status_id`, `cat_order`, `ca
 DROP TABLE IF EXISTS `app_consultation_category_name`;
 CREATE TABLE IF NOT EXISTS `app_consultation_category_name` (
   `ncat_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Auto PK',
-  `cat_id` int(11) NOT NULL COMMENT 'Category, FK',
-  `lang_id` int(11) NOT NULL COMMENT 'Language, FK',
+  `cat_id` int(11) NOT NULL DEFAULT '0' COMMENT 'Category, FK',
+  `lang_id` int(11) NOT NULL DEFAULT '0' COMMENT 'Language, FK',
   `cat_name` varchar(200) NOT NULL COMMENT 'Name',
   `cat_desc` text,
   PRIMARY KEY (`ncat_id`),
@@ -385,17 +385,6 @@ CREATE TABLE IF NOT EXISTS `app_contactus` (
   KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `app_contactus`
---
-
-INSERT INTO `app_contactus` (`cont_id`, `user_id`, `cont_subj`, `cont_msg`, `cont_datetime`) VALUES
-(1, 4, '2', '2', '2019-05-16 15:27:55'),
-(2, 4, '2', '2', '2019-05-16 15:28:16'),
-(3, 4, '2', '2', '2019-05-16 15:29:50'),
-(4, 4, '2', '2', '2019-05-16 15:34:56'),
-(5, 4, '2', '2', '2019-05-16 17:15:59');
-
 -- --------------------------------------------------------
 
 --
@@ -405,9 +394,9 @@ INSERT INTO `app_contactus` (`cont_id`, `user_id`, `cont_subj`, `cont_msg`, `con
 DROP TABLE IF EXISTS `app_notification`;
 CREATE TABLE IF NOT EXISTS `app_notification` (
   `notif_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Auto PK',
-  `for_id` tinyint(4) NOT NULL COMMENT 'For FK',
-  `lang_id` int(11) NOT NULL COMMENT 'Language',
-  `nstatus_id` tinyint(4) NOT NULL COMMENT 'Status',
+  `for_id` tinyint(4) NOT NULL DEFAULT '0' COMMENT 'For FK',
+  `lang_id` int(11) NOT NULL DEFAULT '0' COMMENT 'Language',
+  `nstatus_id` tinyint(4) NOT NULL DEFAULT '1' COMMENT 'Status',
   `notif_title` varchar(200) NOT NULL COMMENT 'Title',
   `notif_text` text NOT NULL COMMENT 'Text',
   `ins_datetime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Inserted Datetime',
@@ -437,7 +426,7 @@ CREATE TABLE IF NOT EXISTS `app_notification_for` (
   `nfor_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Auto PK',
   `notif_id` int(11) NOT NULL COMMENT 'Notification',
   `user_id` int(11) NOT NULL COMMENT 'Member',
-  `nstatus_id` tinyint(4) NOT NULL COMMENT 'Status',
+  `nstatus_id` tinyint(4) NOT NULL DEFAULT '1' COMMENT 'Status',
   PRIMARY KEY (`nfor_id`),
   KEY `notif_id` (`notif_id`),
   KEY `user_id` (`user_id`),
@@ -534,19 +523,22 @@ INSERT INTO `app_notif_status` (`nstatus_id`, `nstatus_name`) VALUES
 DROP TABLE IF EXISTS `app_service`;
 CREATE TABLE IF NOT EXISTS `app_service` (
   `serv_id` smallint(6) NOT NULL AUTO_INCREMENT COMMENT 'Auto PK',
+  `status_id` tinyint(4) NOT NULL DEFAULT '1' COMMENT 'Status',
   `serv_name` varchar(200) NOT NULL COMMENT 'Name',
-  PRIMARY KEY (`serv_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`serv_id`),
+  KEY `status_id` (`status_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `app_service`
 --
 
-INSERT INTO `app_service` (`serv_id`, `serv_name`) VALUES
-(1, 'Book'),
-(2, 'Tips'),
-(3, 'Consultation'),
-(4, 'Test');
+INSERT INTO `app_service` (`serv_id`, `status_id`, `serv_name`) VALUES
+(0, 2, ' None'),
+(1, 1, 'Book'),
+(2, 1, 'Tips'),
+(3, 1, 'Consultation'),
+(4, 1, 'Test');
 
 -- --------------------------------------------------------
 
@@ -557,10 +549,11 @@ INSERT INTO `app_service` (`serv_id`, `serv_name`) VALUES
 DROP TABLE IF EXISTS `app_subscribe`;
 CREATE TABLE IF NOT EXISTS `app_subscribe` (
   `subs_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Auto PK',
-  `serv_id` smallint(6) NOT NULL COMMENT 'Service',
-  `user_id` int(11) NOT NULL COMMENT 'User',
-  `cycle_id` smallint(6) NOT NULL COMMENT 'Cycle',
+  `serv_id` smallint(6) NOT NULL DEFAULT '0' COMMENT 'Service',
+  `user_id` int(11) NOT NULL DEFAULT '0' COMMENT 'User',
+  `cycle_id` smallint(6) NOT NULL DEFAULT '0' COMMENT 'Cycle',
   `book_id` int(11) NOT NULL DEFAULT '0' COMMENT 'Book',
+  `pkg_id` int(11) NOT NULL DEFAULT '0' COMMENT 'Package',
   `tcat_id` int(11) NOT NULL DEFAULT '0' COMMENT 'Tips Category',
   `test_id` int(11) NOT NULL DEFAULT '0' COMMENT 'Test',
   `cat_id` int(11) NOT NULL DEFAULT '0' COMMENT 'Consultation Category',
@@ -579,15 +572,17 @@ CREATE TABLE IF NOT EXISTS `app_subscribe` (
   KEY `tcat_id` (`tcat_id`),
   KEY `test_id` (`test_id`),
   KEY `cons_id` (`cons_id`),
-  KEY `cat_id` (`cat_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+  KEY `cat_id` (`cat_id`),
+  KEY `pkg_id` (`pkg_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `app_subscribe`
 --
 
-INSERT INTO `app_subscribe` (`subs_id`, `serv_id`, `user_id`, `cycle_id`, `book_id`, `tcat_id`, `test_id`, `cat_id`, `cons_id`, `subs_start`, `subs_end`, `subs_qnt`, `subs_price`, `subs_amt`, `ins_datetime`) VALUES
-(16, 1, 4, 1, 1, 0, 0, 0, 0, '2019-05-11', '2099-12-31', '1', '10', '10', '2019-05-11 16:04:54');
+INSERT INTO `app_subscribe` (`subs_id`, `serv_id`, `user_id`, `cycle_id`, `book_id`, `pkg_id`, `tcat_id`, `test_id`, `cat_id`, `cons_id`, `subs_start`, `subs_end`, `subs_qnt`, `subs_price`, `subs_amt`, `ins_datetime`) VALUES
+(16, 1, 4, 1, 1, 0, 0, 0, 0, 0, '2019-05-11', '2099-12-31', '1', '10', '10', '2019-05-11 16:04:54'),
+(20, 2, 4, 10, 0, 5, 0, 0, 0, 0, '2019-05-18', '2020-05-18', '1', '70', '70', '2019-05-18 00:06:47');
 
 -- --------------------------------------------------------
 
@@ -629,9 +624,9 @@ INSERT INTO `app_test` (`test_id`, `test_num`, `test_iname`, `status_id`, `test_
 DROP TABLE IF EXISTS `app_test_evaluate`;
 CREATE TABLE IF NOT EXISTS `app_test_evaluate` (
   `eval_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Auto PK',
-  `test_id` int(11) NOT NULL COMMENT 'Test, FK',
-  `lang_id` int(11) NOT NULL COMMENT 'Language FK',
-  `gend_id` tinyint(4) NOT NULL COMMENT 'Gender, FK',
+  `test_id` int(11) NOT NULL DEFAULT '0' COMMENT 'Test, FK',
+  `lang_id` int(11) NOT NULL DEFAULT '0' COMMENT 'Language FK',
+  `gend_id` tinyint(4) NOT NULL DEFAULT '1' COMMENT 'Gender, FK',
   `eval_from` decimal(10,0) NOT NULL DEFAULT '0' COMMENT 'Total Result From',
   `eval_to` decimal(10,0) NOT NULL DEFAULT '99999' COMMENT 'Total Result To',
   `eval_text` text NOT NULL COMMENT 'Evaluation',
@@ -735,8 +730,8 @@ INSERT INTO `app_test_evaluate` (`eval_id`, `test_id`, `lang_id`, `gend_id`, `ev
 DROP TABLE IF EXISTS `app_test_name`;
 CREATE TABLE IF NOT EXISTS `app_test_name` (
   `ntest_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Auto PK',
-  `test_id` int(11) NOT NULL COMMENT 'Test, FK',
-  `lang_id` int(11) NOT NULL COMMENT 'Language, FK',
+  `test_id` int(11) NOT NULL DEFAULT '0' COMMENT 'Test, FK',
+  `lang_id` int(11) NOT NULL DEFAULT '0' COMMENT 'Language, FK',
   `test_name` varchar(200) NOT NULL COMMENT 'Name',
   `test_desc` text,
   PRIMARY KEY (`ntest_id`),
@@ -768,8 +763,8 @@ INSERT INTO `app_test_name` (`ntest_id`, `test_id`, `lang_id`, `test_name`, `tes
 DROP TABLE IF EXISTS `app_test_question`;
 CREATE TABLE IF NOT EXISTS `app_test_question` (
   `qstn_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Auto PK',
-  `test_id` int(11) NOT NULL COMMENT 'Test, FK',
-  `lang_id` int(11) NOT NULL COMMENT 'Language, FK',
+  `test_id` int(11) NOT NULL DEFAULT '0' COMMENT 'Test, FK',
+  `lang_id` int(11) NOT NULL DEFAULT '0' COMMENT 'Language, FK',
   `gend_id` tinyint(4) NOT NULL DEFAULT '1' COMMENT 'Gender',
   `qstn_num` tinyint(4) NOT NULL DEFAULT '1' COMMENT 'Number',
   `qstn_text` varchar(500) NOT NULL COMMENT 'Question',
@@ -1760,10 +1755,10 @@ CREATE TABLE IF NOT EXISTS `app_tips_category` (
 
 INSERT INTO `app_tips_category` (`tcat_id`, `status_id`, `tcat_name`) VALUES
 (0, 2, 'None'),
-(1, 1, 'Free Tips'),
-(2, 1, 'Sexual Tips'),
-(3, 1, 'Body Language'),
-(4, 1, 'Relationships'),
+(1, 2, 'Free Tips'),
+(2, 2, 'Sexual Tips'),
+(3, 2, 'Body Language'),
+(4, 2, 'Relationships'),
 (5, 1, 'Eve & Adam');
 
 -- --------------------------------------------------------
@@ -1775,26 +1770,27 @@ INSERT INTO `app_tips_category` (`tcat_id`, `status_id`, `tcat_name`) VALUES
 DROP TABLE IF EXISTS `app_tips_package`;
 CREATE TABLE IF NOT EXISTS `app_tips_package` (
   `pkg_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Auto PK',
-  `cycle_id` smallint(6) NOT NULL COMMENT 'Cycle',
-  `status_id` tinyint(4) NOT NULL DEFAULT '1',
-  `pkg_order` int(11) NOT NULL DEFAULT '0',
-  `pkg_name` varchar(200) NOT NULL,
+  `cycle_id` smallint(6) NOT NULL DEFAULT '0' COMMENT 'Cycle',
+  `status_id` tinyint(4) NOT NULL DEFAULT '1' COMMENT 'Status',
+  `pkg_order` int(11) NOT NULL DEFAULT '0' COMMENT 'Order',
+  `pkg_name` varchar(200) NOT NULL COMMENT 'Name',
   `pkg_price` decimal(10,0) NOT NULL DEFAULT '0' COMMENT 'Price',
   PRIMARY KEY (`pkg_id`),
   KEY `cycle_id` (`cycle_id`),
   KEY `status_id` (`status_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `app_tips_package`
 --
 
 INSERT INTO `app_tips_package` (`pkg_id`, `cycle_id`, `status_id`, `pkg_order`, `pkg_name`, `pkg_price`) VALUES
-(1, 5, 1, 1, 'Sexual Tips', '10'),
-(2, 6, 1, 2, 'Sexual Tips', '21'),
-(3, 8, 1, 3, 'Sexual Tips', '32'),
-(4, 9, 1, 4, 'Sexual Tips', '50'),
-(5, 10, 1, 5, 'Sexual Tips', '70');
+(0, 1, 2, 0, 'None', '0'),
+(1, 5, 1, 1, 'Eve & Adam', '10'),
+(2, 6, 1, 2, 'Eve & Adam', '21'),
+(3, 8, 1, 3, 'Eve & Adam', '32'),
+(4, 9, 1, 4, 'Eve & Adam', '50'),
+(5, 10, 1, 5, 'Eve & Adam', '70');
 
 -- --------------------------------------------------------
 
@@ -1817,11 +1813,11 @@ CREATE TABLE IF NOT EXISTS `app_tips_pkg_cat` (
 --
 
 INSERT INTO `app_tips_pkg_cat` (`tpkg_id`, `pkg_id`, `tcat_id`) VALUES
-(1, 1, 2),
-(2, 2, 2),
-(3, 3, 2),
-(4, 4, 2),
-(5, 5, 2);
+(1, 1, 5),
+(2, 2, 5),
+(3, 3, 5),
+(4, 4, 5),
+(5, 5, 5);
 
 -- --------------------------------------------------------
 
@@ -2067,7 +2063,7 @@ INSERT INTO `cpy_ads` (`ads_id`, `status_id`, `repeat_id`, `every_id`, `ads_titl
 DROP TABLE IF EXISTS `cpy_faq`;
 CREATE TABLE IF NOT EXISTS `cpy_faq` (
   `faq_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Auto PK',
-  `fcat_id` int(11) NOT NULL COMMENT 'Category',
+  `fcat_id` int(11) NOT NULL DEFAULT '1' COMMENT 'Category',
   `status_id` tinyint(4) NOT NULL DEFAULT '1' COMMENT 'Status',
   `lang_id` int(11) NOT NULL COMMENT 'Language',
   `color_id` tinyint(4) NOT NULL DEFAULT '0' COMMENT 'Color',
@@ -2606,27 +2602,31 @@ CREATE TABLE IF NOT EXISTS `cpy_vuser` (
 DROP TABLE IF EXISTS `phs_bill_cycle`;
 CREATE TABLE IF NOT EXISTS `phs_bill_cycle` (
   `cycle_id` smallint(6) NOT NULL AUTO_INCREMENT COMMENT 'Auto PK',
+  `status_id` tinyint(4) NOT NULL DEFAULT '1' COMMENT 'Status',
+  `cycle_interval` varchar(30) NOT NULL DEFAULT 'MONTH' COMMENT 'MySQL Interval',
   `cycle_name` varchar(200) NOT NULL COMMENT 'Name',
   `cycle_desc` varchar(200) NOT NULL COMMENT 'Description',
   PRIMARY KEY (`cycle_id`),
-  UNIQUE KEY `cycle_name` (`cycle_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+  UNIQUE KEY `cycle_name` (`cycle_name`),
+  KEY `status_id` (`status_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `phs_bill_cycle`
 --
 
-INSERT INTO `phs_bill_cycle` (`cycle_id`, `cycle_name`, `cycle_desc`) VALUES
-(1, 'One Time', 'Pay One\'s Use all time'),
-(2, 'One Time Use', 'Pay One for One'),
-(3, 'Daily', ''),
-(4, 'Week', ''),
-(5, '1 Month', ''),
-(6, '3 Months', ''),
-(7, '4 Months', ''),
-(8, '6 Months', ''),
-(9, '9 Months', ''),
-(10, '12 Months', '');
+INSERT INTO `phs_bill_cycle` (`cycle_id`, `status_id`, `cycle_interval`, `cycle_name`, `cycle_desc`) VALUES
+(0, 2, '1 DAY', 'None', 'None'),
+(1, 1, '100 YEAR', 'One Time', 'Pay One\'s Use all time'),
+(2, 1, '1 DAY', 'One Time Use', 'Pay One for One'),
+(3, 1, '1 DAY', 'Daily', ''),
+(4, 1, '1 WEEK', 'Week', ''),
+(5, 1, '1 MONTH', '1 Month', ''),
+(6, 1, '3 MONTH', '3 Months', ''),
+(7, 1, '4 MONTH', '4 Months', ''),
+(8, 1, '6 MONTH', '6 Months', ''),
+(9, 1, '9 MONTH', '9 Months', ''),
+(10, 1, '12 MONTH', '12 Months', '');
 
 -- --------------------------------------------------------
 
@@ -3659,7 +3659,7 @@ CREATE TABLE IF NOT EXISTS `phs_setting` (
   `set_val` varchar(255) NOT NULL DEFAULT 'none' COMMENT 'Value',
   PRIMARY KEY (`set_id`),
   UNIQUE KEY `set_name` (`set_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=77 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=80 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `phs_setting`
@@ -3691,7 +3691,7 @@ INSERT INTO `phs_setting` (`set_id`, `set_name`, `set_val`) VALUES
 (48, 'Nav-Right-Menu', '4'),
 (49, 'TIPS-FREE', '1'),
 (50, 'TIPS-PAID', '2'),
-(51, 'APP-DISP-ADS', '1'),
+(51, 'APP-DISP-ADS', '0'),
 (52, 'APP-DISP-FreeTips', '1'),
 (53, 'Currency-Sign', '$'),
 (54, 'Path-Ads-Images', '../assets/img/adsImages/'),
@@ -3713,7 +3713,10 @@ INSERT INTO `phs_setting` (`set_id`, `set_name`, `set_val`) VALUES
 (73, 'App-Menu-Home', '3101'),
 (74, 'App-Application-Name', 'Dr.X'),
 (75, 'App-Menu-Contact', '3900'),
-(76, 'App-Mode-Contact', '-3');
+(76, 'App-Mode-Contact', '-3'),
+(77, 'App-Menu-Tips-Subscribe', '3509'),
+(78, 'App-Page-Tips-Subscribe', 'app-tips-subscribe.php'),
+(79, 'App-Menu-Tips', '3500');
 
 -- --------------------------------------------------------
 
@@ -3794,7 +3797,7 @@ INSERT INTO `phs_status` (`status_id`, `status_name`) VALUES
 DROP TABLE IF EXISTS `phs_users`;
 CREATE TABLE IF NOT EXISTS `phs_users` (
   `user_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Auto PK',
-  `pgrp_id` int(11) DEFAULT NULL COMMENT 'Permission Group',
+  `pgrp_id` int(11) NOT NULL DEFAULT '0' COMMENT 'Permission Group',
   `user_logon` varchar(100) NOT NULL COMMENT 'Logon Name',
   `user_password` varchar(100) NOT NULL COMMENT 'Password',
   `user_email` varchar(100) NOT NULL COMMENT 'Email',
@@ -4014,6 +4017,12 @@ ALTER TABLE `app_notification_status`
   ADD CONSTRAINT `app_notification_status_ibfk_3` FOREIGN KEY (`user_id`) REFERENCES `cpy_user` (`user_id`);
 
 --
+-- Constraints for table `app_service`
+--
+ALTER TABLE `app_service`
+  ADD CONSTRAINT `app_service_ibfk_1` FOREIGN KEY (`status_id`) REFERENCES `phs_status` (`status_id`);
+
+--
 -- Constraints for table `app_subscribe`
 --
 ALTER TABLE `app_subscribe`
@@ -4180,6 +4189,12 @@ ALTER TABLE `cpy_user`
   ADD CONSTRAINT `cpy_user_ibfk_3` FOREIGN KEY (`gend_id`) REFERENCES `phs_gender` (`gend_id`),
   ADD CONSTRAINT `cpy_user_ibfk_4` FOREIGN KEY (`pgrp_id`) REFERENCES `cpy_pgroup` (`pgrp_id`),
   ADD CONSTRAINT `cpy_user_ibfk_5` FOREIGN KEY (`status_id`) REFERENCES `phs_status` (`status_id`);
+
+--
+-- Constraints for table `phs_bill_cycle`
+--
+ALTER TABLE `phs_bill_cycle`
+  ADD CONSTRAINT `phs_bill_cycle_ibfk_1` FOREIGN KEY (`status_id`) REFERENCES `phs_status` (`status_id`);
 
 --
 -- Constraints for table `phs_country`
