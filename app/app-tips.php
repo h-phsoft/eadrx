@@ -18,7 +18,6 @@ if (ph_Setting('APP-DISP-FreeTips') == 1) {
   $aPkgs = cPackage::getArray();
   if (count($aPkgs) > 0) {
     foreach ($aPkgs as $pkg) {
-//      $nCount = ph_GetDBValue('count(*)', '`app_subscribe`', '`user_id`=' . $nUserId . ' AND `serv_id`=4 AND `test_id`=' . $pkg->Pkg_Id);
       $vCycle = ph_GetDBValue('cycle_name', '`phs_bill_cycle`', '`cycle_id`=' . $pkg->Cycle_Id);
       ?>
       <div class="block col-12 col-sm-12 my-3">
