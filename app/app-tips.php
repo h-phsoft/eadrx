@@ -56,7 +56,7 @@ if (ph_Setting('APP-DISP-FreeTips') == 1) {
               ?>
               <div class="row my-3">
                 <div class="col-12 text-right">
-                  <a class="btn btn-info" href="?<?php echo $nLang . '/' . ph_Setting('App-Menu-Take-Test') . '/' . $pkg->Pkg_Id; ?>"><?php echo ph_DBKey('Subscribe', $curLang->Lang_Id) . ' ' . $pkg->Pkg_Price . ph_Setting('Currency-Sign'); ?></a>
+                  <a class="btn btn-info" href="?<?php echo $nLang . '/' . ph_Setting('App-Menu-Tips-Subscribe') . '/' . $pkg->Pkg_Id; ?>"><?php echo ph_DBKey('Subscribe', $curLang->Lang_Id) . ' ' . $pkg->Pkg_Price . ph_Setting('Currency-Sign'); ?></a>
                 </div>
               </div>
             </div>

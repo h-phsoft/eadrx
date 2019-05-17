@@ -6,9 +6,12 @@ if ($nId != 0) {
     $book = cBook::getInstance($nId, false);
     $sSQL = 'INSERT INTO `app_subscribe`'
             . '(`serv_id`   , `user_id`   , `cycle_id`  , `book_id`   ,'
-            . ' `subs_start`, `subs_end`  , `subs_qnt`  , `subs_price`, `subs_amt`'
+            . ' `subs_start`, `subs_end`  ,'
+            . ' `subs_qnt`  , `subs_price`, `subs_amt`'
             . ')  VALUES ('
-            . ' 1, ' . $nUserId . ', 1, ' . $nId . ', NOW(), "2099/12/31 23:59", 1, ' . $book->Book_Price . ', ' . $book->Book_Price . ' )';
+            . ' 1, ' . $nUserId . ', 1, ' . $nId . ','
+            . ' NOW(), "2099/12/31 23:59",'
+            . ' 1, ' . $book->Book_Price . ', ' . $book->Book_Price . ' )';
     ph_Execute($sSQL);
   }
 }

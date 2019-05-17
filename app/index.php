@@ -136,6 +136,9 @@ if ($pageName == '') {
       $vHeader = ph_GetDBValue('test_name', 'app_vtest', '(`test_id`=' . $nId . ' AND `lang_id`=' . $curLang->Lang_Id . ')');
     }
     $pageName = ph_Setting('App-Page-Take-Test');
+  } else if ($nMode == ph_Setting('App-Menu-Tips-Subscribe')) {
+    $vHeader = ph_DBKey('Subscribe Tips', $curLang->Lang_Id);
+    $pageName = ph_Setting('App-Page-Tips-Subscribe');
   } else {
     $vHeader = ph_Setting('App-Application-Name');
     $pageName = 'app-main.php';
