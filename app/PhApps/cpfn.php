@@ -90,6 +90,22 @@ if (!function_exists('cp_AddLog')) {
 
 }
 
+if (!function_exists('cp_AddContact')) {
+
+  function cp_AddContact($nUserId, $sSubject, $sMessage) {
+    $nRegId = -999;
+    if ($nUserId != '' && $sSubject != '' && $sMessage != '') {
+      $sSQL = "INSERT INTO `app_contactus` ( `user_id`, `cont_subj`, `cont_msg` )"
+              . " VALUES ( '" . $nUserId . "', '" . $sSubject . "', '" . $sMessage . "' )";
+      ph_Execute($sSQL);
+      $nRegId = ph_InsertedId();
+      ph_AddLog('Subject=[' . $sSubject . '] Message=[' . $sMessage . '] Id=[' . $nRegId . ']', 'Add ContactUs');
+    }
+    return $nRegId;
+  }
+
+}
+
 if (!function_exists('cp_isUserExist')) {
 
   function cp_isUserExist($sPhULogin) {

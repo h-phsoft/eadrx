@@ -87,6 +87,12 @@ if ($nUserId > 0) {
   $vUserName = cp_UserName($nUserId);
   $nUPGrp = ph_GetDBValue('pgrp_id', '`cpy_user`', '`user_id`=' . $nUserId);
 }
+if ($nMode == ph_Setting('App-Mode-Contact') && $nId != 0) {
+  $inputSubject = ph_Post('inputSubject');
+  $inputMessage = ph_Post('inputMessage');
+  echo '<br><br><br><br><br><br><br>';
+  cp_AddContact($nUserId, $inputSubject, $inputMessage);
+}
 
 // PhSoft Setting
 $ph_Setting_SiteName = ph_Setting('Site-Name');

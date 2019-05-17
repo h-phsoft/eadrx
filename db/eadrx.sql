@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: May 14, 2019 at 01:50 PM
+-- Generation Time: May 16, 2019 at 03:21 PM
 -- Server version: 5.7.24
 -- PHP Version: 7.2.14
 
@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS `app_book` (
   PRIMARY KEY (`book_id`),
   KEY `lang_id` (`lang_id`),
   KEY `book_status` (`status_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `app_book`
@@ -244,7 +244,7 @@ CREATE TABLE IF NOT EXISTS `app_consultation` (
   KEY `status_id` (`cstatus_id`),
   KEY `user_id` (`user_id`),
   KEY `cat_id` (`cat_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `app_consultation`
@@ -269,7 +269,7 @@ CREATE TABLE IF NOT EXISTS `app_consultation_category` (
   PRIMARY KEY (`cat_id`),
   UNIQUE KEY `cat_name` (`cat_name`),
   KEY `status_id` (`status_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `app_consultation_category`
@@ -347,7 +347,7 @@ CREATE TABLE IF NOT EXISTS `app_consult_answer` (
   PRIMARY KEY (`answer_id`),
   KEY `user_id` (`user_id`),
   KEY `cons_id` (`cons_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -366,7 +366,35 @@ CREATE TABLE IF NOT EXISTS `app_consult_assign` (
   KEY `user_id` (`user_id`),
   KEY `cons_id` (`cons_id`),
   KEY `status_id` (`status_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `app_contactus`
+--
+
+DROP TABLE IF EXISTS `app_contactus`;
+CREATE TABLE IF NOT EXISTS `app_contactus` (
+  `cont_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Auto PK',
+  `user_id` int(11) NOT NULL COMMENT 'User, FK',
+  `cont_subj` varchar(200) NOT NULL COMMENT 'Subject',
+  `cont_msg` varchar(1024) NOT NULL COMMENT 'Message',
+  `cont_datetime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Datetime',
+  PRIMARY KEY (`cont_id`),
+  KEY `user_id` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `app_contactus`
+--
+
+INSERT INTO `app_contactus` (`cont_id`, `user_id`, `cont_subj`, `cont_msg`, `cont_datetime`) VALUES
+(1, 4, '2', '2', '2019-05-16 15:27:55'),
+(2, 4, '2', '2', '2019-05-16 15:28:16'),
+(3, 4, '2', '2', '2019-05-16 15:29:50'),
+(4, 4, '2', '2', '2019-05-16 15:34:56'),
+(5, 4, '2', '2', '2019-05-16 17:15:59');
 
 -- --------------------------------------------------------
 
@@ -414,7 +442,7 @@ CREATE TABLE IF NOT EXISTS `app_notification_for` (
   KEY `notif_id` (`notif_id`),
   KEY `user_id` (`user_id`),
   KEY `nstatus_id` (`nstatus_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `app_notification_for`
@@ -1724,7 +1752,7 @@ CREATE TABLE IF NOT EXISTS `app_tips_category` (
   `tcat_name` varchar(100) NOT NULL DEFAULT '' COMMENT 'Name',
   PRIMARY KEY (`tcat_id`),
   KEY `status_id` (`status_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `app_tips_category`
@@ -1732,8 +1760,8 @@ CREATE TABLE IF NOT EXISTS `app_tips_category` (
 
 INSERT INTO `app_tips_category` (`tcat_id`, `status_id`, `tcat_name`) VALUES
 (0, 2, 'None'),
-(1, 1, 'Free'),
-(2, 1, 'Sexual'),
+(1, 1, 'Free Tips'),
+(2, 1, 'Sexual Tips'),
 (3, 1, 'Body Language'),
 (4, 1, 'Relationships'),
 (5, 1, 'Eve & Adam');
@@ -1782,7 +1810,7 @@ CREATE TABLE IF NOT EXISTS `app_tips_pkg_cat` (
   PRIMARY KEY (`tpkg_id`),
   UNIQUE KEY `pkg_id` (`pkg_id`,`tcat_id`),
   KEY `tcat_id` (`tcat_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `app_tips_pkg_cat`
@@ -1834,6 +1862,43 @@ CREATE TABLE IF NOT EXISTS `app_vcons_cat` (
 ,`lang_id` int(11)
 ,`cat_name` varchar(200)
 ,`cat_desc` text
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `app_vcontactus`
+-- (See below for the actual view)
+--
+DROP VIEW IF EXISTS `app_vcontactus`;
+CREATE TABLE IF NOT EXISTS `app_vcontactus` (
+`cont_id` int(11)
+,`cont_subj` varchar(200)
+,`cont_msg` varchar(1024)
+,`cont_datetime` datetime
+,`pgrp_id` int(10)
+,`pgrp_name` varchar(200)
+,`lang_id` int(11)
+,`lang_code` varchar(10)
+,`lang_dir` varchar(10)
+,`lang_name` varchar(100)
+,`lang_dname` varchar(200)
+,`lang_ccode` varchar(5)
+,`cntry_id` int(11)
+,`cntry_code` varchar(2)
+,`cntry_name` varchar(100)
+,`user_id` int(10)
+,`user_name` varchar(200)
+,`user_email` varchar(200)
+,`user_password` varchar(200)
+,`user_mobile` varchar(200)
+,`user_token` varchar(100)
+,`ins_datetime` timestamp
+,`upd_datetime` timestamp
+,`gend_id` tinyint(4)
+,`gend_name` varchar(100)
+,`status_id` tinyint(4)
+,`status_name` varchar(200)
 );
 
 -- --------------------------------------------------------
@@ -2420,7 +2485,7 @@ INSERT INTO `cpy_team_names` (`teamn_id`, `team_id`, `lang_id`, `team_name`, `te
 DROP TABLE IF EXISTS `cpy_user`;
 CREATE TABLE IF NOT EXISTS `cpy_user` (
   `user_id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'Auto PK',
-  `cntry_id` int(11) DEFAULT NULL COMMENT 'Country',
+  `cntry_id` int(11) NOT NULL DEFAULT '0' COMMENT 'Country',
   `lang_id` int(11) NOT NULL DEFAULT '2' COMMENT 'Language',
   `pgrp_id` int(11) NOT NULL DEFAULT '1' COMMENT ' Type',
   `status_id` tinyint(4) NOT NULL DEFAULT '1' COMMENT 'Status',
@@ -2448,13 +2513,13 @@ CREATE TABLE IF NOT EXISTS `cpy_user` (
 --
 
 INSERT INTO `cpy_user` (`user_id`, `cntry_id`, `lang_id`, `pgrp_id`, `status_id`, `gend_id`, `user_name`, `user_email`, `user_password`, `user_mobile`, `user_token`, `ins_datetime`, `upd_datetime`) VALUES
-(0, 213, 2, -1, 1, 1, 'Log Default', 'log@doctorx.cc', 'e10adc3949ba59abbe56e057f20f883e', NULL, NULL, '2018-12-22 15:48:37', NULL),
-(1, 213, 2, -1, 1, 1, 'Administrator', 'admin@doctorx.cc', 'e10adc3949ba59abbe56e057f20f883e', NULL, NULL, '2018-12-22 15:48:37', NULL),
-(2, 213, 2, 0, 1, 2, 'Dr Halla0', 'halla@doctorx.cc', 'e10adc3949ba59abbe56e057f20f883e', NULL, NULL, '2018-12-22 15:50:30', '2018-12-22 15:51:35'),
-(3, 213, 2, -1, 1, 2, 'Dr Halla1', 'smart.halla@doctorx.cc', 'e10adc3949ba59abbe56e057f20f883e', NULL, NULL, '2018-12-22 15:50:30', '2018-12-22 15:51:35'),
-(4, NULL, 2, 1, 1, 1, 'Haytham', NULL, 'e10adc3949ba59abbe56e057f20f883e', NULL, NULL, NULL, NULL),
-(5, NULL, 2, 1, 1, 2, 'Halla', NULL, 'e10adc3949ba59abbe56e057f20f883e', NULL, NULL, NULL, NULL),
-(6, NULL, 2, 1, 1, 1, 'Amer', NULL, 'e10adc3949ba59abbe56e057f20f883e', NULL, NULL, NULL, NULL);
+(0, 0, 2, -1, 1, 1, 'Log Default', 'log@doctorx.cc', 'e10adc3949ba59abbe56e057f20f883e', NULL, NULL, '2018-12-22 15:48:37', NULL),
+(1, 0, 2, -1, 1, 1, 'Administrator', 'admin@doctorx.cc', 'e10adc3949ba59abbe56e057f20f883e', NULL, NULL, '2018-12-22 15:48:37', NULL),
+(2, 0, 2, 0, 1, 2, 'Dr Halla0', 'halla@doctorx.cc', 'e10adc3949ba59abbe56e057f20f883e', NULL, NULL, '2018-12-22 15:50:30', '2018-12-22 15:51:35'),
+(3, 0, 2, -1, 1, 2, 'Dr Halla1', 'smart.halla@doctorx.cc', 'e10adc3949ba59abbe56e057f20f883e', NULL, NULL, '2018-12-22 15:50:30', '2018-12-22 15:51:35'),
+(4, 0, 2, 1, 1, 1, 'Haytham', NULL, 'e10adc3949ba59abbe56e057f20f883e', NULL, NULL, NULL, NULL),
+(5, 0, 2, 1, 1, 2, 'Halla', NULL, 'e10adc3949ba59abbe56e057f20f883e', NULL, NULL, NULL, NULL),
+(6, 0, 2, 1, 1, 1, 'Amer', NULL, 'e10adc3949ba59abbe56e057f20f883e', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -2497,6 +2562,39 @@ CREATE TABLE IF NOT EXISTS `cpy_vteam` (
 ,`team_title` varchar(10)
 ,`team_position` varchar(50)
 ,`team_text` text
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `cpy_vuser`
+-- (See below for the actual view)
+--
+DROP VIEW IF EXISTS `cpy_vuser`;
+CREATE TABLE IF NOT EXISTS `cpy_vuser` (
+`pgrp_id` int(10)
+,`pgrp_name` varchar(200)
+,`lang_id` int(11)
+,`lang_code` varchar(10)
+,`lang_dir` varchar(10)
+,`lang_name` varchar(100)
+,`lang_dname` varchar(200)
+,`lang_ccode` varchar(5)
+,`cntry_id` int(11)
+,`cntry_code` varchar(2)
+,`cntry_name` varchar(100)
+,`user_id` int(10)
+,`user_name` varchar(200)
+,`user_email` varchar(200)
+,`user_password` varchar(200)
+,`user_mobile` varchar(200)
+,`user_token` varchar(100)
+,`ins_datetime` timestamp
+,`upd_datetime` timestamp
+,`gend_id` tinyint(4)
+,`gend_name` varchar(100)
+,`status_id` tinyint(4)
+,`status_name` varchar(200)
 );
 
 -- --------------------------------------------------------
@@ -2635,13 +2733,14 @@ CREATE TABLE IF NOT EXISTS `phs_country` (
   UNIQUE KEY `cntry_name` (`cntry_name`),
   UNIQUE KEY `cntry_code` (`cntry_code`),
   KEY `status_id` (`status_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=247 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=248 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `phs_country`
 --
 
 INSERT INTO `phs_country` (`cntry_id`, `status_id`, `cntry_code`, `cntry_name`) VALUES
+(0, 1, '0', 'None'),
 (1, 1, 'AF', 'Afghanistan'),
 (2, 1, 'AL', 'Albania'),
 (3, 1, 'DZ', 'Algeria'),
@@ -3560,7 +3659,7 @@ CREATE TABLE IF NOT EXISTS `phs_setting` (
   `set_val` varchar(255) NOT NULL DEFAULT 'none' COMMENT 'Value',
   PRIMARY KEY (`set_id`),
   UNIQUE KEY `set_name` (`set_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=75 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=77 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `phs_setting`
@@ -3612,7 +3711,9 @@ INSERT INTO `phs_setting` (`set_id`, `set_name`, `set_val`) VALUES
 (70, 'App-Page-Register', 'app-register.php'),
 (72, 'App-Mode-Logout', '-9'),
 (73, 'App-Menu-Home', '3101'),
-(74, 'App-Application-Name', 'Dr.X');
+(74, 'App-Application-Name', 'Dr.X'),
+(75, 'App-Menu-Contact', '3900'),
+(76, 'App-Mode-Contact', '-3');
 
 -- --------------------------------------------------------
 
@@ -3752,6 +3853,15 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- --------------------------------------------------------
 
 --
+-- Structure for view `app_vcontactus`
+--
+DROP TABLE IF EXISTS `app_vcontactus`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `app_vcontactus`  AS  select `c`.`cont_id` AS `cont_id`,`c`.`cont_subj` AS `cont_subj`,`c`.`cont_msg` AS `cont_msg`,`c`.`cont_datetime` AS `cont_datetime`,`u`.`pgrp_id` AS `pgrp_id`,`u`.`pgrp_name` AS `pgrp_name`,`u`.`lang_id` AS `lang_id`,`u`.`lang_code` AS `lang_code`,`u`.`lang_dir` AS `lang_dir`,`u`.`lang_name` AS `lang_name`,`u`.`lang_dname` AS `lang_dname`,`u`.`lang_ccode` AS `lang_ccode`,`u`.`cntry_id` AS `cntry_id`,`u`.`cntry_code` AS `cntry_code`,`u`.`cntry_name` AS `cntry_name`,`u`.`user_id` AS `user_id`,`u`.`user_name` AS `user_name`,`u`.`user_email` AS `user_email`,`u`.`user_password` AS `user_password`,`u`.`user_mobile` AS `user_mobile`,`u`.`user_token` AS `user_token`,`u`.`ins_datetime` AS `ins_datetime`,`u`.`upd_datetime` AS `upd_datetime`,`u`.`gend_id` AS `gend_id`,`u`.`gend_name` AS `gend_name`,`u`.`status_id` AS `status_id`,`u`.`status_name` AS `status_name` from (`app_contactus` `c` join `cpy_vuser` `u`) where (`c`.`user_id` = `u`.`user_id`) ;
+
+-- --------------------------------------------------------
+
+--
 -- Structure for view `app_vtest`
 --
 DROP TABLE IF EXISTS `app_vtest`;
@@ -3802,6 +3912,15 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 DROP TABLE IF EXISTS `cpy_vteam`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `cpy_vteam`  AS  select `m`.`team_id` AS `team_id`,`m`.`team_iname` AS `team_iname`,`m`.`team_order` AS `team_order`,`m`.`team_photo` AS `team_photo`,`t`.`teamn_id` AS `teamn_id`,`t`.`lang_id` AS `lang_id`,`t`.`team_name` AS `team_name`,`t`.`team_title` AS `team_title`,`t`.`team_position` AS `team_position`,`t`.`team_text` AS `team_text` from (`cpy_team` `m` join `cpy_team_names` `t`) where (`t`.`team_id` = `m`.`team_id`) ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `cpy_vuser`
+--
+DROP TABLE IF EXISTS `cpy_vuser`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `cpy_vuser`  AS  select `p`.`pgrp_id` AS `pgrp_id`,`p`.`pgrp_name` AS `pgrp_name`,`l`.`lang_id` AS `lang_id`,`l`.`lang_code` AS `lang_code`,`l`.`lang_dir` AS `lang_dir`,`l`.`lang_name` AS `lang_name`,`l`.`lang_dname` AS `lang_dname`,`l`.`lang_ccode` AS `lang_ccode`,`c`.`cntry_id` AS `cntry_id`,`c`.`cntry_code` AS `cntry_code`,`c`.`cntry_name` AS `cntry_name`,`u`.`user_id` AS `user_id`,`u`.`user_name` AS `user_name`,`u`.`user_email` AS `user_email`,`u`.`user_password` AS `user_password`,`u`.`user_mobile` AS `user_mobile`,`u`.`user_token` AS `user_token`,`u`.`ins_datetime` AS `ins_datetime`,`u`.`upd_datetime` AS `upd_datetime`,`g`.`gend_id` AS `gend_id`,`g`.`gend_name` AS `gend_name`,`s`.`status_id` AS `status_id`,`s`.`status_name` AS `status_name` from (((((`cpy_user` `u` join `cpy_pgroup` `p`) join `phs_language` `l`) join `phs_country` `c`) join `phs_gender` `g`) join `phs_status` `s`) where ((`u`.`pgrp_id` = `p`.`pgrp_id`) and (`u`.`lang_id` = `l`.`lang_id`) and (`u`.`cntry_id` = `c`.`cntry_id`) and (`u`.`gend_id` = `g`.`gend_id`) and (`u`.`status_id` = `s`.`status_id`)) ;
 
 -- --------------------------------------------------------
 
@@ -3864,6 +3983,12 @@ ALTER TABLE `app_consult_assign`
   ADD CONSTRAINT `app_consult_assign_ibfk_1` FOREIGN KEY (`cons_id`) REFERENCES `app_consultation` (`cons_id`),
   ADD CONSTRAINT `app_consult_assign_ibfk_2` FOREIGN KEY (`status_id`) REFERENCES `phs_status` (`status_id`),
   ADD CONSTRAINT `app_consult_assign_ibfk_3` FOREIGN KEY (`user_id`) REFERENCES `cpy_user` (`user_id`);
+
+--
+-- Constraints for table `app_contactus`
+--
+ALTER TABLE `app_contactus`
+  ADD CONSTRAINT `app_contactus_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `cpy_user` (`user_id`);
 
 --
 -- Constraints for table `app_notification`

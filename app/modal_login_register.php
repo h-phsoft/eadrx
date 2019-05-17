@@ -5,7 +5,7 @@
     <div class="modal-content">
 
       <!--Modal cascading tabs-->
-      <div class="modal-c-tabs">
+      <div>
 
         <!-- Nav tabs -->
         <ul class="nav nav-tabs md-tabs tabs-2 light-blue darken-3" role="tablist">
@@ -100,6 +100,7 @@
 <!--Modal: Login / Register Form-->
 
 <div class="text-center">
-  <a href="" class="btn btn-default btn-rounded my-3" data-toggle="modal" data-target="#modalLRForm">Launch
-    Modal LogIn/Register</a>
+  <a href="" class="btn btn-default btn-rounded my-3" data-toggle="modal" data-target="#modalLRForm">
+    Launch Modal LogIn/Register
+  </a>
 </div>

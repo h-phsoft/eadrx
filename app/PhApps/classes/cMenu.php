@@ -116,7 +116,7 @@ class cMenu {
         $vMenu .= '    <div class="header-navigation-content">' . chr(13);
         $vMenu .= '      <div class="row">' . chr(13);
         foreach ($menu->aSubs as $sub) {
-          $subRef = "?l=" . $nLang . "&m=" . $sub->Menu_Id;
+          $subRef = "?" . $nLang . "/" . $sub->Menu_Id;
           if ($sub->Menu_URL != '') {
             $subRef = $sub->Menu_URL;
           }
@@ -129,7 +129,7 @@ class cMenu {
             $vMenu .= '          <h4>' . trim($subIcon . '&nbsp;&nbsp;' . ph_DBKey($sub->Menu_Name, $nLang)) . '</h4>' . chr(13);
             $vMenu .= '          <ul>' . chr(13);
             foreach ($sub->aSubs as $ssub) {
-              $ssubRef = "?l=" . $nLang . "&m=" . $ssub->Menu_Id;
+              $ssubRef = "?" . $nLang . "/" . $ssub->Menu_Id;
               if ($ssub->Menu_URL != '') {
                 $ssubRef = $ssub->Menu_URL;
               }
@@ -165,7 +165,7 @@ class cMenu {
         $vMenu .= '  </a>' . chr(13);
         $vMenu .= '  <ul class="dropdown-menu">' . chr(13);
         foreach ($menu->aSubs as $sub) {
-          $subRef = "?l=" . $nLang . "&m=" . $sub->Menu_Id;
+          $subRef = "?" . $nLang . "/" . $sub->Menu_Id;
           if ($sub->Menu_URL != '') {
             $subRef = $sub->Menu_URL;
           }
@@ -178,7 +178,7 @@ class cMenu {
             $vMenu .= '      <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;">' . trim($subIcon . '&nbsp;&nbsp;' . ph_DBKey($sub->Menu_Name, $nLang)) . '<i class="fa fa-angle-right"></i></a>' . chr(13);
             $vMenu .= '        <ul class="dropdown-menu" role="menu">' . chr(13);
             foreach ($sub->aSubs as $ssub) {
-              $ssubRef = "?l=" . $nLang . "&m=" . $ssub->Menu_Id;
+              $ssubRef = "?" . $nLang . "/" . $ssub->Menu_Id;
               if ($ssub->Menu_URL != '') {
                 $ssubRef = $ssub->Menu_URL;
               }
